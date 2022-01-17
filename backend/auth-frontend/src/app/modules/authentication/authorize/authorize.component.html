@@ -1,0 +1,72 @@
+<div class="w-full h-full">
+    <div class="flex items-center justify-center w-full h-full">
+        <div class="max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-2">
+            <mat-card class="mat-elevation-z6 p-4">
+
+                <div class="container">
+                    <div class="w-full">
+                        <div class="flex justify-center">
+                            <img src="assets/img/logo.png" alt="Logo" />
+                        </div>
+                        <div class="flex flex-col justify-center items-center">
+                            <h2 class="mat-h2 mb-0">Authorize application</h2>
+                        </div>
+                    </div>
+
+                    <div class="w-full" *ngIf="!authorizationInfo">
+                        <mat-progress-spinner class="m-auto" diameter="48" color="primary" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+
+                    <div class="grid grid-cols-12 w-full" *ngIf="authorizationInfo">
+
+                        <div class="flex justify-center col-span-12">
+                            <span>Would you like to authorize <strong>{{ authorizationInfo.client.clientId }}</strong> to use your user account?</span>
+                        </div>
+
+                        <div class="flex justify-center col-span-12">
+
+                            <form ngNoForm [action]="authorizeUrl" method="post" class="w-full">
+                                <input name="client_id" [value]="authorizationInfo.client.clientId" type="hidden" />
+                                <input name="state" [value]="authorizationInfo.state" type="hidden" />
+
+                                <mat-list>
+                                    <mat-list-item *ngFor="let scope of authorizationInfo.scopes">
+
+                                        <!-- Align to the left -->
+                                        <mat-checkbox class="flex align-self-start" name="scope" [value]="scope">
+                                            {{scope}}
+                                        </mat-checkbox>
+                                    </mat-list-item>
+                                </mat-list>
+
+                                <div class="flex justify-center mt-4">
+
+                                    <!-- Button on the left -->
+                                    <div class="flex flex-col items-center mx-4">
+                                        <button mat-raised-button type="submit" color="primary">
+                                            Authorize
+                                        </button>
+                                    </div>
+
+                                    <!-- Button on the right -->
+                                    <div class="flex flex-col items-center mx-4">
+                                        <button mat-raised-button type="reset" color="warn">
+                                            Decline
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+</div>
