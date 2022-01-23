@@ -3,7 +3,7 @@ package oidc.management.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -22,6 +22,13 @@ import static org.springframework.security.web.authentication.ui.DefaultLoginPag
 @EnableWebSecurity
 public class DefaultSecurityConfig {
 
+    /**
+     * Default Security Filter Chain.
+     * 
+     * @param http Security configuration.
+     * @return Security Filter Chain.
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -38,9 +45,14 @@ public class DefaultSecurityConfig {
             .build();
     }
 
+    /**
+     * Argon2 password encoder bean.
+     * 
+     * @return Argon2 password encoder.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new Argon2PasswordEncoder();
     }
 
 }
