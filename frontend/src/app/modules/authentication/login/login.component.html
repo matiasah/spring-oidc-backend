@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <!-- Formulario de datos para inicio de sesión -->
+                    <!-- Login form -->
                     <form #form="ngForm" (ngSubmit)="onSubmit()">
                         <div class="grid grid-cols-12 w-full">
 
@@ -46,7 +46,7 @@
 
                             <div class="col-span-12 mt-2" *ngIf="!requesting">
 
-                                <!-- Botón de inicio de sesión -->
+                                <!-- Login button -->
                                 <button mat-raised-button id="loginButton" type="submit" class="w-full" color="primary">
                                     Login
                                 </button>
