@@ -2,6 +2,21 @@ version: '3.7'
 
 services:
 
+  # Frontend
+  frontend:
+    build:
+      context: frontend
+      dockerfile: dev.dockerfile
+    restart: unless-stopped
+    ports:
+      - "4200:4200"
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /opt/frontend
+    environment:
+      TZ: America/Santiago
+
   # Authorization service
   auth-service:
     build:
@@ -11,8 +26,12 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./backend/src/:/opt/backend/src/"
-      - "~/.m2/repository/:/root/.m2/repository/"
+      - type: bind
+        source: ./backend/src/
+        target: /opt/backend/src/
+      - type: bind
+        source: ~/.m2/repository/
+        target: /root/.m2/repository/
     networks:
       backend:
         aliases:
