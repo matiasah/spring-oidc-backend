@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+
+  # Authorization service
+  auth-service:
+    build:
+      context: backend
+      dockerfile: dev.dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./backend/src/:/opt/backend/src/"
+      - "~/.m2/repository/:/root/.m2/repository/"
+    networks:
+      backend:
+        aliases:
+          - auth-service
+    environment:
+      TZ: America/Santiago
+      spring.profiles.active: dev
+      spring.cloud.consul.host: consul
+      spring.cloud.consul.port: 8500
+      spring.data.mongodb.host: mongodb
+      spring.data.mongodb.port: 27017
+  
+  # MongoDB
+  mongodb:
+    image: mongo:5.0.3
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/:/data/db
+    networks:
+      backend:
+        aliases:
+          - mongodb
+    environment:
+      TZ: America/Santiago
+
+networks:
+  backend:
+    name: backend
