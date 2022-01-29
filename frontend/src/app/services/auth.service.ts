@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AccessToken } from '../models/access-token';
 import { User } from '../models/user';
 import { map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,7 @@ export class AuthService {
 
     public constructor(
         private storage: Storage,
+        private router: Router,
         private http: HttpClient
     ) {
 
@@ -45,38 +47,9 @@ export class AuthService {
         }
     }
 
-    public login(user: User): Observable<boolean> {
-        // Si no hay contraseña
-        if (!user.password) {
-            // Retornar falso
-            return of(false);
-        }
-
-        // Crear FormData
-        const form: FormData = new FormData();
-
-        // Método de inicio de sesión
-        form.append('grant_type', 'password');
-
-        // Usuario
-        form.append('username', user.username);
-        form.append('password', user.password);
-
-        // Enviar FormData
-        return this.http.post<AccessToken>(`${environment.host}/oauth/token`, form)
-            .pipe(map(
-                response => {
-                    // Fijar token
-                    this.setToken(response);
-
-                    // Retornar verdadero
-                    return true;
-                },
-                () => {
-                    // Retornar falso
-                    return false;
-                }
-            ));
+    public login(): void {
+        // Redirect to login
+        window.location = `${environment.host}/oauth2/authorize?client_id=${environment.clientId}&redirect_uri=${window.location}&scope=${environment.scope}&response_type=code` as any as Location;
     }
 
     public getToken(): AccessToken | undefined {
