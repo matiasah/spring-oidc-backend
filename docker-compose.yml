@@ -30,6 +30,9 @@ services:
         source: ./backend/src/
         target: /opt/backend/src/
       - type: bind
+        source: ./backend/target/
+        target: /opt/backend/target/
+      - type: bind
         source: ~/.m2/repository/
         target: /root/.m2/repository/
     networks:
