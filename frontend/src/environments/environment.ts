@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   token_item: 'oidc_token_dev',
-  host: 'http://localhost:8080'
+  host: 'http://localhost:8080',
+  clientId: 'dev',
+  scope: 'openid profile'
 };
 
 /*
