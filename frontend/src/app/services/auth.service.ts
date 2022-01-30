@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -61,16 +61,20 @@ export class AuthService {
 
     public exchangeCodeForToken(code: string): Observable<AccessToken> {
         // Request body
-        const body: FormData = new FormData()
+        const body: URLSearchParams = new URLSearchParams()
 
-        body.append('client_id', environment.clientId)
-        body.append('client_secret', environment.clientSecret)
         body.append('code', code)
         body.append('grant_type', 'authorization_code')
         body.append('redirect_uri', environment.redirectUri)
 
+        // Headers
+        const headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Basic ${btoa(`${environment.clientId}:${environment.clientSecret}`)}`
+        });
+
         // Get token
-        return this.http.post<AccessToken>(`${environment.host}/oauth2/token`, body, { withCredentials: true })
+        return this.http.post<AccessToken>(`${environment.host}/oauth2/token`, body, { headers, withCredentials: true })
             .pipe(map(
                 (accessToken) => {
                     // Set expiresAt
