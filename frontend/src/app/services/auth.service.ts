@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -48,8 +48,18 @@ export class AuthService {
     }
 
     public login(): void {
+        // HTTP Params
+        const httpParams: HttpParams = new HttpParams()
+            .set('client_id', environment.clientId)
+            .set('redirect_uri', window.location as any as string)
+            .set('scope', environment.scope)
+            .set('response_type', 'code');
+        
+        // HTTP Request
+        const httpRequest: HttpRequest<unknown> = new HttpRequest('GET', `${environment.host}/oauth2/authorize`, { params: httpParams });
+
         // Redirect to login
-        window.location = `${environment.host}/oauth2/authorize?client_id=${environment.clientId}&redirect_uri=${window.location}&scope=${environment.scope}&response_type=code` as any as Location;
+        window.location = httpRequest.urlWithParams as any as Location;
     }
 
     public getToken(): AccessToken | undefined {
