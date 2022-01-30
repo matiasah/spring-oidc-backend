@@ -51,21 +51,23 @@ public class AuthorizationServerConfig {
 
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer
 				.getEndpointsMatcher();
-
-		http
+        
+		return http
 			.requestMatcher(endpointsMatcher)
-			.authorizeRequests(authorizeRequests ->
-				authorizeRequests.anyRequest().authenticated()
-			)
-			.csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-			.apply(authorizationServerConfigurer);
-            
-        return http
-            .formLogin(Customizer.withDefaults())
-            .exceptionHandling()
-                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(DEFAULT_LOGIN_PAGE_URL))
+			.authorizeRequests()
+                .anyRequest()
+                    .authenticated()
+                    .and()
+			.csrf()
+                .ignoringRequestMatchers(endpointsMatcher)
                 .and()
-            .build();
+			.apply(authorizationServerConfigurer)
+                .and()
+            .formLogin(Customizer.withDefaults())
+                .exceptionHandling()
+                    .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(DEFAULT_LOGIN_PAGE_URL))
+                    .and()
+                .build();
     }
 
     @Bean

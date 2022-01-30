@@ -4,10 +4,12 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
     declarations: [
-        LoginComponent
+        LoginComponent,
+        CallbackComponent
     ],
     imports: [
         CommonModule,
