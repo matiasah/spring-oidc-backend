@@ -51,7 +51,7 @@ export class AuthService {
         // HTTP Params
         const httpParams: HttpParams = new HttpParams()
             .set('client_id', environment.clientId)
-            .set('redirect_uri', window.location as any as string)
+            .set('redirect_uri', environment.redirectUri)
             .set('scope', environment.scope)
             .set('response_type', 'code');
         
