@@ -8,7 +8,7 @@ export const environment = {
   host: 'http://localhost:8080',
   clientId: 'dev',
   scope: 'openid profile',
-  redirectUri: 'http://127.0.0.1/auth/callback'
+  redirectUri: 'http://127.0.0.1/oauth/callback'
 };
 
 /*
