@@ -12,9 +12,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-    // User cache
-    private user?: User;
-
     // Access token
     private token?: AccessToken;
 
@@ -36,9 +33,9 @@ export class AuthService {
             if (this.token) {
 
                 // Si hay expiracion
-                if (this.token.expiracion) {
+                if (this.token.expiresAt) {
                     // Transformar fecha a Date
-                    this.token.expiracion = new Date(this.token.expiracion);
+                    this.token.expiresAt = new Date(this.token.expiresAt);
                 } else {
                     // Eliminar token
                     this.cleanToken();
@@ -62,75 +59,75 @@ export class AuthService {
         window.location = httpRequest.urlWithParams as any as Location;
     }
 
+    public exchangeCodeForToken(code: string): Observable<AccessToken> {
+        // Request body
+        const body: FormData = new FormData()
+
+        body.append('client_id', environment.clientId)
+        body.append('client_secret', environment.clientSecret)
+        body.append('code', code)
+        body.append('grant_type', 'authorization_code')
+        body.append('redirect_uri', environment.redirectUri)
+
+        // Get token
+        return this.http.post<AccessToken>(`${environment.host}/oauth2/token`, body, { withCredentials: true })
+            .pipe(map(
+                (accessToken) => {
+                    // Set expiresAt
+                    accessToken.expiresAt = new Date(Date.now() + accessToken.expires_in * 1000);
+
+                    // Return accessToken
+                    return accessToken;
+                }
+            ));
+    }
+
     public getToken(): AccessToken | undefined {
-        // Si hay token en memoria
+        // If there's a token in memory
         if (this.token) {
 
-            // Retornar copia del token
+            // Return a copy of the token
             return Object.assign({}, this.token);
         }
 
-        // Retornar indefinido
+        // Return undefined
         return undefined;
     }
 
     public setToken(token: AccessToken): AccessToken | undefined {
-        // Si el token no es nulo
+        // If the token is valid
         if (token != null) {
-            // Copiar token a memoria
+
+            // Copy the token
             this.token = Object.assign({}, token);
 
-            // Si no hay fecha de expiracion
-            if (!this.token.expiracion) {
-                // Fijar expiración
-                this.token.expiracion = new Date(Date.now() + token.expires_in * 1000);
-            }
-
-            // Almacenar en localStorage
+            // Put in localStorage
             this.storage.setItem(environment.token_item, JSON.stringify(this.token));
 
-            // Eliminar usuario de memoria
-            this.user = undefined;
-
-            // Retornar copia del token
+            // Return a copy of the token
             return Object.assign({}, this.token);
         }
 
-        // Returnar indefinido
+        // Return undefined
         return undefined;
     }
 
     public cleanToken(): void {
-        // Quitar token de memoria
+        // Remove token from memory
         this.token = undefined;
 
-        // Quitar token de localStorage
+        // Remove token from localStorage
         this.storage.removeItem(environment.token_item);
-
-        // Eliminar usuario de memoria
-        this.user = undefined;
-    }
-
-    public getUser(): Observable<User> {
-        // Si hay un usuario
-        if (this.user) {
-            // Retornar un observable de ese usuario
-            return of(this.user);
-        }
-
-        // Retornar un observable de una petición que obtiene al usuario
-        return this.http.get<User>(`${environment.host}/usuarios/me`)
-            .pipe(tap(response => this.user = response));
     }
 
     public isTokenValid(): boolean {
-        // Si hay token
-        if (this.token && this.token.expiracion) {
-            // Verificar expiración
-            return this.token.expiracion.getTime() > Date.now();
+        // If there's a token in memory
+        if (this.token && this.token.expiresAt) {
+            // Verify that the token is still valid
+            return this.token.expiresAt.getTime() > Date.now();
         }
 
-        // No hay token
+        // Token is not valid, return false
         return false;
     }
 

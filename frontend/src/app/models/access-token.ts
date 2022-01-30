@@ -5,5 +5,5 @@ export interface AccessToken {
     expires_in: number;
     scope: string;
     jti: string;
-    expiracion?: Date;
+    expiresAt?: Date;
 }

@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   token_item: 'oidc_token_dev',
-  host: 'http://localhost:8080',
+  host: 'http://127.0.0.1:8080',
   clientId: 'dev',
+  clientSecret: 'dev',
   scope: 'openid profile',
   redirectUri: 'http://127.0.0.1/oauth/callback'
 };
