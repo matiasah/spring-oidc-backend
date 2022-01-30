@@ -15,6 +15,7 @@
 	<description>OIDC Management Service</description>
 	<properties>
 		<java.version>11</java.version>
+        <bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,6 +38,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
             <version>0.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${bcpkix-jdk15on.version}</version>
         </dependency>
 
 		<dependency>
