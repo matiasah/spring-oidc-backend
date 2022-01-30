@@ -9,7 +9,7 @@ services:
       dockerfile: dev.dockerfile
     restart: unless-stopped
     ports:
-      - "4200:4200"
+      - "80:80"
     volumes:
       - type: bind
         source: ./frontend
