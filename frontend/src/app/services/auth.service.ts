@@ -67,10 +67,13 @@ export class AuthService {
         body.append('grant_type', 'authorization_code')
         body.append('redirect_uri', environment.redirectUri)
 
+        // Basic token
+        const basicToken: string = btoa(`${environment.clientId}:${environment.clientSecret}`);
+
         // Headers
         const headers: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Basic ${btoa(`${environment.clientId}:${environment.clientSecret}`)}`
+            'Authorization': `Basic ${basicToken}`
         });
 
         // Get token
