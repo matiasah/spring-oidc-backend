@@ -2,21 +2,21 @@ package oidc.management.repository;
 
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import oidc.management.model.Client;
+import oidc.management.model.ServiceAccount;
 
 /**
- * OIDC Client Repository.
+ * OIDC Service Account Repository.
  * 
  * @author Matías Hermosilla
  * @since 16-01-2022
  * @see MongoRepository
- * @see Client
+ * @see ServiceAccount
  */
-public interface ClientRepository extends MongoRepository<Client, String> {
+public interface ServiceAccountRepository extends MongoRepository<ServiceAccount, String> {
 
     /**
      * Finds a client by client id.
      */
-    public Optional<Client> findByClientId(String clientId);
+    public Optional<ServiceAccount> findByClientId(String clientId);
     
 }

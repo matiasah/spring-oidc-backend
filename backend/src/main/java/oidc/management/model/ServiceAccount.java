@@ -15,18 +15,18 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * OIDC Client model.
+ * OIDC Service Account model.
  * 
  * @author Matías Hermosilla
  * @since 16-01-2022
  */
-@Document(collection = "clients")
+@Document(collection = "service_accounts")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
-public class Client {
+public class ServiceAccount {
     
     /**
      * Application id.

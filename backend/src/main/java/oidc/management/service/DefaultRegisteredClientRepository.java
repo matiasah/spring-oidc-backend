@@ -1,12 +1,19 @@
 package oidc.management.service;
 
+import java.time.Instant;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.stereotype.Service;
-import oidc.management.model.Client;
-import oidc.management.repository.ClientRepository;
+import oidc.management.model.ServiceAccount;
+import oidc.management.repository.ServiceAccountRepository;
 
 /**
  * Default implementation of {@link RegisteredClientRepository}.
@@ -15,19 +22,22 @@ import oidc.management.repository.ClientRepository;
  * @since 23-01-2022
  * @see RegisteredClientRepository
  * @see RegisteredClient
- * @see Client
- * @see ClientRepository
+ * @see ServiceAccount
+ * @see ServiceAccountRepository
  */
 @Service
 public class DefaultRegisteredClientRepository implements RegisteredClientRepository {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ServiceAccountRepository clientRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void save(RegisteredClient registeredClient) {
         // Copy RegisteredClient on Client
-        Client client = Client.builder()
+        ServiceAccount client = ServiceAccount.builder()
             .id(registeredClient.getId())
             .clientId(registeredClient.getClientId())
             .clientIdIssuedAt(registeredClient.getClientIdIssuedAt())
@@ -48,8 +58,10 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
 
     @Override
     public RegisteredClient findById(String id) {
+        System.out.println("findById");
+
         // Find Client
-        Optional<Client> clientHolder = clientRepository.findById(id);
+        Optional<ServiceAccount> clientHolder = clientRepository.findById(id);
 
         // If client does not exist
         if (clientHolder.isEmpty()) {
@@ -59,7 +71,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
         }
 
         // Get Client
-        Client client = clientHolder.get();
+        ServiceAccount client = clientHolder.get();
         
         // Return RegisteredClient
         return RegisteredClient
@@ -80,8 +92,31 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
 
     @Override
     public RegisteredClient findByClientId(String clientId) {
+        if (clientId.equals("dev")) {
+            return RegisteredClient
+                .withId("dev")
+                .clientId(clientId)
+                .clientIdIssuedAt(Instant.now())
+                .clientSecret(passwordEncoder.encode("dev"))
+                .clientSecretExpiresAt(null)
+                .clientName("dev")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .redirectUri("http://127.0.0.1/oauth/callback")
+                .redirectUri("http://localhost/oauth/callback")
+                .redirectUri("https://openidconnect.net/callback")
+                .scope(OidcScopes.OPENID)
+                .scope(OidcScopes.PROFILE)
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .tokenSettings(TokenSettings.builder().build())
+                .build();
+        }
+
         // Find Client
-        Optional<Client> clientHolder = clientRepository.findByClientId(clientId);
+        Optional<ServiceAccount> clientHolder = clientRepository.findByClientId(clientId);
 
         // If client does not exist
         if (clientHolder.isEmpty()) {
@@ -91,7 +126,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
         }
 
         // Get Client
-        Client client = clientHolder.get();
+        ServiceAccount client = clientHolder.get();
         
         // Return RegisteredClient
         return RegisteredClient
