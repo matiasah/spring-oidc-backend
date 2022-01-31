@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class CallbackComponent implements OnInit {
 
     public constructor(
         private activatedRoute: ActivatedRoute,
+        private router: Router,
         private authService: AuthService
     ) { }
 
@@ -29,6 +30,9 @@ export class CallbackComponent implements OnInit {
 
                         // Set current access token
                         this.authService.setToken(accessToken);
+
+                        // Redirect to system
+                        this.router.navigate(['/sys']);
                     }
                 );
 
