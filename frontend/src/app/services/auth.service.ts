@@ -124,7 +124,7 @@ export class AuthService {
         this.storage.removeItem(environment.token_item);
     }
 
-    public isTokenValid(): boolean {
+    public isAuthenticated(): boolean {
         // If there's a token in memory
         if (this.token && this.token.expiresAt) {
             // Verify that the token is still valid
