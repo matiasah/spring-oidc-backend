@@ -34,6 +34,11 @@
 
             <h3 mat-subheader>System</h3>
 
+            <a mat-list-item id="linkHome" (click)="sidenav.close()" routerLink="./">
+                <mat-icon matListIcon>home</mat-icon>
+                <span mat-line>Home</span>
+            </a>
+
             <a mat-list-item id="linkUsers" (click)="sidenav.close()" routerLink="./users">
                 <mat-icon matListIcon>manage_accounts</mat-icon>
                 <span mat-line>User Accounts</span>
@@ -57,6 +62,14 @@
             <a mat-list-item id="linkScopes" (click)="sidenav.close()" routerLink="./scopes">
                 <mat-icon matListIcon>list</mat-icon>
                 <span mat-line>Scopes</span>
+            </a>
+
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Audit</h3>
+
+            <a mat-list-item id="linkLoginAttempts" (click)="sidenav.close()" routerLink="./scopes">
+                <mat-icon matListIcon>login</mat-icon>
+                <span mat-line>Login attempts</span>
             </a>
 
             <mat-divider></mat-divider>
