@@ -2,13 +2,14 @@ package oidc.management.service;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import oidc.management.model.User;
-import oidc.management.repository.UserRepository;
+import oidc.management.model.UserAccount;
+import oidc.management.repository.UserAccountRepository;
 
 /**
  * Default implementation of {@link UserDetailsService}
@@ -16,7 +17,7 @@ import oidc.management.repository.UserRepository;
  * @author Matías Hermosilla
  * @since 23-01-2022
  * @see UserDetailsService
- * @see User
+ * @see UserAccount
  */
 @Service
 public class DefaultUserDetailsService implements UserDetailsService {
@@ -25,7 +26,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
      * @see UserDetailsService#loadUserByUsername(String)
      */
     @Autowired
-    private UserRepository userRepository;
+    private UserAccountRepository userAccountRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,7 +38,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
         if (username.equals("admin")) {
 
             // Return user
-            return org.springframework.security.core.userdetails.User.builder()
+            return User.builder()
                 .username(username)
                 .password(passwordEncoder.encode("admin"))
                 .roles("ADMIN")
@@ -49,7 +50,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
         }
 
         // Find user by username
-        Optional<User> userHolder = userRepository.findByUsername(username);
+        Optional<UserAccount> userHolder = userAccountRepository.findByUsername(username);
 
         // If user was not found
         if (userHolder.isEmpty()) {

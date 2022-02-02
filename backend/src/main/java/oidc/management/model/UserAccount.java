@@ -13,12 +13,12 @@ import lombok.EqualsAndHashCode;
  * @author Matías Hermosilla
  * @since 16-01-2022
  * @see UserDetails
- * @see UserRepository
+ * @see UserAccountRepository
  */
 @Document(collection = "users")
 @Data
 @EqualsAndHashCode(of = "id")
-public class User implements UserDetails {
+public class UserAccount implements UserDetails {
     private String id;
     private List<GrantedAuthority> authorities;
     private String password;
