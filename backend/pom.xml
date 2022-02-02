@@ -14,8 +14,16 @@
 	<name>management</name>
 	<description>OIDC Management Service</description>
 	<properties>
+        <!-- Java version -->
 		<java.version>11</java.version>
+
+        <!-- Dependencies versions -->
         <bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
+        <spring-security-oauth2-authorization-server.version>0.2.1</spring-security-oauth2-authorization-server.version>
+        <querydsl.version>5.0.0</querydsl.version>
+
+        <!-- Plugin versions -->
+        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,7 +45,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
-            <version>0.2.1</version>
+            <version>${spring-security-oauth2-authorization-server.version}</version>
         </dependency>
 
         <dependency>
@@ -45,6 +53,18 @@
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>${bcpkix-jdk15on.version}</version>
         </dependency>
+
+        <dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-mongodb</artifactId>
+            <version>${querydsl.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mongodb</groupId>
+					<artifactId>mongo-java-driver</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,15 +95,32 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
+
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>${apt-maven-plugin.version}</version>
+                <dependencies>
+					<dependency>
+						<groupId>com.querydsl</groupId>
+						<artifactId>querydsl-apt</artifactId>
+						<version>${querydsl.version}</version>
+					</dependency>
+				</dependencies>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/annotations</outputDirectory>
+                            <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!-- Build frontend -->
             <plugin>
