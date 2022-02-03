@@ -27,11 +27,9 @@ public class Authority implements GrantedAuthority {
 
     private String description;
     
-    
     @Override
     public String getAuthority() {
-        // TODO Auto-generated method stub
-        return null;
+        return name;
     }
     
 }
