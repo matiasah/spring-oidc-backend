@@ -8,7 +8,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -17,6 +16,18 @@ import oidc.management.model.Authority;
 import oidc.management.model.ServiceAccount;
 import oidc.management.repository.ServiceAccountRepository;
 
+/**
+ * Default implementation of {@link OAuth2TokenCustomizer} that adds the
+ * {@link ServiceAccount}'s {@link Authority}s to the {@link Authentication}'s
+ * {@link Collection} of {@link GrantedAuthority}s.
+ * 
+ * @author Matías Hermosilla
+ * @since 03-02-2022
+ * @see OAuth2TokenCustomizer
+ * @see ServiceAccount
+ * @see Authority
+ * @see Authentication
+ */
 @Service
 public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtEncodingContext> {
 
