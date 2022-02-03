@@ -126,8 +126,11 @@ export class AuthService {
         // Remove token from localStorage
         this.storage.removeItem(environment.token_item);
 
-        // Go to logout page
-        window.location = `${environment.host}/logout` as any as Location;
+        // Perform logout
+        this.http.get(`${environment.host}/logout`, { responseType: 'text', withCredentials: true }).subscribe();
+
+        // Go root page
+        this.router.navigate(['/']);
     }
 
     public isAuthenticated(): boolean {
