@@ -76,11 +76,16 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
             // Get authorities from ServiceAccount
             List<Authority> serviceAccountAuthorities = serviceAccount.getAuthorities();
 
-            // For every ServiceAccount authority
-            for (Authority authority : serviceAccountAuthorities) {
-                
-                // Add to authorities
-                authorities.add(authority.getAuthority());
+            // If serviceAccountAuthorities is not null
+            if (serviceAccountAuthorities != null) {
+
+                // For every ServiceAccount authority
+                for (Authority authority : serviceAccountAuthorities) {
+                    
+                    // Add to authorities
+                    authorities.add(authority.getAuthority());
+                }
+
             }
         }
 
