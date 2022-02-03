@@ -16,6 +16,14 @@ import org.springframework.stereotype.Service;
 import oidc.management.model.ServiceAccount;
 import oidc.management.repository.ServiceAccountRepository;
 
+/**
+ * ServiceAccount Service for managing Service Accounts.
+ * 
+ * @author Matías Hermosilla
+ * @since 03-02-2022
+ * @see ServiceAccount
+ * @see ServiceAccountRepository
+ */
 @Service
 public class ServiceAccountService {
 
