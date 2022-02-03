@@ -45,10 +45,7 @@ export class SystemComponent implements OnInit {
 
     public onLogout(): void {
         // Eliminar token
-        this.authService.cleanToken();
-
-        // Navegar a login
-        this.router.navigate(['/']);
+        this.authService.logout();
     }
 
     public get backUrl(): Observable<undefined | string> {

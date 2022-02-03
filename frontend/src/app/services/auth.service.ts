@@ -38,7 +38,7 @@ export class AuthService {
                     this.token.expiresAt = new Date(this.token.expiresAt);
                 } else {
                     // Eliminar token
-                    this.cleanToken();
+                    this.logout();
                 }
             }
         }
@@ -119,12 +119,15 @@ export class AuthService {
         return undefined;
     }
 
-    public cleanToken(): void {
+    public logout(): void {
         // Remove token from memory
         this.token = undefined;
 
         // Remove token from localStorage
         this.storage.removeItem(environment.token_item);
+
+        // Go to logout page
+        window.location = `${environment.host}/logout` as any as Location;
     }
 
     public isAuthenticated(): boolean {
