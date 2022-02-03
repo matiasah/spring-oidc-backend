@@ -58,8 +58,6 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
 
     @Override
     public RegisteredClient findById(String id) {
-        System.out.println("findById");
-
         // Find Client
         Optional<ServiceAccount> clientHolder = clientRepository.findById(id);
 
