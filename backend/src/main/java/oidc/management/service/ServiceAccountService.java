@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.stereotype.Service;
+import oidc.management.model.Authority;
 import oidc.management.model.ServiceAccount;
 import oidc.management.repository.ServiceAccountRepository;
 
@@ -92,6 +93,7 @@ public class ServiceAccountService {
                 )
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .tokenSettings(TokenSettings.builder().build())
+                .authorities(Arrays.asList(Authority.builder().name("ROLE_SERVICE_ACCOUNT").build()))
                 .build());
         }
 
