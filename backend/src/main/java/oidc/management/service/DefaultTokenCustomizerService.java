@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Service;
 import oidc.management.model.Authority;
 import oidc.management.model.ServiceAccount;
-import oidc.management.repository.ServiceAccountRepository;
 
 /**
  * Default implementation of {@link OAuth2TokenCustomizer} that adds the
@@ -34,7 +33,7 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
     private static final String AUTHORITIES_CLAIM = "authorities";
 
     @Autowired
-    private ServiceAccountRepository serviceAccountRepository;
+    private ServiceAccountService serviceAccountService;
 
     @Override
     public void customize(JwtEncodingContext jwtEncodingContext) {
@@ -67,7 +66,7 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
         RegisteredClient registeredClient = jwtEncodingContext.getRegisteredClient();
 
         // Get ServiceAccount
-        Optional<ServiceAccount> optServiceAccount = serviceAccountRepository.findById(registeredClient.getId());
+        Optional<ServiceAccount> optServiceAccount = serviceAccountService.findById(registeredClient.getId());
 
         // If the ServiceAccount exists
         if (optServiceAccount.isPresent()) {
