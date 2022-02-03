@@ -1,10 +1,14 @@
 package oidc.management.service;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -23,6 +27,31 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
 
     @Override
     public void customize(JwtEncodingContext jwtEncodingContext) {
+
+        // Set to contain authorities
+        Set<String> authorities = new HashSet<>();
+
+        // Get authentication
+        Authentication auth = jwtEncodingContext.getPrincipal();
+
+        // If authentication is not null
+        if (auth != null) {
+
+            // Get authorities
+            Collection<? extends GrantedAuthority> authenticationAuthorities = auth.getAuthorities();
+
+            // If authentication authorities is not null
+            if (authenticationAuthorities != null) {
+
+                // For each authority
+                for (GrantedAuthority authority : authenticationAuthorities) {
+
+                    // Add authority to authorities
+                    authorities.add(authority.getAuthority());
+                }
+            }
+        }
+
         // Get RegisteredClient
         RegisteredClient registeredClient = jwtEncodingContext.getRegisteredClient();
 
@@ -34,9 +63,6 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
             // Get ServiceAccount
             ServiceAccount serviceAccount = optServiceAccount.get();
 
-            // Set to contain authorities
-            Set<String> authorities = new HashSet<>();
-
             // Get authorities from ServiceAccount
             List<Authority> serviceAccountAuthorities = serviceAccount.getAuthorities();
 
@@ -46,10 +72,10 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
                 // Add to authorities
                 authorities.add(authority.getAuthority());
             }
-
-            // Add authorities
-            jwtEncodingContext.getClaims().claim(AUTHORITIES_CLAIM, authorities);
         }
+
+        // Add authorities
+        jwtEncodingContext.getClaims().claim(AUTHORITIES_CLAIM, authorities);
     }
     
 }
