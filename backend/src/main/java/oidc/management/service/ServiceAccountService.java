@@ -3,6 +3,7 @@ package oidc.management.service;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +28,8 @@ import oidc.management.repository.ServiceAccountRepository;
 @Service
 public class ServiceAccountService {
 
+    private static final UUID DEFAULT_CLIENT_ID = UUID.randomUUID();
+
     @Autowired
     private ServiceAccountRepository serviceAccountRepository;
 
@@ -43,8 +46,8 @@ public class ServiceAccountService {
     public Optional<ServiceAccount> findById(String id) {
 
         // Development service account
-        if (id.equals("dev")) {
-            return this.findByClientId(id);
+        if (id.equals(DEFAULT_CLIENT_ID.toString())) {
+            return this.findByClientId("dev");
         }
 
         return serviceAccountRepository.findById(id);
@@ -62,7 +65,7 @@ public class ServiceAccountService {
         // Development service account
         if (clientId.equals("dev")) {
             return Optional.of(ServiceAccount.builder()
-                .id("dev")
+                .id(DEFAULT_CLIENT_ID.toString())
                 .clientId(clientId)
                 .clientIdIssuedAt(Instant.now())
                 .clientSecret(passwordEncoder.encode("dev"))
@@ -87,7 +90,7 @@ public class ServiceAccountService {
                         .collect(Collectors.toSet())
                 )
                 .scopes(
-                    Arrays.asList(OidcScopes.OPENID, OidcScopes.PROFILE)
+                    Arrays.asList(OidcScopes.OPENID, OidcScopes.PROFILE, OidcScopes.EMAIL)
                         .stream()
                         .collect(Collectors.toSet())
                 )
