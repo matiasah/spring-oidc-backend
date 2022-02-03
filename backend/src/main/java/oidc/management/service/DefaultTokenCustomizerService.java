@@ -37,9 +37,6 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
             // Set to contain authorities
             Set<String> authorities = new HashSet<>();
 
-            // Get current authorities
-            jwtEncodingContext.getClaims().claim(AUTHORITIES_CLAIM, authorities);
-
             // Get authorities from ServiceAccount
             List<Authority> serviceAccountAuthorities = serviceAccount.getAuthorities();
 
@@ -49,6 +46,9 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
                 // Add to authorities
                 authorities.add(authority.getAuthority());
             }
+
+            // Add authorities
+            jwtEncodingContext.getClaims().claim(AUTHORITIES_CLAIM, authorities);
         }
     }
     
