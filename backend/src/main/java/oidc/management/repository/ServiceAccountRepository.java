@@ -17,6 +17,10 @@ import oidc.management.model.QServiceAccount;
  * @since 16-01-2022
  * @see MongoRepository
  * @see ServiceAccount
+ * @see QServiceAccount
+ * @see QuerydslPredicateExecutor
+ * @see QuerydslBinderCustomizer
+ * @see QuerydslBindings
  */
 public interface ServiceAccountRepository extends MongoRepository<ServiceAccount, String>, QuerydslPredicateExecutor<ServiceAccount>, QuerydslBinderCustomizer<QServiceAccount> {
 
