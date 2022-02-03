@@ -8,7 +8,7 @@ export const environment = {
   host: 'http://127.0.0.1:8080',
   clientId: 'dev',
   clientSecret: 'dev',
-  scope: 'openid profile',
+  scope: 'openid profile email',
   redirectUri: 'http://127.0.0.1/oauth/callback'
 };
 
