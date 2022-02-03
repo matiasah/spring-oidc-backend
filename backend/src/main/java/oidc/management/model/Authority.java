@@ -3,6 +3,7 @@ package oidc.management.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import oidc.management.repository.AuthorityRepository;
@@ -15,6 +16,7 @@ import oidc.management.repository.AuthorityRepository;
  * @see GrantedAuthority
  * @see AuthorityRepository
  */
+@Builder
 @Document(collection = "authorities")
 @Data
 @EqualsAndHashCode(of = "id")
