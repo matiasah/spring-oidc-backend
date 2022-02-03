@@ -35,7 +35,7 @@ import oidc.management.repository.UserAccountRepository;
  * @see ObjectMapper
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user-accounts")
 public class UserAccountController {
     
     @Autowired
