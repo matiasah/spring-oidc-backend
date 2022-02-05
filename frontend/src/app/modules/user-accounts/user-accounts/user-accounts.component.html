@@ -7,13 +7,15 @@
     <mat-card-content>
 
         <div class="w-100">
-            <form #form="ngForm" autocomplete="off">
-                <div class="row">
-                    <mat-form-field class="col">
-                        <input matInput name="username" [(ngModel)]="usernameSearch" placeholder="User name">
-                    </mat-form-field>
-                </div>
-            </form>
+            <div class="mt-4">
+                <form #form="ngForm" autocomplete="off">
+                    <div class="grid grid-cols grid-cols-12 gap-4">
+                        <mat-form-field class="col-span-12">
+                            <input matInput name="username" [(ngModel)]="usernameSearch" placeholder="User name">
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
         </div>
         
         <div *ngIf="isLoading | async" class="loading-shade">
