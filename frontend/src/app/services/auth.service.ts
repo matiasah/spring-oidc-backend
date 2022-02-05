@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/commo
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AccessToken } from '../models/access-token';
+import { AccessToken } from '../interfaces/access-token';
 import { User } from '../models/user';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
