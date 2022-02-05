@@ -70,9 +70,27 @@ export class UserAccountsComponent implements OnInit {
         this.paginator.complete();
     }
 
+    public createEntry(): void {
+        // Open create dialog
+        /**
+        const ref: MatDialogRef<CrearInterfazUsuarioComponent> = this.dialog.open(CrearInterfazUsuarioComponent, {
+            minWidth: '60vw',
+            data: { id: this.proyectoId }
+        });
+
+        // On close dialog
+        ref.afterClosed().subscribe(
+            () => {
+                // Update paginator
+                this.paginator.update();
+            }
+        );
+         */
+    }
+
     public deleteEntry(userAccount: UserAccount) {
         /**
-        // Crear dialogo
+        // Open delete dialog
         const ref: MatDialogRef<EliminarUsuarioComponent> = this.dialog.open(EliminarUsuarioComponent, {
             width: '1000px',
             data: userAccount
@@ -81,7 +99,7 @@ export class UserAccountsComponent implements OnInit {
         // Al cerrar dialogo
         ref.afterClosed().subscribe(
             response => {
-                // Actualizar paginador
+                // Update paginator
                 this.paginator.update();
             }
         );
