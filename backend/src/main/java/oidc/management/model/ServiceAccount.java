@@ -2,6 +2,7 @@ package oidc.management.model;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -53,5 +54,13 @@ public class ServiceAccount {
     private ClientSettings clientSettings;
     private TokenSettings tokenSettings;
     private List<Authority> authorities;
+
+    public void setClientSettings(Map<String, Object> clientSettings) {
+        this.clientSettings = ClientSettings.withSettings(clientSettings).build();
+    }
+
+    public void setTokenSettings(Map<String, Object> tokenSettings) {
+        this.tokenSettings = TokenSettings.withSettings(tokenSettings).build();
+    }
 
 }
