@@ -1,15 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserAccount } from 'src/app/interfaces/user-account';
+import { UserAccountService } from 'src/app/services/user-account.service';
 
 @Component({
-  selector: 'app-create-user-account',
-  templateUrl: './create-user-account.component.html',
-  styleUrls: ['./create-user-account.component.scss']
+    selector: 'app-create-user-account',
+    templateUrl: './create-user-account.component.html',
+    styleUrls: ['./create-user-account.component.scss']
 })
 export class CreateUserAccountComponent implements OnInit {
 
-  constructor() { }
+    // User account to create
+    public userAccount: UserAccount = {
+        enabled: true
+    } as UserAccount;
 
-  ngOnInit(): void {
-  }
+    // Indicate if the account is being created
+    public creating = false;
+
+    // Form reference
+    @ViewChild('form', { static: true })
+    public form!: NgForm;
+
+    public constructor(
+        private dialogRef: MatDialogRef<CreateUserAccountComponent>,
+        private snackBar: MatSnackBar,
+        private userAccountService: UserAccountService
+    ) {
+
+    }
+
+    public ngOnInit() {
+    }
+
+    public onSubmit() {
+        // If the form is valid
+        if (this.form.valid) {
+
+            // Indicate that the account is being created
+            this.creating = true;
+
+            // Create
+            /*
+            this.userAccountService.save(this.userAccount).subscribe(
+                response => {
+                    // Indicate that the user account is not being created
+                    this.creating = false;
+
+                    // Notify success
+                    this.snackBar.open('The user account has been created', 'Aceptar', { duration: 2000 });
+
+                    // Close modal
+                    this.dialogRef.close();
+                },
+                error => {
+                    // Indicate that the user account is not being created
+                    this.creating = false;
+
+                    // Notify error
+                    this.snackBar.open('No se ha podido registrar el analista', 'Aceptar', { duration: 2000 });
+
+                    // Close modal
+                    this.dialogRef.close();
+                }
+            );
+            */
+        }
+    }
 
 }

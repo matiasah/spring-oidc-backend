@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { UserAccount } from 'src/app/interfaces/user-account';
 import { UserAccountService } from 'src/app/services/user-account.service';
 import { Paginator } from 'src/app/util/paginator';
+import { CreateUserAccountComponent } from '../create-user-account/create-user-account.component';
 
 @Component({
     selector: 'app-user-accounts',
@@ -72,10 +73,8 @@ export class UserAccountsComponent implements OnInit {
 
     public createEntry(): void {
         // Open create dialog
-        /**
-        const ref: MatDialogRef<CrearInterfazUsuarioComponent> = this.dialog.open(CrearInterfazUsuarioComponent, {
-            minWidth: '60vw',
-            data: { id: this.proyectoId }
+        const ref: MatDialogRef<CreateUserAccountComponent> = this.dialog.open(CreateUserAccountComponent, {
+            minWidth: '60vw'
         });
 
         // On close dialog
@@ -85,7 +84,6 @@ export class UserAccountsComponent implements OnInit {
                 this.paginator.update();
             }
         );
-         */
     }
 
     public deleteEntry(userAccount: UserAccount) {
