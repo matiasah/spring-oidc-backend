@@ -3,6 +3,8 @@ package oidc.management.model;
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -13,7 +15,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * OIDC Service Account model.
@@ -36,6 +40,9 @@ public class ServiceAccount {
     private String id;
     private String clientId;
     private Instant clientIdIssuedAt;
+
+    @Getter(onMethod_ = {@JsonIgnore})
+    @Setter(onMethod_ = {@JsonSetter})
     private String clientSecret;
     private Instant clientSecretExpiresAt;
     private String clientName;
