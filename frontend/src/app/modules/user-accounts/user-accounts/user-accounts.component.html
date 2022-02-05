@@ -6,6 +6,79 @@
 
     <mat-card-content>
 
+        <div class="w-100">
+            <form #form="ngForm" autocomplete="off">
+                <div class="row">
+                    <mat-form-field class="col">
+                        <input matInput name="username" [(ngModel)]="usernameSearch" placeholder="User name">
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+        
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+        
+        <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+        
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Id.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    {{ userAccount.id }}
+                </mat-cell>
+            </ng-container>
+        
+            <!-- User name -->
+            <ng-container matColumnDef="username">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    User name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    {{ userAccount.username }}
+                </mat-cell>
+            </ng-container>
+        
+            <!-- Cuenta activada -->
+            <ng-container matColumnDef="enabled">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Enabled
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    <mat-icon *ngIf="userAccount.enabled">check</mat-icon>
+                    <mat-icon *ngIf="!userAccount.enabled">close</mat-icon>
+                </mat-cell>
+            </ng-container>
+        
+            <!-- Edit -->
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    <button mat-icon-button matTooltip="Edit user" [routerLink]="'user-accounts/' + userAccount.id">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+        
+            <!-- Eliminar -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    <button mat-icon-button matTooltip="Delete user" (click)="deleteEntry(userAccount)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+        
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
     </mat-card-content>
     
 </mat-card>
