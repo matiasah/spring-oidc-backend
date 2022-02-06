@@ -5,7 +5,7 @@
         <div class="w-full flex justify-between">
             <h1 class="title font-bold">User Accounts</h1>
     
-            <button mat-mini-fab color="accent" class="col-span-1" (click)="createEntry()">
+            <button mat-mini-fab color="accent" class="col-span-1" matTooltip="Create user account" (click)="createEntry()">
                 <mat-icon>add</mat-icon>
             </button>
     
@@ -91,7 +91,7 @@
             <ng-container matColumnDef="edit">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
-                    <button mat-icon-button matTooltip="Edit user" (click)="editEntry(userAccount)">
+                    <button mat-icon-button matTooltip="Edit user account" (click)="editEntry(userAccount)">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </mat-cell>
@@ -101,7 +101,7 @@
             <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
-                    <button mat-icon-button matTooltip="Delete user" (click)="deleteEntry(userAccount)">
+                    <button mat-icon-button matTooltip="Delete user account" (click)="deleteEntry(userAccount)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-cell>
