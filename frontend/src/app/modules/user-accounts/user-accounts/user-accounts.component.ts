@@ -22,6 +22,8 @@ export class UserAccountsComponent implements OnInit {
     public displayedColumns: string[] = [
         'id',
         'username',
+        'firstName',
+        'lastName',
         'enabled',
         'edit',
         'delete'
@@ -50,6 +52,8 @@ export class UserAccountsComponent implements OnInit {
 
     // Search input
     public usernameSearch: string = '';
+    public firstNameSearch: string = '';
+    public lastNameSearch: string = '';
 
     public constructor(
         private userAccountService: UserAccountService,

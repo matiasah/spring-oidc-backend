@@ -21,8 +21,14 @@
         </div>
 
         <div class="grid grid-cols grid-cols-12 gap-4">
-            <mat-form-field class="col-span-12" appearance="fill">
+            <mat-form-field class="col-span-12 md:col-span-4" appearance="fill">
                 <input matInput name="username" [(ngModel)]="usernameSearch" placeholder="User name">
+            </mat-form-field>
+            <mat-form-field class="col-span-12 md:col-span-4" appearance="fill">
+                <input matInput name="firstName" [(ngModel)]="firstNameSearch" placeholder="First name">
+            </mat-form-field>
+            <mat-form-field class="col-span-12 md:col-span-4" appearance="fill">
+                <input matInput name="lastName" [(ngModel)]="lastNameSearch" placeholder="Last name">
             </mat-form-field>
         </div>
 
@@ -47,6 +53,26 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
                     {{ userAccount.username }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- First name -->
+            <ng-container matColumnDef="firstName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    First name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    {{ userAccount.firstName }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Last name -->
+            <ng-container matColumnDef="lastName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Last name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    {{ userAccount.lastName }}
                 </mat-cell>
             </ng-container>
 
