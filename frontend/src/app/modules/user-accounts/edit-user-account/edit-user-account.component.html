@@ -27,6 +27,14 @@
                 <input matInput name="password" type="password" #passwordForm="ngModel" [(ngModel)]="userAccount.password" placeholder="Password">
             </mat-form-field>
 
+            <mat-form-field class="col-span-12 md:col-span-6">
+                <input matInput name="firstName" #firstNameForm="ngModel" [(ngModel)]="userAccount.firstName" placeholder="First name">
+            </mat-form-field>
+
+            <mat-form-field class="col-span-12 md:col-span-6">
+                <input matInput name="lastName" #lastNameForm="ngModel" [(ngModel)]="userAccount.lastName" placeholder="Last name">
+            </mat-form-field>
+
             <div class="col-span-12">
                 <mat-checkbox name="activado" [(ngModel)]="userAccount.enabled">Enable user account</mat-checkbox>
             </div>
