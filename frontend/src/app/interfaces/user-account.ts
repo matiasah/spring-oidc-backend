@@ -9,4 +9,6 @@ export interface UserAccount {
     accountNonLocked: boolean;
     credentialsNonExpired: boolean;
     enabled: boolean;
+    firstName: string;
+    lastName: string;
 }
