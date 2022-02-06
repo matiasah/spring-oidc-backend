@@ -9,6 +9,7 @@ import { UserAccount } from 'src/app/interfaces/user-account';
 import { UserAccountService } from 'src/app/services/user-account.service';
 import { Paginator } from 'src/app/util/paginator';
 import { CreateUserAccountComponent } from '../create-user-account/create-user-account.component';
+import { EditUserAccountComponent } from '../edit-user-account/edit-user-account.component';
 
 @Component({
     selector: 'app-user-accounts',
@@ -75,6 +76,22 @@ export class UserAccountsComponent implements OnInit {
         // Open create dialog
         const ref: MatDialogRef<CreateUserAccountComponent> = this.dialog.open(CreateUserAccountComponent, {
             minWidth: '60vw'
+        });
+
+        // On close dialog
+        ref.afterClosed().subscribe(
+            () => {
+                // Update paginator
+                this.paginator.update();
+            }
+        );
+    }
+
+    public editEntry(userAccount: UserAccount): void {
+        // Open edit dialog
+        const ref: MatDialogRef<EditUserAccountComponent> = this.dialog.open(EditUserAccountComponent, {
+            minWidth: '60vw',
+            data: userAccount
         });
 
         // On close dialog

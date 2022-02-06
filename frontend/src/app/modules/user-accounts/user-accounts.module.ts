@@ -5,11 +5,13 @@ import { UserAccountsRoutingModule } from './user-accounts-routing.module';
 import { UserAccountsComponent } from './user-accounts/user-accounts.component';
 import { MaterialModule } from '../material/material.module';
 import { CreateUserAccountComponent } from './create-user-account/create-user-account.component';
+import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
 
 @NgModule({
     declarations: [
         UserAccountsComponent,
-        CreateUserAccountComponent
+        CreateUserAccountComponent,
+        EditUserAccountComponent
     ],
     imports: [
         CommonModule,

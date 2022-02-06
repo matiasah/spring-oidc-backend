@@ -65,7 +65,7 @@
             <ng-container matColumnDef="edit">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
-                    <button mat-icon-button matTooltip="Edit user" [routerLink]="'user-accounts/' + userAccount.id">
+                    <button mat-icon-button matTooltip="Edit user" (click)="editEntry(userAccount)">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </mat-cell>

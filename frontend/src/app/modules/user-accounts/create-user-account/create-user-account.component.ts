@@ -32,8 +32,7 @@ export class CreateUserAccountComponent implements OnInit {
 
     }
 
-    public ngOnInit() {
-    }
+    public ngOnInit() { }
 
     public onSubmit() {
         // If the form is valid
@@ -43,14 +42,13 @@ export class CreateUserAccountComponent implements OnInit {
             this.creating = true;
 
             // Create
-            /*
             this.userAccountService.save(this.userAccount).subscribe(
                 response => {
                     // Indicate that the user account is not being created
                     this.creating = false;
 
                     // Notify success
-                    this.snackBar.open('The user account has been created', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('The user account has been created', 'Ok', { duration: 2000 });
 
                     // Close modal
                     this.dialogRef.close();
@@ -60,13 +58,12 @@ export class CreateUserAccountComponent implements OnInit {
                     this.creating = false;
 
                     // Notify error
-                    this.snackBar.open('No se ha podido registrar el analista', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('Failed to create user account, there was an error', 'Ok', { duration: 2000 });
 
                     // Close modal
                     this.dialogRef.close();
                 }
             );
-            */
         }
     }
 
