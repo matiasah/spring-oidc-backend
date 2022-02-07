@@ -14,6 +14,10 @@ const routes: Routes = [
             {
                 path: 'service-accounts',
                 loadChildren: () => import('../service-accounts/service-accounts.module').then(m => m.ServiceAccountsModule)
+            },
+            {
+                path: 'authorities',
+                loadChildren: () => import('../authorities/authorities.module').then(m => m.AuthoritiesModule)
             }
         ]
     }
