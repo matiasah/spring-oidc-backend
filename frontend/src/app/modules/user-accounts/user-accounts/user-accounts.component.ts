@@ -110,12 +110,12 @@ export class UserAccountsComponent implements OnInit {
     public deleteEntry(userAccount: UserAccount) {
         /**
         // Open delete dialog
-        const ref: MatDialogRef<EliminarUsuarioComponent> = this.dialog.open(EliminarUsuarioComponent, {
+        const ref: MatDialogRef<DeleteUserAccountComponent> = this.dialog.open(DeleteUserAccountComponent, {
             width: '1000px',
             data: userAccount
         });
 
-        // Al cerrar dialogo
+        // On close dialog
         ref.afterClosed().subscribe(
             response => {
                 // Update paginator
