@@ -12,10 +12,10 @@ import { UserAccountService } from 'src/app/services/user-account.service';
 })
 export class EditUserAccountComponent implements OnInit {
 
-    // Indicate if the account is being edited
+    // Indicate if the user account is being edited
     public editing: boolean = false;
 
-    // Formulario
+    // Form
     @ViewChild('form', { static: true })
     public form!: NgForm;
 
@@ -34,7 +34,7 @@ export class EditUserAccountComponent implements OnInit {
         // If the form is valid
         if (this.form.valid) {
 
-            // Indicate that the account is being edited
+            // Indicate that the user account is being edited
             this.editing = true;
 
             // Update
