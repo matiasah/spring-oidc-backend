@@ -41,7 +41,7 @@ export class AuthorityService {
         return this.http.patch<Authority>(`${environment.host}/authorities/${authorities.id}`, this.getDTO(authorities));
     }
 
-    public deleteById(id: number): Observable<void> {
+    public deleteById(id: string): Observable<void> {
         return this.http.delete<void>(`${environment.host}/authorities/${id}`);
     }
 

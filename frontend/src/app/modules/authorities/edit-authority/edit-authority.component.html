@@ -1,0 +1,54 @@
+<div class="w-full">
+    <div class="flex justify-between">
+        <h2 mat-dialog-title>
+            Edit authority
+        </h2>
+
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="none">
+
+    <mat-dialog-content>
+
+        <div class="grid grid-cols-12 gap-2 py-2">
+
+            <mat-form-field class="col-span-12" appearance="fill">
+                <input matInput name="name" #nameForm="ngModel" [(ngModel)]="authority.name" required placeholder="Name" autocomplete="none" cdkFocusInitial>
+                <mat-error *ngIf="nameForm.hasError('required')">
+                    Field is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-span-12" appearance="fill">
+                <textarea matInput name="description" #descriptionForm="ngModel" [(ngModel)]="authority.description" placeholder="Description" autocomplete="none"></textarea>
+            </mat-form-field>
+            
+        </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="grid grid-cols-12 flex justify-end gap-2">
+        <div *ngIf="!editing" class="col-span-6 md:col-span-3 md:col-start-7">
+            <button class="w-full" type="submit" mat-raised-button color="accent">
+                <span class="hidden md:inline">Edit</span>
+                <mat-icon class="inline md:hidden">done</mat-icon>
+            </button>
+        </div>
+
+        <div *ngIf="!editing" class="col-span-6 md:col-span-3 md:col-start-10">
+            <button class="w-full" mat-raised-button mat-dialog-close color="warn">
+                <span class="hidden md:inline">Cancel</span>
+                <mat-icon class="inline md:hidden">close</mat-icon>
+            </button>
+        </div>
+
+        <div class="col-span-12 flex justify-center" *ngIf="editing">
+            <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </mat-dialog-actions>
+
+</form>

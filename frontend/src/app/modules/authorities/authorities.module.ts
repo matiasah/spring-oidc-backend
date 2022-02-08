@@ -1,14 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AuthoritiesRoutingModule } from './authorities-routing.module';
-
+import { AuthoritiesComponent } from './authorities/authorities.component';
+import { CreateAuthorityComponent } from './create-authority/create-authority.component';
+import { EditAuthorityComponent } from './edit-authority/edit-authority.component';
+import { DeleteAuthorityComponent } from './delete-authority/delete-authority.component';
+import { MaterialModule } from '../material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    AuthoritiesRoutingModule
-  ]
+    declarations: [
+        AuthoritiesComponent,
+        CreateAuthorityComponent,
+        EditAuthorityComponent,
+        DeleteAuthorityComponent
+    ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AuthoritiesRoutingModule
+    ]
 })
 export class AuthoritiesModule { }
