@@ -6,12 +6,14 @@ import { UserAccountsComponent } from './user-accounts/user-accounts.component';
 import { MaterialModule } from '../material/material.module';
 import { CreateUserAccountComponent } from './create-user-account/create-user-account.component';
 import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
+import { DeleteUserAccountComponent } from './delete-user-account/delete-user-account.component';
 
 @NgModule({
     declarations: [
         UserAccountsComponent,
         CreateUserAccountComponent,
-        EditUserAccountComponent
+        EditUserAccountComponent,
+        DeleteUserAccountComponent
     ],
     imports: [
         CommonModule,

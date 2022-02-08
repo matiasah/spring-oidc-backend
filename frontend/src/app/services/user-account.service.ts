@@ -41,7 +41,7 @@ export class UserAccountService {
         return this.http.patch<UserAccount>(`${environment.host}/user-accounts/${userAccount.id}`, this.getDTO(userAccount));
     }
 
-    public deleteById(id: number): Observable<void> {
+    public deleteById(id: string): Observable<void> {
         return this.http.delete<void>(`${environment.host}/user-accounts/${id}`);
     }
 

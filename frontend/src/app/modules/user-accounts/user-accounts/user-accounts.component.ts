@@ -9,6 +9,7 @@ import { UserAccount } from 'src/app/interfaces/user-account';
 import { UserAccountService } from 'src/app/services/user-account.service';
 import { Paginator } from 'src/app/util/paginator';
 import { CreateUserAccountComponent } from '../create-user-account/create-user-account.component';
+import { DeleteUserAccountComponent } from '../delete-user-account/delete-user-account.component';
 import { EditUserAccountComponent } from '../edit-user-account/edit-user-account.component';
 
 @Component({
@@ -108,10 +109,9 @@ export class UserAccountsComponent implements OnInit {
     }
 
     public deleteEntry(userAccount: UserAccount) {
-        /**
         // Open delete dialog
         const ref: MatDialogRef<DeleteUserAccountComponent> = this.dialog.open(DeleteUserAccountComponent, {
-            width: '1000px',
+            minWidth: '60vw',
             data: userAccount
         });
 
@@ -122,7 +122,6 @@ export class UserAccountsComponent implements OnInit {
                 this.paginator.update();
             }
         );
-         */
     }
 
 }
