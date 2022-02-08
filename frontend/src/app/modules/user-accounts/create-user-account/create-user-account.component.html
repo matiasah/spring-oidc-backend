@@ -16,25 +16,25 @@
 
         <div class="grid grid-cols-12 gap-2 py-2">
 
-            <mat-form-field class="col-span-12 md:col-span-6">
+            <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
                 <input matInput name="username" #usernameForm="ngModel" [(ngModel)]="userAccount.username" required placeholder="User name" cdkFocusInitial>
                 <mat-error *ngIf="usernameForm.hasError('required')">
                     Field is required
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="col-span-12 md:col-span-6">
+            <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
                 <input matInput name="password" type="password" #passwordForm="ngModel" [(ngModel)]="userAccount.password" required placeholder="Password">
                 <mat-error *ngIf="passwordForm.hasError('required')">
                     Field is required
                 </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="col-span-12 md:col-span-6">
+            <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
                 <input matInput name="firstName" #firstNameForm="ngModel" [(ngModel)]="userAccount.firstName" placeholder="First name">
             </mat-form-field>
 
-            <mat-form-field class="col-span-12 md:col-span-6">
+            <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
                 <input matInput name="lastName" #lastNameForm="ngModel" [(ngModel)]="userAccount.lastName" placeholder="Last name">
             </mat-form-field>
 
