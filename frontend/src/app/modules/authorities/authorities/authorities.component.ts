@@ -105,7 +105,7 @@ export class AuthoritiesComponent implements OnInit {
     public deleteEntry(authority: Authority) {
         // Open delete dialog
         const ref: MatDialogRef<DeleteAuthorityComponent> = this.dialog.open(DeleteAuthorityComponent, {
-            width: '1000px',
+            minWidth: '60vw',
             data: authority
         });
     
