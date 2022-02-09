@@ -38,6 +38,10 @@
                 <input matInput name="lastName" #lastNameForm="ngModel" [(ngModel)]="userAccount.lastName" placeholder="Last name">
             </mat-form-field>
 
+            <mat-form-field class="col-span-12" appearance="fill">
+                <app-input-authorities name="authorities" #authoritiesForm="ngModel" [(ngModel)]="userAccount.authorities" placeholder="Authorities"></app-input-authorities>
+            </mat-form-field>
+
             <div class="col-span-12">
                 <mat-checkbox name="activado" [(ngModel)]="userAccount.enabled">Enable user account</mat-checkbox>
             </div>

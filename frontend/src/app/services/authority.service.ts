@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Authority } from '../interfaces/authority';
-import { Paginator } from '../util/paginator';
+import { Paginator, SpringPage } from '../util/paginator';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,11 @@ export class AuthorityService {
 
     public paginator(): Paginator<Authority> {
         return new Paginator(this.http, `${environment.host}/authorities/page`);
+    }
+
+    public findTop10ByNameContaining(name: string): Observable<Authority[]> {
+        return this.http.get<SpringPage<Authority>>(`${environment.host}/authorities/page?name=${name}&page=0&size=10`)
+            .pipe(map(page => page.content));
     }
 
     public findAll(): Observable<Authority[]> {

@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { CreateUserAccountComponent } from './create-user-account/create-user-account.component';
 import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
 import { DeleteUserAccountComponent } from './delete-user-account/delete-user-account.component';
+import { InputAuthoritiesModule } from '../input-authorities/input-authorities.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { DeleteUserAccountComponent } from './delete-user-account/delete-user-ac
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
+        InputAuthoritiesModule,
         UserAccountsRoutingModule
     ]
 })
