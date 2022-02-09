@@ -26,8 +26,7 @@ export class UserAccountsComponent implements OnInit {
         'firstName',
         'lastName',
         'enabled',
-        'edit',
-        'delete'
+        'options'
     ];
 
     // Paginator

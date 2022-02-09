@@ -88,19 +88,12 @@
             </ng-container>
 
             <!-- Edit -->
-            <ng-container matColumnDef="edit">
+            <ng-container matColumnDef="options">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
                     <button mat-icon-button matTooltip="Edit user account" (click)="editEntry(userAccount)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                </mat-cell>
-            </ng-container>
-
-            <!-- Eliminar -->
-            <ng-container matColumnDef="delete">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let userAccount">
                     <button mat-icon-button matTooltip="Delete user account" (click)="deleteEntry(userAccount)">
                         <mat-icon>delete</mat-icon>
                     </button>
