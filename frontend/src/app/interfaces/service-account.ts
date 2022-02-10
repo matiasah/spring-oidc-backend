@@ -11,6 +11,7 @@ export interface ServiceAccount {
     clientSecret: string;
     clientSecretExpiresAt: string;
     clientName: string;
+    clientDescription: string;
     clientAuthenticationMethods: ClientAuthenticationMethod[];
     authorizationGrantTypes: AuthorizationGrantType[];
     redirectUris: string[];

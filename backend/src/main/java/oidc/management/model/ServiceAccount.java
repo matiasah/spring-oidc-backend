@@ -47,6 +47,7 @@ public class ServiceAccount {
     private String clientSecret;
     private Instant clientSecretExpiresAt;
     private String clientName;
+    private String clientDescription;
     private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
     private Set<AuthorizationGrantType> authorizationGrantTypes;
     private Set<String> redirectUris;
