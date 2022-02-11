@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditServiceAccountComponent } from './edit-service-account/edit-service-account.component';
 import { DeleteServiceAccountComponent } from './delete-service-account/delete-service-account.component';
+import { InputAuthoritiesModule } from '../input-authorities/input-authorities.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { DeleteServiceAccountComponent } from './delete-service-account/delete-s
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
+        InputAuthoritiesModule,
         ServiceAccountsRoutingModule
     ]
 })
