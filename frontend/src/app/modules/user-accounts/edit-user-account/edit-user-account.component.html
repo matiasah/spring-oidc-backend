@@ -17,26 +17,26 @@
         <div class="grid grid-cols-12 gap-2 py-2">
 
             <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
-                <input matInput name="username" #usernameForm="ngModel" [(ngModel)]="userAccount.username" required placeholder="User name" cdkFocusInitial>
+                <input matInput name="username" #usernameForm="ngModel" [(ngModel)]="userAccount.username" required placeholder="User name" autocomplete="none" cdkFocusInitial>
                 <mat-error *ngIf="usernameForm.hasError('required')">
                     Field is required
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
-                <input matInput name="password" type="password" #passwordForm="ngModel" [(ngModel)]="userAccount.password" placeholder="Password">
+                <input matInput name="password" type="password" #passwordForm="ngModel" [(ngModel)]="userAccount.password" placeholder="Password" autocomplete="none">
             </mat-form-field>
 
             <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
-                <input matInput name="firstName" #firstNameForm="ngModel" [(ngModel)]="userAccount.firstName" placeholder="First name">
+                <input matInput name="firstName" #firstNameForm="ngModel" [(ngModel)]="userAccount.firstName" placeholder="First name" autocomplete="none">
             </mat-form-field>
 
             <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
-                <input matInput name="lastName" #lastNameForm="ngModel" [(ngModel)]="userAccount.lastName" placeholder="Last name">
+                <input matInput name="lastName" #lastNameForm="ngModel" [(ngModel)]="userAccount.lastName" placeholder="Last name" autocomplete="none">
             </mat-form-field>
 
             <mat-form-field class="col-span-12" appearance="fill">
-                <app-input-authorities name="authorities" #authoritiesForm="ngModel" [(ngModel)]="userAccount.authorities" placeholder="Authorities"></app-input-authorities>
+                <app-input-authorities name="authorities" #authoritiesForm="ngModel" [(ngModel)]="userAccount.authorities" placeholder="Authorities" autocomplete="none"></app-input-authorities>
             </mat-form-field>
 
             <div class="col-span-12">
