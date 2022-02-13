@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -40,6 +41,8 @@ public class ServiceAccount {
     @Id
     private String id;
     private String clientId;
+
+    @CreatedDate
     private Instant clientIdIssuedAt;
 
     @Getter(onMethod_ = {@JsonIgnore})

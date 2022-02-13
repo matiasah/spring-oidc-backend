@@ -7,3 +7,13 @@ export enum ClientAuthenticationMethod {
     PRIVATE_KEY_JWT = "private_key_jwt",
     NONE = "none",
 }
+
+export const clientAuthenticationMethodNames: {[key in ClientAuthenticationMethod]: string} = {
+    [ClientAuthenticationMethod.BASIC]: "Basic",
+    [ClientAuthenticationMethod.CLIENT_SECRET_BASIC]: "Client Secret Basic",
+    [ClientAuthenticationMethod.POST]: "POST",
+    [ClientAuthenticationMethod.CLIENT_SECRET_POST]: "Client Secret POST",
+    [ClientAuthenticationMethod.CLIENT_SECRET_JWT]: "Client Secret JWT",
+    [ClientAuthenticationMethod.PRIVATE_KEY_JWT]: "Private Key JWT",
+    [ClientAuthenticationMethod.NONE]: "None",
+};

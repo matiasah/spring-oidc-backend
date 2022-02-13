@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthorizationGrantType, authorizationGrantTypeNames } from 'src/app/enums/authorization-grant-type';
+import { ClientAuthenticationMethod, clientAuthenticationMethodNames } from 'src/app/enums/client-authentication-method';
 import { ServiceAccount } from 'src/app/interfaces/service-account';
 import { ServiceAccountService } from 'src/app/services/service-account.service';
 
@@ -13,7 +15,9 @@ import { ServiceAccountService } from 'src/app/services/service-account.service'
 export class CreateServiceAccountComponent implements OnInit {
 
     // Service account to create
-    public serviceAccount: ServiceAccount = {} as ServiceAccount;
+    public serviceAccount: ServiceAccount = {
+        redirectUris: []
+    } as unknown as ServiceAccount;
 
     // Indicate if the account is being created
     public creating = false;
@@ -21,6 +25,18 @@ export class CreateServiceAccountComponent implements OnInit {
     // Form reference
     @ViewChild('form', { static: true })
     public form!: NgForm;
+
+    // Client authentication methods
+    public clientAuthenticationMethods: ClientAuthenticationMethod[] = Object.values(ClientAuthenticationMethod);
+
+    // Client authentication methods names
+    public clientAuthenticationMethodsNames = clientAuthenticationMethodNames;
+
+    // Authorization grant types
+    public authorizationGrantTypes: AuthorizationGrantType[] = Object.values(AuthorizationGrantType);
+
+    // Authorization grant types names
+    public authorizationGrantTypesNames = authorizationGrantTypeNames;
 
     public constructor(
         private dialogRef: MatDialogRef<CreateServiceAccountComponent>,
@@ -63,6 +79,18 @@ export class CreateServiceAccountComponent implements OnInit {
                 }
             );
         }
+    }
+
+    public addRedirectUri(): void {
+        this.serviceAccount.redirectUris.push('');
+    }
+
+    public removeRedirectUri(index: number): void {
+        this.serviceAccount.redirectUris.splice(index, 1);
+    }
+
+    public trackByIdx(index: number, obj: any): any {
+        return index;
     }
 
 }
