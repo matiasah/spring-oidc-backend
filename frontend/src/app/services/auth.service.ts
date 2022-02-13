@@ -3,8 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccessToken } from '../interfaces/access-token';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
+function setTokenExpiresAt(accessToken: AccessToken): AccessToken {
+
+    // Set expiresAt
+    accessToken.expiresAt = new Date(Date.now() + accessToken.expires_in * 1000);
+
+    // Return accessToken
+    return accessToken;
+}
 
 @Injectable({
     providedIn: 'root'
@@ -77,15 +86,7 @@ export class AuthService {
 
         // Get token
         return this.http.post<AccessToken>(`${environment.host}/oauth2/token`, body, { headers, withCredentials: true })
-            .pipe(map(
-                (accessToken) => {
-                    // Set expiresAt
-                    accessToken.expiresAt = new Date(Date.now() + accessToken.expires_in * 1000);
-
-                    // Return accessToken
-                    return accessToken;
-                }
-            ));
+            .pipe(map(setTokenExpiresAt));
     }
 
     public exchangeRefreshTokenForAccessToken(refreshToken: string): Observable<AccessToken> {
@@ -107,15 +108,7 @@ export class AuthService {
 
         // Get token
         return this.http.post<AccessToken>(`${environment.host}/oauth2/token`, body, { headers, withCredentials: true })
-            .pipe(map(
-                (accessToken) => {
-                    // Set expiresAt
-                    accessToken.expiresAt = new Date(Date.now() + accessToken.expires_in * 1000);
-
-                    // Return accessToken
-                    return accessToken;
-                }
-            ));
+            .pipe(map(setTokenExpiresAt));
     }
 
     public getToken(): AccessToken | undefined {
@@ -179,6 +172,8 @@ export class AuthService {
 
                 // Request new token
                 return this.exchangeRefreshTokenForAccessToken(this.token.refresh_token)
+                    // Set expiresAt
+                    .pipe(map(setTokenExpiresAt))
                     // Map response
                     .pipe(map(
                         accessToken => {
@@ -191,7 +186,16 @@ export class AuthService {
                         }
                     ))
                     // If an error was caught on the request
-                    .pipe(catchError(error => of(false)));
+                    .pipe(catchError(
+                        error => {
+
+                            // Erase token
+                            this.logout();
+
+                            // Return false
+                            return of(false);
+                        }
+                    ));
 
             }
 
