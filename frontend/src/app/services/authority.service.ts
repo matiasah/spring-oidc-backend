@@ -18,8 +18,8 @@ export class AuthorityService {
     }
 
     // Get Data Transfer Object (DTO)
-    public getDTO(serviceAccount: Authority): Authority {
-        return Object.assign({}, serviceAccount);
+    public getDTO(authority: Authority): Authority {
+        return Object.assign({}, authority);
     }
 
     public paginator(): Paginator<Authority> {
@@ -39,12 +39,12 @@ export class AuthorityService {
         return this.http.get<Authority>(`${environment.host}/authorities/${id}`);
     }
 
-    public save(authorities: Authority): Observable<Authority> {
-        return this.http.post<Authority>(`${environment.host}/authorities`, this.getDTO(authorities));
+    public save(authority: Authority): Observable<Authority> {
+        return this.http.post<Authority>(`${environment.host}/authorities`, this.getDTO(authority));
     }
 
-    public update(authorities: Authority): Observable<Authority> {
-        return this.http.patch<Authority>(`${environment.host}/authorities/${authorities.id}`, this.getDTO(authorities));
+    public update(authority: Authority): Observable<Authority> {
+        return this.http.patch<Authority>(`${environment.host}/authorities/${authority.id}`, this.getDTO(authority));
     }
 
     public deleteById(id: string): Observable<void> {
