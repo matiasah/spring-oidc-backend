@@ -24,6 +24,7 @@ public interface UserAccountRepository extends MongoRepository<UserAccount, Stri
 
     @Override
     public default void customize(QuerydslBindings bindings, QUserAccount qModel) {
+        bindings.bind(qModel.id).first((path, value) -> path.eq(value));
         bindings.bind(Long.class).first((NumberPath<Long> path, Long value) -> path.eq(value));
         bindings.bind(Integer.class).first((NumberPath<Integer> path, Integer value) -> path.eq(value));
         bindings.bind(String.class).first((StringPath path, String value) -> path.containsIgnoreCase(value));
