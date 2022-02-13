@@ -10,29 +10,25 @@
 
 <mat-dialog-content>
 
-    <div class="grid grid-cols-12 gap-2 py-2">
-    
-        <div class="flex">
+    <div class="w-full flex">
 
-            <mat-list role="list">
-                <mat-list-item role="listitem">
-                    <strong>Name:</strong>
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    <strong>Description:</strong>
-                </mat-list-item>
-            </mat-list>
+        <mat-list role="list">
+            <mat-list-item role="listitem">
+                <strong>Name:</strong>
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                <strong>Description:</strong>
+            </mat-list-item>
+        </mat-list>
 
-            <mat-list role="list">
-                <mat-list-item role="listitem">
-                    {{ authority.name }}
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                    {{ authority.description }}
-                </mat-list-item>
-            </mat-list>
-
-        </div>
+        <mat-list role="list">
+            <mat-list-item role="listitem">
+                {{ authority.name }}
+            </mat-list-item>
+            <mat-list-item role="listitem">
+                {{ authority.description }}
+            </mat-list-item>
+        </mat-list>
 
     </div>
 
