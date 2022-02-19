@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,7 +13,8 @@ export class CallbackComponent implements OnInit {
     public constructor(
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private snackBar: MatSnackBar
     ) { }
 
     public ngOnInit(): void {
@@ -24,17 +26,34 @@ export class CallbackComponent implements OnInit {
                 // Get code
                 const code = queryParams.code;
 
-                // Exchange code for token
-                this.authService.exchangeCodeForToken(code).subscribe(
-                    (accessToken) => {
+                // If there's a code
+                if (code) {
 
-                        // Set current access token
-                        this.authService.setToken(accessToken);
+                    // Exchange code for token
+                    this.authService.exchangeCodeForToken(code).subscribe(
+                        (accessToken) => {
 
-                        // Redirect to system
-                        this.router.navigate(['/sys']);
-                    }
-                );
+                            // Set current access token
+                            this.authService.setToken(accessToken);
+
+                            // Redirect to system
+                            this.router.navigate(['/sys']);
+                        },
+                        (error) => {
+
+                            // Redirect to login
+                            this.router.navigate(['/login']);
+
+                            // Notify error
+                            this.snackBar.open('Failed to authenticate, please try again later', 'Ok', { duration: 4000 });
+                        }
+                    );
+
+                } else {
+
+                    // Redirect to login
+                    this.router.navigate(['/login']);
+                }
 
             }
         );

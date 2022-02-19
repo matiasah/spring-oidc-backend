@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationGuard } from 'src/app/guards/authentication.guard';
 import { CallbackComponent } from './callback/callback.component';
 import { LoginComponent } from './login/login.component';
 
@@ -11,7 +12,8 @@ const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AuthenticationGuard]
     },
     {
         path: 'oauth/callback',
