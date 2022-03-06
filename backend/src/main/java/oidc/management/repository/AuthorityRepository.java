@@ -1,5 +1,6 @@
 package oidc.management.repository;
 
+import java.util.Optional;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -22,6 +23,14 @@ import oidc.management.model.QAuthority;
  * @see QuerydslBindings
  */
 public interface AuthorityRepository extends MongoRepository<Authority, String>, QuerydslPredicateExecutor<Authority>, QuerydslBinderCustomizer<QAuthority> {
+
+    /**
+     * Finds an authority by its name.
+     * 
+     * @param authorityName The name of the authority to find.
+     * @return The authority if it exists, otherwise an empty optional.
+     */
+    public Optional<Authority> findByName(String authorityName);
     
     @Override
     public default void customize(QuerydslBindings bindings, QAuthority qModel) {
