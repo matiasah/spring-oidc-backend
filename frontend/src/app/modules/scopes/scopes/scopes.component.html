@@ -4,13 +4,13 @@
 
         <div class="w-full flex justify-between">
             <h1 class="title font-bold">Scopes</h1>
-    
+
             <button mat-mini-fab color="accent" class="col-span-1" matTooltip="Create scope" (click)="createEntry()">
                 <mat-icon>add</mat-icon>
             </button>
-    
+
         </div>
-    
+
         <div *ngIf="isLoading | async" class="loading-shade">
             <mat-spinner></mat-spinner>
         </div>
@@ -28,54 +28,58 @@
 
         <mat-divider></mat-divider>
 
-        <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+        <div class="w-full overflow-x-auto">
 
-            <!-- ID -->
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Id.
-                </mat-header-cell>
-                <mat-cell *matCellDef="let scope">
-                    {{ scope.id }}
-                </mat-cell>
-            </ng-container>
+            <table mat-table class="w-full" [dataSource]="dataSource" matSort>
 
-            <!-- Name -->
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Name
-                </mat-header-cell>
-                <mat-cell *matCellDef="let scope">
-                    {{ scope.name }}
-                </mat-cell>
-            </ng-container>
+                <!-- ID -->
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Id.
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let scope">
+                        {{ scope.id }}
+                    </mat-cell>
+                </ng-container>
 
-            <!-- Description -->
-            <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Description
-                </mat-header-cell>
-                <mat-cell *matCellDef="let scope">
-                    {{ scope.description }}
-                </mat-cell>
-            </ng-container>
+                <!-- Name -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let scope">
+                        {{ scope.name }}
+                    </mat-cell>
+                </ng-container>
 
-            <!-- Options -->
-            <ng-container matColumnDef="options">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let scope">
-                    <button mat-icon-button matTooltip="Edit scope" (click)="editEntry(scope)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Delete scope" (click)="deleteEntry(scope)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container>
+                <!-- Description -->
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Description
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let scope">
+                        {{ scope.description }}
+                    </mat-cell>
+                </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </table>
+                <!-- Options -->
+                <ng-container matColumnDef="options">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let scope">
+                        <button mat-icon-button matTooltip="Edit scope" (click)="editEntry(scope)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Delete scope" (click)="deleteEntry(scope)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </table>
+
+        </div>
 
         <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
