@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.stereotype.Service;
+import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
-import oidc.management.repository.ServiceAccountRepository;
 
 /**
  * Default implementation of {@link RegisteredClientRepository}.
@@ -16,19 +16,16 @@ import oidc.management.repository.ServiceAccountRepository;
  * @see RegisteredClientRepository
  * @see RegisteredClient
  * @see ServiceAccount
- * @see ServiceAccountRepository
  */
 @Service
 public class DefaultRegisteredClientRepository implements RegisteredClientRepository {
-
-    @Autowired
-    private ServiceAccountRepository clientRepository;
 
     @Autowired
     private ServiceAccountService serviceAccountService;
 
     @Override
     public void save(RegisteredClient registeredClient) {
+        /**
         // Copy RegisteredClient on Client
         ServiceAccount client = ServiceAccount.builder()
             .id(registeredClient.getId())
@@ -47,6 +44,8 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
         
         // Save client
         clientRepository.save(client);
+         */
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -75,7 +74,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
             .clientAuthenticationMethods((methods) -> methods.addAll(client.getClientAuthenticationMethods()))
             .authorizationGrantTypes((grantTypes) -> grantTypes.addAll(client.getAuthorizationGrantTypes()))
             .redirectUris((redirectUris) -> redirectUris.addAll(client.getRedirectUris()))
-            .scopes((scopes) -> scopes.addAll(client.getScopes()))
+            .scopes((scopes) -> scopes.addAll(client.getScopes().stream().map(Scope::getName).collect(java.util.stream.Collectors.toSet())))
             .clientSettings(client.getClientSettings())
             .tokenSettings(client.getTokenSettings())
             .build();
@@ -108,7 +107,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
             .clientAuthenticationMethods((methods) -> methods.addAll(client.getClientAuthenticationMethods()))
             .authorizationGrantTypes((grantTypes) -> grantTypes.addAll(client.getAuthorizationGrantTypes()))
             .redirectUris((redirectUris) -> redirectUris.addAll(client.getRedirectUris()))
-            .scopes((scopes) -> scopes.addAll(client.getScopes()))
+            .scopes((scopes) -> scopes.addAll(client.getScopes().stream().map(Scope::getName).collect(java.util.stream.Collectors.toSet())))
             .clientSettings(client.getClientSettings())
             .tokenSettings(client.getTokenSettings())
             .build();
