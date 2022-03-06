@@ -1,5 +1,6 @@
 package oidc.management.repository;
 
+import java.util.Optional;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -10,6 +11,14 @@ import oidc.management.model.QScope;
 import oidc.management.model.Scope;
 
 public interface ScopeRepository extends MongoRepository<Scope, String>, QuerydslPredicateExecutor<Scope>, QuerydslBinderCustomizer<QScope> {
+
+    /**
+     * Finds a scope by its name.
+     * 
+     * @param scopeName The name of the scope to find.
+     * @return The scope if it exists, otherwise an empty optional.
+     */
+    public Optional<Scope> findByName(String scopeName);
     
     @Override
     public default void customize(QuerydslBindings bindings, QScope qModel) {
