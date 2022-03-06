@@ -1,0 +1,60 @@
+<div *ngIf="isLoading | async" class="loading-shade">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="flex justify-start">
+    <mat-icon>search</mat-icon>
+    <span class="mat-h4">Search scope</span>
+</div>
+
+<form #form="ngForm" autocomplete="off">
+    <div class="grid grid-cols grid-cols-12 gap-4">
+        <mat-form-field class="col-span-12" appearance="fill">
+            <input matInput name="name" [(ngModel)]="nameSearch" placeholder="Name">
+        </mat-form-field>
+    </div>
+</form>
+
+<mat-divider></mat-divider>
+
+<div class="w-full overflow-x-auto">
+
+    <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+
+        <!-- Select -->
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let scope">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? select(scope) : null"
+                    [checked]="isSelected(scope)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Name -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Name
+            </mat-header-cell>
+            <mat-cell *matCellDef="let scope">
+                {{ scope.name }}
+            </mat-cell>
+        </ng-container>
+
+        <!-- Description -->
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Description
+            </mat-header-cell>
+            <mat-cell *matCellDef="let scope">
+                {{ scope.description }}
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+
+</div>
+
+<mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
