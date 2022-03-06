@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.server.authorization.config.ClientSet
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.stereotype.Service;
 import oidc.management.model.Authority;
+import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
 import oidc.management.repository.ServiceAccountRepository;
 
@@ -90,7 +91,11 @@ public class ServiceAccountService {
                         .collect(Collectors.toSet())
                 )
                 .scopes(
-                    Arrays.asList(OidcScopes.OPENID, OidcScopes.PROFILE, OidcScopes.EMAIL)
+                    Arrays.asList(
+                            Scope.builder().name(OidcScopes.OPENID).build(),
+                            Scope.builder().name(OidcScopes.PROFILE).build(),
+                            Scope.builder().name(OidcScopes.EMAIL).build()
+                        )
                         .stream()
                         .collect(Collectors.toSet())
                 )
