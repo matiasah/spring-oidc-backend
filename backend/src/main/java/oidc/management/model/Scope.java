@@ -2,9 +2,11 @@ package oidc.management.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * Spring Security Scope model.
@@ -14,6 +16,8 @@ import lombok.EqualsAndHashCode;
  */
 @Builder
 @Document(collection = "scopes")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
 public class Scope {
