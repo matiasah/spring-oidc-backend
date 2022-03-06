@@ -2,6 +2,7 @@ import { AuthorizationGrantType } from "../enums/authorization-grant-type";
 import { ClientAuthenticationMethod } from "../enums/client-authentication-method";
 import { Authority } from "./authority";
 import { ClientSettings } from "./client-settings";
+import { Scope } from "./scope";
 import { TokenSettings } from "./token-settings";
 
 export interface ServiceAccount {
@@ -15,7 +16,7 @@ export interface ServiceAccount {
     clientAuthenticationMethods: ClientAuthenticationMethod[];
     authorizationGrantTypes: AuthorizationGrantType[];
     redirectUris: string[];
-    scopes: string[];
+    scopes: Scope[];
     clientSettings: ClientSettings;
     tokenSettings: TokenSettings;
     authorities: Authority[];

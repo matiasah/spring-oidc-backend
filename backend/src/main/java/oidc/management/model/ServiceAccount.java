@@ -54,7 +54,7 @@ public class ServiceAccount {
     private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
     private Set<AuthorizationGrantType> authorizationGrantTypes;
     private Set<String> redirectUris;
-    private Set<String> scopes;
+    private Set<Scope> scopes;
     private ClientSettings clientSettings;
     private TokenSettings tokenSettings;
     private List<Authority> authorities;
