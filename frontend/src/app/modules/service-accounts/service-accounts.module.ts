@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditServiceAccountComponent } from './edit-service-account/edit-service-account.component';
 import { DeleteServiceAccountComponent } from './delete-service-account/delete-service-account.component';
 import { InputAuthoritiesModule } from '../input-authorities/input-authorities.module';
+import { InputScopesTableModule } from '../input-scopes-table/input-scopes-table.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { InputAuthoritiesModule } from '../input-authorities/input-authorities.m
         FormsModule,
         ReactiveFormsModule,
         InputAuthoritiesModule,
+        InputScopesTableModule,
         ServiceAccountsRoutingModule
     ]
 })
