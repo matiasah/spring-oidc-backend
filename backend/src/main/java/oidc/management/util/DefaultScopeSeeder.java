@@ -17,7 +17,7 @@ import oidc.management.repository.ScopeRepository;
  * 
  * @author Matias Hermosilla
  * @since 11-03-2022
- * @see DefaultUserAccountProperties
+ * @see DefaultScopeProperties
  */
 @Log
 @ConditionalOnProperty(prefix = "oidc.management.scope", name = "enabled", havingValue = "true")
