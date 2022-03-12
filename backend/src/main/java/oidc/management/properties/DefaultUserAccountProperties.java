@@ -1,5 +1,6 @@
 package oidc.management.properties;
 
+import java.util.UUID;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import lombok.Data;
 
@@ -13,6 +14,6 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "oidc.management.user-account")
 public class DefaultUserAccountProperties {
     private Boolean enabled;
-    private String username;
-    private String password;
+    private String username = UUID.randomUUID().toString();
+    private String password = UUID.randomUUID().toString();
 }
