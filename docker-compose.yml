@@ -26,15 +26,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - type: bind
-        source: ./backend/src/
-        target: /opt/backend/src/
-      - type: bind
-        source: ./backend/target/
-        target: /opt/backend/target/
-      - type: bind
-        source: ~/.m2/repository/
-        target: /root/.m2/repository/
+      - "./backend/src/:/opt/backend/src/"
+      - "./backend/target/:/opt/backend/target/"
+      - "~/.m2/repository/:/root/.m2/repository/"
     networks:
       backend:
         aliases:
@@ -46,7 +40,10 @@ services:
       spring.cloud.consul.port: 8500
       spring.data.mongodb.host: mongodb
       spring.data.mongodb.port: 27017
-      LOG_LEVEL: DEBUG
+      LOG_LEVEL: INFO
+      LOGGING_LEVEL_ROOT: INFO
+      OIDC_MANAGEMENT_DEFAULT_SERVICEACCOUNT_ENABLED: "true"
+      OIDC_MANAGEMENT_DEFAULT_SCOPE_ENABLED: "true"
   
   # MongoDB
   mongodb:
