@@ -1,6 +1,7 @@
 package oidc.management.properties;
 
 import java.util.Set;
+import java.util.UUID;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import lombok.Data;
 import oidc.management.util.DefaultServiceAccountSeeder;
@@ -16,7 +17,7 @@ import oidc.management.util.DefaultServiceAccountSeeder;
 @ConfigurationProperties(prefix = "oidc.management.service-account")
 public class DefaultServiceAccountProperties {
     private Boolean enabled;
-    private String clientId;
-    private String clientSecret;
+    private String clientId = UUID.randomUUID().toString();
+    private String clientSecret = UUID.randomUUID().toString();
     private Set<String> redirectUris;
 }
