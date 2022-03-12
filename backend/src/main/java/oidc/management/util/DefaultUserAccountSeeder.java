@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.extern.java.Log;
 import oidc.management.model.Authority;
@@ -21,6 +22,7 @@ import oidc.management.repository.UserAccountRepository;
  * @see DefaultUserAccountProperties
  */
 @Log
+@DependsOn("defaultAuthoritySeeder")
 @ConditionalOnProperty(prefix = "oidc.management.user-account", name = "enabled", havingValue = "true")
 @ConditionalOnBean(DefaultUserAccountProperties.class)
 public class DefaultUserAccountSeeder {
