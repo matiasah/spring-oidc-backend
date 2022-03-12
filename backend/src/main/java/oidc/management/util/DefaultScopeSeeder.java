@@ -20,7 +20,7 @@ import oidc.management.repository.ScopeRepository;
  * @see DefaultScopeProperties
  */
 @Log
-@ConditionalOnProperty(prefix = "oidc.management.scope", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "oidc.management.default.scope", name = "enabled", havingValue = "true")
 @ConditionalOnBean(DefaultScopeProperties.class)
 public class DefaultScopeSeeder {
 

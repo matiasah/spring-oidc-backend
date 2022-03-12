@@ -33,7 +33,7 @@ import oidc.management.repository.ServiceAccountRepository;
  */
 @Log
 @DependsOn("defaultScopeSeeder")
-@ConditionalOnProperty(prefix = "oidc.management.service-account", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "oidc.management.default.service-account", name = "enabled", havingValue = "true")
 @ConditionalOnBean(DefaultServiceAccountProperties.class)
 public class DefaultServiceAccountSeeder {
 

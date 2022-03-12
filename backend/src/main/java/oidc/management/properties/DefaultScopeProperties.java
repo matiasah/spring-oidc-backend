@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 08-03-2022
  */
 @Data
-@ConfigurationProperties(prefix = "oidc.management.scope")
+@ConfigurationProperties(prefix = "oidc.management.default.scope")
 public class DefaultScopeProperties {
     private Boolean enabled;
 }

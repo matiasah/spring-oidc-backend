@@ -18,7 +18,7 @@ import oidc.management.repository.AuthorityRepository;
  * @see DefaultUserAccountProperties
  */
 @Log
-@ConditionalOnProperty(prefix = "oidc.management.authority", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "oidc.management.default.authority", name = "enabled", havingValue = "true")
 @ConditionalOnBean(DefaultAuthorityProperties.class)
 public class DefaultAuthoritySeeder {
 

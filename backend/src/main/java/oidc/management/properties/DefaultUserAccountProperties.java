@@ -1,7 +1,8 @@
 package oidc.management.properties;
 
-import java.util.UUID;
+import javax.validation.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 import lombok.Data;
 
 /**
@@ -10,10 +11,17 @@ import lombok.Data;
  * @author Matias Hermosilla
  * @since 08-03-2022
  */
+@Validated
 @Data
-@ConfigurationProperties(prefix = "oidc.management.user-account")
+@ConfigurationProperties(prefix = "oidc.management.default.user-account")
 public class DefaultUserAccountProperties {
+
     private Boolean enabled;
-    private String username = UUID.randomUUID().toString();
-    private String password = UUID.randomUUID().toString();
+
+    @NotEmpty
+    private String username;
+
+    @NotEmpty
+    private String password;
+
 }
