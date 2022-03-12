@@ -9,9 +9,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -23,6 +26,9 @@ import lombok.Setter;
  * @see UserAccountRepository
  */
 @Document(collection = "users")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
 public class UserAccount implements UserDetails {
