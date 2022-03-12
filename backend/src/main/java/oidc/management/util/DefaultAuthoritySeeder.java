@@ -23,9 +23,6 @@ import oidc.management.repository.AuthorityRepository;
 public class DefaultAuthoritySeeder {
 
     @Autowired
-    private DefaultAuthorityProperties defaultAuthorityProperties;
-
-    @Autowired
     private AuthorityRepository authorityRepository;
 
     /**
@@ -34,32 +31,23 @@ public class DefaultAuthoritySeeder {
     @PostConstruct
     public void seed() {
 
-        
-
-    }
-
-    /**
-     * Creates a default authority.
-     * 
-     * @param name The authority name.
-     * @param description The authority description.
-     */
-    public void createIfNotExists(String name, String description) {
-
         // Find if the authority already exists
-        Optional<Authority> optAuthority = authorityRepository.findByName(name);
+        Optional<Authority> optAuthority = authorityRepository.findByName("ROLE_OIDC_ADMIN");
 
         // If the authority does not exist, create it
         if (!optAuthority.isPresent()) {
 
             // Create the authority object
             Authority authority = Authority.builder()
-                    .name(name)
-                    .description(description)
+                    .name("ROLE_OIDC_ADMIN")
+                    .description("Administrator role for OIDC")
                     .build();
 
             // Save the authority
             this.authorityRepository.save(authority);
+
+            // Log the creation of the authority
+            log.info("Created default authority \"" + authority.getName() + "\"");
 
         }
 
