@@ -1,5 +1,6 @@
 package oidc.management.util;
 
+import java.util.Arrays;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
 import oidc.management.model.Authority;
 import oidc.management.model.UserAccount;
@@ -22,9 +24,10 @@ import oidc.management.repository.UserAccountRepository;
  * @see DefaultUserAccountProperties
  */
 @Log
+@Component("defaultUserAccountSeeder")
 @DependsOn("defaultAuthoritySeeder")
 @ConditionalOnProperty(prefix = "oidc.management.default.user-account", name = "enabled", havingValue = "true")
-@ConditionalOnBean(DefaultUserAccountProperties.class)
+@ConditionalOnBean({DefaultUserAccountProperties.class, DefaultAuthoritySeeder.class})
 public class DefaultUserAccountSeeder {
 
     @Autowired
@@ -68,6 +71,7 @@ public class DefaultUserAccountSeeder {
                         .accountNonLocked(true)
                         .credentialsNonExpired(true)
                         .enabled(true)
+                        .authorities(Arrays.asList(optAuthority.get()))
                         .build();
 
                 // Save the user account
@@ -79,14 +83,14 @@ public class DefaultUserAccountSeeder {
             } else {
 
                 // Warn
-                log.warning("The default user account already exists");
+                log.warning("The default user account \"" + defaultUserAccountProperties.getUsername() + "\" already exists");
 
             }
 
         } else {
                 
             // Warn
-            log.warning("The default authority does not exist");
+            log.warning("The default authority \"ROLE_OIDC_ADMIN\" does not exist");
 
         }
 
