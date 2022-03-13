@@ -21,7 +21,7 @@
                     <div class="grid grid-cols-12 w-full" *ngIf="authorizationInfo">
 
                         <div class="flex justify-center col-span-12">
-                            <span>Would you like to authorize <strong>{{ authorizationInfo.client.clientId }}</strong> to use your user account?</span>
+                            <span>Would you like to authorize <strong>{{ authorizationInfo.client.clientName }}</strong> to use your user account?</span>
                         </div>
 
                         <div class="flex justify-center col-span-12">
@@ -34,8 +34,8 @@
                                     <mat-list-item *ngFor="let scope of authorizationInfo.scopes">
 
                                         <!-- Align to the left -->
-                                        <mat-checkbox class="flex align-self-start" name="scope" [value]="scope">
-                                            {{scope}}
+                                        <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name">
+                                            {{ scope.description }}
                                         </mat-checkbox>
                                     </mat-list-item>
                                 </mat-list>
@@ -55,7 +55,7 @@
                                             Decline
                                         </button>
                                     </div>
-                                    
+
                                 </div>
 
                             </form>

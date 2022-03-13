@@ -10,7 +10,7 @@ public class AuthorizationInfo {
 
     private Principal principal;
     private RegisteredClient client;
-    private Set<String> scopes;
+    private Set<Scope> scopes;
     private String state;
     
 }

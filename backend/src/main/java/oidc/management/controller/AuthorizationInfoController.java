@@ -2,8 +2,13 @@ package oidc.management.controller;
 
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import oidc.management.model.Scope;
+import oidc.management.model.ServiceAccount;
+import oidc.management.repository.ServiceAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -27,19 +32,20 @@ public class AuthorizationInfoController {
     @Autowired
     private RegisteredClientRepository registeredClientRepository;
 
+    @Autowired
+    private ServiceAccountRepository serviceAccountRepository;
+
     /**
      * Get client info.
      * 
      * @param principal The principal.
      * @param clientId The client id.
-     * @param scopes The scopes.
      * @return The client info.
      */
     @GetMapping("oauth2/authorization-info")
     public ResponseEntity<AuthorizationInfo> getAuthorizationInfo(
             final @AuthenticationPrincipal Principal principal,
             final @RequestParam(OAuth2ParameterNames.CLIENT_ID) String clientId,
-            final @RequestParam(OAuth2ParameterNames.SCOPE) String scope,
             final @RequestParam(OAuth2ParameterNames.STATE) String state
         ) {
 
@@ -48,12 +54,29 @@ public class AuthorizationInfoController {
 
         // Check if client exists
         if (client == null) {
+
+            // Registered client not found
             return ResponseEntity.notFound().build();
         }
 
+        // Find Service Account (RegisteredClient) by id
+        final Optional<ServiceAccount> optServiceAccount = serviceAccountRepository.findByClientId(clientId);
+
+        // Check if Service Account exists
+        if (!optServiceAccount.isPresent()) {
+
+            // Service Account not found
+            return ResponseEntity.notFound().build();
+        }
+
+        // Get Service Account
+        final ServiceAccount serviceAccount = optServiceAccount.get();
+
         // Get scopes
-        final Set<String> scopes = Arrays.stream(StringUtils.delimitedListToStringArray(scope, " "))
-            .collect(Collectors.toSet());
+        final Set<Scope> scopes = serviceAccount
+                .getScopes()
+                .stream()
+                .collect(Collectors.toSet());
 
         // Authorization info
         final AuthorizationInfo authorizationInfo = new AuthorizationInfo();
