@@ -27,12 +27,12 @@ import oidc.management.repository.ScopeRepository;
 public class DefaultScopeSeeder {
 
     protected static final List<Scope> DEFAULT_SCOPES = Arrays.asList(
-            new Scope(null, "openid", "OpenID Connect"),
-            new Scope(null, "profile", "User profile"),
-            new Scope(null, "email", "User email"),
-            new Scope(null, "address", "User address"),
-            new Scope(null, "phone", "User phone"),
-            new Scope(null, "offline_access", "Offline access"),
+            new Scope(null, "openid", "Verify your identity"),
+            new Scope(null, "profile", "See your profile information"),
+            new Scope(null, "email", "See your email address"),
+            new Scope(null, "address", "See your address"),
+            new Scope(null, "phone", "See your phone number"),
+            new Scope(null, "offline_access", "Access your data offline"),
             new Scope(null, "create_authority", "Create authorities"),
             new Scope(null, "read_authority", "Read authorities"),
             new Scope(null, "update_authority", "Update authorities"),
