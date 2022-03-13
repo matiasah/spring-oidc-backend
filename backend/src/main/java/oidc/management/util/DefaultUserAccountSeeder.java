@@ -82,8 +82,8 @@ public class DefaultUserAccountSeeder {
 
             } else {
 
-                // Warn
-                log.warning("The default user account \"" + defaultUserAccountProperties.getUsername() + "\" already exists");
+                // Log
+                log.info("The default user account \"" + defaultUserAccountProperties.getUsername() + "\" already exists");
 
             }
 
