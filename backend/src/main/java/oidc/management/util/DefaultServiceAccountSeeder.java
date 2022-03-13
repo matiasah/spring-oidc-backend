@@ -142,7 +142,7 @@ public class DefaultServiceAccountSeeder {
         this.serviceAccountRepository.save(serviceAccount);
 
         // Log
-        log.info("Created a default service account with id \"" + serviceAccount.getClientId() + "\" and password \"" + serviceAccountProperties.getClientSecret() + "\"");
+        log.info("Created default service account with id \"" + serviceAccount.getClientId() + "\" and password \"" + serviceAccountProperties.getClientSecret() + "\"");
 
     }
 
