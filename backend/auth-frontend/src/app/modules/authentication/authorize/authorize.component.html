@@ -34,7 +34,7 @@
                                     <mat-list-item *ngFor="let scope of authorizationInfo.scopes">
 
                                         <!-- Align to the left -->
-                                        <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name">
+                                        <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name" [checked]="true">
                                             {{ scope.description }}
                                         </mat-checkbox>
                                     </mat-list-item>
