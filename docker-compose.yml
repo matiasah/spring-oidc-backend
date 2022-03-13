@@ -11,9 +11,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - type: bind
-        source: ./frontend
-        target: /opt/frontend
+      - "./frontend:/opt/frontend"
     environment:
       TZ: America/Santiago
 
