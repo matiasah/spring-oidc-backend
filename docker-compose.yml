@@ -24,7 +24,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./backend/auth-frontend:/opt/backend/auth-frontend"
       - "./backend/src/:/opt/backend/src/"
       - "./backend/target/:/opt/backend/target/"
       - "~/.m2/repository/:/root/.m2/repository/"
