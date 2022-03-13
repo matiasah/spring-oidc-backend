@@ -6,4 +6,4 @@ services:
   auth-service:
     ports:
       - "5005:5005"
-    command: ["./mvnw", "spring-boot:run", "-Dspring-boot.run.jvmArguments=\"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000\"", "-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dev"]
+    command: ["./mvnw", "spring-boot:run", "-Dspring-boot.run.jvmArguments=\"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005\"", "-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dev"]
