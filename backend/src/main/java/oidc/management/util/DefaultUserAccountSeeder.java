@@ -78,7 +78,7 @@ public class DefaultUserAccountSeeder {
                 this.userAccountRepository.save(userAccount);
 
                 // Log
-                log.info("Created a user service account with name \"" + defaultUserAccountProperties.getUsername() + "\" and password \"" + defaultUserAccountProperties.getPassword() + "\"");
+                log.info("Created default user account with name \"" + defaultUserAccountProperties.getUsername() + "\" and password \"" + defaultUserAccountProperties.getPassword() + "\"");
 
             } else {
 
