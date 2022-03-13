@@ -25,6 +25,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
  * Authorization info controller.
  * 
  * @author Matías Hermosilla
+ * @since 29-01-2022
  */
 @RestController
 public class AuthorizationInfoController {
