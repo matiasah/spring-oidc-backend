@@ -11,8 +11,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -41,6 +46,9 @@ public class ScopeController {
     
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private SpringValidatorAdapter validator;
 
     /**
      * Get all scopes.
@@ -95,11 +103,24 @@ public class ScopeController {
      * 
      * @param object The scope to create.
      * @return The created scope.
+     * @throws BindException If the scope is not valid.
      */
     @PostMapping
-    public ResponseEntity<Scope> save(@RequestBody Scope object) {
+    public ResponseEntity<Scope> save(@RequestBody Scope object) throws BindException {
         // Remove the id
         object.setId(null);
+
+        // Create validator
+        BindingResult result = new BeanPropertyBindingResult(object, "authority");
+
+        // Validate authority
+        this.validator.validate(object, result);
+
+        // If there are errors
+        if (result.hasErrors()) {
+            // Throw exception
+            throw new BindException(result);
+        }
 
         // Save the scope
         this.scopeRepository.save(object);
@@ -114,10 +135,12 @@ public class ScopeController {
      * @param id The scope id.
      * @param request The request.
      * @return The updated scope.
-     * @throws IOException
+     * @throws IOException If the request body cannot be parsed.
+     * @throws BindException If the scope is not valid.
+     * @throws BindException If the scope is not found.
      */
-    @PatchMapping("{id}")
-    public ResponseEntity<Scope> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
+    @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Scope> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
         Optional<Scope> optional = this.scopeRepository.findById(id);
@@ -125,17 +148,29 @@ public class ScopeController {
         // Verify if the holder contains a value
         if ( optional.isPresent() ) {
 
-            // Get the scope
-            Scope scope = optional.get();
+            // Get the object
+            Scope object = optional.get();
 
-            // Update the scope
-            scope = mapper.readerForUpdating(scope).readValue(request.getReader());
+            // Update the object
+            object = mapper.readerForUpdating(object).readValue(request.getReader());
 
-            // Save the scope
-            this.scopeRepository.save(scope);
+            // Create validator
+            BindingResult result = new BeanPropertyBindingResult(object, "authority");
 
-            // Return the scope
-            return new ResponseEntity<>(scope, HttpStatus.OK);
+            // Validate authority
+            this.validator.validate(object, result);
+
+            // If there are errors
+            if (result.hasErrors()) {
+                // Throw exception
+                throw new BindException(result);
+            }
+
+            // Save the object
+            this.scopeRepository.save(object);
+
+            // Return the object
+            return new ResponseEntity<>(object, HttpStatus.OK);
         }
 
         // Return bad request
