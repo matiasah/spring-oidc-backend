@@ -13,6 +13,10 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -43,6 +47,9 @@ public class AuthorityController {
     
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private SpringValidatorAdapter validator;
 
     /**
      * Get all authorities.
@@ -97,11 +104,23 @@ public class AuthorityController {
      * 
      * @param object The authority to create.
      * @return The created authority.
+     * @throws BindException If the object is not valid.
      */
     @PostMapping
-    public ResponseEntity<Authority> save(@RequestBody Authority object) {
+    public ResponseEntity<Authority> save(@RequestBody Authority object) throws BindException {
         // Remove the id
         object.setId(null);
+
+        // Create validator
+        BindingResult result = new BeanPropertyBindingResult(object, "authority");
+
+        // Validate authority
+        this.validator.validate(object, result);
+
+        // Si hay errores
+        if (result.hasErrors()) {
+            throw new BindException(result);
+        }
 
         // Save the authority
         this.authorityRepository.save(object);
@@ -116,10 +135,11 @@ public class AuthorityController {
      * @param id The authority id.
      * @param request The request.
      * @return The updated authority.
-     * @throws IOException
+     * @throws IOException If the request body cannot be parsed.
+     * @throws BindException If the object is not valid.
      */
     @PatchMapping("{id}")
-    public ResponseEntity<Authority> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
+    public ResponseEntity<Authority> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
         Optional<Authority> optional = this.authorityRepository.findById(id);
@@ -127,17 +147,28 @@ public class AuthorityController {
         // Verify if the holder contains a value
         if ( optional.isPresent() ) {
 
-            // Get the authority
-            Authority authority = optional.get();
+            // Get the object
+            Authority object = optional.get();
 
-            // Update the authority
-            authority = mapper.readerForUpdating(authority).readValue(request.getReader());
+            // Update the object
+            object = mapper.readerForUpdating(object).readValue(request.getReader());
 
-            // Save the authority
-            this.authorityRepository.save(authority);
+            // Create validator
+            BindingResult result = new BeanPropertyBindingResult(object, "object");
 
-            // Return the authority
-            return new ResponseEntity<>(authority, HttpStatus.OK);
+            // Validate object
+            this.validator.validate(object, result);
+
+            // Si hay errores
+            if (result.hasErrors()) {
+                throw new BindException(result);
+            }
+
+            // Save the object
+            this.authorityRepository.save(object);
+
+            // Return the object
+            return new ResponseEntity<>(object, HttpStatus.OK);
         }
 
         // Return bad request
@@ -152,11 +183,13 @@ public class AuthorityController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<Authority> delete(@PathVariable("id") String id) {
+
         // Delete the authority by it's id
         this.authorityRepository.deleteById(id);
 
         // Return ok
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
 }
