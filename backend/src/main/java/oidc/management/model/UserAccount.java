@@ -17,6 +17,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * OIDC User model.
  * 
@@ -36,15 +38,19 @@ public class UserAccount implements UserDetails {
     @Id
     private String id;
     private List<Authority> authorities;
-    
+
+    @NotNull
     @Getter(onMethod_ = {@JsonIgnore})
     @Setter(onMethod_ = {@JsonSetter})
     private String password;
+
+    @NotNull
     private String username;
+
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
-    private boolean enabled;
+    private boolean enabled = true;
 
     private String firstName;
     private String lastName;
