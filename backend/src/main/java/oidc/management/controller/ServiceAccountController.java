@@ -13,6 +13,10 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -46,6 +50,9 @@ public class ServiceAccountController {
     
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private SpringValidatorAdapter validator;
 
     /**
      * Get all service accounts.
@@ -100,9 +107,10 @@ public class ServiceAccountController {
      * 
      * @param object The service account to create.
      * @return The created service account.
+     * @throws BindException If the service account is not valid.
      */
     @PostMapping
-    public ResponseEntity<ServiceAccount> save(@RequestBody ServiceAccount object) {
+    public ResponseEntity<ServiceAccount> save(@RequestBody ServiceAccount object) throws BindException {
         // Remove the id
         object.setId(null);
 
@@ -111,6 +119,18 @@ public class ServiceAccountController {
 
             // Encode the password
             object.setClientSecret(this.passwordEncoder.encode(object.getClientSecret()));
+        }
+
+        // Create validator
+        BindingResult result = new BeanPropertyBindingResult(object, "serviceAccount");
+
+        // Validate authority
+        this.validator.validate(object, result);
+
+        // If there are errors
+        if (result.hasErrors()) {
+            // Throw exception
+            throw new BindException(result);
         }
 
         // Save the service account
@@ -126,10 +146,11 @@ public class ServiceAccountController {
      * @param id The service account id.
      * @param request The request.
      * @return The updated service account.
-     * @throws IOException
+     * @throws IOException If the request body cannot be parsed.
+     * @throws BindException If the service account is not valid.
      */
     @PatchMapping("{id}")
-    public ResponseEntity<ServiceAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
+    public ResponseEntity<ServiceAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
         Optional<ServiceAccount> optional = this.serviceAccountRepository.findById(id);
@@ -138,26 +159,38 @@ public class ServiceAccountController {
         if ( optional.isPresent() ) {
 
             // Get the service account
-            ServiceAccount serviceAccount = optional.get();
+            ServiceAccount object = optional.get();
             
             // Get the previous password
-            String password = serviceAccount.getClientSecret();
+            String password = object.getClientSecret();
 
             // Update the service account
-            serviceAccount = mapper.readerForUpdating(serviceAccount).readValue(request.getReader());
+            object = mapper.readerForUpdating(object).readValue(request.getReader());
             
             // If the previous password does not match the new password
-            if ( !password.equals(serviceAccount.getClientSecret()) && serviceAccount.getClientSecret() != null ) {
+            if ( !password.equals(object.getClientSecret()) && object.getClientSecret() != null ) {
 
                 // Encode the password
-                serviceAccount.setClientSecret(this.passwordEncoder.encode(serviceAccount.getClientSecret()));
+                object.setClientSecret(this.passwordEncoder.encode(object.getClientSecret()));
+            }
+
+            // Create validator
+            BindingResult result = new BeanPropertyBindingResult(object, "serviceAccount");
+
+            // Validate authority
+            this.validator.validate(object, result);
+
+            // If there are errors
+            if (result.hasErrors()) {
+                // Throw exception
+                throw new BindException(result);
             }
 
             // Save the service account
-            this.serviceAccountRepository.save(serviceAccount);
+            this.serviceAccountRepository.save(object);
 
             // Return the service account
-            return new ResponseEntity<>(serviceAccount, HttpStatus.OK);
+            return new ResponseEntity<>(object, HttpStatus.OK);
         }
 
         // Return bad request
@@ -172,6 +205,7 @@ public class ServiceAccountController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<ServiceAccount> delete(@PathVariable("id") String id) {
+
         // Delete the service account by it's id
         this.serviceAccountRepository.deleteById(id);
 
