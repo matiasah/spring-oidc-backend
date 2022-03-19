@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Spring Security Scope model.
  * 
@@ -25,6 +27,7 @@ public class Scope {
     @Id
     private String id;
 
+    @NotNull
     private String name;
 
     private String description;
