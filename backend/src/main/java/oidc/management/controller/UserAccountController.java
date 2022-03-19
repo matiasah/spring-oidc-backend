@@ -206,6 +206,7 @@ public class UserAccountController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<UserAccount> delete(@PathVariable("id") String id) {
+
         // Delete the user account by it's id
         this.userAccountRepository.deleteById(id);
 
