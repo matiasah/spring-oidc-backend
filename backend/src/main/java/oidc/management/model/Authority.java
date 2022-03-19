@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import oidc.management.repository.AuthorityRepository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Spring Security Authority model.
  * 
@@ -25,6 +27,7 @@ public class Authority implements GrantedAuthority {
     @Id
     private String id;
 
+    @NotNull
     private String name;
 
     private String description;
