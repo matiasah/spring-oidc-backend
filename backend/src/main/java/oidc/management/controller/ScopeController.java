@@ -185,6 +185,7 @@ public class ScopeController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<Scope> delete(@PathVariable("id") String id) {
+
         // Delete the scope by it's id
         this.scopeRepository.deleteById(id);
 
