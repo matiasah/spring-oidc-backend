@@ -11,8 +11,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -46,6 +51,9 @@ public class UserAccountController {
     
     @Autowired
     private ObjectMapper mapper;
+
+    @Autowired
+    private SpringValidatorAdapter validator;
 
     /**
      * Get all user accounts.
@@ -100,9 +108,10 @@ public class UserAccountController {
      * 
      * @param object The user account to create.
      * @return The created user account.
+     * @throws BindException If the user account is not valid.
      */
     @PostMapping
-    public ResponseEntity<UserAccount> save(@RequestBody UserAccount object) {
+    public ResponseEntity<UserAccount> save(@RequestBody UserAccount object) throws BindException {
         // Remove the id
         object.setId(null);
 
@@ -111,6 +120,18 @@ public class UserAccountController {
 
             // Encode the password
             object.setPassword(this.passwordEncoder.encode(object.getPassword()));
+        }
+
+        // Create validator
+        BindingResult result = new BeanPropertyBindingResult(object, "userAccount");
+
+        // Validate authority
+        this.validator.validate(object, result);
+
+        // If there are errors
+        if (result.hasErrors()) {
+            // Throw exception
+            throw new BindException(result);
         }
 
         // Save the user account
@@ -126,10 +147,11 @@ public class UserAccountController {
      * @param id The user account id.
      * @param request The request.
      * @return The updated user account.
-     * @throws IOException
+     * @throws IOException If the request body cannot be parsed.
+     * @throws BindException If the user account is not valid.
      */
-    @PatchMapping("{id}")
-    public ResponseEntity<UserAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
+    @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
         Optional<UserAccount> optional = this.userAccountRepository.findById(id);
@@ -138,26 +160,38 @@ public class UserAccountController {
         if ( optional.isPresent() ) {
 
             // Get the user account
-            UserAccount userAccount = optional.get();
+            UserAccount object = optional.get();
             
             // Get the previous password
-            String password = userAccount.getPassword();
+            String password = object.getPassword();
 
             // Update the user account
-            userAccount = mapper.readerForUpdating(userAccount).readValue(request.getReader());
+            object = mapper.readerForUpdating(object).readValue(request.getReader());
             
             // If the previous password does not match the new password
-            if ( !password.equals(userAccount.getPassword()) && userAccount.getPassword() != null ) {
+            if ( !password.equals(object.getPassword()) && object.getPassword() != null ) {
 
                 // Encode the password
-                userAccount.setPassword(this.passwordEncoder.encode(userAccount.getPassword()));
+                object.setPassword(this.passwordEncoder.encode(object.getPassword()));
+            }
+
+            // Create validator
+            BindingResult result = new BeanPropertyBindingResult(object, "userAccount");
+
+            // Validate authority
+            this.validator.validate(object, result);
+
+            // If there are errors
+            if (result.hasErrors()) {
+                // Throw exception
+                throw new BindException(result);
             }
 
             // Save the user account
-            this.userAccountRepository.save(userAccount);
+            this.userAccountRepository.save(object);
 
             // Return the user account
-            return new ResponseEntity<>(userAccount, HttpStatus.OK);
+            return new ResponseEntity<>(object, HttpStatus.OK);
         }
 
         // Return bad request
