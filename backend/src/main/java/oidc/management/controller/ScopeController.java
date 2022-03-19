@@ -111,7 +111,7 @@ public class ScopeController {
         object.setId(null);
 
         // Create validator
-        BindingResult result = new BeanPropertyBindingResult(object, "authority");
+        BindingResult result = new BeanPropertyBindingResult(object, "scope");
 
         // Validate authority
         this.validator.validate(object, result);
@@ -155,7 +155,7 @@ public class ScopeController {
             object = mapper.readerForUpdating(object).readValue(request.getReader());
 
             // Create validator
-            BindingResult result = new BeanPropertyBindingResult(object, "authority");
+            BindingResult result = new BeanPropertyBindingResult(object, "scope");
 
             // Validate authority
             this.validator.validate(object, result);
