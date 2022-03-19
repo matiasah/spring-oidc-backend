@@ -118,8 +118,9 @@ public class AuthorityController {
         // Validate authority
         this.validator.validate(object, result);
 
-        // Si hay errores
+        // If there are errors
         if (result.hasErrors()) {
+            // Throw exception
             throw new BindException(result);
         }
 
@@ -160,8 +161,9 @@ public class AuthorityController {
             // Validate object
             this.validator.validate(object, result);
 
-            // Si hay errores
+            // If there are errors
             if (result.hasErrors()) {
+                // Throw exception
                 throw new BindException(result);
             }
 
