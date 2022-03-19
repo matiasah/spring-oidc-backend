@@ -24,6 +24,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * OIDC Service Account model.
  * 
@@ -43,20 +45,30 @@ public class ServiceAccount {
      */
     @Id
     private String id;
+
+    @NotNull
     private String clientId;
 
     @CreatedDate
     private Instant clientIdIssuedAt;
 
+    @NotNull
     @Getter(onMethod_ = {@JsonIgnore})
     @Setter(onMethod_ = {@JsonSetter})
     private String clientSecret;
+
     private Instant clientSecretExpiresAt;
+
     private String clientName;
+
     private String clientDescription;
+
     private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
+
     private Set<AuthorizationGrantType> authorizationGrantTypes;
+
     private Set<String> redirectUris;
+
     private Set<Scope> scopes;
 
     /**
