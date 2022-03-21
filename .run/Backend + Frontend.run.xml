@@ -3,6 +3,7 @@
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="" />
+        <option name="commandLineOptions" value="--build" />
         <option name="secondarySourceFiles">
           <list>
             <option value="docker-compose-debug.yml" />
@@ -10,7 +11,6 @@
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />
         <option name="upDetach" value="false" />
-        <option name="upForceRecreate" value="true" />
       </settings>
     </deployment>
     <method v="2" />
