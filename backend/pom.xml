@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.2</version>
+		<version>2.5.10</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>oidc</groupId>
@@ -19,7 +19,7 @@
 
         <!-- Dependencies versions -->
         <bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
-        <spring-security-oauth2-authorization-server.version>0.2.1</spring-security-oauth2-authorization-server.version>
+        <spring-security-oauth2-authorization-server.version>0.2.2</spring-security-oauth2-authorization-server.version>
         <querydsl.version>5.0.0</querydsl.version>
 
         <!-- Plugin versions -->
