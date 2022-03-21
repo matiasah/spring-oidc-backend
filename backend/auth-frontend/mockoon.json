@@ -1,0 +1,543 @@
+{
+  "uuid": "bc5b3416-5a4f-449e-aa82-9f2b2c628277",
+  "lastMigration": 19,
+  "name": "Mockoon",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8080,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "a0616c73-2e80-47e9-8904-b60051e5cf8b",
+      "documentation": "Login request (Username and Password)",
+      "method": "post",
+      "endpoint": "login",
+      "responses": [
+        {
+          "uuid": "b0d8cf9f-dfe2-4fa5-b327-eaabdc7b460b",
+          "body": "",
+          "latency": 0,
+          "statusCode": 302,
+          "label": "",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 20 Mar 2022 23:43:55 GMT"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Location",
+              "value": "http://127.0.0.1:8080/oauth2/authorize?client_id=eb5d9c2a-b5aa-4467-b4b4-79ae82eee0d8&redirect_uri=http://127.0.0.1/oauth/callback&scope=openid%20profile%20email&response_type=code"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "JSESSIONID=BA231DF3062B9A12BCF9B561464B3861; Path=/; HttpOnly"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "deny"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "12c30df4-3e30-479d-a5d4-4ffcdb38856d",
+      "documentation": "Authorize API (Consent Redirect)",
+      "method": "get",
+      "endpoint": "oauth2/authorize",
+      "responses": [
+        {
+          "uuid": "a7aa4d6f-ac16-42d3-a871-57154f451b24",
+          "body": "",
+          "latency": 0,
+          "statusCode": 302,
+          "label": "",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 20 Mar 2022 23:53:21 GMT"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Location",
+              "value": "http://127.0.0.1:4200/consent?scope=openid%20profile%20email&client_id=eb5d9c2a-b5aa-4467-b4b4-79ae82eee0d8&state=Gwxf4UOiIaigfhOBMrMMs0SRnqQCTo-LTxmth2RdFLU%3D"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "354a1af7-861a-4a95-9735-b38a9d3f84a3",
+          "body": "",
+          "latency": 0,
+          "statusCode": 302,
+          "label": "",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 21 Mar 2022 00:34:08 GMT"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Location",
+              "value": "http://127.0.0.1:4200/oauth/callback?code=slUtkmxKye1xRxzI3CtfAgqL1pWHz0SAe1VDJTQhNkJwAxNPkChqXE5QT7pFSDvnMQtSN2j9KbaIkEZKsUxrx32a4ZP333OdQxylRxK7HEeGUjZVR7mw3a4erYWeIWuM"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": true
+    },
+    {
+      "uuid": "d7bd7564-425f-4735-ae9a-737bc10bfe9c",
+      "documentation": "Authorization Info API (Consent Page Info)",
+      "method": "get",
+      "endpoint": "oauth2/authorization-info",
+      "responses": [
+        {
+          "uuid": "352cedbc-ab75-4f9b-90a8-c87915cc7bed",
+          "body": "{\n  \"principal\": null,\n  \"client\": {\n    \"id\": \"622d39a3048d8c28a6a3f6ee\",\n    \"clientId\": \"eb5d9c2a-b5aa-4467-b4b4-79ae82eee0d8\",\n    \"clientIdIssuedAt\": null,\n    \"clientSecret\": \"$argon2id$v=19$m=4096,t=3,p=1$1RXSSHDe3m8Q+Yr1m4JGfg$6hXiF2ObLwgGtR6fHTqZ8LmUos8C+dkZ7VdhFx1Ygf4\",\n    \"clientSecretExpiresAt\": null,\n    \"clientName\": \"Default Service Account\",\n    \"clientAuthenticationMethods\": [\n      {\n        \"value\": \"client_secret_post\"\n      },\n      {\n        \"value\": \"client_secret_basic\"\n      }\n    ],\n    \"authorizationGrantTypes\": [\n      {\n        \"value\": \"refresh_token\"\n      },\n      {\n        \"value\": \"authorization_code\"\n      }\n    ],\n    \"redirectUris\": [\n      \"http://127.0.0.1/oauth/callback\"\n    ],\n    \"scopes\": [\n      \"create_service_account\",\n      \"address\",\n      \"update_scope\",\n      \"openid\",\n      \"profile\",\n      \"read_service_account\",\n      \"delete_user_account\",\n      \"update_user_account\",\n      \"create_user_account\",\n      \"update_authority\",\n      \"create_authority\",\n      \"delete_authority\",\n      \"read_authority\",\n      \"phone\",\n      \"delete_service_account\",\n      \"offline_access\",\n      \"delete_scope\",\n      \"update_service_account\",\n      \"read_user_account\",\n      \"email\",\n      \"create_scope\",\n      \"read_scope\"\n    ],\n    \"clientSettings\": {\n      \"settings\": {\n        \"settings.client.require-proof-key\": false,\n        \"settings.client.require-authorization-consent\": true\n      },\n      \"requireProofKey\": false,\n      \"requireAuthorizationConsent\": true\n    },\n    \"tokenSettings\": {\n      \"settings\": {\n        \"settings.token.reuse-refresh-tokens\": true,\n        \"settings.token.id-token-signature-algorithm\": \"RS256\",\n        \"settings.token.access-token-time-to-live\": \"PT5M\",\n        \"settings.token.refresh-token-time-to-live\": \"PT1H\"\n      },\n      \"accessTokenTimeToLive\": \"PT5M\",\n      \"idTokenSignatureAlgorithm\": \"RS256\",\n      \"refreshTokenTimeToLive\": \"PT1H\",\n      \"reuseRefreshTokens\": true\n    }\n  },\n  \"scopes\": [\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e9\",\n      \"name\": \"delete_user_account\",\n      \"description\": \"Delete User accounts\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e8\",\n      \"name\": \"update_user_account\",\n      \"description\": \"Update User accounts\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e7\",\n      \"name\": \"read_user_account\",\n      \"description\": \"Read User accounts\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e6\",\n      \"name\": \"create_user_account\",\n      \"description\": \"Create User accounts\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e5\",\n      \"name\": \"delete_service_account\",\n      \"description\": \"Delete service accounts\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e4\",\n      \"name\": \"update_service_account\",\n      \"description\": \"Update service accounts\"\n    },\n    {\n      \"id\": \"622d39a2048d8c28a6a3f6d9\",\n      \"name\": \"profile\",\n      \"description\": \"User profile\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e3\",\n      \"name\": \"read_service_account\",\n      \"description\": \"Read service accounts\"\n    },\n    {\n      \"id\": \"622d39a2048d8c28a6a3f6d8\",\n      \"name\": \"openid\",\n      \"description\": \"OpenID Connect\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e2\",\n      \"name\": \"create_service_account\",\n      \"description\": \"Create service accounts\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e1\",\n      \"name\": \"delete_authority\",\n      \"description\": \"Delete authorities\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6e0\",\n      \"name\": \"update_authority\",\n      \"description\": \"Update authorities\"\n    },\n    {\n      \"id\": \"622d39a2048d8c28a6a3f6da\",\n      \"name\": \"email\",\n      \"description\": \"User email\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6df\",\n      \"name\": \"read_authority\",\n      \"description\": \"Read authorities\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6de\",\n      \"name\": \"create_authority\",\n      \"description\": \"Create authorities\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6dd\",\n      \"name\": \"offline_access\",\n      \"description\": \"Offline access\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6dc\",\n      \"name\": \"phone\",\n      \"description\": \"User phone\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6ed\",\n      \"name\": \"delete_scope\",\n      \"description\": \"Delete scopes\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6db\",\n      \"name\": \"address\",\n      \"description\": \"User address\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6ec\",\n      \"name\": \"update_scope\",\n      \"description\": \"Update scopes\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6eb\",\n      \"name\": \"read_scope\",\n      \"description\": \"Read scopes\"\n    },\n    {\n      \"id\": \"622d39a3048d8c28a6a3f6ea\",\n      \"name\": \"create_scope\",\n      \"description\": \"Create scopes\"\n    }\n  ],\n  \"state\": \"Gwxf4UOiIaigfhOBMrMMs0SRnqQCTo-LTxmth2RdFLU=\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 20 Mar 2022 23:53:21 GMT"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "http://127.0.0.1:4200"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "732cbb59-2ab6-4901-a719-1b8765d024cc",
+      "documentation": "Token API (Code grant)",
+      "method": "post",
+      "endpoint": "oauth2/token",
+      "responses": [
+        {
+          "uuid": "210f377c-233c-42e9-ac3b-759d23afb79a",
+          "body": "{\"access_token\":\"eyJraWQiOiJhNTY3MjQ1YS1lM2MxLTRlODYtOGM2YS01N2NmNmU5MmEwNWMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImViNWQ5YzJhLWI1YWEtNDQ2Ny1iNGI0LTc5YWU4MmVlZTBkOCIsIm5iZiI6MTY0NzgyMjg0OSwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsImVtYWlsIl0sImV4cCI6MTY0NzgyMzE0OSwiaWF0IjoxNjQ3ODIyODQ5LCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl19.rRkF9pVlL9nZUYjZCAGmUZQ8WxNTIxBD5ArlNDCCmbxJ3WGDc3cpArY_VewtDNcOkuQKTl0ePvWTHPlFEMOueRLGEzNe2a1bukkNtfIH6tIf-K5gBuZF7dZAysi9UV1Gs3YFKsuFLiDGmOjYRhS2AYfqkn6ALrxnzG27pO_Ey8M4WtpWAAmAEenPa5xlqVPJgxBlu4sLU-vOYoXo-D0XMZKKMyqCL4PpXMnUoEZaWgGbvII-tMYk0cTtHKsQpM5-zpmbC2KU2yfKYrWUn9kjdW8IBeE8JhFSuSc8fBEECUIFORrAB-nqALQK8qx6h5RuWqOckA_SgwX-o_CwNrS6VQ\",\"refresh_token\":\"qTlvFC7xMmqF4fUyQ1CMCvGnHAFWfaFtJ_QMTDzJ9bnIUHSJNcw4ypoeo88DujrjZHtK0k2SUX2Rx_p9SbjdHtcS9pQd65IF99c67yXHzMDW4T3kuw_lpWzGqNjMMirD\",\"scope\":\"openid profile email\",\"id_token\":\"eyJraWQiOiJhNTY3MjQ1YS1lM2MxLTRlODYtOGM2YS01N2NmNmU5MmEwNWMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImViNWQ5YzJhLWI1YWEtNDQ2Ny1iNGI0LTc5YWU4MmVlZTBkOCIsImF6cCI6ImViNWQ5YzJhLWI1YWEtNDQ2Ny1iNGI0LTc5YWU4MmVlZTBkOCIsImV4cCI6MTY0NzgyNDY0OSwiaWF0IjoxNjQ3ODIyODQ5LCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl19.P6aOSMaVMeL-dc07r0CsiIDeIgfmIvPPiM5chBmgIfS6cDIEsrS7E-TYRUg0-pCkl1dmmgpvFxRpspuMYMcMenVw7GMsxwfJdBa0NfJbdyHL7vlNBUfB7hlC5dacS1HGz0bh92_oGK3pLEsFDQdjx5F0tfrc9HR8K3IoiN3ZZ6R2ZqxgSTDMSLgRfhNs9g1cYJaPc_2ReIoasNV9Ztv5CVTXB7rjSN3Dd_NB6tQbyk42Xg2O2fRXvh2_lH6OtVO-Z8sBEPV1CfdG3leYzXU1dJXFotTzwmJ2QTFhDzDk9G8LHghQb-D3Xq83DnaAOUyvHmnAsX3_Yxqt-VwuSbrlkg\",\"token_type\":\"Bearer\",\"expires_in\":299}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "http://127.0.0.1"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json;charset=UTF-8"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 21 Mar 2022 00:34:08 GMT"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "9a045741-5f6f-4d38-a366-b2f3ee0588eb",
+      "documentation": "Authorize API (Give consent)",
+      "method": "post",
+      "endpoint": "oauth2/authorize",
+      "responses": [
+        {
+          "uuid": "1f7cd3fe-92ac-48bd-918a-25862514b5c6",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 302,
+          "label": "",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache, no-store, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 21 Mar 2022 02:31:04 GMT"
+            },
+            {
+              "key": "Expires",
+              "value": "0"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Location",
+              "value": "http://127.0.0.1:4200/oauth/callback?code=CjurPig8KXCiAW8zL5AQy6VT1Vms675wK6eVS3Lt15z1sT0mVP3KiP2Nb2Lhv1SBIalZ7YAcr301ytAULJSZ1sFfFQKvDDcK0719Rmj3KrdjI2SEzUBaDywRdNsciqPh"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Method"
+            },
+            {
+              "key": "Vary",
+              "value": "Access-Control-Request-Headers"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "X-XSS-Protection",
+              "value": "1; mode=block"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "http;//localhost:4200/consent",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}
