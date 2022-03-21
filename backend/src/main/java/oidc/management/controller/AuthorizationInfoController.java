@@ -47,6 +47,7 @@ public class AuthorizationInfoController {
     public ResponseEntity<AuthorizationInfo> getAuthorizationInfo(
             final @AuthenticationPrincipal Principal principal,
             final @RequestParam(OAuth2ParameterNames.CLIENT_ID) String clientId,
+            final @RequestParam(OAuth2ParameterNames.SCOPE) String scope,
             final @RequestParam(OAuth2ParameterNames.STATE) String state
         ) {
 
@@ -70,6 +71,11 @@ public class AuthorizationInfoController {
             return ResponseEntity.notFound().build();
         }
 
+        // Get requested scopes
+        final Set<String> requestedScopes = Arrays
+                .stream(StringUtils.delimitedListToStringArray(scope, " "))
+                .collect(Collectors.toSet());
+
         // Get Service Account
         final ServiceAccount serviceAccount = optServiceAccount.get();
 
@@ -77,6 +83,7 @@ public class AuthorizationInfoController {
         final Set<Scope> scopes = serviceAccount
                 .getScopes()
                 .stream()
+                .filter(scopeObject -> requestedScopes.contains(scopeObject.getName()))
                 .collect(Collectors.toSet());
 
         // Authorization info
