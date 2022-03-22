@@ -1,2 +1,4 @@
-# spring-oidc-backend
-OpenID Connect + Spring Framework
+# Spring OIDC Backend
+Custom Authorization server using OpenID Connect and Spring Framework
+
+## Screenshots
