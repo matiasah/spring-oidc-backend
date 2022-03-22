@@ -1,10 +1,14 @@
 <div class="w-full h-full">
+
     <div class="flex items-center justify-center w-full h-full">
-        <div class="max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-2">
+
+        <div class="flex flex-col max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-2">
+
             <mat-card class="mat-elevation-z6 p-4">
 
                 <div class="container">
-                    <div class="w-full">
+
+                    <div class="container">
                         <div class="flex justify-center">
                             <img src="assets/img/logo.png" alt="Logo" />
                         </div>
@@ -13,34 +17,48 @@
                         </div>
                     </div>
 
-                    <div class="w-full" *ngIf="!authorizationInfo">
+                    <div class="container" *ngIf="!authorizationInfo">
                         <mat-progress-spinner class="m-auto" diameter="48" color="primary" mode="indeterminate">
                         </mat-progress-spinner>
                     </div>
 
-                    <div class="grid grid-cols-12 w-full" *ngIf="authorizationInfo">
+                    <div class="container" *ngIf="authorizationInfo">
 
-                        <div class="flex justify-center col-span-12">
+                        <div class="container h-12">
                             <span>Would you like to authorize <strong>{{ authorizationInfo.client.clientName }}</strong> to use your user account?</span>
                         </div>
 
-                        <div class="flex justify-center col-span-12">
+                        <div class="container h-full pt-12 -mt-12">
 
                             <form ngNoForm [action]="authorizeUrl" method="post" class="w-full">
                                 <input name="client_id" [value]="authorizationInfo.client.clientId" type="hidden" />
                                 <input name="state" [value]="authorizationInfo.state" type="hidden" />
 
-                                <mat-list>
-                                    <mat-list-item *ngFor="let scope of authorizationInfo.scopes">
+                                <div class="flex flex-col max-h-full h-full pb-20 -mb-20">
 
-                                        <!-- Align to the left -->
-                                        <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name" [checked]="true">
-                                            {{ scope.description }}
-                                        </mat-checkbox>
-                                    </mat-list-item>
-                                </mat-list>
+                                    <div class="flex flex-col max-h-scopes">
 
-                                <div class="flex justify-center mt-4">
+                                        <div class="overflow-y-auto">
+
+                                            <mat-list>
+
+                                                <mat-list-item *ngFor="let scope of authorizationInfo.scopes">
+
+                                                    <!-- Align to the left -->
+                                                    <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name" [checked]="true">
+                                                        {{ scope.description }}
+                                                    </mat-checkbox>
+                                                </mat-list-item>
+
+                                            </mat-list>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="flex justify-center mt-4 h-16">
 
                                     <!-- Button on the left -->
                                     <div class="flex flex-col items-center mx-4">
@@ -67,6 +85,9 @@
                 </div>
 
             </mat-card>
+
         </div>
+
     </div>
+
 </div>
