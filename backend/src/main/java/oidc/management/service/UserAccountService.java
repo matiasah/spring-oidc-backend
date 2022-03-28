@@ -39,6 +39,14 @@ public interface UserAccountService {
     public Optional<UserAccount> findById(String id);
 
     /**
+     * Find a user account by its username.
+     *
+     * @param username Username.
+     * @return User account.
+     */
+    public Optional<UserAccount> findByUsername(String username);
+
+    /**
      * Save a user account.
      *
      * @param userAccount User account.

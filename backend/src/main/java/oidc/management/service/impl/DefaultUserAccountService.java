@@ -63,6 +63,16 @@ public class DefaultUserAccountService implements UserAccountService {
     }
 
     @Override
+    public Optional<UserAccount> findByUsername(String username) {
+        // Find user account by username
+        return this.userAccountRepository.findByUsername(username)
+                .map(
+                        // Decrypt user account
+                        userAccount -> this.userAccountEncryptionService.decrypt(userAccount)
+                );
+    }
+
+    @Override
     public UserAccount save(UserAccount userAccount) {
         // Encrypt user account before saving
         return this.userAccountRepository.save(
