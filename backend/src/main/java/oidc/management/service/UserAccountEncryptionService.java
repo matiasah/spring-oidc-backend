@@ -26,4 +26,12 @@ public interface UserAccountEncryptionService {
      */
     public UserAccount decrypt(UserAccount userAccount);
 
+    /**
+     * Hashes the user account name for searching by name equality.
+     *
+     * @param username The user account name to hash.
+     * @return The hashed user account name.
+     */
+    public String hashUsername(String username);
+
 }

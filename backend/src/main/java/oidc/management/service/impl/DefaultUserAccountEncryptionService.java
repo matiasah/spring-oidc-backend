@@ -25,4 +25,9 @@ public class DefaultUserAccountEncryptionService implements UserAccountEncryptio
         return userAccount;
     }
 
+    @Override
+    public String hashUsername(String username) {
+        return username;
+    }
+
 }
