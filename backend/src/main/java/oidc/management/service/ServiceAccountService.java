@@ -1,8 +1,11 @@
 package oidc.management.service;
 
+import java.util.List;
 import java.util.Optional;
 import oidc.management.model.ServiceAccount;
 import oidc.management.repository.ServiceAccountRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * ServiceAccount Service for managing Service Accounts.
@@ -13,6 +16,21 @@ import oidc.management.repository.ServiceAccountRepository;
  * @see ServiceAccountRepository
  */
 public interface ServiceAccountService {
+
+    /**
+     * Find all Service Accounts.
+     *
+     * @return A list of Service Accounts.
+     */
+    public List<ServiceAccount> findAll();
+
+    /**
+     * Find a page of Service Accounts.
+     *
+     * @param pageable Pageable object.
+     * @return A page of Service Accounts.
+     */
+    public Page<ServiceAccount> findAll(Pageable pageable);
 
     /**
      * Finds a {@link ServiceAccount} by its {@link String} clientId.
@@ -31,5 +49,20 @@ public interface ServiceAccountService {
      *         exists, or an empty {@link Optional} if it does not.
      */
     public Optional<ServiceAccount> findByClientId(String clientId);
-    
+
+    /**
+     * Saves a {@link ServiceAccount}.
+     *
+     * @param serviceAccount The {@link ServiceAccount} to save.
+     * @return The saved {@link ServiceAccount}.
+     */
+    public ServiceAccount save(ServiceAccount serviceAccount);
+
+    /**
+     * Deletes a {@link ServiceAccount} by it's {@link String} id.
+     *
+     * @param id The {@link String} id.
+     */
+    public void deleteById(String id);
+
 }
