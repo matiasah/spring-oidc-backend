@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
  * @author Matías Hermosilla
  * @since 03-02-2022
  * @see ServiceAccount
- * @see ServiceAccountRepository
+ * @see oidc.management.service.impl.DefaultServiceAccountService
  */
 public interface ServiceAccountService {
 
