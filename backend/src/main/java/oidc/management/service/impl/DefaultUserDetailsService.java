@@ -1,4 +1,4 @@
-package oidc.management.service;
+package oidc.management.service.impl;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
