@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
  * @author Matías Hermosilla
  * @since 16-01-2022
  * @see UserDetails
- * @see UserAccountRepository
+ * @see oidc.management.repository.UserAccountRepository
  */
 @Document(collection = "users")
 @Builder
@@ -37,6 +37,13 @@ public class UserAccount implements UserDetails {
 
     @Id
     private String id;
+
+    /**
+     * The user's alias.
+     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING USER ACCOUNTS.
+     **/
+    private String alias;
+
     private List<Authority> authorities;
 
     @NotNull
@@ -53,6 +60,7 @@ public class UserAccount implements UserDetails {
     private boolean enabled = true;
 
     private String firstName;
+
     private String lastName;
 
     @CreatedDate
