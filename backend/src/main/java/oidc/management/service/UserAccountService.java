@@ -1,5 +1,6 @@
 package oidc.management.service;
 
+import oidc.management.model.ServiceAccount;
 import oidc.management.model.UserAccount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,25 +17,26 @@ import java.util.Optional;
 public interface UserAccountService {
 
     /**
-     * Find all the user accounts.
+     * Find all the {@link UserAccount}s.
      *
-     * @return List of user accounts.
+     * @return List of {@link UserAccount}s.
      */
     public List<UserAccount> findAll();
 
     /**
-     * Find a page of user accounts.
+     * Find a page of @{@link UserAccount}s.
      *
      * @param pageable Pageable object.
-     * @return Page of user accounts.
+     * @return Page of {@link UserAccount}s.
      */
     public Page<UserAccount> findAll(Pageable pageable);
 
     /**
-     * Find a user account by its id.
+     * Find a {@link UserAccount} by its id.
      *
-     * @param id User account id.
-     * @return User account.
+     * @param id The {@link UserAccount} id.
+     * @return An {@link Optional} containing the {@link UserAccount} if it
+     *         exists, or an empty {@link Optional} if it does not.
      */
     public Optional<UserAccount> findById(String id);
 
@@ -42,22 +44,23 @@ public interface UserAccountService {
      * Find a user account by its username.
      *
      * @param username Username.
-     * @return User account.
+     * @return An {@link Optional} containing the {@link UserAccount} if it
+     *         exists, or an empty {@link Optional} if it does not.
      */
     public Optional<UserAccount> findByUsername(String username);
 
     /**
-     * Save a user account.
+     * Save a {@link UserAccount}.
      *
-     * @param userAccount User account.
-     * @return User account.
+     * @param userAccount The {@link UserAccount} to save.
+     * @return The saved {@link UserAccount}.
      */
     public UserAccount save(UserAccount userAccount);
 
     /**
-     * Delete a user account.
+     * Deletes a {@link UserAccount} by it's {@link String} id.
      *
-     * @param id User account id.
+     * @param id The {@link UserAccount} id.
      */
     public void deleteById(String id);
 
