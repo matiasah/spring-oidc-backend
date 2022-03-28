@@ -64,6 +64,7 @@ public class DefaultUserAccountService implements UserAccountService {
 
     @Override
     public Optional<UserAccount> findByUsername(String username) {
+        // TODO: Add logic to find user account by encrypted username
         // Find user account by username
         return this.userAccountRepository.findByUsername(username)
                 .map(

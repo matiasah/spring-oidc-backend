@@ -64,6 +64,7 @@ public class DefaultServiceAccountService implements ServiceAccountService {
 
     @Override
     public Optional<ServiceAccount> findByClientId(String clientId) {
+        // TODO: Add logic to find Service Account by encrypted client id
         // Find Service Account by clientId
         return serviceAccountRepository.findByClientId(clientId)
                 .map(
