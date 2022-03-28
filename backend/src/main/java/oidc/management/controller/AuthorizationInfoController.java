@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
-import oidc.management.repository.ServiceAccountRepository;
+import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -34,7 +34,7 @@ public class AuthorizationInfoController {
     private RegisteredClientRepository registeredClientRepository;
 
     @Autowired
-    private ServiceAccountRepository serviceAccountRepository;
+    private ServiceAccountService serviceAccountService;
 
     /**
      * Get client info.
@@ -62,7 +62,7 @@ public class AuthorizationInfoController {
         }
 
         // Find Service Account (RegisteredClient) by id
-        final Optional<ServiceAccount> optServiceAccount = serviceAccountRepository.findByClientId(clientId);
+        final Optional<ServiceAccount> optServiceAccount = serviceAccountService.findByClientId(clientId);
 
         // Check if Service Account exists
         if (!optServiceAccount.isPresent()) {
