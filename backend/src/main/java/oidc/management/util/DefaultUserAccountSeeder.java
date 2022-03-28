@@ -3,6 +3,8 @@ package oidc.management.util;
 import java.util.Arrays;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+
+import oidc.management.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,7 +16,6 @@ import oidc.management.model.Authority;
 import oidc.management.model.UserAccount;
 import oidc.management.properties.DefaultUserAccountProperties;
 import oidc.management.repository.AuthorityRepository;
-import oidc.management.repository.UserAccountRepository;
 
 /**
  * Creates a default user account.
@@ -34,7 +35,7 @@ public class DefaultUserAccountSeeder {
     private DefaultUserAccountProperties defaultUserAccountProperties;
 
     @Autowired
-    private UserAccountRepository userAccountRepository;
+    private UserAccountService userAccountService;
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -58,7 +59,7 @@ public class DefaultUserAccountSeeder {
             String username = defaultUserAccountProperties.getUsername();
 
             // Find if the user account already exists
-            Optional<UserAccount> optUserAccount = userAccountRepository.findByUsername(username);
+            Optional<UserAccount> optUserAccount = userAccountService.findByUsername(username);
 
             // If the user account does not exist, create it
             if (!optUserAccount.isPresent()) {
@@ -75,7 +76,7 @@ public class DefaultUserAccountSeeder {
                         .build();
 
                 // Save the user account
-                this.userAccountRepository.save(userAccount);
+                this.userAccountService.save(userAccount);
 
                 // Log
                 log.info("Created default user account with name \"" + defaultUserAccountProperties.getUsername() + "\" and password \"" + defaultUserAccountProperties.getPassword() + "\"");
