@@ -27,26 +27,6 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
 
     @Override
     public void save(RegisteredClient registeredClient) {
-        /**
-        // Copy RegisteredClient on Client
-        ServiceAccount client = ServiceAccount.builder()
-            .id(registeredClient.getId())
-            .clientId(registeredClient.getClientId())
-            .clientIdIssuedAt(registeredClient.getClientIdIssuedAt())
-            .clientSecret(registeredClient.getClientSecret())
-            .clientSecretExpiresAt(registeredClient.getClientSecretExpiresAt())
-            .clientName(registeredClient.getClientName())
-            .clientAuthenticationMethods(registeredClient.getClientAuthenticationMethods())
-            .authorizationGrantTypes(registeredClient.getAuthorizationGrantTypes())
-            .redirectUris(registeredClient.getRedirectUris())
-            .scopes(registeredClient.getScopes())
-            .clientSettings(registeredClient.getClientSettings())
-            .tokenSettings(registeredClient.getTokenSettings())
-            .build();
-        
-        // Save client
-        clientRepository.save(client);
-         */
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
