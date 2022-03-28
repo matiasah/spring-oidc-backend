@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.types.Predicate;
+import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import oidc.management.model.ServiceAccount;
-import oidc.management.repository.ServiceAccountRepository;
 
 /**
  * Service Account Controller
@@ -34,7 +34,7 @@ import oidc.management.repository.ServiceAccountRepository;
  * @author Matias Hermosilla
  * @since 03-02-2022
  * @see ServiceAccount
- * @see ServiceAccountRepository
+ * @see ServiceAccountService
  * @see PasswordEncoder
  * @see ObjectMapper
  */
@@ -43,7 +43,7 @@ import oidc.management.repository.ServiceAccountRepository;
 public class ServiceAccountController {
     
     @Autowired
-    private ServiceAccountRepository serviceAccountRepository;
+    private ServiceAccountService serviceAccountService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -62,7 +62,7 @@ public class ServiceAccountController {
     @GetMapping
     public List<ServiceAccount> index() {
         // Return list of service accounts
-        return serviceAccountRepository.findAll();
+        return serviceAccountService.findAll();
     }
 
     /**
@@ -71,11 +71,8 @@ public class ServiceAccountController {
      * @return Page of service accounts.
      */
     @GetMapping("page")
-    public Page<ServiceAccount> page(@QuerydslPredicate(root = ServiceAccount.class) Predicate predicate, Pageable pageable) {
-        if (predicate != null) {
-            return this.serviceAccountRepository.findAll(predicate, pageable);
-        }
-        return this.serviceAccountRepository.findAll(pageable);
+    public Page<ServiceAccount> page(Pageable pageable) {
+        return this.serviceAccountService.findAll(pageable);
     }
 
     /**
@@ -87,7 +84,7 @@ public class ServiceAccountController {
     @GetMapping("{id}")
     public ResponseEntity<ServiceAccount> get(@PathVariable("id") String id) {
         // Get the optional holder
-        Optional<ServiceAccount> optObject = this.serviceAccountRepository.findById(id);
+        Optional<ServiceAccount> optObject = this.serviceAccountService.findById(id);
 
         // Verify if the holder contains a value
         if (optObject.isPresent()) {
@@ -134,7 +131,7 @@ public class ServiceAccountController {
         }
 
         // Save the service account
-        this.serviceAccountRepository.save(object);
+        this.serviceAccountService.save(object);
 
         // Return the service account
         return new ResponseEntity<>(object, HttpStatus.CREATED);
@@ -153,7 +150,7 @@ public class ServiceAccountController {
     public ResponseEntity<ServiceAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
-        Optional<ServiceAccount> optional = this.serviceAccountRepository.findById(id);
+        Optional<ServiceAccount> optional = this.serviceAccountService.findById(id);
 
         // Verify if the holder contains a value
         if ( optional.isPresent() ) {
@@ -187,7 +184,7 @@ public class ServiceAccountController {
             }
 
             // Save the service account
-            this.serviceAccountRepository.save(object);
+            this.serviceAccountService.save(object);
 
             // Return the service account
             return new ResponseEntity<>(object, HttpStatus.OK);
@@ -207,7 +204,7 @@ public class ServiceAccountController {
     public ResponseEntity<ServiceAccount> delete(@PathVariable("id") String id) {
 
         // Delete the service account by it's id
-        this.serviceAccountRepository.deleteById(id);
+        this.serviceAccountService.deleteById(id);
 
         // Return ok
         return new ResponseEntity<>(HttpStatus.OK);
