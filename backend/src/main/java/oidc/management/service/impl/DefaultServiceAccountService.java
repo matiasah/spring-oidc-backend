@@ -5,7 +5,6 @@ import oidc.management.repository.ServiceAccountRepository;
 import oidc.management.service.ServiceAccountEncryptionService;
 import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
  * @since 27-03-2022
  */
 @Service
-@ConditionalOnMissingBean(ServiceAccountService.class)
 public class DefaultServiceAccountService implements ServiceAccountService {
 
     @Autowired
