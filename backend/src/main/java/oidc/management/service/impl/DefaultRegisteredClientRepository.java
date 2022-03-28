@@ -2,6 +2,7 @@ package oidc.management.service.impl;
 
 import java.util.Optional;
 
+import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
