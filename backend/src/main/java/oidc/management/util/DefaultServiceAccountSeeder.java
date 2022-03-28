@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
+import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,17 +15,14 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
-import oidc.management.model.Authority;
 import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
 import oidc.management.properties.DefaultServiceAccountProperties;
 import oidc.management.repository.ScopeRepository;
-import oidc.management.repository.ServiceAccountRepository;
 
 /**
  * Creates a default service account.
@@ -44,7 +42,7 @@ public class DefaultServiceAccountSeeder {
     private DefaultServiceAccountProperties serviceAccountProperties;
 
     @Autowired
-    private ServiceAccountRepository serviceAccountRepository;
+    private ServiceAccountService serviceAccountService;
 
     @Autowired
     private ScopeRepository scopeRepository;
@@ -104,7 +102,7 @@ public class DefaultServiceAccountSeeder {
         String clientId = serviceAccountProperties.getClientId();
 
         // Find if the service account already exists
-        Optional<ServiceAccount> optServiceAccount = serviceAccountRepository.findByClientId(clientId);
+        Optional<ServiceAccount> optServiceAccount = serviceAccountService.findByClientId(clientId);
 
         // If the service account does not exist, create it
         if (optServiceAccount.isPresent()) {
@@ -139,7 +137,7 @@ public class DefaultServiceAccountSeeder {
                 .build();
 
         // Save the service account
-        this.serviceAccountRepository.save(serviceAccount);
+        this.serviceAccountService.save(serviceAccount);
 
         // Log
         log.info("Created default service account with id \"" + serviceAccount.getClientId() + "\" and password \"" + serviceAccountProperties.getClientSecret() + "\"");
