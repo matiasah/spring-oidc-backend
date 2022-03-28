@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.querydsl.core.types.Predicate;
 import oidc.management.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import oidc.management.model.UserAccount;
-import oidc.management.repository.UserAccountRepository;
 
 /**
  * User Account Controller
@@ -36,7 +33,7 @@ import oidc.management.repository.UserAccountRepository;
  * @author Matias Hermosilla
  * @since 03-02-2022
  * @see UserAccount
- * @see UserAccountRepository
+ * @see UserAccountService
  * @see PasswordEncoder
  * @see ObjectMapper
  */

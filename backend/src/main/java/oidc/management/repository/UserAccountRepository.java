@@ -15,8 +15,8 @@ import oidc.management.model.QUserAccount;
  * @since 16-01-2022
  * @see MongoRepository
  * @see UserAccount
- * @see UserAccountRepository
- * @see UserAccountRepository#findByUsername(String)
+ * @see oidc.management.service.UserAccountService
+ * @see oidc.management.service.UserAccountService#findByUsername(String)
  */
 public interface UserAccountRepository extends MongoRepository<UserAccount, String>, QuerydslPredicateExecutor<UserAccount>, QuerydslBinderCustomizer<QUserAccount> {
 

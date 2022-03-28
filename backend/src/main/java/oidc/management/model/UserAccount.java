@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
  * @author Matías Hermosilla
  * @since 16-01-2022
  * @see UserDetails
- * @see oidc.management.repository.UserAccountRepository
+ * @see oidc.management.service.UserAccountService
  */
 @Document(collection = "users")
 @Builder
