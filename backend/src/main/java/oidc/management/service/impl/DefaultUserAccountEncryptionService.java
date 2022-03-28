@@ -2,7 +2,6 @@ package oidc.management.service.impl;
 
 import oidc.management.model.UserAccount;
 import oidc.management.service.UserAccountEncryptionService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
  * @since 27-03-2022
  */
 @Service
-@ConditionalOnMissingBean(UserAccountEncryptionService.class)
 public class DefaultUserAccountEncryptionService implements UserAccountEncryptionService {
 
     @Override
