@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.types.Predicate;
+import oidc.management.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +45,7 @@ import oidc.management.repository.UserAccountRepository;
 public class UserAccountController {
     
     @Autowired
-    private UserAccountRepository userAccountRepository;
+    private UserAccountService userAccountService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -63,7 +64,7 @@ public class UserAccountController {
     @GetMapping
     public List<UserAccount> index() {
         // Return list of user accounts
-        return userAccountRepository.findAll();
+        return userAccountService.findAll();
     }
 
     /**
@@ -72,11 +73,8 @@ public class UserAccountController {
      * @return Page of user accounts.
      */
     @GetMapping("page")
-    public Page<UserAccount> page(@QuerydslPredicate(root = UserAccount.class) Predicate predicate, Pageable pageable) {
-        if (predicate != null) {
-            return this.userAccountRepository.findAll(predicate, pageable);
-        }
-        return this.userAccountRepository.findAll(pageable);
+    public Page<UserAccount> page(Pageable pageable) {
+        return this.userAccountService.findAll(pageable);
     }
 
     /**
@@ -88,7 +86,7 @@ public class UserAccountController {
     @GetMapping("{id}")
     public ResponseEntity<UserAccount> get(@PathVariable("id") String id) {
         // Get the optional holder
-        Optional<UserAccount> optObject = this.userAccountRepository.findById(id);
+        Optional<UserAccount> optObject = this.userAccountService.findById(id);
 
         // Verify if the holder contains a value
         if (optObject.isPresent()) {
@@ -135,7 +133,7 @@ public class UserAccountController {
         }
 
         // Save the user account
-        this.userAccountRepository.save(object);
+        this.userAccountService.save(object);
 
         // Return the user account
         return new ResponseEntity<>(object, HttpStatus.CREATED);
@@ -154,7 +152,7 @@ public class UserAccountController {
     public ResponseEntity<UserAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
-        Optional<UserAccount> optional = this.userAccountRepository.findById(id);
+        Optional<UserAccount> optional = this.userAccountService.findById(id);
 
         // Verify if the holder contains a value
         if ( optional.isPresent() ) {
@@ -188,7 +186,7 @@ public class UserAccountController {
             }
 
             // Save the user account
-            this.userAccountRepository.save(object);
+            this.userAccountService.save(object);
 
             // Return the user account
             return new ResponseEntity<>(object, HttpStatus.OK);
@@ -208,7 +206,7 @@ public class UserAccountController {
     public ResponseEntity<UserAccount> delete(@PathVariable("id") String id) {
 
         // Delete the user account by it's id
-        this.userAccountRepository.deleteById(id);
+        this.userAccountService.deleteById(id);
 
         // Return ok
         return new ResponseEntity<>(HttpStatus.OK);
