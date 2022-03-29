@@ -16,8 +16,15 @@
 
         <div class="grid grid-cols-12 gap-2 py-2">
 
+            <mat-form-field class="col-span-12" appearance="fill">
+                <input matInput name="alias" #aliasForm="ngModel" [(ngModel)]="userAccount.alias" required placeholder="User account alias (searchable)" autocomplete="none" cdkFocusInitial>
+                <mat-error *ngIf="aliasForm.hasError('required')">
+                    Field is required
+                </mat-error>
+            </mat-form-field>
+
             <mat-form-field class="col-span-12 md:col-span-6" appearance="fill">
-                <input matInput name="username" #usernameForm="ngModel" [(ngModel)]="userAccount.username" required placeholder="User name" autocomplete="none" cdkFocusInitial>
+                <input matInput name="username" #usernameForm="ngModel" [(ngModel)]="userAccount.username" required placeholder="User name" autocomplete="none">
                 <mat-error *ngIf="usernameForm.hasError('required')">
                     Field is required
                 </mat-error>
@@ -45,7 +52,7 @@
             <div class="col-span-12">
                 <mat-checkbox name="activado" [(ngModel)]="userAccount.enabled">Enable user account</mat-checkbox>
             </div>
-            
+
         </div>
 
     </mat-dialog-content>

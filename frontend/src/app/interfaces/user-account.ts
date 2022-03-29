@@ -2,6 +2,7 @@ import { Authority } from "./authority";
 
 export interface UserAccount {
     id: string;
+    alias: string;
     authorities: Authority[];
     password: string;
     username: string;
