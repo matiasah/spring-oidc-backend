@@ -4,13 +4,13 @@
 
         <div class="w-full flex justify-between">
             <h1 class="title font-bold">User Accounts</h1>
-    
+
             <button mat-mini-fab color="accent" class="col-span-1" matTooltip="Create user account" (click)="createEntry()">
                 <mat-icon>add</mat-icon>
             </button>
-    
+
         </div>
-    
+
         <div *ngIf="isLoading | async" class="loading-shade">
             <mat-spinner></mat-spinner>
         </div>
@@ -21,14 +21,8 @@
         </div>
 
         <div class="grid grid-cols grid-cols-12 gap-4">
-            <mat-form-field class="col-span-12 md:col-span-4" appearance="fill">
-                <input matInput name="username" [(ngModel)]="usernameSearch" placeholder="User name">
-            </mat-form-field>
-            <mat-form-field class="col-span-12 md:col-span-4" appearance="fill">
-                <input matInput name="firstName" [(ngModel)]="firstNameSearch" placeholder="First name">
-            </mat-form-field>
-            <mat-form-field class="col-span-12 md:col-span-4" appearance="fill">
-                <input matInput name="lastName" [(ngModel)]="lastNameSearch" placeholder="Last name">
+            <mat-form-field class="col-span-12" appearance="fill">
+                <input matInput name="alias" [(ngModel)]="aliasSearch" placeholder="User account alias">
             </mat-form-field>
         </div>
 
@@ -46,6 +40,16 @@
                 </mat-cell>
             </ng-container>
 
+            <!-- User alias -->
+            <ng-container matColumnDef="alias">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Alias
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+                    {{ userAccount.alias }}
+                </mat-cell>
+            </ng-container>
+
             <!-- User name -->
             <ng-container matColumnDef="username">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -53,26 +57,6 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
                     {{ userAccount.username }}
-                </mat-cell>
-            </ng-container>
-
-            <!-- First name -->
-            <ng-container matColumnDef="firstName">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    First name
-                </mat-header-cell>
-                <mat-cell *matCellDef="let userAccount">
-                    {{ userAccount.firstName }}
-                </mat-cell>
-            </ng-container>
-
-            <!-- Last name -->
-            <ng-container matColumnDef="lastName">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Last name
-                </mat-header-cell>
-                <mat-cell *matCellDef="let userAccount">
-                    {{ userAccount.lastName }}
                 </mat-cell>
             </ng-container>
 

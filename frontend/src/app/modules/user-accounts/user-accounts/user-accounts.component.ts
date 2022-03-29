@@ -22,9 +22,8 @@ export class UserAccountsComponent implements OnInit {
     // Datatable columns
     public displayedColumns: string[] = [
         'id',
+        'alias',
         'username',
-        'firstName',
-        'lastName',
         'enabled',
         'options'
     ];
@@ -51,9 +50,7 @@ export class UserAccountsComponent implements OnInit {
     public form!: NgForm;
 
     // Search input
-    public usernameSearch: string = '';
-    public firstNameSearch: string = '';
-    public lastNameSearch: string = '';
+    public aliasSearch: string = '';
 
     public constructor(
         private userAccountService: UserAccountService,
