@@ -50,7 +50,7 @@ export class UserAccountsComponent implements OnInit {
     public form!: NgForm;
 
     // Search input
-    public aliasSearch: string = '';
+    public search: string = '';
 
     public constructor(
         private userAccountService: UserAccountService,

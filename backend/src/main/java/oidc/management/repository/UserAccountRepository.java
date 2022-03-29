@@ -3,6 +3,8 @@ package oidc.management.repository;
 import java.util.Optional;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -30,5 +32,14 @@ public interface UserAccountRepository extends MongoRepository<UserAccount, Stri
         bindings.bind(String.class).first((StringPath path, String value) -> path.containsIgnoreCase(value));
         bindings.excluding(QUserAccount.userAccount.password);
     }
-    
+
+    /**
+     * Finds users whose alias contains the given search term.
+     *
+     * @param search The search term.
+     * @param pageable The pageable object.
+     * @return A page of users whose alias contains the given search term.
+     */
+    public Page<UserAccount> findByAliasContaining(String search, Pageable pageable);
+
 }

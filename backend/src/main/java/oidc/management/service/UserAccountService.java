@@ -30,7 +30,7 @@ public interface UserAccountService {
      * @param pageable Pageable object.
      * @return Page of {@link UserAccount}s.
      */
-    public Page<UserAccount> findAll(Pageable pageable);
+    public Page<UserAccount> findAll(Pageable pageable, String search);
 
     /**
      * Find a {@link UserAccount} by its id.
