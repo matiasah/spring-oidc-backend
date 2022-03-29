@@ -20,11 +20,11 @@
             <span class="mat-h4">Search user account</span>
         </div>
 
-        <div class="grid grid-cols grid-cols-12 gap-4">
-            <mat-form-field class="col-span-12" appearance="fill">
+        <form #form="ngForm" class="w-full" autocomplete="off">
+            <mat-form-field class="w-full" appearance="fill">
                 <input matInput name="alias" [(ngModel)]="aliasSearch" placeholder="User account alias">
             </mat-form-field>
-        </div>
+        </form>
 
         <mat-divider></mat-divider>
 
