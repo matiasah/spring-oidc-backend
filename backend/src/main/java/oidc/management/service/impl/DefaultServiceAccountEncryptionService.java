@@ -2,7 +2,6 @@ package oidc.management.service.impl;
 
 import oidc.management.model.ServiceAccount;
 import oidc.management.service.ServiceAccountEncryptionService;
-import org.springframework.stereotype.Service;
 
 /**
  * Default implementation of {@link ServiceAccountEncryptionService}.
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
  * @author Matías Hermosilla
  * @since 27-03-2022
  */
-@Service
 public class DefaultServiceAccountEncryptionService implements ServiceAccountEncryptionService {
 
     @Override
