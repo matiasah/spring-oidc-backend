@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -69,6 +70,7 @@ public class ServiceAccount {
 
     private Set<String> redirectUris;
 
+    @DBRef
     private Set<Scope> scopes;
 
     /**
@@ -88,6 +90,7 @@ public class ServiceAccount {
     /**
      * Authorities
      */
+    @DBRef
     private List<Authority> authorities;
 
     @Transient
