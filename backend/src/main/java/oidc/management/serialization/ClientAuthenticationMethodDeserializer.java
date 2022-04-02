@@ -3,6 +3,7 @@ package oidc.management.serialization;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -12,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Deserializes {@link ClientAuthenticationMethod} from JSON string.
+ * Deserializes a {@link Set} of {@link ClientAuthenticationMethod}s from a JSON array.
  *
  * @author Matías Hermosilla
  * @since 02-04-2022
@@ -20,11 +21,7 @@ import java.util.Set;
 public class ClientAuthenticationMethodDeserializer extends StdDeserializer<Set<ClientAuthenticationMethod>> {
 
     public ClientAuthenticationMethodDeserializer() {
-        this(null);
-    }
-
-    protected ClientAuthenticationMethodDeserializer(Class<?> vc) {
-        super(vc);
+        super(new ObjectMapper().getTypeFactory().constructCollectionType(Set.class, ClientAuthenticationMethod.class));
     }
 
     @Override
@@ -35,43 +32,52 @@ public class ClientAuthenticationMethodDeserializer extends StdDeserializer<Set<
         // Check if the content is an array
         if (node.isArray()) {
 
-            // Creaate a set to store the values
+            // Create a set to store the values
             Set<ClientAuthenticationMethod> methods = new HashSet<>(node.size());
 
             // Iterate over the array
             for (JsonNode element : node) {
 
-                // Get the value
-                String value = element.asText();
+                // Check if the element is a string
+                if (element.isTextual()) {
 
-                // Check if the value is null
-                if (value == null) {
+                    // Get the value
+                    String value = element.asText();
 
-                    // Throw an exception
-                    throw new InvalidFormatException(jp, "The value of the json object cannot be null", null, ClientAuthenticationMethod.class);
-                }
+                    // Check if the value is null
+                    if (value == null) {
 
-                // Check if the value is equal to the value of the client authentication method
-                if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue())) {
+                        // Throw an exception
+                        throw new InvalidFormatException(jp, "The value of the json object cannot be null", null, ClientAuthenticationMethod.class);
+                    }
 
-                    // Add the client authentication method to the set
-                    methods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
-                } else if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue())) {
+                    // Check if the value is equal to the value of the client authentication method
+                    if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue())) {
 
-                    // Add the client authentication method to the set
-                    methods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
-                } else if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_JWT.getValue())) {
+                        // Add the client authentication method to the set
+                        methods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
+                    } else if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue())) {
 
-                    // Add the client authentication method to the set
-                    methods.add(ClientAuthenticationMethod.CLIENT_SECRET_JWT);
-                } else if (value.equals(ClientAuthenticationMethod.PRIVATE_KEY_JWT.getValue())) {
+                        // Add the client authentication method to the set
+                        methods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
+                    } else if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_JWT.getValue())) {
 
-                    // Add the client authentication method to the set
-                    methods.add(ClientAuthenticationMethod.PRIVATE_KEY_JWT);
-                } else if (value.equals(ClientAuthenticationMethod.NONE.getValue())) {
+                        // Add the client authentication method to the set
+                        methods.add(ClientAuthenticationMethod.CLIENT_SECRET_JWT);
+                    } else if (value.equals(ClientAuthenticationMethod.PRIVATE_KEY_JWT.getValue())) {
 
-                    // Add the client authentication method to the set
-                    methods.add(ClientAuthenticationMethod.NONE);
+                        // Add the client authentication method to the set
+                        methods.add(ClientAuthenticationMethod.PRIVATE_KEY_JWT);
+                    } else if (value.equals(ClientAuthenticationMethod.NONE.getValue())) {
+
+                        // Add the client authentication method to the set
+                        methods.add(ClientAuthenticationMethod.NONE);
+                    } else {
+
+                        // Throw an exception
+                        throw new InvalidFormatException(jp, "The value of the json object is not valid", null, ClientAuthenticationMethod.class);
+                    }
+
                 } else {
 
                     // Throw an exception

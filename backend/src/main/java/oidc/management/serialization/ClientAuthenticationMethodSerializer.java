@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import java.util.Set;
 
 /**
- * Serializes {@link ClientAuthenticationMethod} to string JSON representation.
+ * Serializes a {@link Set} of {@link ClientAuthenticationMethod}s to a JSON string.
  *
  * @author Matías Hermosilla
  * @since 02-04-2022
