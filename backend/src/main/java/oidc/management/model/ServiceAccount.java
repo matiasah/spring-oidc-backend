@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import oidc.management.serialization.AuthorizationGrantTypeDeserializer;
+import oidc.management.serialization.AuthorizationGrantTypeSerializer;
 import oidc.management.serialization.ClientAuthenticationMethodDeserializer;
 import oidc.management.serialization.ClientAuthenticationMethodSerializer;
 import org.springframework.data.annotation.CreatedDate;
@@ -72,6 +74,8 @@ public class ServiceAccount {
     @JsonDeserialize(using = ClientAuthenticationMethodDeserializer.class)
     private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
 
+    @JsonSerialize(using = AuthorizationGrantTypeSerializer.class)
+    @JsonDeserialize(using = AuthorizationGrantTypeDeserializer.class)
     private Set<AuthorizationGrantType> authorizationGrantTypes;
 
     private Set<String> redirectUris;
