@@ -109,6 +109,7 @@ public class ServiceAccount {
      **/
     private Set<String> tags;
 
+    @JsonIgnore
     @Transient
     public ClientSettings getClientSettings() {
         return ClientSettings.builder()
@@ -117,12 +118,14 @@ public class ServiceAccount {
                 .build();
     }
 
+    @JsonIgnore
     @Transient
     public void setClientSettings(ClientSettings clientSettings) {
         this.setRequireAuthenticationConsent(clientSettings.isRequireAuthorizationConsent());
         this.setRequireProofKey(clientSettings.isRequireProofKey());
     }
 
+    @JsonIgnore
     @Transient
     public TokenSettings getTokenSettings() {
         return TokenSettings.builder()
@@ -133,6 +136,7 @@ public class ServiceAccount {
                 .build();
     }
 
+    @JsonIgnore
     @Transient
     public void setTokenSettings(TokenSettings tokenSettings) {
         this.setAccessTokenTimeToLive(tokenSettings.getAccessTokenTimeToLive());
