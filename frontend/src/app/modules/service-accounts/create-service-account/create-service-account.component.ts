@@ -23,7 +23,7 @@ export class CreateServiceAccountComponent implements OnInit {
     public creating = false;
 
     // Form reference
-    @ViewChild('form', { static: true })
+    @ViewChild('scopeForm', { static: true })
     public form!: NgForm;
 
     // Client authentication methods
