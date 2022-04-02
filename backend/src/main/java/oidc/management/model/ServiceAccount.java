@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import oidc.management.serialization.ClientAuthenticationMethodDeserializer;
+import oidc.management.serialization.ClientAuthenticationMethodSerializer;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -64,6 +68,8 @@ public class ServiceAccount {
 
     private String clientDescription;
 
+    @JsonSerialize(using = ClientAuthenticationMethodSerializer.class)
+    @JsonDeserialize(using = ClientAuthenticationMethodDeserializer.class)
     private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
 
     private Set<AuthorizationGrantType> authorizationGrantTypes;
