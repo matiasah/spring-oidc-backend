@@ -8,6 +8,7 @@ import { CreateUserAccountComponent } from './create-user-account/create-user-ac
 import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
 import { DeleteUserAccountComponent } from './delete-user-account/delete-user-account.component';
 import { InputAuthoritiesModule } from '../input-authorities/input-authorities.module';
+import {InputTagsModule} from "../input-tags/input-tags.module";
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { InputAuthoritiesModule } from '../input-authorities/input-authorities.m
         FormsModule,
         ReactiveFormsModule,
         InputAuthoritiesModule,
+        InputTagsModule,
         UserAccountsRoutingModule
     ]
 })

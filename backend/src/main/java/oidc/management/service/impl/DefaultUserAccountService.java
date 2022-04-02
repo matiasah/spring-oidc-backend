@@ -45,7 +45,7 @@ public class DefaultUserAccountService implements UserAccountService {
         if (search != null && !search.isEmpty()) {
 
             // Find user accounts by alias match
-            return this.userAccountRepository.findByAliasContaining(search, pageable)
+            return this.userAccountRepository.findByTagsContainingIgnoreCase(search, pageable)
                     .map(
                             // Decrypt user accounts
                             userAccount -> this.userAccountEncryptionService.decrypt(userAccount)

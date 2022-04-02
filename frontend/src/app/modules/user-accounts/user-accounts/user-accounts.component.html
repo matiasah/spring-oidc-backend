@@ -22,7 +22,7 @@
 
         <form #form="ngForm" class="w-full" autocomplete="off">
             <mat-form-field class="w-full" appearance="fill">
-                <input matInput name="search" [(ngModel)]="search" placeholder="User account alias">
+                <input matInput name="search" [(ngModel)]="search" placeholder="Search by tags">
             </mat-form-field>
         </form>
 
@@ -40,16 +40,6 @@
                 </mat-cell>
             </ng-container>
 
-            <!-- User alias -->
-            <ng-container matColumnDef="alias">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Alias
-                </mat-header-cell>
-                <mat-cell *matCellDef="let userAccount">
-                    {{ userAccount.alias }}
-                </mat-cell>
-            </ng-container>
-
             <!-- User name -->
             <ng-container matColumnDef="username">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -57,6 +47,26 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
                     {{ userAccount.username }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Tags -->
+            <ng-container matColumnDef="tags">
+                <mat-header-cell *matHeaderCellDef>
+                    Tags
+                </mat-header-cell>
+                <mat-cell *matCellDef="let userAccount">
+
+                    <!-- Chip list -->
+                    <mat-chip-list>
+
+                        <!-- For every tag -->
+                        <mat-chip *ngFor="let tag of userAccount.tags">
+                            <span>{{ tag }}</span>
+                        </mat-chip>
+
+                    </mat-chip-list>
+
                 </mat-cell>
             </ng-container>
 

@@ -22,8 +22,8 @@ export class UserAccountsComponent implements OnInit {
     // Datatable columns
     public displayedColumns: string[] = [
         'id',
-        'alias',
         'username',
+        'tags',
         'enabled',
         'options'
     ];

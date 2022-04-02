@@ -2,6 +2,8 @@ package oidc.management.model;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,12 +41,6 @@ public class UserAccount implements UserDetails {
     @Id
     private String id;
 
-    /**
-     * The user's alias.
-     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING USER ACCOUNTS.
-     **/
-    private String alias;
-
     @DBRef
     private List<Authority> authorities;
 
@@ -64,6 +60,12 @@ public class UserAccount implements UserDetails {
     private String firstName;
 
     private String lastName;
+
+    /**
+     * The user's tags
+     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING USER ACCOUNTS.
+     **/
+    private Set<String> tags;
 
     @CreatedDate
     private Instant createdAt;

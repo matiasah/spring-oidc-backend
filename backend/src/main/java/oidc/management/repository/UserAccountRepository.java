@@ -27,10 +27,10 @@ public interface UserAccountRepository extends MongoRepository<UserAccount, Stri
     /**
      * Finds users whose alias contains the given search term.
      *
-     * @param search The search term.
+     * @param tag The search term.
      * @param pageable The pageable object.
      * @return A page of users whose alias contains the given search term.
      */
-    public Page<UserAccount> findByAliasContaining(String search, Pageable pageable);
+    public Page<UserAccount> findByTagsContainingIgnoreCase(String tag, Pageable pageable);
 
 }
