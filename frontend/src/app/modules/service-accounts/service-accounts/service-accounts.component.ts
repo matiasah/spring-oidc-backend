@@ -24,6 +24,7 @@ export class ServiceAccountsComponent implements OnInit {
         'id',
         'clientName',
         'clientDescription',
+        'tags',
         'options'
     ];
 
@@ -49,8 +50,7 @@ export class ServiceAccountsComponent implements OnInit {
     public form!: NgForm;
 
     // Search input
-    public clientNameSearch: string = '';
-    public clientDescriptionSearch: string = '';
+    public search: string = '';
 
     public constructor(
         private serviceAccountService: ServiceAccountService,

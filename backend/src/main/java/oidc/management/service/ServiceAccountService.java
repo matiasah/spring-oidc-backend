@@ -28,9 +28,10 @@ public interface ServiceAccountService {
      * Find a page of Service Accounts.
      *
      * @param pageable Pageable object.
+     * @param search The search string.
      * @return A page of Service Accounts.
      */
-    public Page<ServiceAccount> findAll(Pageable pageable);
+    public Page<ServiceAccount> findAll(Pageable pageable, String search);
 
     /**
      * Finds a {@link ServiceAccount} by its {@link String} clientId.

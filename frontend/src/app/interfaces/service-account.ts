@@ -20,4 +20,5 @@ export interface ServiceAccount {
     clientSettings: ClientSettings;
     tokenSettings: TokenSettings;
     authorities: Authority[];
+    tags: string[];
 }

@@ -39,9 +39,17 @@ public class DefaultServiceAccountService implements ServiceAccountService {
     }
 
     @Override
-    public Page<ServiceAccount> findAll(Pageable pageable) {
-        // Find all Service Accounts
-        return serviceAccountRepository.findAll(pageable)
+    public Page<ServiceAccount> findAll(Pageable pageable, String search) {
+
+        // If there is no search term or it is empty
+        if (search == null || search.isEmpty()) {
+
+            // Return all Service Accounts
+            return serviceAccountRepository.findAll(pageable);
+        }
+
+        // Return all Service Accounts that match the search term
+        return serviceAccountRepository.findByTagsContainingIgnoreCase(search, pageable)
                 .map(
                         // Decrypt Service Account
                         serviceAccount -> serviceAccountEncryptionService.decrypt(serviceAccount)

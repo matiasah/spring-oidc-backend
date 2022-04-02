@@ -1,14 +1,12 @@
 package oidc.management.repository;
 
 import java.util.Optional;
-import com.querydsl.core.types.dsl.NumberPath;
-import com.querydsl.core.types.dsl.StringPath;
+
+import oidc.management.model.UserAccount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
-import org.springframework.data.querydsl.binding.QuerydslBindings;
 import oidc.management.model.ServiceAccount;
-import oidc.management.model.QServiceAccount;
 
 /**
  * OIDC Service Account Repository.
@@ -16,26 +14,20 @@ import oidc.management.model.QServiceAccount;
  * @author Matías Hermosilla
  * @since 16-01-2022
  * @see MongoRepository
- * @see ServiceAccount
- * @see QServiceAccount
- * @see QuerydslPredicateExecutor
- * @see QuerydslBinderCustomizer
- * @see QuerydslBindings
  */
-public interface ServiceAccountRepository extends MongoRepository<ServiceAccount, String>, QuerydslPredicateExecutor<ServiceAccount>, QuerydslBinderCustomizer<QServiceAccount> {
+public interface ServiceAccountRepository extends MongoRepository<ServiceAccount, String> {
 
     /**
      * Finds a client by client id.
      */
     public Optional<ServiceAccount> findByClientId(String clientId);
 
-    @Override
-    public default void customize(QuerydslBindings bindings, QServiceAccount qModel) {
-        bindings.bind(qModel.id).first((path, value) -> path.eq(value));
-        bindings.bind(Long.class).first((NumberPath<Long> path, Long value) -> path.eq(value));
-        bindings.bind(Integer.class).first((NumberPath<Integer> path, Integer value) -> path.eq(value));
-        bindings.bind(String.class).first((StringPath path, String value) -> path.containsIgnoreCase(value));
-        bindings.excluding(qModel.clientSecret);
-    }
+    /**
+     * Finds service accounts whose tags contain the given search term.
+     * @param tag The search term.
+     * @param pageable The pageable object.
+     * @return A page of service accounts whose tags contain the given search term.
+     */
+    public Page<ServiceAccount> findByTagsContainingIgnoreCase(String tag, Pageable pageable);
     
 }

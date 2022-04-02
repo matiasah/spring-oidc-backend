@@ -9,6 +9,7 @@ import { EditServiceAccountComponent } from './edit-service-account/edit-service
 import { DeleteServiceAccountComponent } from './delete-service-account/delete-service-account.component';
 import { InputAuthoritiesModule } from '../input-authorities/input-authorities.module';
 import { InputScopesTableModule } from '../input-scopes-table/input-scopes-table.module';
+import {InputTagsModule} from "../input-tags/input-tags.module";
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { InputScopesTableModule } from '../input-scopes-table/input-scopes-table
         ReactiveFormsModule,
         InputAuthoritiesModule,
         InputScopesTableModule,
+        InputTagsModule,
         ServiceAccountsRoutingModule
     ]
 })

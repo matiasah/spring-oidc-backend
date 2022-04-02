@@ -41,19 +41,15 @@ public class DefaultUserAccountService implements UserAccountService {
     @Override
     public Page<UserAccount> findAll(Pageable pageable, String search) {
 
-        // If there's a search pattern
-        if (search != null && !search.isEmpty()) {
+        // If there is no search term or it is empty
+        if (search == null || search.isEmpty()) {
 
-            // Find user accounts by alias match
-            return this.userAccountRepository.findByTagsContainingIgnoreCase(search, pageable)
-                    .map(
-                            // Decrypt user accounts
-                            userAccount -> this.userAccountEncryptionService.decrypt(userAccount)
-                    );
+            // Return all user accounts
+            return this.userAccountRepository.findAll(pageable);
         }
 
-        // Find all user accounts
-        return this.userAccountRepository.findAll(pageable)
+        // Return all user accounts that match the search term
+        return this.userAccountRepository.findByTagsContainingIgnoreCase(search, pageable)
                 .map(
                         // Decrypt user accounts
                         userAccount -> this.userAccountEncryptionService.decrypt(userAccount)

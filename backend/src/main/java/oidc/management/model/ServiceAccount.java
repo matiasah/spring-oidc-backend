@@ -93,6 +93,12 @@ public class ServiceAccount {
     @DBRef
     private List<Authority> authorities;
 
+    /**
+     * The user's tags
+     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING SERVICE ACCOUNTS.
+     **/
+    private Set<String> tags;
+
     @Transient
     public ClientSettings getClientSettings() {
         return ClientSettings.builder()

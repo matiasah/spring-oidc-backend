@@ -28,6 +28,7 @@ public interface UserAccountService {
      * Find a page of @{@link UserAccount}s.
      *
      * @param pageable Pageable object.
+     * @param search Search string.
      * @return Page of {@link UserAccount}s.
      */
     public Page<UserAccount> findAll(Pageable pageable, String search);

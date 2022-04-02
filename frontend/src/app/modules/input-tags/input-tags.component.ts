@@ -35,7 +35,7 @@ export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatForm
     // Tags
     public tags: string[] = [];
 
-    // Authority name form control
+    // Tag form control
     public tagsFormControl: FormControl = new FormControl();
 
     @ViewChild('tagsInput', { read: ElementRef, static: true })
@@ -48,7 +48,7 @@ export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatForm
     public placeholder: string = '';
 
     @HostBinding('id')
-    public id: string = `input-authorities-${InputTagsComponent.NEXT_ID++}`;
+    public id: string = `input-tags-${InputTagsComponent.NEXT_ID++}`;
 
     @Input()
     public get required(): boolean { return this.requiredFlag; }
@@ -156,7 +156,7 @@ export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatForm
     public removeTag(string: string): void {
 
         // Remove string from array
-        this.tags = this.tags.filter(
+        const tags = this.tags.filter(
             (tagToRemove) => {
 
                 // If the string is not the same
@@ -164,13 +164,11 @@ export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatForm
             }
         );
 
-        // If no authorities are left
-        if (this.tags.length == 0) {
+        // Focus input
+        this.focused = true;
 
-            // Unfocus
-            this.focused = false;
-
-        }
+        // Set the tags
+        this.tags = tags;
 
         // Update changes
         this.updateChanges();
