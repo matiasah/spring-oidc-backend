@@ -1,35 +1,43 @@
-package oidc.management.jwk;
+package oidc.management.jwk.source.strategy;
 
 import com.nimbusds.jose.KeySourceException;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import oidc.management.jwk.RSAKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
- * JWKS source that returns a list of JWK for a single authorization server replica.
+ * Simple JWK source that generates a single RSA key pair at startup.
  *
  * @author Matías Hermosilla
  * @since 03-04-2022
  */
-public class SingleJWKSource implements JWKSource<SecurityContext> {
+public class SimpleJWKSource implements JWKSource<SecurityContext> {
 
+    /**
+     * RSA Key Generator used to generate the JWK.
+     */
     @Autowired
     private RSAKeyGenerator rsaKeyGenerator;
 
-    private RSAKey rsaKey;
+    /**
+     * Current JWK Set.
+     */
     private JWKSet jwkSet;
 
     @PostConstruct
     public void init() {
-        rsaKey = rsaKeyGenerator.generateRsa();
-        jwkSet = new JWKSet(rsaKey);
+        // Generate RSA key
+        JWK jwk = rsaKeyGenerator.generateRsa();
+
+        // Create JWK set
+        jwkSet = new JWKSet(jwk);
     }
 
     @Override

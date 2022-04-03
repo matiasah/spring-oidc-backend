@@ -8,4 +8,4 @@ spring:
 oidc:
   management:
     jwk:
-      strategy: single
+      strategy: simple
