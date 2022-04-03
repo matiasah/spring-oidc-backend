@@ -11,3 +11,7 @@ oidc:
       strategy: simple
       provider: simple
       schedule: 0 * * ? * *
+      cache:
+        value: ""
+        cacheManager: "concurrentMapJwkCacheManager"
+        condition: ""

@@ -5,6 +5,7 @@ import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import oidc.management.jwk.JwkProvider;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -32,6 +33,16 @@ public class CachingJWKSourceStrategy implements JWKSource<SecurityContext> {
     }
 
     public List<JWK> get(final JWKSelector jwkSelector, final SecurityContext context) {
+        // Return list of JWKs
+        return this.getJwks();
+    }
+
+    @Cacheable(
+            value = "${oidc.management.jwk.cache.value}",
+            cacheManager = "${oidc.management.jwk.cache.cacheManager}",
+            condition = "${oidc.management.jwk.cache.condition}"
+    )
+    public List<JWK> getJwks() {
         // Return list of JWKs
         return this.jwkProvider.getJwks();
     }
