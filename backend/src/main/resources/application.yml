@@ -10,3 +10,4 @@ oidc:
     jwk:
       strategy: simple
       provider: simple
+      schedule: 0 * * ? * *
