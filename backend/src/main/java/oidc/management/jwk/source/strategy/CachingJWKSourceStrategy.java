@@ -22,11 +22,6 @@ public class CachingJWKSourceStrategy implements JWKSource<SecurityContext> {
     private JwkProvider jwkProvider;
 
     /**
-     * Current list of JWKs
-     */
-    private List<JWK> jwks;
-
-    /**
      * Constructor for the class, receives a JwkProvider.
      *
      * @param jwkProvider
