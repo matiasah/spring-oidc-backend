@@ -5,6 +5,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import oidc.management.jwk.JwkProvider;
 import oidc.management.jwk.provider.InMemoryChangingJwkProvider;
 import oidc.management.jwk.provider.SimpleJwkProvider;
+import oidc.management.jwk.source.strategy.CachingJWKSourceStrategy;
 import oidc.management.jwk.source.strategy.ScheduledJWKSourceStrategy;
 import oidc.management.jwk.source.strategy.SimpleJWKSourceStrategy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,6 +25,12 @@ public class JwkConfig {
     @ConditionalOnProperty(name = "oidc.management.jwk.strategy", havingValue = "scheduled")
     public JWKSource<SecurityContext> scheduledJwkSourceStrategy(JwkProvider jwkProvider) {
         return new ScheduledJWKSourceStrategy(jwkProvider);
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "oidc.management.jwk.strategy", havingValue = "caching")
+    public JWKSource<SecurityContext> cachingJwkSourceStrategy(JwkProvider jwkProvider) {
+        return new CachingJWKSourceStrategy(jwkProvider);
     }
 
     @Bean
