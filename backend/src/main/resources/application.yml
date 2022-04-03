@@ -4,3 +4,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${oidc.management.url}/oauth2/jwks
+
+oidc:
+  management:
+    jwk:
+      strategy: single
