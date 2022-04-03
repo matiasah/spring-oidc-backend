@@ -12,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
@@ -51,6 +54,8 @@ public class UserAccountController {
      * 
      * @return List of user accounts.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_user_account')")
     @GetMapping
     public List<UserAccount> index() {
         // Return list of user accounts
@@ -62,8 +67,10 @@ public class UserAccountController {
      * 
      * @return Page of user accounts.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_user_account')")
     @GetMapping("page")
-    public Page<UserAccount> page(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
+    public Page<UserAccount> page(Authentication authentication, Pageable pageable, @RequestParam(value = "search", required = false) String search) {
         return this.userAccountService.findAll(pageable, search);
     }
 
