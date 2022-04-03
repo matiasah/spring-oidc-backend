@@ -1,9 +1,6 @@
 package oidc.management.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
@@ -132,6 +129,7 @@ public class DefaultServiceAccountSeeder {
                         .stream().collect(Collectors.toSet()))
                 .redirectUris(serviceAccountProperties.getRedirectUris())
                 .scopes(scopes.stream().collect(Collectors.toSet()))
+                .tags(new HashSet<>(Arrays.asList("default")))
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .tokenSettings(TokenSettings.builder().build())
                 .build();

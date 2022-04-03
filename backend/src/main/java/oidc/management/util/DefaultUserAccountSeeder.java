@@ -1,6 +1,7 @@
 package oidc.management.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 
@@ -73,6 +74,7 @@ public class DefaultUserAccountSeeder {
                         .credentialsNonExpired(true)
                         .enabled(true)
                         .authorities(Arrays.asList(optAuthority.get()))
+                        .tags(new HashSet<>(Arrays.asList("default")))
                         .build();
 
                 // Save the user account
