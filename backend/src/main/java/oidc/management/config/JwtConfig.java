@@ -2,7 +2,7 @@ package oidc.management.config;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import oidc.management.jwk.source.strategy.FirstJWKSource;
+import oidc.management.jwk.source.strategy.FirstJWKSourceStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -49,7 +49,7 @@ public class JwtConfig {
     @Bean
     public JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwkSource) {
         // Create a JWK source that uses the first JWK found in the JWK Set.
-        JWKSource<SecurityContext> firstJwkSource = new FirstJWKSource(jwkSource);
+        JWKSource<SecurityContext> firstJwkSource = new FirstJWKSourceStrategy(jwkSource);
 
         // Create a JWT encoder that uses the first JWK found in the JWK Set.
         return new NimbusJwsEncoder(firstJwkSource);

@@ -9,3 +9,4 @@ oidc:
   management:
     jwk:
       strategy: simple
+      provider: simple

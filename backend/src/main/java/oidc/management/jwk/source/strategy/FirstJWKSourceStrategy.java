@@ -15,11 +15,11 @@ import java.util.List;
  * @author Matías Hermosilla
  * @since 03-04-2022
  */
-public class FirstJWKSource implements JWKSource<SecurityContext> {
+public class FirstJWKSourceStrategy implements JWKSource<SecurityContext> {
 
     private JWKSource<SecurityContext> jwkSource;
 
-    public FirstJWKSource(JWKSource<SecurityContext> jwkSource) {
+    public FirstJWKSourceStrategy(JWKSource<SecurityContext> jwkSource) {
         this.jwkSource = jwkSource;
     }
 
