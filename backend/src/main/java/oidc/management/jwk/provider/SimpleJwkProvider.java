@@ -1,6 +1,7 @@
 package oidc.management.jwk.provider;
 
 import com.nimbusds.jose.jwk.JWK;
+import com.nimbusds.jose.jwk.RSAKey;
 import oidc.management.jwk.JwkProvider;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,17 @@ public class SimpleJwkProvider implements JwkProvider {
     /**
      * The current JWK.
      */
-    private JWK jwk;
+    private RSAKey rsaKey;
 
     @PostConstruct
     public void init() {
         // Generate initial RSA key
-        jwk = rsaKeyGenerator.generateRsa();
+        rsaKey = rsaKeyGenerator.generateRsa();
     }
 
     @Override
     public List<JWK> getJwks() {
-        return Arrays.asList(jwk);
+        return Arrays.asList(rsaKey);
     }
 
 }
