@@ -27,14 +27,26 @@ import java.util.Map;
 @Log4j2
 public class VaultJwkProvider implements JwkProvider {
 
+    /**
+     * Path to the JWKs secret in Vault.
+     */
     @Value("${oidc.management.jwk.vault.path}")
     private String path;
 
+    /**
+     * Vault operations bean to retrieve the JWKs.
+     */
     @Autowired
     private VaultOperations vaultOperations;
 
+    /**
+     * Vault key value operations bean to retrieve the JWKs.
+     */
     private VaultKeyValueOperations vaultKeyValueOperations;
 
+    /**
+     * Initializes the VaultKeyValueOperations bean.
+     */
     @PostConstruct
     public void init() {
         // Get KV1 client

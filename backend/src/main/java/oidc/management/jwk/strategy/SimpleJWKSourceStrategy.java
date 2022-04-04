@@ -1,4 +1,4 @@
-package oidc.management.jwk.source.strategy;
+package oidc.management.jwk.strategy;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSelector;
@@ -31,6 +31,7 @@ public class SimpleJWKSourceStrategy implements JWKSource<SecurityContext> {
         this.jwkProvider = jwkProvider;
     }
 
+    @Override
     public List<JWK> get(final JWKSelector jwkSelector, final SecurityContext context) {
         // Return list of JWKs
         return this.jwkProvider.getJwks();

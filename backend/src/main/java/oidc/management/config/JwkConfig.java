@@ -3,12 +3,12 @@ package oidc.management.config;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import oidc.management.jwk.JwkProvider;
-import oidc.management.jwk.provider.InMemoryChangingJwkProvider;
+import oidc.management.jwk.provider.RenewingJwkProvider;
 import oidc.management.jwk.provider.SimpleJwkProvider;
 import oidc.management.jwk.provider.VaultJwkProvider;
-import oidc.management.jwk.source.strategy.CachingJWKSourceStrategy;
-import oidc.management.jwk.source.strategy.ScheduledJWKSourceStrategy;
-import oidc.management.jwk.source.strategy.SimpleJWKSourceStrategy;
+import oidc.management.jwk.strategy.CachingJWKSourceStrategy;
+import oidc.management.jwk.strategy.ScheduledJWKSourceStrategy;
+import oidc.management.jwk.strategy.SimpleJWKSourceStrategy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +43,7 @@ public class JwkConfig {
     @Bean
     @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "inmemory-changing")
     public JwkProvider inMemoryChangingJwkProvider() {
-        return new InMemoryChangingJwkProvider();
+        return new RenewingJwkProvider();
     }
 
     @Bean

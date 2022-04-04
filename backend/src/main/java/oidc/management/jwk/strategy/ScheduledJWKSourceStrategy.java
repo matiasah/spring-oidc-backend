@@ -1,4 +1,4 @@
-package oidc.management.jwk.source.strategy;
+package oidc.management.jwk.strategy;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSelector;
@@ -42,12 +42,13 @@ public class ScheduledJWKSourceStrategy implements JWKSource<SecurityContext> {
         this.jwks = jwkProvider.getJwks();
     }
 
+    @Override
     public List<JWK> get(final JWKSelector jwkSelector, final SecurityContext context) {
         // Return list of JWKs
         return jwks;
     }
 
-    @Scheduled(cron = "${oidc.management.jwk.schedule}")
+    @Scheduled(cron = "${oidc.management.jwk.scheduled.cron}")
     public void updateJwks() {
         // Log the update
         log.info("Updating JWKs");

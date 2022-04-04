@@ -2,7 +2,7 @@ package oidc.management.config;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import oidc.management.jwk.source.strategy.FirstJWKSourceStrategy;
+import oidc.management.jwk.strategy.FirstJWKSourceStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtEncoder;

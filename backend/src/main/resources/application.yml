@@ -10,7 +10,11 @@ oidc:
     jwk:
       strategy: simple
       provider: simple
-      schedule: 0 * * ? * *
+      scheduled:
+        cron: "0 * * ? * *"
+      renewing:
+        cron: "0 0 0/2 ? * *"
+        limit: 12
       cache:
         value: ""
         cacheManager: "concurrentMapJwkCacheManager"

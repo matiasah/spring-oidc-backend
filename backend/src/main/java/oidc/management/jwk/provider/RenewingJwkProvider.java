@@ -5,9 +5,11 @@ import com.nimbusds.jose.jwk.RSAKey;
 import oidc.management.jwk.JwkProvider;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,7 +18,13 @@ import java.util.List;
  * @author Matías Hermosilla
  * @since 03-04-2022
  */
-public class InMemoryChangingJwkProvider implements JwkProvider {
+public class RenewingJwkProvider implements JwkProvider {
+
+    /**
+     * Maximum number of JWKs to be generated.
+     */
+    @Value("${oidc.management.jwk.renewing.limit}")
+    private int limit;
 
     /**
      * RSA Key Generator used to generate the JWK.
@@ -27,7 +35,7 @@ public class InMemoryChangingJwkProvider implements JwkProvider {
     /**
      * List of current JWKs.
      */
-    private List<JWK> jwks = new ArrayList<>();
+    private final List<JWK> jwks = new LinkedList<>();
 
     @PostConstruct
     public void init() {
@@ -41,6 +49,22 @@ public class InMemoryChangingJwkProvider implements JwkProvider {
     @Override
     public List<JWK> getJwks() {
         return jwks;
+    }
+
+    @Scheduled(cron = "${oidc.management.jwk.renewing.cron}")
+    public void renew() {
+        // Generate new RSA key
+        RSAKey rsaKey = rsaKeyGenerator.generateRsa();
+
+        // If the list is full
+        if (jwks.size() >= limit) {
+
+            // Remove the last element
+            jwks.remove(jwks.size() - 1);
+        }
+
+        // Add the new key at the beginning of the list
+        jwks.add(0, rsaKey);
     }
 
 }

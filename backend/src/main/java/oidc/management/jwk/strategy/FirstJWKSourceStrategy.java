@@ -1,4 +1,4 @@
-package oidc.management.jwk.source.strategy;
+package oidc.management.jwk.strategy;
 
 import com.nimbusds.jose.KeySourceException;
 import com.nimbusds.jose.jwk.JWK;
