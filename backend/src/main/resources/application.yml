@@ -21,3 +21,5 @@ oidc:
         condition: ""
       vault:
         path: "jwks"
+      mongo:
+        collection: "jwks"

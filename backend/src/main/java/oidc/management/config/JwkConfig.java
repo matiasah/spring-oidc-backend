@@ -3,6 +3,7 @@ package oidc.management.config;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import oidc.management.jwk.JwkProvider;
+import oidc.management.jwk.provider.MongoJwkProvider;
 import oidc.management.jwk.provider.RenewingJwkProvider;
 import oidc.management.jwk.provider.SimpleJwkProvider;
 import oidc.management.jwk.provider.VaultJwkProvider;
@@ -41,7 +42,7 @@ public class JwkConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "inmemory-changing")
+    @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "renewing")
     public JwkProvider inMemoryChangingJwkProvider() {
         return new RenewingJwkProvider();
     }
@@ -50,6 +51,12 @@ public class JwkConfig {
     @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "vault")
     public JwkProvider vaultJwkProvider() {
         return new VaultJwkProvider();
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "mongodb")
+    public JwkProvider mongoJwkProvider() {
+        return new MongoJwkProvider();
     }
 
 }
