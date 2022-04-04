@@ -5,6 +5,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import oidc.management.jwk.JwkProvider;
 import oidc.management.jwk.provider.InMemoryChangingJwkProvider;
 import oidc.management.jwk.provider.SimpleJwkProvider;
+import oidc.management.jwk.provider.VaultJwkProvider;
 import oidc.management.jwk.source.strategy.CachingJWKSourceStrategy;
 import oidc.management.jwk.source.strategy.ScheduledJWKSourceStrategy;
 import oidc.management.jwk.source.strategy.SimpleJWKSourceStrategy;
@@ -43,6 +44,12 @@ public class JwkConfig {
     @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "inmemory-changing")
     public JwkProvider inMemoryChangingJwkProvider() {
         return new InMemoryChangingJwkProvider();
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "vault")
+    public JwkProvider vaultJwkProvider() {
+        return new VaultJwkProvider();
     }
 
 }
