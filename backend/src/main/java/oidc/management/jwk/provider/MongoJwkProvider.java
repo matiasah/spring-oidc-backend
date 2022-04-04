@@ -1,12 +1,15 @@
 package oidc.management.jwk.provider;
 
+import com.mongodb.client.FindIterable;
 import com.nimbusds.jose.jwk.JWK;
+import lombok.extern.log4j.Log4j2;
 import oidc.management.jwk.JwkProvider;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +18,7 @@ import java.util.List;
  * @author Matías Hermosilla
  * @since 03-04-2022
  */
+@Log4j2
 public class MongoJwkProvider implements JwkProvider {
 
     /**
@@ -31,7 +35,31 @@ public class MongoJwkProvider implements JwkProvider {
 
     @Override
     public List<JWK> getJwks() {
-        return mongoTemplate.findAll(JWK.class, collection);
+        // Initialize a list of JWKs
+        List<JWK> jwks = new ArrayList<>();
+
+        // Find all documents in the collection
+        FindIterable<Document> iterable = mongoTemplate.getCollection(collection).find(Document.class);
+
+        // For every document
+        for (Document document : iterable) {
+
+            try {
+                // Parse the map into a JWK
+                JWK jwk = JWK.parse(document);
+
+                // Add the JWK to the list
+                jwks.add(jwk);
+            } catch (Exception e) {
+
+                // Log the document that could not be parsed
+                log.error("Could not parse document {}", document.getObjectId("_id").toString(), e);
+            }
+
+        }
+
+        // Return the list of JWKs
+        return jwks;
     }
 
 }
