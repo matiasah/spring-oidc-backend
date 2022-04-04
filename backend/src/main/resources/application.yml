@@ -15,3 +15,5 @@ oidc:
         value: ""
         cacheManager: "concurrentMapJwkCacheManager"
         condition: ""
+      vault:
+        path: "jwks"
