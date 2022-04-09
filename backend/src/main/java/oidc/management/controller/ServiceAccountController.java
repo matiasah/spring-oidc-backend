@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
@@ -52,6 +54,8 @@ public class ServiceAccountController {
      * 
      * @return List of service accounts.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_service_account')")
     @GetMapping
     public List<ServiceAccount> index() {
         // Return list of service accounts
@@ -63,6 +67,8 @@ public class ServiceAccountController {
      * 
      * @return Page of service accounts.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_service_account')")
     @GetMapping("page")
     public Page<ServiceAccount> page(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
         return this.serviceAccountService.findAll(pageable, search);
@@ -73,7 +79,9 @@ public class ServiceAccountController {
      * 
      * @param id Service account id.
      * @return Service account.
-     */    
+     */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_service_account')")
     @GetMapping("{id}")
     public ResponseEntity<ServiceAccount> get(@PathVariable("id") String id) {
         // Get the optional holder
@@ -99,6 +107,8 @@ public class ServiceAccountController {
      * @return The created service account.
      * @throws BindException If the service account is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_create_service_account')")
     @PostMapping
     public ResponseEntity<ServiceAccount> save(@RequestBody ServiceAccount object) throws BindException {
         // Remove the id
@@ -139,6 +149,8 @@ public class ServiceAccountController {
      * @throws IOException If the request body cannot be parsed.
      * @throws BindException If the service account is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_update_service_account')")
     @PatchMapping("{id}")
     public ResponseEntity<ServiceAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
@@ -193,6 +205,8 @@ public class ServiceAccountController {
      * @param id The service account id.
      * @return The deleted service account.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_delete_service_account')")
     @DeleteMapping("{id}")
     public ResponseEntity<ServiceAccount> delete(@PathVariable("id") String id) {
 

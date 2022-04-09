@@ -13,6 +13,8 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
@@ -57,6 +59,8 @@ public class AuthorityController {
      * 
      * @return List of authorities.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_authority')")
     @GetMapping
     public List<Authority> index() {
         // Return list of authorities
@@ -68,6 +72,8 @@ public class AuthorityController {
      * 
      * @return Page of authorities.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_authority')")
     @GetMapping("page")
     public Page<Authority> page(@QuerydslPredicate(root = Authority.class) Predicate predicate, Pageable pageable) {
         if (predicate != null) {
@@ -81,7 +87,9 @@ public class AuthorityController {
      * 
      * @param id Authority id.
      * @return Authority.
-     */    
+     */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_authority')")
     @GetMapping("{id}")
     public ResponseEntity<Authority> get(@PathVariable("id") String id) {
         // Get the optional holder
@@ -107,6 +115,8 @@ public class AuthorityController {
      * @return The created authority.
      * @throws BindException If the object is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_create_authority')")
     @PostMapping
     public ResponseEntity<Authority> save(@RequestBody Authority object) throws BindException {
         // Remove the id
@@ -140,6 +150,8 @@ public class AuthorityController {
      * @throws IOException If the request body cannot be parsed.
      * @throws BindException If the object is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_update_authority')")
     @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Authority> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
@@ -184,6 +196,8 @@ public class AuthorityController {
      * @param id The authority id.
      * @return The deleted authority.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_delete_authority')")
     @DeleteMapping("{id}")
     public ResponseEntity<Authority> delete(@PathVariable("id") String id) {
 

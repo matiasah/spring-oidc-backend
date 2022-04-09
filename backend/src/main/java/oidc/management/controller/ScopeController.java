@@ -13,6 +13,8 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
@@ -55,6 +57,8 @@ public class ScopeController {
      * 
      * @return List of scopes.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_scope')")
     @GetMapping
     public List<Scope> index() {
         // Return list of scopes
@@ -66,6 +70,8 @@ public class ScopeController {
      * 
      * @return Page of scopes.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_scope')")
     @GetMapping("page")
     public Page<Scope> page(@QuerydslPredicate(root = Scope.class) Predicate predicate, Pageable pageable) {
         if (predicate != null) {
@@ -79,7 +85,9 @@ public class ScopeController {
      * 
      * @param id Scope id.
      * @return Scope.
-     */    
+     */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_scope')")
     @GetMapping("{id}")
     public ResponseEntity<Scope> get(@PathVariable("id") String id) {
         // Get the optional holder
@@ -105,6 +113,8 @@ public class ScopeController {
      * @return The created scope.
      * @throws BindException If the scope is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_create_scope')")
     @PostMapping
     public ResponseEntity<Scope> save(@RequestBody Scope object) throws BindException {
         // Remove the id
@@ -139,6 +149,8 @@ public class ScopeController {
      * @throws BindException If the scope is not valid.
      * @throws BindException If the scope is not found.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_update_scope')")
     @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Scope> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
@@ -183,6 +195,8 @@ public class ScopeController {
      * @param id The scope id.
      * @return The deleted scope.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_delete_scope')")
     @DeleteMapping("{id}")
     public ResponseEntity<Scope> delete(@PathVariable("id") String id) {
 

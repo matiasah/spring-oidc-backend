@@ -79,7 +79,9 @@ public class UserAccountController {
      * 
      * @param id User account id.
      * @return User account.
-     */    
+     */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_read_user_account')")
     @GetMapping("{id}")
     public ResponseEntity<UserAccount> get(@PathVariable("id") String id) {
         // Get the optional holder
@@ -105,6 +107,8 @@ public class UserAccountController {
      * @return The created user account.
      * @throws BindException If the user account is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_create_user_account')")
     @PostMapping
     public ResponseEntity<UserAccount> save(@RequestBody UserAccount object) throws BindException {
         // Remove the id
@@ -145,6 +149,8 @@ public class UserAccountController {
      * @throws IOException If the request body cannot be parsed.
      * @throws BindException If the user account is not valid.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_update_user_account')")
     @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserAccount> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
@@ -199,6 +205,8 @@ public class UserAccountController {
      * @param id The user account id.
      * @return The deleted user account.
      */
+    @Secured({"ROLE_OIDC_ADMIN"})
+    @PreAuthorize("hasAuthority('SCOPE_delete_user_account')")
     @DeleteMapping("{id}")
     public ResponseEntity<UserAccount> delete(@PathVariable("id") String id) {
 
