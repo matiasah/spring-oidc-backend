@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.types.Predicate;
+import oidc.management.service.ScopeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +21,8 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import oidc.management.model.Scope;
-import oidc.management.repository.ScopeRepository;
 
 /**
  * Scopes Controller
@@ -44,7 +37,7 @@ import oidc.management.repository.ScopeRepository;
 public class ScopeController {
     
     @Autowired
-    private ScopeRepository scopeRepository;
+    private ScopeService scopeService;
     
     @Autowired
     private ObjectMapper mapper;
@@ -62,7 +55,7 @@ public class ScopeController {
     @GetMapping
     public List<Scope> index() {
         // Return list of scopes
-        return scopeRepository.findAll();
+        return scopeService.findAll();
     }
 
     /**
@@ -73,11 +66,9 @@ public class ScopeController {
     @Secured({"ROLE_OIDC_ADMIN"})
     @PreAuthorize("hasAuthority('SCOPE_read_scope')")
     @GetMapping("page")
-    public Page<Scope> page(@QuerydslPredicate(root = Scope.class) Predicate predicate, Pageable pageable) {
-        if (predicate != null) {
-            return this.scopeRepository.findAll(predicate, pageable);
-        }
-        return this.scopeRepository.findAll(pageable);
+    public Page<Scope> page(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
+        // Return page of scopes
+        return this.scopeService.findAll(pageable, search);
     }
 
     /**
@@ -91,7 +82,7 @@ public class ScopeController {
     @GetMapping("{id}")
     public ResponseEntity<Scope> get(@PathVariable("id") String id) {
         // Get the optional holder
-        Optional<Scope> optObject = this.scopeRepository.findById(id);
+        Optional<Scope> optObject = this.scopeService.findById(id);
 
         // Verify if the holder contains a value
         if (optObject.isPresent()) {
@@ -133,7 +124,7 @@ public class ScopeController {
         }
 
         // Save the scope
-        this.scopeRepository.save(object);
+        this.scopeService.save(object);
 
         // Return the scope
         return new ResponseEntity<>(object, HttpStatus.CREATED);
@@ -155,7 +146,7 @@ public class ScopeController {
     public ResponseEntity<Scope> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
-        Optional<Scope> optional = this.scopeRepository.findById(id);
+        Optional<Scope> optional = this.scopeService.findById(id);
 
         // Verify if the holder contains a value
         if ( optional.isPresent() ) {
@@ -179,7 +170,7 @@ public class ScopeController {
             }
 
             // Save the object
-            this.scopeRepository.save(object);
+            this.scopeService.save(object);
 
             // Return the object
             return new ResponseEntity<>(object, HttpStatus.OK);
@@ -201,7 +192,7 @@ public class ScopeController {
     public ResponseEntity<Scope> delete(@PathVariable("id") String id) {
 
         // Delete the scope by it's id
-        this.scopeRepository.deleteById(id);
+        this.scopeService.deleteById(id);
 
         // Return ok
         return new ResponseEntity<>(HttpStatus.OK);

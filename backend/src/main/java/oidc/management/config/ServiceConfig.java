@@ -1,13 +1,7 @@
 package oidc.management.config;
 
-import oidc.management.service.ServiceAccountEncryptionService;
-import oidc.management.service.ServiceAccountService;
-import oidc.management.service.UserAccountEncryptionService;
-import oidc.management.service.UserAccountService;
-import oidc.management.service.impl.DefaultServiceAccountEncryptionService;
-import oidc.management.service.impl.DefaultServiceAccountService;
-import oidc.management.service.impl.DefaultUserAccountEncryptionService;
-import oidc.management.service.impl.DefaultUserAccountService;
+import oidc.management.service.*;
+import oidc.management.service.impl.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,6 +57,17 @@ public class ServiceConfig {
     @ConditionalOnMissingBean
     public UserAccountService userAccountService() {
         return new DefaultUserAccountService();
+    }
+
+    /**
+     * Default implementation of {@link ScopeService}
+     *
+     * @return An instance of {@link DefaultScopeService}.
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ScopeService scopeService() {
+        return new DefaultScopeService();
     }
 
 }
