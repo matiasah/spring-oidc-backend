@@ -11,6 +11,7 @@ import oidc.management.model.ServiceAccount;
 import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.util.StringUtils;
@@ -43,6 +44,7 @@ public class AuthorizationInfoController {
      * @param clientId The client id.
      * @return The client info.
      */
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("oauth2/authorization-info")
     public ResponseEntity<AuthorizationInfo> getAuthorizationInfo(
             final @AuthenticationPrincipal Principal principal,
