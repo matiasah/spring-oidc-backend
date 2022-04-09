@@ -10,6 +10,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Default implementation of {@link ScopeService} for managing scopes.
+ *
+ * @author Matías Hermosilla
+ * @since 09-04-2022
+ */
 public class DefaultScopeService implements ScopeService {
 
     @Autowired
@@ -51,6 +57,12 @@ public class DefaultScopeService implements ScopeService {
     public void deleteById(String id) {
         // Delete the scope by id
         scopeRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Scope> findByName(String name) {
+        // Find a scope by its name
+        return scopeRepository.findByName(name);
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+
+import oidc.management.service.ScopeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
 import oidc.management.model.Scope;
 import oidc.management.properties.DefaultScopeProperties;
-import oidc.management.repository.ScopeRepository;
 
 /**
  * Creates default scopes.
@@ -52,7 +53,7 @@ public class DefaultScopeSeeder {
     );
 
     @Autowired
-    private ScopeRepository scopeRepository;
+    private ScopeService scopeService;
 
     public DefaultScopeSeeder() {
         // Log constructor
@@ -80,13 +81,13 @@ public class DefaultScopeSeeder {
     public void createIfNotExists(Scope scope) {
         
         // Find if the scope already exists
-        Optional<Scope> optScope = scopeRepository.findByName(scope.getName());
+        Optional<Scope> optScope = scopeService.findByName(scope.getName());
 
         // If the scope does not exist, create it
         if (!optScope.isPresent()) {
 
             // Save the scope
-            this.scopeRepository.save(scope);
+            this.scopeService.save(scope);
 
             // Log the creation of the scope
             log.info("Created default scope \"" + scope.getName() + "\"");

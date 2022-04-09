@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
+import oidc.management.service.ScopeService;
 import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -19,7 +20,6 @@ import lombok.extern.java.Log;
 import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
 import oidc.management.properties.DefaultServiceAccountProperties;
-import oidc.management.repository.ScopeRepository;
 
 /**
  * Creates a default service account.
@@ -42,7 +42,7 @@ public class DefaultServiceAccountSeeder {
     private ServiceAccountService serviceAccountService;
 
     @Autowired
-    private ScopeRepository scopeRepository;
+    private ScopeService scopeService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -72,7 +72,7 @@ public class DefaultServiceAccountSeeder {
         for (Scope scope : DefaultScopeSeeder.DEFAULT_SCOPES) {
 
             // Find the scope by name
-            Optional<Scope> optionalScope = scopeRepository.findByName(scope.getName());
+            Optional<Scope> optionalScope = scopeService.findByName(scope.getName());
 
             // If the scope exists
             if (optionalScope.isPresent()) {

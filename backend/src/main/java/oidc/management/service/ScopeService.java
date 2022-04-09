@@ -53,4 +53,12 @@ public interface ScopeService {
      */
     public void deleteById(String id);
 
+    /**
+     * Finds a {@link Scope} by its name.
+     *
+     * @param name The name of the {@link Scope}.
+     * @return An optional of {@link Scope}.
+     */
+    public Optional<Scope> findByName(String name);
+
 }
