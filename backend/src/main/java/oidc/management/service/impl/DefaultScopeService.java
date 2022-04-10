@@ -41,7 +41,7 @@ public class DefaultScopeService implements ScopeService {
     @Override
     public Page<Scope> findAll(Pageable pageable, String search) {
 
-        // If there is no search term or it is empty
+        // If there is no search term or the search term is empty
         if (search == null || search.isEmpty()) {
 
             // Return all scopes

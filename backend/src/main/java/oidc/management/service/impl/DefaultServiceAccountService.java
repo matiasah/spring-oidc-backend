@@ -41,7 +41,7 @@ public class DefaultServiceAccountService implements ServiceAccountService {
     @Override
     public Page<ServiceAccount> findAll(Pageable pageable, String search) {
 
-        // If there is no search term or it is empty
+        // If there is no search term or the search term is empty
         if (search == null || search.isEmpty()) {
 
             // Return all Service Accounts
