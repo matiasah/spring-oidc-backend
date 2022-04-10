@@ -73,7 +73,7 @@ public class DefaultScopeService implements ScopeService {
     @Override
     public Optional<Scope> findByName(String name) {
         // Find a scope by its name
-        return scopeRepository.findByName(scopeEncryptionService.getHashedName(name))
+        return scopeRepository.findByHashedName(scopeEncryptionService.getHashedName(name))
                 .map(
                         // Decrypt scope
                         scope -> scopeEncryptionService.decrypt(scope)

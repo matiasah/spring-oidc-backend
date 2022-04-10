@@ -34,6 +34,8 @@ public class Scope {
 
     /**
      * The hashed name of the scope, for searching purposes.
+     * 
+     * @see {@link oidc.management.service.ScopeEncryptionService#getHashedName(String)}
      */
     @JsonIgnore
     private String hashedName;
