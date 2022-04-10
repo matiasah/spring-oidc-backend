@@ -196,7 +196,6 @@ public class AuthorityController {
 
         // Return ok
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 }
