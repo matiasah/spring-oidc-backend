@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceConfig {
 
     /**
-     * Default implementation of {@link ServiceAccountEncryptionService}
+     * Default implementation of {@link ServiceAccountEncryptionService}.
      *
      * @return An instance of {@link DefaultServiceAccountEncryptionService}.
      */
@@ -27,7 +27,7 @@ public class ServiceConfig {
     }
 
     /**
-     * Default implementation of {@link ServiceAccountService}
+     * Default implementation of {@link ServiceAccountService}.
      *
      * @return An instance of {@link DefaultServiceAccountService}.
      */
@@ -38,7 +38,7 @@ public class ServiceConfig {
     }
 
     /**
-     * Default implementation of {@link UserAccountEncryptionService}
+     * Default implementation of {@link UserAccountEncryptionService}.
      *
      * @return An instance of {@link DefaultUserAccountEncryptionService}.
      */
@@ -49,7 +49,7 @@ public class ServiceConfig {
     }
 
     /**
-     * Default implementation of {@link UserAccountService}
+     * Default implementation of {@link UserAccountService}.
      *
      * @return An instance of {@link DefaultUserAccountService}.
      */
@@ -60,7 +60,18 @@ public class ServiceConfig {
     }
 
     /**
-     * Default implementation of {@link ScopeService}
+     * Default implementation of {@link ScopeEncryptionService}.
+     *
+     * @return An instance of {@link DefaultScopeEncryptionService}.
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ScopeEncryptionService scopeEncryptionService() {
+        return new DefaultScopeEncryptionService();
+    }
+
+    /**
+     * Default implementation of {@link ScopeService}.
      *
      * @return An instance of {@link DefaultScopeService}.
      */
