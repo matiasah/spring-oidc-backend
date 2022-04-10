@@ -28,7 +28,7 @@ export const environment = {
     'read_scope',
     'update_scope',
     'delete_scope',
-  ].concat(' '),
+  ].join(' '),
   redirectUri: 'http://127.0.0.1/oauth/callback'
 };
 
