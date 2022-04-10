@@ -26,4 +26,12 @@ public interface ScopeEncryptionService {
      */
     public Scope decrypt(Scope scope);
 
+    /**
+     * Hashes the name of a scope and returns a hashed string.
+     *
+     * @param name The name of the scope to hash.
+     * @return The hashed version of the given name.
+     */
+    public String getHashedName(String name);
+
 }

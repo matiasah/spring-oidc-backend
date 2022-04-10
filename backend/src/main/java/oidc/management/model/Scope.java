@@ -1,5 +1,6 @@
 package oidc.management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,12 @@ public class Scope {
 
     @NotNull
     private String name;
+
+    /**
+     * The hashed name of the scope, for searching purposes.
+     */
+    @JsonIgnore
+    private String hashedName;
 
     private String description;
 
