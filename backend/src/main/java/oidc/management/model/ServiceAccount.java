@@ -16,6 +16,7 @@ import oidc.management.serialization.ClientAuthenticationMethodSerializer;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -38,6 +39,8 @@ import javax.validation.constraints.NotNull;
  * 
  * @author Matías Hermosilla
  * @since 16-01-2022
+ * @see Scope
+ * @see Authority
  */
 @Document(collection = "service_accounts")
 @Builder
@@ -106,6 +109,8 @@ public class ServiceAccount {
     /**
      * The service account's tags
      * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING SERVICE ACCOUNTS.
+     *
+     * @see {@link oidc.management.repository.ServiceAccountRepository#findByTagsContainingIgnoreCase(String, Pageable)}
      **/
     private Set<String> tags;
 

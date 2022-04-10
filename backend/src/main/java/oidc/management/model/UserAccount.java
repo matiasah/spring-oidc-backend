@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,7 @@ import javax.validation.constraints.NotNull;
  * @author Matías Hermosilla
  * @since 16-01-2022
  * @see UserDetails
+ * @see Authority
  * @see oidc.management.service.UserAccountService
  */
 @Document(collection = "users")
@@ -64,6 +66,8 @@ public class UserAccount implements UserDetails {
     /**
      * The user's tags
      * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING USER ACCOUNTS.
+     * 
+     * @see {@link oidc.management.repository.UserAccountRepository#findByTagsContainingIgnoreCase(String, Pageable)}
      **/
     private Set<String> tags;
 
