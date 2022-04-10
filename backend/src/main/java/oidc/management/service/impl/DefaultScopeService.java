@@ -69,7 +69,7 @@ public class DefaultScopeService implements ScopeService {
                         scope -> scopeEncryptionService.decrypt(scope)
                 );
     }
-    
+
     @Override
     public Optional<Scope> findByName(String name) {
         // Find a scope by its name
