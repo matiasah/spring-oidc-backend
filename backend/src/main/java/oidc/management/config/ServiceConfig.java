@@ -83,7 +83,7 @@ public class ServiceConfig {
 
     /**
      * Default implementation of {@link AuthorityEncryptionService}.
-     * 
+     *
      * @return An instance of {@link DefaultAuthorityEncryptionService}.
      */
     @Bean
