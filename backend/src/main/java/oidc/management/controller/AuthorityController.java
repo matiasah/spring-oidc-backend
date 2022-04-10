@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.types.Predicate;
+import oidc.management.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +21,8 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import oidc.management.model.Authority;
-import oidc.management.repository.AuthorityRepository;
 
 /**
  * Authorities Controller
@@ -37,7 +30,7 @@ import oidc.management.repository.AuthorityRepository;
  * @author Matias Hermosilla
  * @since 03-02-2022
  * @see Authority
- * @see AuthorityRepository
+ * @see AuthorityService
  * @see PasswordEncoder
  * @see ObjectMapper
  */
@@ -46,7 +39,7 @@ import oidc.management.repository.AuthorityRepository;
 public class AuthorityController {
     
     @Autowired
-    private AuthorityRepository authorityRepository;
+    private AuthorityService authorityService;
     
     @Autowired
     private ObjectMapper mapper;
@@ -64,7 +57,7 @@ public class AuthorityController {
     @GetMapping
     public List<Authority> index() {
         // Return list of authorities
-        return authorityRepository.findAll();
+        return authorityService.findAll();
     }
 
     /**
@@ -75,11 +68,8 @@ public class AuthorityController {
     @Secured({"ROLE_OIDC_ADMIN"})
     @PreAuthorize("hasAuthority('SCOPE_read_authority')")
     @GetMapping("page")
-    public Page<Authority> page(@QuerydslPredicate(root = Authority.class) Predicate predicate, Pageable pageable) {
-        if (predicate != null) {
-            return this.authorityRepository.findAll(predicate, pageable);
-        }
-        return this.authorityRepository.findAll(pageable);
+    public Page<Authority> page(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
+        return this.authorityService.findAll(pageable, search);
     }
 
     /**
@@ -93,7 +83,7 @@ public class AuthorityController {
     @GetMapping("{id}")
     public ResponseEntity<Authority> get(@PathVariable("id") String id) {
         // Get the optional holder
-        Optional<Authority> optObject = this.authorityRepository.findById(id);
+        Optional<Authority> optObject = this.authorityService.findById(id);
 
         // Verify if the holder contains a value
         if (optObject.isPresent()) {
@@ -135,7 +125,7 @@ public class AuthorityController {
         }
 
         // Save the authority
-        this.authorityRepository.save(object);
+        this.authorityService.save(object);
 
         // Return the authority
         return new ResponseEntity<>(object, HttpStatus.CREATED);
@@ -156,7 +146,7 @@ public class AuthorityController {
     public ResponseEntity<Authority> update(@PathVariable("id") String id, HttpServletRequest request) throws IOException, BindException {
             
         // Get the optional holder
-        Optional<Authority> optional = this.authorityRepository.findById(id);
+        Optional<Authority> optional = this.authorityService.findById(id);
 
         // Verify if the holder contains a value
         if ( optional.isPresent() ) {
@@ -180,7 +170,7 @@ public class AuthorityController {
             }
 
             // Save the object
-            this.authorityRepository.save(object);
+            this.authorityService.save(object);
 
             // Return the object
             return new ResponseEntity<>(object, HttpStatus.OK);
@@ -202,7 +192,7 @@ public class AuthorityController {
     public ResponseEntity<Authority> delete(@PathVariable("id") String id) {
 
         // Delete the authority by it's id
-        this.authorityRepository.deleteById(id);
+        this.authorityService.deleteById(id);
 
         // Return ok
         return new ResponseEntity<>(HttpStatus.OK);
