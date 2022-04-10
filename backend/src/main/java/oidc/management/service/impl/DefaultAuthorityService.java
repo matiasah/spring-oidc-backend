@@ -47,7 +47,7 @@ public class DefaultAuthorityService implements AuthorityService {
         }
 
         // Find all authorities
-        return authorityRepository.findAllByNameContaining(search, pageable)
+        return authorityRepository.findByTagsContainingIgnoreCase(search, pageable)
                 .map(
                         // Decrypt authority
                         authority -> authorityEncryptionService.decrypt(authority)
