@@ -25,11 +25,11 @@ public interface UserAccountRepository extends MongoRepository<UserAccount, Stri
     public Optional<UserAccount> findByUsername(String username);
 
     /**
-     * Finds users whose tags contain the given search term.
+     * Finds {@link UserAccount}s whose tags contain the given search term.
      *
      * @param tag The search term.
      * @param pageable The pageable object.
-     * @return A page of users whose tags contain the given search term.
+     * @return A page of {@link UserAccount}s whose tags contain the given search term.
      */
     public Page<UserAccount> findByTagsContainingIgnoreCase(String tag, Pageable pageable);
 

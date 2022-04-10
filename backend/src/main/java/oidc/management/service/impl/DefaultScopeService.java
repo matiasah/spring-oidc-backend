@@ -53,7 +53,7 @@ public class DefaultScopeService implements ScopeService {
         }
 
         // Return all scopes that match the search term
-        return scopeRepository.findAll(pageable)
+        return scopeRepository.findByTagsContainingIgnoreCase(search, pageable)
                 .map(
                         // Decrypt scope
                         scope -> scopeEncryptionService.decrypt(scope)
@@ -73,7 +73,7 @@ public class DefaultScopeService implements ScopeService {
     @Override
     public Optional<Scope> findByName(String name) {
         // Find a scope by its name
-        return scopeRepository.findByName(name)
+        return scopeRepository.findByName(scopeEncryptionService.getHashedName(name))
                 .map(
                         // Decrypt scope
                         scope -> scopeEncryptionService.decrypt(scope)

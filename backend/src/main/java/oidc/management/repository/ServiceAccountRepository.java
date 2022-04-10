@@ -23,10 +23,11 @@ public interface ServiceAccountRepository extends MongoRepository<ServiceAccount
     public Optional<ServiceAccount> findByClientId(String clientId);
 
     /**
-     * Finds service accounts whose tags contain the given search term.
+     * Finds {@link ServiceAccount}s whose tags contain the given search term.
+     *
      * @param tag The search term.
      * @param pageable The pageable object.
-     * @return A page of service accounts whose tags contain the given search term.
+     * @return A page of {@link ServiceAccount} whose tags contain the given search term.
      */
     public Page<ServiceAccount> findByTagsContainingIgnoreCase(String tag, Pageable pageable);
     
