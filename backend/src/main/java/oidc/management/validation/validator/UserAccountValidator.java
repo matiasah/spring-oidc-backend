@@ -9,6 +9,13 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
+/**
+ * Default {@link UserAccount} validator.
+ * It validates that two {@link UserAccount}s don't have the same username.
+ *
+ * @author Matías Hermosilla
+ * @since 10-04-2022
+ */
 public class UserAccountValidator implements ConstraintValidator<ValidUserAccount, UserAccount> {
 
     @Autowired
