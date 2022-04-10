@@ -13,6 +13,7 @@ import oidc.management.serialization.AuthorizationGrantTypeDeserializer;
 import oidc.management.serialization.AuthorizationGrantTypeSerializer;
 import oidc.management.serialization.ClientAuthenticationMethodDeserializer;
 import oidc.management.serialization.ClientAuthenticationMethodSerializer;
+import oidc.management.validation.annotations.ValidServiceAccount;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -48,6 +49,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
+@ValidServiceAccount
 public class ServiceAccount {
     
     /**
