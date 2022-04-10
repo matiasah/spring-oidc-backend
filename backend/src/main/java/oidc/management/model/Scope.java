@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Spring Security Scope model.
@@ -38,5 +39,11 @@ public class Scope {
     private String hashedName;
 
     private String description;
+
+    /**
+     * The scope's tags
+     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING SCOPES.
+     **/
+    private Set<String> tags;
 
 }
