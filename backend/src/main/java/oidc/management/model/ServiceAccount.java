@@ -104,7 +104,7 @@ public class ServiceAccount {
     private List<Authority> authorities;
 
     /**
-     * The user's tags
+     * The service account's tags
      * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING SERVICE ACCOUNTS.
      **/
     private Set<String> tags;
