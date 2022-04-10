@@ -3,6 +3,8 @@ package oidc.management.repository;
 import java.util.Optional;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.StringPath;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -40,4 +42,5 @@ public interface AuthorityRepository extends MongoRepository<Authority, String>,
         bindings.bind(String.class).first((StringPath path, String value) -> path.containsIgnoreCase(value));
     }
 
+    public Page<Authority> findAllByNameContaining(String search, Pageable pageable);
 }
