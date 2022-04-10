@@ -65,6 +65,16 @@ public class DefaultAuthorityService implements AuthorityService {
     }
 
     @Override
+    public Optional<Authority> findByName(String name) {
+        // Find authority by its name
+        return authorityRepository.findByHashedName(authorityEncryptionService.getHashedName(name))
+                .map(
+                        // Decrypt authority
+                        authority -> authorityEncryptionService.decrypt(authority)
+                );
+    }
+
+    @Override
     public Authority save(Authority authority) {
         // Encrypt authority before saving it
         return authorityRepository.save(

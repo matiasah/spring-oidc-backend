@@ -2,6 +2,8 @@ package oidc.management.util;
 
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+
+import oidc.management.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
 import oidc.management.model.Authority;
 import oidc.management.properties.DefaultAuthorityProperties;
-import oidc.management.repository.AuthorityRepository;
 
 /**
  * Creates default authorities.
@@ -25,7 +26,7 @@ import oidc.management.repository.AuthorityRepository;
 public class DefaultAuthoritySeeder {
 
     @Autowired
-    private AuthorityRepository authorityRepository;
+    private AuthorityService authorityService;
 
     /**
      * Creates a default user account.
@@ -34,7 +35,7 @@ public class DefaultAuthoritySeeder {
     public void seed() {
 
         // Find if the authority already exists
-        Optional<Authority> optAuthority = authorityRepository.findByName("ROLE_OIDC_ADMIN");
+        Optional<Authority> optAuthority = authorityService.findByName("ROLE_OIDC_ADMIN");
 
         // If the authority exists
         if (optAuthority.isPresent()) {
@@ -54,7 +55,7 @@ public class DefaultAuthoritySeeder {
                 .build();
 
         // Save the authority
-        this.authorityRepository.save(authority);
+        this.authorityService.save(authority);
 
         // Log the creation of the authority
         log.info("Created default authority \"" + authority.getName() + "\"");

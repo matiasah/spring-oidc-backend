@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import oidc.management.model.Authority;
 
+import java.util.Optional;
+
 /**
  * Spring Security Authority Repository.
  * 
@@ -14,6 +16,14 @@ import oidc.management.model.Authority;
  * @see Authority
  */
 public interface AuthorityRepository extends MongoRepository<Authority, String> {
+
+    /**
+     * Finds an {@link Authority} by its hashed name.
+     *
+     * @param name The name of the {@link Authority}.
+     * @return The {@link Authority} with the given name.
+     */
+    public Optional<Authority> findByHashedName(String name);
 
     /**
      * Finds {@link Authority}s whose tags contain the given search term.

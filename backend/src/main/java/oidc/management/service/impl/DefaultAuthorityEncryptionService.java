@@ -30,4 +30,15 @@ public class DefaultAuthorityEncryptionService implements AuthorityEncryptionSer
         return authority;
     }
 
+    /**
+     * Default hash behaviour, does not hash.
+     *
+     * @param name The name of the {@link Authority} that should be hashed.
+     * @return The name of the {@link Authority} as is.
+     */
+    @Override
+    public String getHashedName(String name) {
+        return name;
+    }
+
 }

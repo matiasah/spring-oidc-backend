@@ -17,10 +17,10 @@ import java.util.Optional;
 public interface ScopeRepository extends MongoRepository<Scope, String> {
 
     /**
-     * Finds a scope by its name.
+     * Finds a {@link Scope} by its name.
      *
-     * @param name The name of the scope to find.
-     * @return The scope if found, otherwise empty optional.
+     * @param name The name of the {@link Scope} to find.
+     * @return The {@link Scope} if found, otherwise empty optional.
      */
     public Optional<Scope> findByName(String name);
 

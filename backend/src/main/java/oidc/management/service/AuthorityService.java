@@ -40,6 +40,14 @@ public interface AuthorityService {
     public Optional<Authority> findById(String id);
 
     /**
+     * Finds an {@link Authority} by its name.
+     *
+     * @param name The name of the {@link Authority}.
+     * @return The {@link Authority}.
+     */
+    public Optional<Authority> findByName(String name);
+
+    /**
      * Saves an {@link Authority}.
      *
      * @param authority The {@link Authority} to save.

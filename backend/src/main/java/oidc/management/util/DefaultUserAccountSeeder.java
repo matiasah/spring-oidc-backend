@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 
+import oidc.management.service.AuthorityService;
 import oidc.management.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -16,7 +17,6 @@ import lombok.extern.java.Log;
 import oidc.management.model.Authority;
 import oidc.management.model.UserAccount;
 import oidc.management.properties.DefaultUserAccountProperties;
-import oidc.management.repository.AuthorityRepository;
 
 /**
  * Creates a default user account.
@@ -39,7 +39,7 @@ public class DefaultUserAccountSeeder {
     private UserAccountService userAccountService;
 
     @Autowired
-    private AuthorityRepository authorityRepository;
+    private AuthorityService authorityService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -51,7 +51,7 @@ public class DefaultUserAccountSeeder {
     public void seed() {
 
         // Get the default authority
-        Optional<Authority> optAuthority = this.authorityRepository.findByName("ROLE_OIDC_ADMIN");
+        Optional<Authority> optAuthority = this.authorityService.findByName("ROLE_OIDC_ADMIN");
 
         // If the authority exists
         if (optAuthority.isPresent()) {

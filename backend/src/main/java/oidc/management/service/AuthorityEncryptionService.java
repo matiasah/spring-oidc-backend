@@ -26,4 +26,12 @@ public interface AuthorityEncryptionService {
      */
     public Authority decrypt(Authority authority);
 
+    /**
+     * Hashes the name of the given {@link Authority} and returns the hashed version.
+     *
+     * @param name The name of the {@link Authority} to hash.
+     * @return The hashed name.
+     */
+    public String getHashedName(String name);
+
 }

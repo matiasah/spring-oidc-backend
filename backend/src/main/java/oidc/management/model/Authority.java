@@ -31,6 +31,13 @@ public class Authority implements GrantedAuthority {
     @NotNull
     private String name;
 
+    /**
+     * Persists a hashed version of the authority name.
+     *
+     * @see {@link oidc.management.service.AuthorityEncryptionService#getHashedName(String)}
+     */
+    private String hashedName;
+
     private String description;
     
     @Override
