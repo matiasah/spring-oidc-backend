@@ -3,6 +3,7 @@ package oidc.management.util;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 
 import oidc.management.service.ScopeService;
@@ -27,29 +28,31 @@ import oidc.management.properties.DefaultScopeProperties;
 @ConditionalOnBean(DefaultScopeProperties.class)
 public class DefaultScopeSeeder {
 
+    private static final Set<String> DEFAULT_SCOPES_TAGS = Set.of("default");
+
     protected static final List<Scope> DEFAULT_SCOPES = Arrays.asList(
-            Scope.builder().name("openid").description("Verify your identity").build(),
-            Scope.builder().name("profile").description("See your profile information").build(),
-            Scope.builder().name("email").description("See your email address").build(),
-            Scope.builder().name("address").description("See your address").build(),
-            Scope.builder().name("phone").description("See your phone number").build(),
-            Scope.builder().name("offline_access").description("Access your data offline").build(),
-            Scope.builder().name("create_authority").description("Create authorities").build(),
-            Scope.builder().name("read_authority").description("Read authorities").build(),
-            Scope.builder().name("update_authority").description("Update authorities").build(),
-            Scope.builder().name("delete_authority").description("Delete authorities").build(),
-            Scope.builder().name("create_service_account").description("Create service accounts").build(),
-            Scope.builder().name("read_service_account").description("Read service accounts").build(),
-            Scope.builder().name("update_service_account").description("Update service accounts").build(),
-            Scope.builder().name("delete_service_account").description("Delete service accounts").build(),
-            Scope.builder().name("create_user_account").description("Create user accounts").build(),
-            Scope.builder().name("read_user_account").description("Read user accounts").build(),
-            Scope.builder().name("update_user_account").description("Update user accounts").build(),
-            Scope.builder().name("delete_user_account").description("Delete user accounts").build(),
-            Scope.builder().name("create_scope").description("Create scopes").build(),
-            Scope.builder().name("read_scope").description("Read scopes").build(),
-            Scope.builder().name("update_scope").description("Update scopes").build(),
-            Scope.builder().name("delete_scope").description("Delete scopes").build()
+            Scope.builder().name("openid").description("Verify your identity").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("profile").description("See your profile information").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("email").description("See your email address").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("address").description("See your address").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("phone").description("See your phone number").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("offline_access").description("Access your data offline").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("create_authority").description("Create authorities").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("read_authority").description("Read authorities").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("update_authority").description("Update authorities").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("delete_authority").description("Delete authorities").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("create_service_account").description("Create service accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("read_service_account").description("Read service accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("update_service_account").description("Update service accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("delete_service_account").description("Delete service accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("create_user_account").description("Create user accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("read_user_account").description("Read user accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("update_user_account").description("Update user accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("delete_user_account").description("Delete user accounts").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("create_scope").description("Create scopes").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("read_scope").description("Read scopes").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("update_scope").description("Update scopes").tags(DEFAULT_SCOPES_TAGS).build(),
+            Scope.builder().name("delete_scope").description("Delete scopes").tags(DEFAULT_SCOPES_TAGS).build()
     );
 
     @Autowired
