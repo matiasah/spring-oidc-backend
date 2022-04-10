@@ -26,4 +26,12 @@ public interface ServiceAccountEncryptionService {
      */
     public ServiceAccount decrypt(ServiceAccount account);
 
+    /**
+     * Hashes the given {@link ServiceAccount}'s clientId for searching by equality.
+     *
+     * @param clientId The clientId to hash.
+     * @return The hashed clientId.
+     */
+    public String getHashedClientId(String clientId);
+
 }

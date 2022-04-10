@@ -70,7 +70,8 @@ public class DefaultServiceAccountService implements ServiceAccountService {
     public Optional<ServiceAccount> findByClientId(String clientId) {
         // TODO: Add logic to find Service Account by encrypted client id
         // Find Service Account by clientId
-        return serviceAccountRepository.findByClientId(clientId)
+        return serviceAccountRepository
+                .findByHashedClientId(this.serviceAccountEncryptionService.getHashedClientId(clientId))
                 .map(
                         // Decrypt Service Account
                         serviceAccount -> serviceAccountEncryptionService.decrypt(serviceAccount)

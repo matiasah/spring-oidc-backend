@@ -20,7 +20,7 @@ public interface ServiceAccountRepository extends MongoRepository<ServiceAccount
     /**
      * Finds a client by client id.
      */
-    public Optional<ServiceAccount> findByClientId(String clientId);
+    public Optional<ServiceAccount> findByHashedClientId(String clientId);
 
     /**
      * Finds {@link ServiceAccount}s whose tags contain the given search term.

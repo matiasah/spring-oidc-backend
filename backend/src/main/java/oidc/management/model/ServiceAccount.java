@@ -61,6 +61,14 @@ public class ServiceAccount {
     @NotNull
     private String clientId;
 
+    /**
+     * The hashed client id of the service account, for searching purposes.
+     * 
+     * @see {@link oidc.management.service.ServiceAccountEncryptionService#getHashedClientId(String)}
+     */
+    @JsonIgnore
+    private String hashedClientId;
+
     @CreatedDate
     private Instant clientIdIssuedAt;
 
