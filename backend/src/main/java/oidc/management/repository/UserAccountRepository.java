@@ -22,7 +22,7 @@ public interface UserAccountRepository extends MongoRepository<UserAccount, Stri
      * @param username The username.
      * @return The user.
      */
-    public Optional<UserAccount> findByUsername(String username);
+    public Optional<UserAccount> findByHashedUsername(String username);
 
     /**
      * Finds {@link UserAccount}s whose tags contain the given search term.

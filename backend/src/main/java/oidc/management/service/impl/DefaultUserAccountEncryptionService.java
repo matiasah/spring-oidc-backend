@@ -13,6 +13,9 @@ public class DefaultUserAccountEncryptionService implements UserAccountEncryptio
 
     @Override
     public UserAccount encrypt(UserAccount userAccount) {
+        // Set hashed username
+        userAccount.setHashedUsername(userAccount.getUsername());
+
         return userAccount;
     }
 
