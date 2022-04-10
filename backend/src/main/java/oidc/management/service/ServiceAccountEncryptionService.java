@@ -11,18 +11,18 @@ import oidc.management.model.ServiceAccount;
 public interface ServiceAccountEncryptionService {
 
     /**
-     * Encrypts the given service account.
+     * Encrypts the given {@link ServiceAccount}.
      *
-     * @param account The account to encrypt.
-     * @return The encrypted account.
+     * @param account The {@link ServiceAccount} to encrypt.
+     * @return The encrypted {@link ServiceAccount}.
      */
     public ServiceAccount encrypt(ServiceAccount account);
 
     /**
-     * Decrypts the given service account.
+     * Decrypts the given {@link ServiceAccount}.
      *
-     * @param account The account to decrypt.
-     * @return The decrypted account.
+     * @param account The {@link ServiceAccount} to decrypt.
+     * @return The decrypted {@link ServiceAccount}.
      */
     public ServiceAccount decrypt(ServiceAccount account);
 
