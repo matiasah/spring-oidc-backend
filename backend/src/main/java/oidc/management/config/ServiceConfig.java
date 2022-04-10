@@ -92,4 +92,15 @@ public class ServiceConfig {
         return new DefaultAuthorityEncryptionService();
     }
 
+    /**
+     * Default implementation of {@link AuthorityService}.
+     *
+     * @return An instance of {@link DefaultAuthorityService}.
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthorityService authorityService() {
+        return new DefaultAuthorityService();
+    }
+
 }
