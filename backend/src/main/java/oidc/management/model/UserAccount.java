@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import oidc.management.validation.annotations.ValidUserAccount;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -38,6 +39,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
+@ValidUserAccount
 public class UserAccount implements UserDetails {
 
     @Id
