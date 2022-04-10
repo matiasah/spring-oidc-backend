@@ -20,11 +20,11 @@
             <span class="mat-h4">Search scope</span>
         </div>
 
-        <div class="grid grid-cols grid-cols-12 gap-4">
-            <mat-form-field class="col-span-12" appearance="fill">
-                <input matInput name="name" [(ngModel)]="nameSearch" placeholder="Name">
+        <form #form="ngForm" class="w-full" autocomplete="off">
+            <mat-form-field class="w-full" appearance="fill">
+                <input matInput name="search" [(ngModel)]="search" placeholder="Search by tags">
             </mat-form-field>
-        </div>
+        </form>
 
         <mat-divider></mat-divider>
 
@@ -59,6 +59,26 @@
                     </mat-header-cell>
                     <mat-cell *matCellDef="let scope">
                         {{ scope.description }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Tags -->
+                <ng-container matColumnDef="tags">
+                    <mat-header-cell *matHeaderCellDef>
+                        Tags
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let scope">
+
+                        <!-- Chip list -->
+                        <mat-chip-list>
+
+                            <!-- For every tag -->
+                            <mat-chip *ngFor="let tag of scope.tags">
+                                <span>{{ tag }}</span>
+                            </mat-chip>
+
+                        </mat-chip-list>
+
                     </mat-cell>
                 </ng-container>
 

@@ -7,6 +7,7 @@ import { EditScopeComponent } from './edit-scope/edit-scope.component';
 import { DeleteScopeComponent } from './delete-scope/delete-scope.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTagsModule } from "../input-tags/input-tags.module";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-        ScopesRoutingModule
+        ScopesRoutingModule,
+        InputTagsModule
     ]
 })
 export class ScopesModule { }

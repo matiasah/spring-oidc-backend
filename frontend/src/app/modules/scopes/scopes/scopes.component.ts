@@ -24,6 +24,7 @@ export class ScopesComponent implements OnInit {
         'id',
         'name',
         'description',
+        'tags',
         'options'
     ];
 
@@ -49,7 +50,7 @@ export class ScopesComponent implements OnInit {
     public form!: NgForm;
 
     // Search input
-    public nameSearch: string = '';
+    public search: string = '';
 
     public constructor(
         private scopeService: ScopeService,

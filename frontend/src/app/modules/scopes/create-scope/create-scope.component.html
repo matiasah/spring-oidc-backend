@@ -27,6 +27,10 @@
                 <textarea matInput name="description" #descriptionForm="ngModel" [(ngModel)]="scope.description" placeholder="Description" autocomplete="none"></textarea>
             </mat-form-field>
 
+            <mat-form-field class="col-span-12" appearance="fill">
+                <app-input-tags name="tags" #tagsForm="ngModel" [(ngModel)]="scope.tags" placeholder="Tags (searchable)" autocomplete="none"></app-input-tags>
+            </mat-form-field>
+
         </div>
 
     </mat-dialog-content>
