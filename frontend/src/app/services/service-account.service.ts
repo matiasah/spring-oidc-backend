@@ -29,7 +29,7 @@ export class ServiceAccountService {
         return this.http.get<ServiceAccount[]>(`${environment.host}/service-accounts`);
     }
 
-    public findById(id: number): Observable<ServiceAccount> {
+    public findById(id: string): Observable<ServiceAccount> {
         return this.http.get<ServiceAccount>(`${environment.host}/service-accounts/${id}`);
     }
 
@@ -41,7 +41,7 @@ export class ServiceAccountService {
         return this.http.patch<ServiceAccount>(`${environment.host}/service-accounts/${serviceAccount.id}`, this.getDTO(serviceAccount));
     }
 
-    public deleteById(id: number): Observable<void> {
+    public deleteById(id: string): Observable<void> {
         return this.http.delete<void>(`${environment.host}/service-accounts/${id}`);
     }
 
