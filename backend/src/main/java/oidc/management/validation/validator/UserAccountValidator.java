@@ -33,17 +33,17 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
             // If user account with the same name exists
             if (userAccountWithSameName.isPresent()) {
 
-                // If the user account with the same name is not the same as the user account
-                if (!userAccountWithSameName.get().getId().equals(userAccount.getId())) {
+                // If the user account with the same name is the same as the user account
+                if (userAccountWithSameName.get().getId().equals(userAccount.getId())) {
 
-                    // The user account is not valid
-                    return false;
+                    // The user account is valid
+                    return true;
                 }
 
             }
 
-            // The user account is valid
-            return true;
+            // The user account is not valid
+            return false;
         }
 
         // Find a user account with the same name

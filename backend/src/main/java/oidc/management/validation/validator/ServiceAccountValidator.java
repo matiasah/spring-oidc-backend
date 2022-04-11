@@ -33,17 +33,17 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
             // If the serviceAccount with the same clientId is found
             if (serviceAccountWithSameClientId.isPresent()) {
 
-                // If the serviceAccount with the same clientId is not the same as the one being validated.
-                if (!serviceAccountWithSameClientId.get().getId().equals(serviceAccount.getId())) {
+                // If the serviceAccount with the same clientId is the same as the one being validated
+                if (serviceAccountWithSameClientId.get().getId().equals(serviceAccount.getId())) {
 
-                    // The serviceAccount is not valid
-                    return false;
+                    // The serviceAccount is valid
+                    return true;
                 }
 
             }
 
-            // The serviceAccount is valid
-            return true;
+            // The serviceAccount is not valid
+            return false;
         }
 
         // Find a serviceAccount with the same clientId.
