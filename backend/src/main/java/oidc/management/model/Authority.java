@@ -1,5 +1,6 @@
 package oidc.management.model;
 
+import oidc.management.validation.annotations.ValidAuthority;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,6 +25,7 @@ import java.util.Set;
 @Document(collection = "authorities")
 @Data
 @EqualsAndHashCode(of = "id")
+@ValidAuthority
 public class Authority implements GrantedAuthority {
 
     @Id
