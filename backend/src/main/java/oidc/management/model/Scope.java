@@ -1,6 +1,7 @@
 package oidc.management.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import oidc.management.validation.annotations.ValidScope;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,6 +26,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
+@ValidScope
 public class Scope {
     
     @Id
