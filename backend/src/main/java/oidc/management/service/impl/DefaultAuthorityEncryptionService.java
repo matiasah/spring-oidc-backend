@@ -16,6 +16,9 @@ public class DefaultAuthorityEncryptionService implements AuthorityEncryptionSer
      */
     @Override
     public Authority encrypt(Authority authority) {
+        // Set hashed name
+        authority.setHashedName(authority.getName());
+
         return authority;
     }
 
