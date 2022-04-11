@@ -7,6 +7,7 @@ import { EditAuthorityComponent } from './edit-authority/edit-authority.componen
 import { DeleteAuthorityComponent } from './delete-authority/delete-authority.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTagsModule } from "../input-tags/input-tags.module";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-        AuthoritiesRoutingModule
+        AuthoritiesRoutingModule,
+        InputTagsModule
     ]
 })
 export class AuthoritiesModule { }

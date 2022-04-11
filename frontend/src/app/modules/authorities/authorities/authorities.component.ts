@@ -23,6 +23,7 @@ export class AuthoritiesComponent implements OnInit {
     public displayedColumns: string[] = [
         'id',
         'name',
+        'tags',
         'options'
     ];
 
@@ -108,7 +109,7 @@ export class AuthoritiesComponent implements OnInit {
             minWidth: '60vw',
             data: authority
         });
-    
+
         // On close dialog
         ref.afterClosed().subscribe(
             response => {

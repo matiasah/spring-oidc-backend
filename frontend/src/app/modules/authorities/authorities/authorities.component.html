@@ -4,13 +4,13 @@
 
         <div class="w-full flex justify-between">
             <h1 class="title font-bold">Authorities</h1>
-    
+
             <button mat-mini-fab color="accent" class="col-span-1" matTooltip="Create authority" (click)="createEntry()">
                 <mat-icon>add</mat-icon>
             </button>
-    
+
         </div>
-    
+
         <div *ngIf="isLoading | async" class="loading-shade">
             <mat-spinner></mat-spinner>
         </div>
@@ -47,6 +47,26 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let authority">
                     {{ authority.name }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Tags -->
+            <ng-container matColumnDef="tags">
+                <mat-header-cell *matHeaderCellDef>
+                    Tags
+                </mat-header-cell>
+                <mat-cell *matCellDef="let scope">
+
+                    <!-- Chip list -->
+                    <mat-chip-list>
+
+                        <!-- For every tag -->
+                        <mat-chip *ngFor="let tag of scope.tags">
+                            <span>{{ tag }}</span>
+                        </mat-chip>
+
+                    </mat-chip-list>
+
                 </mat-cell>
             </ng-container>
 
