@@ -1,6 +1,7 @@
 package oidc.management.util;
 
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 
 import oidc.management.service.AuthorityService;
@@ -52,6 +53,7 @@ public class DefaultAuthoritySeeder {
         Authority authority = Authority.builder()
                 .name("ROLE_OIDC_ADMIN")
                 .description("Administrator role for OIDC")
+                .tags(Set.of("default"))
                 .build();
 
         // Save the authority
