@@ -4,6 +4,7 @@ import oidc.management.model.Authority;
 import oidc.management.service.AuthorityService;
 import oidc.management.validation.annotations.ValidAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -21,8 +22,16 @@ public class AuthorityValidator implements ConstraintValidator<ValidAuthority, A
     @Autowired
     private AuthorityService authorityService;
 
+    @Transactional
     @Override
     public boolean isValid(Authority authority, ConstraintValidatorContext constraintValidatorContext) {
+        // If authority service is not present
+        if (authorityService == null) {
+
+            // Skip validation
+            return true;
+        }
+
         // If the authority has an id, it means that it already persisted.
         if (authority.getId() != null) {
 

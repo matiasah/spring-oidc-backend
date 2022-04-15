@@ -20,6 +20,7 @@ import lombok.extern.java.Log;
 import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
 import oidc.management.properties.DefaultServiceAccountProperties;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Creates a default service account.
@@ -50,6 +51,7 @@ public class DefaultServiceAccountSeeder {
     /**
      * Creates a default service account.
      */
+    @Transactional
     @PostConstruct
     public void seed() {
 

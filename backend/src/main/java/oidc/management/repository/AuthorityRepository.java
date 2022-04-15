@@ -4,7 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import oidc.management.model.Authority;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,10 +15,13 @@ import java.util.Optional;
  * 
  * @author Matías Hermosilla
  * @since 02-02-2022
- * @see MongoRepository
+ * @see AuthorityRepository
  * @see Authority
  */
-public interface AuthorityRepository extends MongoRepository<Authority, String> {
+@NoRepositoryBean
+public interface AuthorityRepository extends PagingAndSortingRepository<Authority, String> {
+
+    public List<Authority> findAll();
 
     /**
      * Finds an {@link Authority} by its hashed name.

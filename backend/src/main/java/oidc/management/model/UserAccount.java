@@ -7,6 +7,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import oidc.management.validation.annotations.ValidUserAccount;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,6 +23,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -33,8 +38,9 @@ import javax.validation.constraints.NotNull;
  * @see Authority
  * @see oidc.management.service.UserAccountService
  */
-@Document(collection = "users")
 @Builder
+@Document(collection = "users")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -42,10 +48,14 @@ import javax.validation.constraints.NotNull;
 @ValidUserAccount
 public class UserAccount implements UserDetails {
 
-    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @javax.persistence.Id
+    @org.springframework.data.annotation.Id
     private String id;
 
     @DBRef
+    @OneToMany
     private List<Authority> authorities;
 
     @NotNull
@@ -74,6 +84,7 @@ public class UserAccount implements UserDetails {
      * 
      * @see {@link oidc.management.repository.UserAccountRepository#findByTagsContainingIgnoreCase(String, Pageable)}
      **/
+    @ElementCollection
     private Set<String> tags;
 
     @CreatedDate

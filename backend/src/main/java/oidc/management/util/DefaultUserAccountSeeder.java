@@ -17,6 +17,7 @@ import lombok.extern.java.Log;
 import oidc.management.model.Authority;
 import oidc.management.model.UserAccount;
 import oidc.management.properties.DefaultUserAccountProperties;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Creates a default user account.
@@ -47,6 +48,7 @@ public class DefaultUserAccountSeeder {
     /**
      * Creates a default user account.
      */
+    @Transactional
     @PostConstruct
     public void seed() {
 

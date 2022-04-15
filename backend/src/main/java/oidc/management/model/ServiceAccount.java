@@ -3,7 +3,6 @@ package oidc.management.model;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -14,8 +13,8 @@ import oidc.management.serialization.AuthorizationGrantTypeSerializer;
 import oidc.management.serialization.ClientAuthenticationMethodDeserializer;
 import oidc.management.serialization.ClientAuthenticationMethodSerializer;
 import oidc.management.validation.annotations.ValidServiceAccount;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -33,6 +32,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -43,8 +46,9 @@ import javax.validation.constraints.NotNull;
  * @see Scope
  * @see Authority
  */
-@Document(collection = "service_accounts")
 @Builder
+@Document(collection = "service_accounts")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -55,7 +59,10 @@ public class ServiceAccount {
     /**
      * Application id.
      */
-    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @javax.persistence.Id
+    @org.springframework.data.annotation.Id
     private String id;
 
     @NotNull
@@ -85,15 +92,19 @@ public class ServiceAccount {
 
     @JsonSerialize(using = ClientAuthenticationMethodSerializer.class)
     @JsonDeserialize(using = ClientAuthenticationMethodDeserializer.class)
+    @ElementCollection
     private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
 
     @JsonSerialize(using = AuthorizationGrantTypeSerializer.class)
     @JsonDeserialize(using = AuthorizationGrantTypeDeserializer.class)
+    @ElementCollection
     private Set<AuthorizationGrantType> authorizationGrantTypes;
 
+    @ElementCollection
     private Set<String> redirectUris;
 
     @DBRef
+    @OneToMany
     private Set<Scope> scopes;
 
     /**
@@ -114,6 +125,7 @@ public class ServiceAccount {
      * Authorities
      */
     @DBRef
+    @OneToMany
     private List<Authority> authorities;
 
     /**
@@ -122,6 +134,7 @@ public class ServiceAccount {
      *
      * @see {@link oidc.management.repository.ServiceAccountRepository#findByTagsContainingIgnoreCase(String, Pageable)}
      **/
+    @ElementCollection
     private Set<String> tags;
 
     @JsonIgnore

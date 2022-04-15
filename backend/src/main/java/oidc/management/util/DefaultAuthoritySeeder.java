@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
 import oidc.management.model.Authority;
 import oidc.management.properties.DefaultAuthorityProperties;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Creates default authorities.
@@ -32,6 +33,7 @@ public class DefaultAuthoritySeeder {
     /**
      * Creates a default user account.
      */
+    @Transactional
     @PostConstruct
     public void seed() {
 

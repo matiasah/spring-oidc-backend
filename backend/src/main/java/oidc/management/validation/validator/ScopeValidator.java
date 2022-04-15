@@ -4,6 +4,7 @@ import oidc.management.model.Scope;
 import oidc.management.service.ScopeService;
 import oidc.management.validation.annotations.ValidScope;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -21,8 +22,17 @@ public class ScopeValidator implements ConstraintValidator<ValidScope, Scope> {
     @Autowired
     private ScopeService scopeService;
 
+    @Transactional
     @Override
     public boolean isValid(Scope scope, ConstraintValidatorContext constraintValidatorContext) {
+        // If scope service is not present
+        if (scopeService == null) {
+
+            // Skip validation
+            return true;
+        }
+
+
         // If the scope has an id, it means it is already persisted.
         if (scope.getId() != null) {
 

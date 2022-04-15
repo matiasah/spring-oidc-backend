@@ -4,6 +4,7 @@ import oidc.management.model.ServiceAccount;
 import oidc.management.service.ServiceAccountService;
 import oidc.management.validation.annotations.ValidServiceAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -21,8 +22,16 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
     @Autowired
     private ServiceAccountService serviceAccountService;
 
+    @Transactional
     @Override
     public boolean isValid(ServiceAccount serviceAccount, ConstraintValidatorContext constraintValidatorContext) {
+        // If service account service is not present
+        if (serviceAccountService == null) {
+
+            // Skip validation
+            return true;
+        }
+
         // If the serviceAccount has an id, it means it is already persisted.
         if (serviceAccount.getId() != null) {
 

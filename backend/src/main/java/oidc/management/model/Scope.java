@@ -2,7 +2,7 @@ package oidc.management.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import oidc.management.validation.annotations.ValidScope;
-import org.springframework.data.annotation.Id;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -22,14 +25,18 @@ import java.util.Set;
  */
 @Builder
 @Document(collection = "scopes")
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
 @ValidScope
 public class Scope {
-    
-    @Id
+
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @javax.persistence.Id
+    @org.springframework.data.annotation.Id
     private String id;
 
     @NotNull
@@ -51,6 +58,7 @@ public class Scope {
      *
      * @see {@link oidc.management.repository.ScopeRepository#findByTagsContainingIgnoreCase(String, Pageable)}
      **/
+    @ElementCollection
     private Set<String> tags;
 
 }

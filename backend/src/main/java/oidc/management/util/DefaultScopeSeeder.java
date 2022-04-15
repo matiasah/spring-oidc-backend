@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
 import oidc.management.model.Scope;
 import oidc.management.properties.DefaultScopeProperties;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Creates default scopes.
@@ -58,11 +59,7 @@ public class DefaultScopeSeeder {
     @Autowired
     private ScopeService scopeService;
 
-    public DefaultScopeSeeder() {
-        // Log constructor
-        log.info("Initializing default scope seeder");
-    }
-
+    @Transactional
     @PostConstruct
     public void seed() {
 

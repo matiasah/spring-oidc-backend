@@ -1,21 +1,26 @@
 package oidc.management.repository;
 
+import java.util.List;
 import java.util.Optional;
 
-import oidc.management.model.UserAccount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import oidc.management.model.ServiceAccount;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * OIDC Service Account Repository.
  * 
  * @author Matías Hermosilla
  * @since 16-01-2022
- * @see MongoRepository
+ * @see PagingAndSortingRepository
+ * @see ServiceAccount
  */
-public interface ServiceAccountRepository extends MongoRepository<ServiceAccount, String> {
+@NoRepositoryBean
+public interface ServiceAccountRepository extends PagingAndSortingRepository<ServiceAccount, String> {
+
+    public List<ServiceAccount> findAll();
 
     /**
      * Finds a client by client id.

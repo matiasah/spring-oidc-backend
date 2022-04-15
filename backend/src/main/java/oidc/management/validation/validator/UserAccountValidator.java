@@ -4,6 +4,7 @@ import oidc.management.model.UserAccount;
 import oidc.management.service.UserAccountService;
 import oidc.management.validation.annotations.ValidUserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -21,8 +22,16 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
     @Autowired
     private UserAccountService userAccountService;
 
+    @Transactional
     @Override
     public boolean isValid(UserAccount userAccount, ConstraintValidatorContext constraintValidatorContext) {
+        // If user account service is not present
+        if (userAccountService == null) {
+
+            // Skip validation
+            return true;
+        }
+
         // If user account has an id
         if (userAccount.getId() != null) {
 

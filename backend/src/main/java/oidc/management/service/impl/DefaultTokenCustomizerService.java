@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Service;
 import oidc.management.model.Authority;
 import oidc.management.model.ServiceAccount;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Default implementation of {@link OAuth2TokenCustomizer} that adds the
@@ -37,6 +38,7 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
     @Autowired
     private ServiceAccountService serviceAccountService;
 
+    @Transactional
     @Override
     public void customize(JwtEncodingContext jwtEncodingContext) {
 

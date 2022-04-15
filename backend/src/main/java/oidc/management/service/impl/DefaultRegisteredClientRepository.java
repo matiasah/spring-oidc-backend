@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Service;
 import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Default implementation of {@link RegisteredClientRepository}.
@@ -30,6 +31,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Transactional
     @Override
     public RegisteredClient findById(String id) {
         // Find Client
@@ -62,6 +64,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
             .build();
     }
 
+    @Transactional
     @Override
     public RegisteredClient findByClientId(String clientId) {
 

@@ -1,15 +1,16 @@
 package oidc.management.model;
 
+import lombok.*;
 import oidc.management.validation.annotations.ValidAuthority;
-import org.springframework.data.annotation.Id;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import oidc.management.repository.AuthorityRepository;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -23,12 +24,18 @@ import java.util.Set;
  */
 @Builder
 @Document(collection = "authorities")
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
 @ValidAuthority
 public class Authority implements GrantedAuthority {
 
-    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @javax.persistence.Id
+    @org.springframework.data.annotation.Id
     private String id;
 
     @NotNull
@@ -42,7 +49,7 @@ public class Authority implements GrantedAuthority {
     private String hashedName;
 
     private String description;
-    
+
     @Override
     public String getAuthority() {
         return name;
@@ -54,6 +61,7 @@ public class Authority implements GrantedAuthority {
      * 
      * @see {@link AuthorityRepository#findByTagsContainingIgnoreCase(String, Pageable)}
      **/
+    @ElementCollection
     private Set<String> tags;
     
 }

@@ -1,20 +1,25 @@
 package oidc.management.repository;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import oidc.management.model.UserAccount;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * @author Matías Hermosilla
  * @since 16-01-2022
- * @see MongoRepository
+ * @see PagingAndSortingRepository
  * @see UserAccount
  * @see oidc.management.service.UserAccountService
  * @see oidc.management.service.UserAccountService#findByUsername(String)
  */
-public interface UserAccountRepository extends MongoRepository<UserAccount, String> {
+@NoRepositoryBean
+public interface UserAccountRepository extends PagingAndSortingRepository<UserAccount, String> {
+
+    public List<UserAccount> findAll();
 
     /**
      * Finds a user by its username.

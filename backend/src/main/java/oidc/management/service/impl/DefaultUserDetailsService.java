@@ -1,7 +1,9 @@
 package oidc.management.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
+import oidc.management.model.Authority;
 import oidc.management.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import oidc.management.model.UserAccount;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Default implementation of {@link UserAccountService}
@@ -27,6 +30,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -40,8 +44,21 @@ public class DefaultUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
+        // Get user
+        UserAccount user = userHolder.get();
+
+        // Fetch authorities
+        List<Authority> authorities = user.getAuthorities();
+
+        // If authorities is not null
+        if (authorities != null) {
+
+            // Fetch size (for JPA)
+            authorities.size();
+        }
+
         // Return user
-        return userHolder.get();
+        return user;
     }
 
     
