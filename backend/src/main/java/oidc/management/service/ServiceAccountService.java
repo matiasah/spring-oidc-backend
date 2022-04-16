@@ -17,6 +17,8 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ServiceAccountService {
 
+    public ServiceAccount.ServiceAccountBuilder entityBuilder();
+
     /**
      * Find all Service Accounts.
      *

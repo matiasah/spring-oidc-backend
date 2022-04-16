@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import oidc.management.model.Authority;
 import oidc.management.model.Scope;
 import oidc.management.model.ServiceAccount;
 import oidc.management.service.ServiceAccountService;
@@ -79,7 +80,7 @@ public class AuthorizationInfoController {
                 .collect(Collectors.toSet());
 
         // Get Service Account
-        final ServiceAccount serviceAccount = optServiceAccount.get();
+        final ServiceAccount<? extends Scope, ? extends Authority> serviceAccount = optServiceAccount.get();
 
         // Get scopes
         final Set<Scope> scopes = serviceAccount

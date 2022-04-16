@@ -5,38 +5,12 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import oidc.management.serialization.AuthorizationGrantTypeDeserializer;
-import oidc.management.serialization.AuthorizationGrantTypeSerializer;
-import oidc.management.serialization.ClientAuthenticationMethodDeserializer;
-import oidc.management.serialization.ClientAuthenticationMethodSerializer;
-import oidc.management.validation.annotations.ValidServiceAccount;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 /**
  * OIDC Service Account model.
@@ -46,116 +20,107 @@ import javax.validation.constraints.NotNull;
  * @see Scope
  * @see Authority
  */
-@Builder
-@Document(collection = "service_accounts")
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(of = "id")
-@ValidServiceAccount
-public class ServiceAccount {
-    
-    /**
-     * Application id.
-     */
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @javax.persistence.Id
-    @org.springframework.data.annotation.Id
-    private String id;
+public interface ServiceAccount<S extends Scope, A extends Authority> {
 
-    @NotNull
-    private String clientId;
+    public String getId();
 
-    /**
-     * The hashed client id of the service account, for searching purposes.
-     * 
-     * @see {@link oidc.management.service.ServiceAccountEncryptionService#getHashedClientId(String)}
-     */
-    @JsonIgnore
-    private String hashedClientId;
+    public void setId(String id);
 
-    @CreatedDate
-    private Instant clientIdIssuedAt;
+    public String getClientId();
 
-    @NotNull
-    @Getter(onMethod_ = {@JsonIgnore})
-    @Setter(onMethod_ = {@JsonSetter})
-    private String clientSecret;
+    public void setClientId(String clientId);
 
-    private Instant clientSecretExpiresAt;
+    public String getHashedClientId();
 
-    private String clientName;
+    public void setHashedClientId(String hashedClientId);
 
-    private String clientDescription;
+    public Instant getClientIdIssuedAt();
 
-    @JsonSerialize(using = ClientAuthenticationMethodSerializer.class)
-    @JsonDeserialize(using = ClientAuthenticationMethodDeserializer.class)
-    @ElementCollection
-    private Set<ClientAuthenticationMethod> clientAuthenticationMethods;
+    public void setClientIdIssuedAt(Instant clientIdIssuedAt);
 
-    @JsonSerialize(using = AuthorizationGrantTypeSerializer.class)
-    @JsonDeserialize(using = AuthorizationGrantTypeDeserializer.class)
-    @ElementCollection
-    private Set<AuthorizationGrantType> authorizationGrantTypes;
+    public String getClientSecret();
 
-    @ElementCollection
-    private Set<String> redirectUris;
+    public void setClientSecret(String clientSecret);
 
-    @DBRef
-    @OneToMany
-    private Set<Scope> scopes;
+    public Instant getClientSecretExpiresAt();
 
-    /**
-     * OIDC Client settings.
-     */
-    private boolean requireAuthenticationConsent = false;
-    private boolean requireProofKey = false;
+    public void setClientSecretExpiresAt(Instant clientSecretExpiresAt);
 
-    /**
-     * JWT Token settings
-     */
-    private Duration accessTokenTimeToLive;
-    private SignatureAlgorithm idTokenSignatureAlgorithm;
-    private Duration refreshTokenTimeToLive;
-    private boolean reuseRefreshTokens = true;
+    public String getClientName();
 
-    /**
-     * Authorities
-     */
-    @DBRef
-    @OneToMany
-    private List<Authority> authorities;
+    public void setClientName(String clientName);
 
-    /**
-     * The service account's tags
-     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING SERVICE ACCOUNTS.
-     *
-     * @see {@link oidc.management.repository.ServiceAccountRepository#findByTagsContainingIgnoreCase(String, Pageable)}
-     **/
-    @ElementCollection
-    private Set<String> tags;
+    public String getClientDescription();
+
+    public void setClientDescription(String clientDescription);
+
+    public Set<ClientAuthenticationMethod> getClientAuthenticationMethods();
+
+    public void setClientAuthenticationMethods(Set<ClientAuthenticationMethod> clientAuthenticationMethods);
+
+    public Set<AuthorizationGrantType> getAuthorizationGrantTypes();
+
+    public void setAuthorizationGrantTypes(Set<AuthorizationGrantType> authorizationGrantTypes);
+
+    public Set<String> getRedirectUris();
+
+    public void setRedirectUris(Set<String> redirectUris);
+
+    public Set<S> getScopes();
+
+    public void setScopes(Set<S> scopes);
+
+    public boolean isRequireAuthenticationConsent();
+
+    public void setRequireAuthenticationConsent(boolean requireAuthenticationConsent);
+
+    public boolean isRequireProofKey();
+
+    public void setRequireProofKey(boolean requireProofKey);
+
+    public Duration getAccessTokenTimeToLive();
+
+    public void setAccessTokenTimeToLive(Duration accessTokenTimeToLive);
+
+    public SignatureAlgorithm getIdTokenSignatureAlgorithm();
+
+    public void setIdTokenSignatureAlgorithm(SignatureAlgorithm idTokenSignatureAlgorithm);
+
+    public Duration getRefreshTokenTimeToLive();
+
+    public void setRefreshTokenTimeToLive(Duration refreshTokenTimeToLive);
+
+    public boolean isReuseRefreshTokens();
+
+    public void setReuseRefreshTokens(boolean reuseRefreshTokens);
+
+    public List<A> getAuthorities();
+
+    public void setAuthorities(List<A> authorities);
+
+    public Set<String> getTags();
+
+    public void setTags(Set<String> tags);
 
     @JsonIgnore
     @Transient
-    public ClientSettings getClientSettings() {
+    public default ClientSettings getClientSettings() {
         return ClientSettings.builder()
-                .requireAuthorizationConsent(this.requireAuthenticationConsent)
-                .requireProofKey(this.requireProofKey)
+                .requireAuthorizationConsent(this.isRequireAuthenticationConsent())
+                .requireProofKey(this.isRequireProofKey())
                 .build();
     }
 
     @JsonIgnore
     @Transient
-    public void setClientSettings(ClientSettings clientSettings) {
+    public default void setClientSettings(ClientSettings clientSettings) {
         this.setRequireAuthenticationConsent(clientSettings.isRequireAuthorizationConsent());
         this.setRequireProofKey(clientSettings.isRequireProofKey());
     }
 
     @JsonIgnore
     @Transient
-    public TokenSettings getTokenSettings() {
+    public default TokenSettings getTokenSettings() {
         return TokenSettings.builder()
                 .accessTokenTimeToLive(this.getAccessTokenTimeToLive())
                 .idTokenSignatureAlgorithm(this.getIdTokenSignatureAlgorithm())
@@ -166,7 +131,7 @@ public class ServiceAccount {
 
     @JsonIgnore
     @Transient
-    public void setTokenSettings(TokenSettings tokenSettings) {
+    public default void setTokenSettings(TokenSettings tokenSettings) {
         this.setAccessTokenTimeToLive(tokenSettings.getAccessTokenTimeToLive());
         this.setIdTokenSignatureAlgorithm(tokenSettings.getIdTokenSignatureAlgorithm());
         this.setRefreshTokenTimeToLive(tokenSettings.getRefreshTokenTimeToLive());
@@ -176,7 +141,49 @@ public class ServiceAccount {
     /**
      * Service Account builder
      */
-    public static class ServiceAccountBuilder {
+    public interface ServiceAccountBuilder<S, A> {
+
+        public ServiceAccountBuilder id(String id);
+
+        public ServiceAccountBuilder clientId(String clientId);
+
+        public ServiceAccountBuilder hashedClientId(String hashedClientId);
+
+        public ServiceAccountBuilder clientIdIssuedAt(Instant clientIdIssuedAt);
+
+        public ServiceAccountBuilder clientSecret(String clientSecret);
+
+        public ServiceAccountBuilder clientSecretExpiresAt(Instant clientSecretExpiresAt);
+
+        public ServiceAccountBuilder clientName(String clientName);
+
+        public ServiceAccountBuilder clientDescription(String clientDescription);
+
+        public ServiceAccountBuilder clientAuthenticationMethods(Set<ClientAuthenticationMethod> clientAuthenticationMethods);
+
+        public ServiceAccountBuilder authorizationGrantTypes(Set<AuthorizationGrantType> authorizationGrantTypes);
+
+        public ServiceAccountBuilder redirectUris(Set<String> redirectUris);
+
+        public ServiceAccountBuilder scopes(Set<S> scopes);
+
+        public ServiceAccountBuilder requireAuthenticationConsent(boolean requireAuthenticationConsent);
+
+        public ServiceAccountBuilder requireProofKey(boolean requireProofKey);
+
+        public ServiceAccountBuilder accessTokenTimeToLive(Duration accessTokenTimeToLive);
+
+        public ServiceAccountBuilder idTokenSignatureAlgorithm(SignatureAlgorithm idTokenSignatureAlgorithm);
+
+        public ServiceAccountBuilder refreshTokenTimeToLive(Duration refreshTokenTimeToLive);
+
+        public ServiceAccountBuilder reuseRefreshTokens(boolean reuseRefreshTokens);
+
+        public ServiceAccountBuilder authorities(List<A> authorities);
+
+        public ServiceAccountBuilder tags(Set<String> tags);
+
+        public ServiceAccount build();
 
         /**
          * Sets client settings
@@ -184,7 +191,7 @@ public class ServiceAccount {
          * @param clientSettings Client settings
          * @return Service Account Builder
          */
-        public ServiceAccountBuilder clientSettings(ClientSettings clientSettings) {
+        public default ServiceAccountBuilder clientSettings(ClientSettings clientSettings) {
             // Set client settings
             this.requireAuthenticationConsent(clientSettings.isRequireAuthorizationConsent());
             this.requireProofKey(clientSettings.isRequireProofKey());
@@ -199,7 +206,7 @@ public class ServiceAccount {
          * @param tokenSettings Token settings
          * @return Service Account Builder
          */
-        public ServiceAccountBuilder tokenSettings(TokenSettings tokenSettings) {
+        public default ServiceAccountBuilder tokenSettings(TokenSettings tokenSettings) {
             // Set token settings
             this.accessTokenTimeToLive(tokenSettings.getAccessTokenTimeToLive());
             this.idTokenSignatureAlgorithm(tokenSettings.getIdTokenSignatureAlgorithm());

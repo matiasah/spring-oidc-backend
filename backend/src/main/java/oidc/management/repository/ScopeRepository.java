@@ -21,9 +21,11 @@ import java.util.Optional;
  * @see Scope
  */
 @NoRepositoryBean
-public interface ScopeRepository extends PagingAndSortingRepository<Scope, String> {
+public interface ScopeRepository<T extends Scope> extends PagingAndSortingRepository<T, String> {
 
-    public List<Scope> findAll();
+    public Scope.ScopeBuilder entityBuilder();
+
+    public List<T> findAll();
 
     /**
      * Finds a {@link Scope} by its hashed name.

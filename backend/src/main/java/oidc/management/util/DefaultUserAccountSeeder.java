@@ -68,7 +68,7 @@ public class DefaultUserAccountSeeder {
             if (!optUserAccount.isPresent()) {
 
                 // Create the user account object
-                UserAccount userAccount = UserAccount.builder()
+                UserAccount userAccount = userAccountService.entityBuilder()
                         .username(username)
                         .password(passwordEncoder.encode(defaultUserAccountProperties.getPassword()))
                         .accountNonExpired(true)

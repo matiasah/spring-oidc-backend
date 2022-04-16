@@ -15,6 +15,8 @@ import java.util.Optional;
  */
 public interface AuthorityService {
 
+    public Authority.AuthorityBuilder entityBuilder();
+
     /**
      * Finds all {@link Authority}s.
      *

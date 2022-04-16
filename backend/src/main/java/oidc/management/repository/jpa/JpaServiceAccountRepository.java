@@ -1,6 +1,7 @@
 package oidc.management.repository.jpa;
 
 import oidc.management.model.ServiceAccount;
+import oidc.management.model.jpa.JpaServiceAccount;
 import oidc.management.repository.ServiceAccountRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
@@ -13,6 +14,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 14-04-2022
  */
 @ConditionalOnBean(JpaRepositoriesAutoConfiguration.class)
-public interface JpaServiceAccountRepository extends ServiceAccountRepository, JpaRepository<ServiceAccount, String> {
+public interface JpaServiceAccountRepository extends ServiceAccountRepository<JpaServiceAccount>, JpaRepository<JpaServiceAccount, String> {
+
+    @Override
+    public default ServiceAccount.ServiceAccountBuilder entityBuilder() {
+        return JpaServiceAccount.builder();
+    }
 
 }

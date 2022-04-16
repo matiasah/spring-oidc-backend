@@ -15,6 +15,8 @@ import java.util.Optional;
  */
 public interface ScopeService {
 
+    public Scope.ScopeBuilder entityBuilder();
+
     /**
      * Finds all {@link Scope}s.
      *

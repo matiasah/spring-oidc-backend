@@ -49,10 +49,13 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
                     return true;
                 }
 
+                // The user account is not valid
+                return false;
+
             }
 
-            // The user account is not valid
-            return false;
+            // The user account is valid
+            return true;
         }
 
         // Find a user account with the same name

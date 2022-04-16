@@ -9,11 +9,10 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import oidc.management.validation.annotations.ValidUserAccount;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Reference;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,59 +37,94 @@ import javax.validation.constraints.NotNull;
  * @see Authority
  * @see oidc.management.service.UserAccountService
  */
-@Builder
-@Document(collection = "users")
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@EqualsAndHashCode(of = "id")
-@ValidUserAccount
-public class UserAccount implements UserDetails {
+public interface UserAccount<A extends Authority> extends UserDetails {
 
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @javax.persistence.Id
-    @org.springframework.data.annotation.Id
-    private String id;
+    public String getId();
 
-    @DBRef
-    @OneToMany
-    private List<Authority> authorities;
+    public void setId(String id);
 
-    @NotNull
-    @Getter(onMethod_ = {@JsonIgnore})
-    @Setter(onMethod_ = {@JsonSetter})
-    private String password;
+    public List<A> getAuthorities();
 
-    @NotNull
-    private String username;
+    public void setAuthorities(List<A> authorities);
 
-    @JsonIgnore
-    private String hashedUsername;
+    public String getPassword();
 
-    private boolean accountNonExpired = true;
-    private boolean accountNonLocked = true;
-    private boolean credentialsNonExpired = true;
-    private boolean enabled = true;
+    public void setPassword(String password);
 
-    private String firstName;
+    public String getUsername();
 
-    private String lastName;
+    public void setUsername(String username);
 
-    /**
-     * The user's tags
-     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING USER ACCOUNTS.
-     * 
-     * @see {@link oidc.management.repository.UserAccountRepository#findByTagsContainingIgnoreCase(String, Pageable)}
-     **/
-    @ElementCollection
-    private Set<String> tags;
+    public String getHashedUsername();
 
-    @CreatedDate
-    private Instant createdAt;
+    public void setHashedUsername(String hashedUsername);
 
-    @LastModifiedDate
-    private Instant updatedAt;
+    public boolean isAccountNonExpired();
+
+    public void setAccountNonExpired(boolean accountNonExpired);
+
+    public boolean isAccountNonLocked();
+
+    public void setAccountNonLocked(boolean accountNonLocked);
+
+    public boolean isCredentialsNonExpired();
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired);
+
+    public boolean isEnabled();
+
+    public void setEnabled(boolean enabled);
+
+    public String getFirstName();
+
+    public void setFirstName(String firstName);
+
+    public String getLastName();
+
+    public Set<String> getTags();
+
+    public void setTags(Set<String> tags);
+
+    public Instant getCreatedAt();
+
+    public void setCreatedAt(Instant createdAt);
+
+    public Instant getUpdatedAt();
+
+    public void setUpdatedAt(Instant updatedAt);
+
+    public interface UserAccountBuilder<A> {
+
+        public UserAccountBuilder id(String id);
+
+        public UserAccountBuilder authorities(List<A> authorities);
+
+        public UserAccountBuilder password(String password);
+
+        public UserAccountBuilder username(String username);
+
+        public UserAccountBuilder hashedUsername(String hashedUsername);
+
+        public UserAccountBuilder accountNonExpired(boolean accountNonExpired);
+
+        public UserAccountBuilder accountNonLocked(boolean accountNonLocked);
+
+        public UserAccountBuilder credentialsNonExpired(boolean credentialsNonExpired);
+
+        public UserAccountBuilder enabled(boolean enabled);
+
+        public UserAccountBuilder firstName(String firstName);
+
+        public UserAccountBuilder lastName(String lastName);
+
+        public UserAccountBuilder tags(Set<String> tags);
+
+        public UserAccountBuilder createdAt(Instant createdAt);
+
+        public UserAccountBuilder updatedAt(Instant updatedAt);
+
+        public UserAccount build();
+
+    }
     
 }

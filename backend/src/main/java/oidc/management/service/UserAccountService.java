@@ -17,6 +17,8 @@ import java.util.Optional;
  */
 public interface UserAccountService {
 
+    public UserAccount.UserAccountBuilder entityBuilder();
+
     /**
      * Find all the {@link UserAccount}s.
      *

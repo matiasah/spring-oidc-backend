@@ -52,7 +52,7 @@ public class DefaultAuthoritySeeder {
         }
 
         // Create the authority object
-        Authority authority = Authority.builder()
+        Authority authority = authorityService.entityBuilder()
                 .name("ROLE_OIDC_ADMIN")
                 .description("Administrator role for OIDC")
                 .tags(Set.of("default"))

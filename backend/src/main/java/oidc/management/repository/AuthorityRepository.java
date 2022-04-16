@@ -19,9 +19,11 @@ import java.util.Optional;
  * @see Authority
  */
 @NoRepositoryBean
-public interface AuthorityRepository extends PagingAndSortingRepository<Authority, String> {
+public interface AuthorityRepository<T extends Authority> extends PagingAndSortingRepository<T, String> {
 
-    public List<Authority> findAll();
+    public Authority.AuthorityBuilder entityBuilder();
+
+    public List<T> findAll();
 
     /**
      * Finds an {@link Authority} by its hashed name.

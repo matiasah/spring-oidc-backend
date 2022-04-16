@@ -49,10 +49,13 @@ public class ScopeValidator implements ConstraintValidator<ValidScope, Scope> {
                     return true;
                 }
 
+                // The scope is not valid.
+                return false;
+
             }
 
-            // The scope is not valid.
-            return false;
+            // The scope is valid.
+            return true;
         }
 
         // Find a scope with the same name.

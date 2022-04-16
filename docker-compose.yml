@@ -40,17 +40,21 @@ services:
       SPRING_CLOUD_CONSUL_PORT: 8500
 
       # MongoDB properties
+      SPRING_AUTOCONFIGURE_EXCLUDE: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration, org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_DATA_MONGODB_PORT: 27017
-      #SPRING_AUTOCONFIGURE_EXCLUDE_0: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
-      #SPRING_AUTOCONFIGURE_EXCLUDE_1: org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
-      #SPRING_AUTOCONFIGURE_EXCLUDE_2: org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration
 
       # JPA properties
-      SPRING_AUTOCONFIGURE_EXCLUDE_0: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      #SPRING_AUTOCONFIGURE_EXCLUDE: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration, org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration
       #SPRING_DATASOURCE_URL: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
       #SPRING_DATASOURCE_USERNAME: sa
       #SPRING_DATASOURCE_PASSWORD: sa
+
+      # ElasticSearch properties
+      #SPRING_AUTOCONFIGURE_EXCLUDE: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration, org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jpa.JpaRepositoriesAutoConfiguration
+      #SPRING_ELASTICSEARCH_URIS: http://elasticsearch:9200
+      #SPRING_ELASTICSEARCH_USERNAME: elastic
+      #SPRING_ELASTICSEARCH_PASSWORD: elastic
 
       # Logging properties
       LOG_LEVEL: INFO
@@ -75,13 +79,34 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./data/:/data/db
+      - ./data/mongodb/:/data/db
     networks:
       backend:
         aliases:
           - mongodb
     environment:
       TZ: America/Santiago
+
+  # Elastic Search
+  elastic-search:
+    image: elasticsearch:8.1.2
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./data/elastic-search/:/usr/share/elasticsearch/data
+    networks:
+      backend:
+        aliases:
+          - elasticsearch
+    environment:
+      TZ: "America/Santiago"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: elastic
+      bootstrap.memory_lock: "false"
+      discovery.type: "single-node"
+      xpack.security.enabled: "false"
 
 networks:
   backend:

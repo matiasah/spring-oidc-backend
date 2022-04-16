@@ -1,10 +1,12 @@
 package oidc.management.service.impl;
 
+import lombok.extern.log4j.Log4j2;
 import oidc.management.model.Authority;
 import oidc.management.repository.AuthorityRepository;
 import oidc.management.service.AuthorityEncryptionService;
 import oidc.management.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
  * @author Matías Hermosilla
  * @since 10-04-2022
  */
+@Log4j2
 public class DefaultAuthorityService implements AuthorityService {
 
     @Autowired
@@ -27,13 +30,18 @@ public class DefaultAuthorityService implements AuthorityService {
     private AuthorityEncryptionService authorityEncryptionService;
 
     @Override
+    public Authority.AuthorityBuilder entityBuilder() {
+        return authorityRepository.entityBuilder();
+    }
+
+    @Override
     public List<Authority> findAll() {
         // Find all authorities
-        return authorityRepository.findAll()
+        return (List<Authority>) authorityRepository.findAll()
                 .stream()
                 .map(
                         // Decrypt authority
-                        authority -> authorityEncryptionService.decrypt(authority)
+                        authority -> authorityEncryptionService.decrypt((Authority) authority)
                 )
                 .collect(Collectors.toList());
     }
@@ -50,7 +58,7 @@ public class DefaultAuthorityService implements AuthorityService {
         return authorityRepository.findByTagsContainingIgnoreCase(search, pageable)
                 .map(
                         // Decrypt authority
-                        authority -> authorityEncryptionService.decrypt(authority)
+                        authority -> authorityEncryptionService.decrypt((Authority) authority)
                 );
     }
 
@@ -60,7 +68,7 @@ public class DefaultAuthorityService implements AuthorityService {
         return authorityRepository.findById(id)
                 .map(
                         // Decrypt authority
-                        authority -> authorityEncryptionService.decrypt(authority)
+                        authority -> authorityEncryptionService.decrypt((Authority) authority)
                 );
     }
 
@@ -70,21 +78,39 @@ public class DefaultAuthorityService implements AuthorityService {
         return authorityRepository.findByHashedName(authorityEncryptionService.getHashedName(name))
                 .map(
                         // Decrypt authority
-                        authority -> authorityEncryptionService.decrypt(authority)
+                        authority -> authorityEncryptionService.decrypt((Authority) authority)
                 );
     }
 
     @Override
     public Authority save(Authority authority) {
-        // Encrypt authority before saving it
-        return authorityRepository.save(
-                authorityEncryptionService.encrypt(authority)
-        );
+        // Encrypt authority
+        Authority encryptedAuthority = authorityEncryptionService.encrypt(authority);
+
+        try {
+            // Save authority
+            this.authorityRepository.save(encryptedAuthority);
+        } catch (DataAccessResourceFailureException e) {
+            // Failed to read response from database
+            log.warn("Problems persisting authority", e);
+        }
+
+        // Set id
+        authority.setId(encryptedAuthority.getId());
+
+        // Return authority
+        return authority;
     }
 
     @Override
     public void deleteById(String id) {
-        // Delete authority by its id
-        authorityRepository.deleteById(id);
+        try {
+            // Delete authority by its id
+            authorityRepository.deleteById(id);
+        } catch (DataAccessResourceFailureException e) {
+            // Failed to read response from database
+            log.warn("Problems deleting authority", e);
+        }
     }
+
 }

@@ -49,10 +49,13 @@ public class AuthorityValidator implements ConstraintValidator<ValidAuthority, A
                     return true;
                 }
 
+                // The authority is not valid.
+                return false;
+
             }
 
-            // The authority is not valid.
-            return false;
+            // The authority is valid.
+            return true;
         }
 
         // Find an authority with the same name.

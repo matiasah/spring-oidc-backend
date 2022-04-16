@@ -18,9 +18,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @see ServiceAccount
  */
 @NoRepositoryBean
-public interface ServiceAccountRepository extends PagingAndSortingRepository<ServiceAccount, String> {
+public interface ServiceAccountRepository<T extends ServiceAccount> extends PagingAndSortingRepository<T, String> {
 
-    public List<ServiceAccount> findAll();
+    public ServiceAccount.ServiceAccountBuilder entityBuilder();
+
+    public List<T> findAll();
 
     /**
      * Finds a client by client id.

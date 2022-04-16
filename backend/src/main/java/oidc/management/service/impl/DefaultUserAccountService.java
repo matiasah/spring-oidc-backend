@@ -1,10 +1,12 @@
 package oidc.management.service.impl;
 
+import lombok.extern.log4j.Log4j2;
 import oidc.management.model.UserAccount;
 import oidc.management.repository.UserAccountRepository;
 import oidc.management.service.UserAccountEncryptionService;
 import oidc.management.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
  * @author Matías Hermosilla
  * @since 27-03-2022
  */
+@Log4j2
 public class DefaultUserAccountService implements UserAccountService {
 
     @Autowired
@@ -27,13 +30,18 @@ public class DefaultUserAccountService implements UserAccountService {
     private UserAccountEncryptionService userAccountEncryptionService;
 
     @Override
+    public UserAccount.UserAccountBuilder entityBuilder() {
+        return userAccountRepository.entityBuilder();
+    }
+
+    @Override
     public List<UserAccount> findAll() {
         // Find all user accounts
-        return this.userAccountRepository.findAll()
+        return (List<UserAccount>) this.userAccountRepository.findAll()
                 .stream()
                 .map(
                         // Decrypt user accounts
-                        userAccount -> this.userAccountEncryptionService.decrypt(userAccount)
+                        userAccount -> this.userAccountEncryptionService.decrypt((UserAccount) userAccount)
                 )
                 .collect(Collectors.toList());
     }
@@ -52,7 +60,7 @@ public class DefaultUserAccountService implements UserAccountService {
         return this.userAccountRepository.findByTagsContainingIgnoreCase(search, pageable)
                 .map(
                         // Decrypt user accounts
-                        userAccount -> this.userAccountEncryptionService.decrypt(userAccount)
+                        userAccount -> this.userAccountEncryptionService.decrypt((UserAccount) userAccount)
                 );
     }
 
@@ -62,7 +70,7 @@ public class DefaultUserAccountService implements UserAccountService {
         return this.userAccountRepository.findById(id)
                 .map(
                         // Decrypt user account
-                        userAccount -> this.userAccountEncryptionService.decrypt(userAccount)
+                        userAccount -> this.userAccountEncryptionService.decrypt((UserAccount) userAccount)
                 );
     }
 
@@ -72,21 +80,39 @@ public class DefaultUserAccountService implements UserAccountService {
         return this.userAccountRepository.findByHashedUsername(this.userAccountEncryptionService.hashUsername(username))
                 .map(
                         // Decrypt user account
-                        userAccount -> this.userAccountEncryptionService.decrypt(userAccount)
+                        userAccount -> this.userAccountEncryptionService.decrypt((UserAccount) userAccount)
                 );
     }
 
     @Override
     public UserAccount save(UserAccount userAccount) {
-        // Encrypt user account before saving
-        return this.userAccountRepository.save(
-                this.userAccountEncryptionService.encrypt(userAccount)
-        );
+        // Encrypt user account
+        UserAccount encryptedUserAccount = this.userAccountEncryptionService.encrypt(userAccount);
+
+        try {
+            // Save user account
+            this.userAccountRepository.save(encryptedUserAccount);
+        } catch (DataAccessResourceFailureException e) {
+            // Failed to read response from database
+            log.warn("Problems saving user account", e);
+        }
+
+        // Set id
+        userAccount.setId(encryptedUserAccount.getId());
+
+        // Return user account
+        return userAccount;
     }
 
     @Override
     public void deleteById(String id) {
-        this.userAccountRepository.deleteById(id);
+        try {
+            // Delete user account by id
+            this.userAccountRepository.deleteById(id);
+        } catch (DataAccessResourceFailureException e) {
+            // Failed to read response from database
+            log.warn("Problems deleting user account", e);
+        }
     }
 
 }

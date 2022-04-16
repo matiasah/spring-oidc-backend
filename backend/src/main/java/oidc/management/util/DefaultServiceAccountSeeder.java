@@ -46,6 +46,9 @@ public class DefaultServiceAccountSeeder {
     private ScopeService scopeService;
 
     @Autowired
+    private DefaultScopeSeeder defaultScopeSeeder;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     /**
@@ -67,11 +70,14 @@ public class DefaultServiceAccountSeeder {
 
         }
 
+        // List of default scopes
+        List<Scope> defaultScopes = defaultScopeSeeder.getDefaultScopes();
+
         // List of scopes
         List<Scope> scopes = new ArrayList<>();
 
         // For each default scope
-        for (Scope scope : DefaultScopeSeeder.DEFAULT_SCOPES) {
+        for (Scope scope : defaultScopes) {
 
             // Find the scope by name
             Optional<Scope> optionalScope = scopeService.findByName(scope.getName());
@@ -87,7 +93,7 @@ public class DefaultServiceAccountSeeder {
         }
 
         // If the list of scopes has equal amount of scopes as the default scopes
-        if (scopes.size() != DefaultScopeSeeder.DEFAULT_SCOPES.size()) {
+        if (scopes.size() != defaultScopes.size()) {
 
             // Warn
             log.warning("The number of stored scopes is not equal to the number default scopes. The service account will not be created");
@@ -115,7 +121,7 @@ public class DefaultServiceAccountSeeder {
         }
 
         // Create the service account object
-        ServiceAccount serviceAccount = ServiceAccount.builder()
+        ServiceAccount serviceAccount = serviceAccountService.entityBuilder()
                 .clientId(serviceAccountProperties.getClientId())
                 .clientSecret(this.passwordEncoder.encode(serviceAccountProperties.getClientSecret()))
                 .clientSecretExpiresAt(null)

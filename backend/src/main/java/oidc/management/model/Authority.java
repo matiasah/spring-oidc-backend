@@ -1,17 +1,8 @@
 package oidc.management.model;
 
-import lombok.*;
-import oidc.management.validation.annotations.ValidAuthority;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import oidc.management.repository.AuthorityRepository;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -22,46 +13,47 @@ import java.util.Set;
  * @see GrantedAuthority
  * @see AuthorityRepository
  */
-@Builder
-@Document(collection = "authorities")
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@EqualsAndHashCode(of = "id")
-@ValidAuthority
-public class Authority implements GrantedAuthority {
+public interface Authority extends GrantedAuthority {
 
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @javax.persistence.Id
-    @org.springframework.data.annotation.Id
-    private String id;
+    public String getId();
 
-    @NotNull
-    private String name;
+    public void setId(String id);
 
-    /**
-     * Persists a hashed version of the authority name.
-     *
-     * @see {@link oidc.management.service.AuthorityEncryptionService#getHashedName(String)}
-     */
-    private String hashedName;
+    public String getName();
 
-    private String description;
+    public void setName(String name);
+
+    public String getHashedName();
+
+    public void setHashedName(String hashedName);
+
+    public String getDescription();
+
+    public void setDescription(String description);
 
     @Override
-    public String getAuthority() {
-        return name;
+    public default String getAuthority() {
+        return getName();
     }
 
-    /**
-     * The scope's tags
-     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING AUTHORITIES.
-     * 
-     * @see {@link AuthorityRepository#findByTagsContainingIgnoreCase(String, Pageable)}
-     **/
-    @ElementCollection
-    private Set<String> tags;
+    public Set<String> getTags();
+
+    public void setTags(Set<String> tags);
+
+    public interface AuthorityBuilder {
+
+        public AuthorityBuilder id(String id);
+
+        public AuthorityBuilder name(String name);
+
+        public AuthorityBuilder hashedName(String hashedName);
+
+        public AuthorityBuilder description(String description);
+
+        public AuthorityBuilder tags(Set<String> tags);
+
+        public Authority build();
+
+    }
     
 }

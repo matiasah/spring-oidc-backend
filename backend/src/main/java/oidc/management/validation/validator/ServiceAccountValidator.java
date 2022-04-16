@@ -49,10 +49,13 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
                     return true;
                 }
 
+                // The serviceAccount is not valid
+                return false;
+
             }
 
-            // The serviceAccount is not valid
-            return false;
+            // The serviceAccount is valid
+            return true;
         }
 
         // Find a serviceAccount with the same clientId.

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import oidc.management.validation.annotations.ValidScope;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,42 +22,42 @@ import java.util.Set;
  * @author Matías Hermosilla
  * @since 13-02-2022
  */
-@Builder
-@Document(collection = "scopes")
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@EqualsAndHashCode(of = "id")
-@ValidScope
-public class Scope {
+public interface Scope {
 
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @javax.persistence.Id
-    @org.springframework.data.annotation.Id
-    private String id;
+    public String getId();
 
-    @NotNull
-    private String name;
+    public void setId(String id);
 
-    /**
-     * The hashed name of the scope, for searching purposes.
-     * 
-     * @see {@link oidc.management.service.ScopeEncryptionService#getHashedName(String)}
-     */
-    @JsonIgnore
-    private String hashedName;
+    public String getName();
 
-    private String description;
+    public void setName(String name);
 
-    /**
-     * The scope's tags
-     * DO NOT ENCRYPT THIS FIELD, IT'S USED FOR SEARCHING/FILTERING SCOPES.
-     *
-     * @see {@link oidc.management.repository.ScopeRepository#findByTagsContainingIgnoreCase(String, Pageable)}
-     **/
-    @ElementCollection
-    private Set<String> tags;
+    public String getHashedName();
+
+    public void setHashedName(String hashedName);
+
+    public String getDescription();
+
+    public void setDescription(String description);
+
+    public Set<String> getTags();
+
+    public void setTags(Set<String> tags);
+
+    public interface ScopeBuilder {
+
+        public ScopeBuilder id(String id);
+
+        public ScopeBuilder name(String name);
+
+        public ScopeBuilder hashedName(String hashedName);
+
+        public ScopeBuilder description(String description);
+
+        public ScopeBuilder tags(Set<String> tags);
+
+        public Scope build();
+
+    }
 
 }

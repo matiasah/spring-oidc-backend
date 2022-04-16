@@ -17,9 +17,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @see oidc.management.service.UserAccountService#findByUsername(String)
  */
 @NoRepositoryBean
-public interface UserAccountRepository extends PagingAndSortingRepository<UserAccount, String> {
+public interface UserAccountRepository<T extends UserAccount> extends PagingAndSortingRepository<T, String> {
 
-    public List<UserAccount> findAll();
+    public UserAccount.UserAccountBuilder entityBuilder();
+
+    public List<T> findAll();
 
     /**
      * Finds a user by its username.

@@ -2,6 +2,7 @@ package oidc.management.service.impl;
 
 import java.util.Optional;
 
+import oidc.management.model.Authority;
 import oidc.management.service.ServiceAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -45,7 +46,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
         }
 
         // Get Client
-        ServiceAccount client = clientHolder.get();
+        ServiceAccount<? extends Scope, ? extends Authority> client = clientHolder.get();
         
         // Return RegisteredClient
         return RegisteredClient
@@ -79,7 +80,7 @@ public class DefaultRegisteredClientRepository implements RegisteredClientReposi
         }
 
         // Get Client
-        ServiceAccount client = clientHolder.get();
+        ServiceAccount<? extends Scope, ? extends Authority> client = clientHolder.get();
         
         // Return RegisteredClient
         return RegisteredClient
