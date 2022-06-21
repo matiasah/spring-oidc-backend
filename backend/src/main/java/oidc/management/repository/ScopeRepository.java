@@ -17,8 +17,8 @@ import java.util.Optional;
  *
  * @author Matías Hermosilla
  * @since 20-02-2022
- * @see PagingAndSortingRepository
- * @see Scope
+ * @see {@link PagingAndSortingRepository}
+ * @see {@link Scope}
  */
 @NoRepositoryBean
 public interface ScopeRepository<T extends Scope> extends PagingAndSortingRepository<T, String> {
