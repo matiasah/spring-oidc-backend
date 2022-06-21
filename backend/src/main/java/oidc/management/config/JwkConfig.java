@@ -43,7 +43,7 @@ public class JwkConfig {
 
     @Bean
     @ConditionalOnProperty(name = "oidc.management.jwk.provider", havingValue = "renewing")
-    public JwkProvider inMemoryChangingJwkProvider() {
+    public JwkProvider renewingJwkProvider() {
         return new RenewingJwkProvider();
     }
 
