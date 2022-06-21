@@ -24,7 +24,7 @@ public class AuthorizationServerConfigTests {
     private JWKSource jwkSource;
 
     @Test
-    public void testBeans() {
+    public void testContext() {
 
     }
 
