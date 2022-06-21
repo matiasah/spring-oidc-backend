@@ -170,7 +170,7 @@ public class UserAccountController {
             object = mapper.readerForUpdating(object).readValue(request.getReader());
             
             // If the previous password does not match the new password
-            if ( !password.equals(object.getPassword()) && object.getPassword() != null ) {
+            if ( object.getPassword() != null && !password.equals(object.getPassword()) ) {
 
                 // Encode the password
                 object.setPassword(this.passwordEncoder.encode(object.getPassword()));
