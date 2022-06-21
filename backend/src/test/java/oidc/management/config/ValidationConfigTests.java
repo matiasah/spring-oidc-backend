@@ -12,5 +12,5 @@ public class ValidationConfigTests {
     public void testContext() {
 
     }
-    
+
 }
