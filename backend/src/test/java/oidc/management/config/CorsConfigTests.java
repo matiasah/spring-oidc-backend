@@ -12,5 +12,5 @@ public class CorsConfigTests {
     public void testContext() {
 
     }
-    
+
 }
