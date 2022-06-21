@@ -170,7 +170,7 @@ public class ServiceAccountController {
             object = mapper.readerForUpdating(object).readValue(request.getReader());
             
             // If the previous password does not match the new password
-            if ( !password.equals(object.getClientSecret()) && object.getClientSecret() != null ) {
+            if ( object.getClientSecret() != null && !password.equals(object.getClientSecret()) ) {
 
                 // Encode the password
                 object.setClientSecret(this.passwordEncoder.encode(object.getClientSecret()));
