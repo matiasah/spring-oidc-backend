@@ -70,7 +70,7 @@ public class UserAccountController {
     @Secured({"ROLE_OIDC_ADMIN"})
     @PreAuthorize("hasAuthority('SCOPE_read_user_account')")
     @GetMapping("page")
-    public Page<UserAccount> page(Authentication authentication, Pageable pageable, @RequestParam(value = "search", required = false) String search) {
+    public Page<UserAccount> page(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
         return this.userAccountService.findAll(pageable, search);
     }
 
