@@ -1,0 +1,10 @@
+spring:
+  mongodb:
+    embedded:
+      version: 5.0.5
+
+oidc:
+  management:
+    jwk:
+      mongo:
+        collection: "jwks"
