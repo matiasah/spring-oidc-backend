@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataM
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -23,6 +24,7 @@ import org.springframework.test.context.ContextConfiguration;
 import java.util.List;
 import java.util.Map;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(classes = {
         MongoJwkProvider.class,
         RSAKeyGenerator.class
@@ -43,12 +45,6 @@ public class MongoJwkProviderTests {
 
     @Autowired
     private RSAKeyGenerator rsaKeyGenerator;
-
-    @BeforeEach
-    public void beforeEach() {
-        // Clean collection data
-        mongoTemplate.getCollection(collection).deleteMany(new Document());
-    }
 
     @Test
     public void testGetJwks() {
