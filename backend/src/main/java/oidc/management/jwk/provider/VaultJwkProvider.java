@@ -12,8 +12,6 @@ import org.springframework.vault.core.VaultOperations;
 import org.springframework.vault.support.VaultResponse;
 
 import javax.annotation.PostConstruct;
-import java.text.ParseException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -39,25 +37,14 @@ public class VaultJwkProvider implements JwkProvider {
     @Autowired
     private VaultOperations vaultOperations;
 
-    /**
-     * Vault key value operations bean to retrieve the JWKs.
-     */
-    private VaultKeyValueOperations vaultKeyValueOperations;
+    @Override
+    public List<JWK> getJwks() {
 
-    /**
-     * Initializes the VaultKeyValueOperations bean.
-     */
-    @PostConstruct
-    public void init() {
         // Get KV1 client
-        vaultKeyValueOperations = vaultOperations.opsForKeyValue(
+        VaultKeyValueOperations vaultKeyValueOperations = vaultOperations.opsForKeyValue(
                 path,
                 VaultKeyValueOperationsSupport.KeyValueBackend.KV_1
         );
-    }
-
-    @Override
-    public List<JWK> getJwks() {
 
         // List all keys in secret
         final List<String> keys = vaultKeyValueOperations.list("");
