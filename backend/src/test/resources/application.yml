@@ -8,3 +8,6 @@ oidc:
     jwk:
       mongo:
         collection: "jwks"
+      renewing:
+        cron: "0 0 0/2 ? * *"
+        limit: 12
