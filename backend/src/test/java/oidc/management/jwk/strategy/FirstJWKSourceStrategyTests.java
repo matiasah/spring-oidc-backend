@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,6 +55,24 @@ public class FirstJWKSourceStrategyTests {
 
         // Validate response value
         Assertions.assertEquals(jwk, response.get(0));
+    }
+
+    @Test
+    public void testGetEmptyList() throws KeySourceException {
+        // Create a list of JWK
+        List<JWK> jwks = Collections.emptyList();
+
+        // Create JWKSelector
+        final JWKSelector jwkSelector =  new JWKSelector(jwkMatcher);
+
+        // Mock get
+        Mockito.when(jwkSource.get(jwkSelector, securityContext)).thenReturn(jwks);
+
+        // Test get
+        List<JWK> response = firstJWKSourceStrategy.get(jwkSelector, securityContext);
+
+        // Validate response size
+        Assertions.assertEquals(0, response.size());
     }
 
 }
