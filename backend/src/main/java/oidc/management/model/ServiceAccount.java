@@ -5,6 +5,12 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import oidc.management.serialization.AuthorizationGrantTypeDeserializer;
+import oidc.management.serialization.AuthorizationGrantTypeSerializer;
+import oidc.management.serialization.ClientAuthenticationMethodDeserializer;
+import oidc.management.serialization.ClientAuthenticationMethodSerializer;
 import org.springframework.data.annotation.Transient;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -54,12 +60,16 @@ public interface ServiceAccount<S extends Scope, A extends Authority> {
 
     public void setClientDescription(String clientDescription);
 
+    @JsonSerialize(using = ClientAuthenticationMethodSerializer.class)
     public Set<ClientAuthenticationMethod> getClientAuthenticationMethods();
 
+    @JsonDeserialize(using = ClientAuthenticationMethodDeserializer.class)
     public void setClientAuthenticationMethods(Set<ClientAuthenticationMethod> clientAuthenticationMethods);
 
+    @JsonSerialize(using = AuthorizationGrantTypeSerializer.class)
     public Set<AuthorizationGrantType> getAuthorizationGrantTypes();
 
+    @JsonDeserialize(using = AuthorizationGrantTypeDeserializer.class)
     public void setAuthorizationGrantTypes(Set<AuthorizationGrantType> authorizationGrantTypes);
 
     public Set<String> getRedirectUris();
