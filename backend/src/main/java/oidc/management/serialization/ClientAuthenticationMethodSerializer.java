@@ -22,7 +22,11 @@ public class ClientAuthenticationMethodSerializer extends StdSerializer<Set<Clie
     public void serialize(Set<ClientAuthenticationMethod> value, com.fasterxml.jackson.core.JsonGenerator gen, com.fasterxml.jackson.databind.SerializerProvider provider) throws java.io.IOException {
         gen.writeStartArray();
         for (ClientAuthenticationMethod method : value) {
-            gen.writeString(method.getValue());
+            if (method != null) {
+                gen.writeString(method.getValue());
+            } else {
+                gen.writeNull();
+            }
         }
         gen.writeEndArray();
     }
