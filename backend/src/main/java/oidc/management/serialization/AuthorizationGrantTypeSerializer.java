@@ -22,7 +22,11 @@ public class AuthorizationGrantTypeSerializer extends StdSerializer<Set<Authoriz
     public void serialize(Set<AuthorizationGrantType> value, com.fasterxml.jackson.core.JsonGenerator gen, com.fasterxml.jackson.databind.SerializerProvider provider) throws java.io.IOException {
         gen.writeStartArray();
         for (AuthorizationGrantType grantType : value) {
-            gen.writeString(grantType.getValue());
+            if (grantType != null) {
+                gen.writeString(grantType.getValue());
+            } else {
+                gen.writeNull();
+            }
         }
         gen.writeEndArray();
     }
