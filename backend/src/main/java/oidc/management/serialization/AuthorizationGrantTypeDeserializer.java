@@ -44,13 +44,6 @@ public class AuthorizationGrantTypeDeserializer extends StdDeserializer<Set<Auth
                     // Get the value
                     String value = element.asText();
 
-                    // Check if the value is null
-                    if (value == null) {
-
-                        // Throw an exception
-                        throw new InvalidFormatException(jp, "The value of the json object cannot be null", null, AuthorizationGrantType.class);
-                    }
-
                     // Check if the value is "authorization_code"
                     if (value.equals("authorization_code")) {
 
