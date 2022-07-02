@@ -24,6 +24,9 @@
         <bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
         <h2.version>2.1.212</h2.version>
 
+        <!-- SonarQube configuration -->
+        <sonar.java.libraries>target/dependency/*.jar</sonar.java.libraries>
+
 	</properties>
 
     <dependencyManagement>
@@ -127,6 +130,10 @@
             <artifactId>mockito-inline</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -219,6 +226,24 @@
                                     <directory>auth-frontend/dist/auth-frontend</directory>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Copy lombok library -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>lombok</includeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>
