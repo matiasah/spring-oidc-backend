@@ -1,6 +1,5 @@
 package oidc.management.repository.elasticsearch;
 
-import oidc.management.model.elasticsearch.ElasticsearchScope;
 import oidc.management.model.elasticsearch.ElasticsearchServiceAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
