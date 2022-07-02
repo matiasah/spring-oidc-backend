@@ -3,6 +3,7 @@ package oidc.management.serialization;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import oidc.management.test.TestServiceAccount;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.Spy;
@@ -34,7 +35,9 @@ public class AuthorizationGrantTypeSerializerTests {
         // Serialize serviceAccount
         final String valueAsString = objectMapper.writeValueAsString(serviceAccount);
 
-        System.out.println(valueAsString);
+        // Validate value
+        Assertions.assertNotNull(valueAsString);
+        Assertions.assertNotEquals("", valueAsString);
     }
 
 }
