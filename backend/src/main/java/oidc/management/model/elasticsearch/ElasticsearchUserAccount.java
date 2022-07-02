@@ -24,7 +24,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
-@Builder
+@Builder(toBuilder = true)
 @Document(indexName = "user_accounts")
 @AllArgsConstructor
 @NoArgsConstructor

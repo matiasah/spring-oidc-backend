@@ -11,7 +11,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Builder
+@Builder(toBuilder = true)
 @Document(indexName = "scopes")
 @NoArgsConstructor
 @AllArgsConstructor

@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Builder
+@Builder(toBuilder = true)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

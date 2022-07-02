@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Builder
+@Builder(toBuilder = true)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "authorities")
 @org.springframework.data.mongodb.core.mapping.Document(collection = "authorities")
 @NoArgsConstructor

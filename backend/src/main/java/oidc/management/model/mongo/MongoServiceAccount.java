@@ -26,7 +26,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
-@Builder
+@Builder(toBuilder = true)
 @Document(collection = "service_accounts")
 @AllArgsConstructor
 @NoArgsConstructor
