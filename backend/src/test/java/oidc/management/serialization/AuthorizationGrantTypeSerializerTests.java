@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootTest(classes = {
@@ -28,6 +29,25 @@ public class AuthorizationGrantTypeSerializerTests {
     public void testSerialize() throws JsonProcessingException {
         // Create list of Authorization
         Set<AuthorizationGrantType> authorizationGrantTypes = Set.of(AuthorizationGrantType.AUTHORIZATION_CODE);
+
+        // Mock getAuthorizationGrantTypes
+        Mockito.when(serviceAccount.getAuthorizationGrantTypes()).thenReturn(authorizationGrantTypes);
+
+        // Serialize serviceAccount
+        final String valueAsString = objectMapper.writeValueAsString(serviceAccount);
+
+        // Validate value
+        Assertions.assertNotNull(valueAsString);
+        Assertions.assertNotEquals("", valueAsString);
+    }
+
+    @Test
+    public void testSerializeNull() throws JsonProcessingException {
+        // Create list of Authorization
+        Set<AuthorizationGrantType> authorizationGrantTypes = new HashSet<>();
+
+        // Put null
+        authorizationGrantTypes.add(null);
 
         // Mock getAuthorizationGrantTypes
         Mockito.when(serviceAccount.getAuthorizationGrantTypes()).thenReturn(authorizationGrantTypes);
