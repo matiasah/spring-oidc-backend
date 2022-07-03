@@ -49,11 +49,11 @@ public interface UserAccount<A extends Authority> extends UserDetails {
 
     public String getPassword();
 
-    public void setPassword(String password);
+    public void setPassword(@NotNull String password);
 
     public String getUsername();
 
-    public void setUsername(String username);
+    public void setUsername(@NotNull String username);
 
     public String getHashedUsername();
 
