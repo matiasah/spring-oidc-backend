@@ -4,34 +4,23 @@ import com.nimbusds.jose.jwk.JWK;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.bson.Document;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-
 
 import java.util.List;
 import java.util.Map;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@SpringBootTest(classes = {
+@Import({
         MongoJwkProvider.class,
         RSAKeyGenerator.class
 })
-@ImportAutoConfiguration
-@AutoConfigurationPackage
-@AutoConfigureDataMongo
+@DataMongoTest
 public class MongoJwkProviderTests {
 
     @Value("${oidc.management.jwk.mongo.collection}")
