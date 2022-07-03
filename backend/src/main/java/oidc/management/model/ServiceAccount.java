@@ -18,6 +18,8 @@ import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * OIDC Service Account model.
  * 
@@ -34,7 +36,7 @@ public interface ServiceAccount<S extends Scope, A extends Authority> {
 
     public String getClientId();
 
-    public void setClientId(String clientId);
+    public void setClientId(@NotNull String clientId);
 
     public String getHashedClientId();
 
@@ -46,7 +48,7 @@ public interface ServiceAccount<S extends Scope, A extends Authority> {
 
     public String getClientSecret();
 
-    public void setClientSecret(String clientSecret);
+    public void setClientSecret(@NotNull String clientSecret);
 
     public Instant getClientSecretExpiresAt();
 
