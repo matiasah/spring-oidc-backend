@@ -30,7 +30,7 @@ public interface Scope {
 
     public String getName();
 
-    public void setName(String name);
+    public void setName(@NotNull String name);
 
     public String getHashedName();
 
