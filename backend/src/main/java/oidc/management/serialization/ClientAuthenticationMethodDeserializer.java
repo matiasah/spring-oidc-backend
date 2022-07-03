@@ -44,13 +44,6 @@ public class ClientAuthenticationMethodDeserializer extends StdDeserializer<Set<
                     // Get the value
                     String value = element.asText();
 
-                    // Check if the value is null
-                    if (value == null) {
-
-                        // Throw an exception
-                        throw new InvalidFormatException(jp, "The value of the json object cannot be null", null, ClientAuthenticationMethod.class);
-                    }
-
                     // Check if the value is equal to the value of the client authentication method
                     if (value.equals(ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue())) {
 
