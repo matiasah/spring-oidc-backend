@@ -1,5 +1,6 @@
 package oidc.management.model;
 
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 /**
@@ -16,7 +17,7 @@ public interface AuditEvent {
 
     public String getDescription();
 
-    public void setDescription(String description);
+    public void setDescription(@NotNull String description);
 
     public ZonedDateTime getCreatedAt();
 
