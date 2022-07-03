@@ -3,7 +3,6 @@ package oidc.management.model.jpa;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
-import oidc.management.model.Authority;
 import oidc.management.model.UserAccount;
 import oidc.management.validation.annotations.ValidUserAccount;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,7 +10,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,7 +32,6 @@ public class JpaUserAccount implements UserAccount<JpaAuthority> {
     private String id;
 
     @Reference
-    @DBRef
     @OneToMany
     private List<JpaAuthority> authorities;
 
