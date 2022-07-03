@@ -3,6 +3,7 @@ package oidc.management.model;
 import org.springframework.security.core.GrantedAuthority;
 import oidc.management.repository.AuthorityRepository;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ public interface Authority extends GrantedAuthority {
 
     public String getName();
 
-    public void setName(String name);
+    public void setName(@NotNull String name);
 
     public String getHashedName();
 
