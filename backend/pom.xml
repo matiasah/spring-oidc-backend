@@ -16,7 +16,7 @@
 
 	<properties>
         <!-- Java version -->
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 
         <!-- Dependencies versions -->
         <spring-cloud-dependencies.version>2021.0.1</spring-cloud-dependencies.version>
