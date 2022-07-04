@@ -63,7 +63,9 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
                     // Add authority to authorities
                     authorities.add(authority.getAuthority());
                 }
+
             }
+
         }
 
         // Get RegisteredClient
@@ -74,6 +76,7 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
 
         // If the ServiceAccount exists
         if (optServiceAccount.isPresent()) {
+
             // Get ServiceAccount
             ServiceAccount serviceAccount = optServiceAccount.get();
 
@@ -88,13 +91,16 @@ public class DefaultTokenCustomizerService implements OAuth2TokenCustomizer<JwtE
                     
                     // Add to authorities
                     authorities.add(authority.getAuthority());
+
                 }
 
             }
+
         }
 
         // Add authorities
         jwtEncodingContext.getClaims().claim(AUTHORITIES_CLAIM, authorities);
+
     }
     
 }
