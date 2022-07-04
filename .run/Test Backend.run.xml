@@ -1,7 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Test Backend" type="JUnit" factoryName="JUnit">
     <module name="spring-oidc-backend" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="PACKAGE_NAME" value="oidc.management" />
     <option name="MAIN_CLASS_NAME" value="" />
