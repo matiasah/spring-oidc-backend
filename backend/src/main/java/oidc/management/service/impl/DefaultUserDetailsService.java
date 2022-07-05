@@ -42,7 +42,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
             // Throw exception
             throw new UsernameNotFoundException("User not found");
-            
+
         }
 
         // Get user
@@ -56,6 +56,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
             // Fetch size (for JPA)
             authorities.size();
+
         }
 
         // Return user
