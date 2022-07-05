@@ -21,7 +21,7 @@ public class DefaultUserAccountEncryptionServiceTests {
 
     @Test
     public void testEncrypt() {
-        
+
         // Test encrypt
         Assertions.assertNotNull(userAccountEncryptionService.encrypt(userAccount));
 
