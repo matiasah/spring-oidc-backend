@@ -77,7 +77,7 @@ public class DefaultUserAccountService implements UserAccountService {
     @Override
     public Optional<UserAccount> findByUsername(String username) {
         // Find user account by username
-        return this.userAccountRepository.findByHashedUsername(this.userAccountEncryptionService.hashUsername(username))
+        return this.userAccountRepository.findByHashedUsername(this.userAccountEncryptionService.getHashedUsername(username))
                 .map(
                         // Decrypt user account
                         userAccount -> this.userAccountEncryptionService.decrypt((UserAccount) userAccount)

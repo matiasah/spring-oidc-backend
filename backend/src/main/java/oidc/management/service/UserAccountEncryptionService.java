@@ -32,6 +32,6 @@ public interface UserAccountEncryptionService {
      * @param username The user account name to hash.
      * @return The hashed user account name.
      */
-    public String hashUsername(String username);
+    public String getHashedUsername(String username);
 
 }
