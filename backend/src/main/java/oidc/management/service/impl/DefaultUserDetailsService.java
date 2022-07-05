@@ -42,6 +42,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
             // Throw exception
             throw new UsernameNotFoundException("User not found");
+            
         }
 
         // Get user
