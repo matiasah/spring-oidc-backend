@@ -11,3 +11,6 @@ oidc:
       renewing:
         cron: "0 0 0/2 ? * *"
         limit: 12
+    default:
+      authority:
+        enabled: true
