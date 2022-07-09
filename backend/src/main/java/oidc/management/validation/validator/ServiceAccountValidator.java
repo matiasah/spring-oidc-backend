@@ -25,6 +25,7 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
     @Transactional
     @Override
     public boolean isValid(ServiceAccount serviceAccount, ConstraintValidatorContext constraintValidatorContext) {
+
         // If service account service is not present
         if (serviceAccountService == null) {
 
@@ -71,6 +72,7 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
 
         // The serviceAccount is valid
         return true;
+
     }
 
 }

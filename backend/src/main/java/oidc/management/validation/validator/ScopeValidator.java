@@ -25,6 +25,7 @@ public class ScopeValidator implements ConstraintValidator<ValidScope, Scope> {
     @Transactional
     @Override
     public boolean isValid(Scope scope, ConstraintValidatorContext constraintValidatorContext) {
+
         // If scope service is not present
         if (scopeService == null) {
 
@@ -70,6 +71,7 @@ public class ScopeValidator implements ConstraintValidator<ValidScope, Scope> {
 
         // The scope is valid.
         return true;
+
     }
 
 }

@@ -25,6 +25,7 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
     @Transactional
     @Override
     public boolean isValid(UserAccount userAccount, ConstraintValidatorContext constraintValidatorContext) {
+
         // If user account service is not present
         if (userAccountService == null) {
 
@@ -71,6 +72,7 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
 
         // The user account is valid
         return true;
+        
     }
 
 }

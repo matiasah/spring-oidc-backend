@@ -25,6 +25,7 @@ public class AuthorityValidator implements ConstraintValidator<ValidAuthority, A
     @Transactional
     @Override
     public boolean isValid(Authority authority, ConstraintValidatorContext constraintValidatorContext) {
+
         // If authority service is not present
         if (authorityService == null) {
 
@@ -71,6 +72,7 @@ public class AuthorityValidator implements ConstraintValidator<ValidAuthority, A
 
         // The authority is valid.
         return true;
+
     }
 
 }
