@@ -14,3 +14,11 @@ oidc:
     default:
       authority:
         enabled: true
+      scope:
+        enabled: true
+      service-account:
+        enabled: true
+        clientId: "test"
+        clientSecret: "test"
+        redirectUris:
+          - http://localhost:8080/
