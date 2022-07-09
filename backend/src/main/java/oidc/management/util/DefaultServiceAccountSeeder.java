@@ -2,7 +2,6 @@ package oidc.management.util;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
 
 import oidc.management.service.ScopeService;
 import oidc.management.service.ServiceAccountService;
@@ -10,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -55,7 +57,8 @@ public class DefaultServiceAccountSeeder {
      * Creates a default service account.
      */
     @Transactional
-    @PostConstruct
+    @EventListener(ContextStartedEvent.class)
+    @Order(3)
     public void seed() {
 
         // If the service account has no redirect uris
