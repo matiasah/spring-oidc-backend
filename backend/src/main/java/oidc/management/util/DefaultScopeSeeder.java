@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import javax.annotation.PostConstruct;
 
 import oidc.management.service.ScopeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
 import oidc.management.model.Scope;
@@ -62,7 +64,8 @@ public class DefaultScopeSeeder {
     }
 
     @Transactional
-    @PostConstruct
+    @EventListener(ContextStartedEvent.class)
+    @Order(2)
     public void seed() {
 
         // For each default scope
