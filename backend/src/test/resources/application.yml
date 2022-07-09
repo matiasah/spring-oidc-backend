@@ -22,3 +22,7 @@ oidc:
         clientSecret: "test"
         redirectUris:
           - http://localhost:8080/
+      user-account:
+        enabled: true
+        username: "test"
+        password: "test"
