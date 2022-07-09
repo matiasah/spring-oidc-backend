@@ -27,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 @ConditionalOnBean(DefaultAuthorityProperties.class)
 public class DefaultAuthoritySeeder {
 
+    public static final String ROLE_OIDC_ADMIN = "ROLE_OIDC_ADMIN";
+
     @Autowired
     private AuthorityService authorityService;
 
@@ -38,13 +40,13 @@ public class DefaultAuthoritySeeder {
     public void seed() {
 
         // Find if the authority already exists
-        Optional<Authority> optAuthority = authorityService.findByName("ROLE_OIDC_ADMIN");
+        Optional<Authority> optAuthority = authorityService.findByName(ROLE_OIDC_ADMIN);
 
         // If the authority exists
         if (optAuthority.isPresent()) {
 
             // Info
-            log.info("The default authority \"ROLE_OIDC_ADMIN\" already exists");
+            log.info("The default authority \"" + ROLE_OIDC_ADMIN + "\" already exists");
 
             // Stop execution
             return;
@@ -53,7 +55,7 @@ public class DefaultAuthoritySeeder {
 
         // Create the authority object
         Authority authority = authorityService.entityBuilder()
-                .name("ROLE_OIDC_ADMIN")
+                .name(ROLE_OIDC_ADMIN)
                 .description("Administrator role for OIDC")
                 .tags(Set.of("default"))
                 .build();
