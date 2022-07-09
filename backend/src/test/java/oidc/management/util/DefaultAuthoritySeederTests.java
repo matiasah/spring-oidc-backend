@@ -1,35 +1,35 @@
 package oidc.management.util;
 
+import oidc.management.properties.DefaultAuthorityProperties;
 import oidc.management.service.AuthorityService;
-import oidc.management.test.TestAuthority;
+import oidc.management.service.impl.DefaultAuthorityEncryptionService;
+import oidc.management.service.impl.DefaultAuthorityService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.Optional;
-
-@ExtendWith(MockitoExtension.class)
+@EnableConfigurationProperties
+@Import({
+        DefaultAuthorityProperties.class,
+        DefaultAuthoritySeeder.class,
+        DefaultAuthorityService.class,
+        DefaultAuthorityEncryptionService.class
+})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@DataJpaTest
 public class DefaultAuthoritySeederTests {
 
-    public static final String ROLE_OIDC_ADMIN = "ROLE_OIDC_ADMIN";
-
-    @InjectMocks
+    @Autowired
     private DefaultAuthoritySeeder defaultAuthoritySeeder;
 
-    @Mock
+    @Autowired
     private AuthorityService authorityService;
 
     @Test
     public void testSeed() {
-
-        // Mock findByName
-        Mockito.when(authorityService.findByName(ROLE_OIDC_ADMIN)).thenReturn(Optional.empty());
-
-        // Mock entityBuilder
-        Mockito.when(authorityService.entityBuilder()).thenReturn(TestAuthority.builder());
 
         // Test seed
         defaultAuthoritySeeder.seed();
@@ -37,16 +37,10 @@ public class DefaultAuthoritySeederTests {
     }
 
     @Test
-    public void testSeedExists() {
+    public void testSeedWithExistingAuthorities() {
 
-        // Create TestAuthority
-        TestAuthority testAuthority = TestAuthority.builder()
-                .name(ROLE_OIDC_ADMIN)
-                .description("test")
-                .build();
-
-        // Mock findByName
-        Mockito.when(authorityService.findByName(ROLE_OIDC_ADMIN)).thenReturn(Optional.of(testAuthority));
+        // Seed authorities
+        defaultAuthoritySeeder.seed();
 
         // Test seed
         defaultAuthoritySeeder.seed();
