@@ -3,7 +3,6 @@ package oidc.management.util;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
-import javax.annotation.PostConstruct;
 
 import oidc.management.service.AuthorityService;
 import oidc.management.service.UserAccountService;
@@ -11,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import lombok.extern.java.Log;
@@ -49,7 +51,8 @@ public class DefaultUserAccountSeeder {
      * Creates a default user account.
      */
     @Transactional
-    @PostConstruct
+    @EventListener(ContextStartedEvent.class)
+    @Order(4)
     public void seed() {
 
         // Get the default authority
