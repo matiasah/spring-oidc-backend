@@ -86,7 +86,7 @@ public class DefaultScopeSeeder {
         Optional<Scope> optScope = scopeService.findByName(scope.getName());
 
         // If the scope does not exist, create it
-        if (!optScope.isPresent()) {
+        if (optScope.isEmpty()) {
 
             // Save the scope
             this.scopeService.save(scope);
