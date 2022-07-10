@@ -31,7 +31,7 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
 
             // Skip validation
             return true;
-            
+
         }
 
         // Find a serviceAccount with the same clientId.
