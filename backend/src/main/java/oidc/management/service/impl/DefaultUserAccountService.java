@@ -53,7 +53,11 @@ public class DefaultUserAccountService implements UserAccountService {
         if (search == null || search.isEmpty()) {
 
             // Return all user accounts
-            return this.userAccountRepository.findAll(pageable);
+            return this.userAccountRepository.findAll(pageable)
+                    .map(
+                            // Decrypt user accounts
+                            userAccount -> this.userAccountEncryptionService.decrypt((UserAccount) userAccount)
+                    );
         }
 
         // Return all user accounts that match the search term
