@@ -3,7 +3,7 @@ package oidc.management.service;
 import oidc.management.model.Scope;
 
 /**
- * Service for encrypting and decrypting scopes.
+ * Service for encrypting and decrypting instances of {@link Scope}.
  *
  * @author Matías Hermosilla
  * @since 09-04-2022
