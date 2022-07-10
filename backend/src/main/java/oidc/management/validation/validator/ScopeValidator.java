@@ -31,42 +31,26 @@ public class ScopeValidator implements ConstraintValidator<ValidScope, Scope> {
 
             // Skip validation
             return true;
+
         }
 
+        // Find a scope with the same name.
+        Optional<Scope> optScopeWithSameName = scopeService.findByName(scope.getName());
 
-        // If the scope has an id, it means it is already persisted.
-        if (scope.getId() != null) {
+        // If the scope with the same name is found
+        if (optScopeWithSameName.isPresent()) {
 
-            // Find a scope with the same name.
-            Optional<Scope> scopeWithSameName = scopeService.findByName(scope.getName());
+            // Get scope with same name
+            Scope scopeWithSameName = optScopeWithSameName.get();
 
-            // If the scope with the same name is found
-            if (scopeWithSameName.isPresent()) {
-
-                // If the scope with the same name is the same as the one being validated
-                if (scopeWithSameName.get().getId().equals(scope.getId())) {
-
-                    // The scope is valid.
-                    return true;
-                }
+            // If ids don't match
+            if (scope.getId() == null || !scopeWithSameName.getId().equals(scope.getId())) {
 
                 // The scope is not valid.
                 return false;
 
             }
 
-            // The scope is valid.
-            return true;
-        }
-
-        // Find a scope with the same name.
-        Optional<Scope> scopeWithSameName = scopeService.findByName(scope.getName());
-
-        // If the scope with the same name is found
-        if (scopeWithSameName.isPresent()) {
-
-            // The scope is not valid.
-            return false;
         }
 
         // The scope is valid.
