@@ -31,43 +31,27 @@ public class AuthorityValidator implements ConstraintValidator<ValidAuthority, A
 
             // Skip validation
             return true;
+
         }
 
-        // If the authority has an id, it means that it already persisted.
-        if (authority.getId() != null) {
+        // Find an authority with the same name.
+        Optional<Authority> optAuthorityWithSameName = authorityService
+                .findByName(authority.getName());
 
-            // Find an authority with the same name.
-            Optional<Authority> authorityWithSameName = authorityService
-                    .findByName(authority.getName());
+        // If the authority with the same name is found
+        if (optAuthorityWithSameName.isPresent()) {
 
-            // If the authority with the same name is found
-            if (authorityWithSameName.isPresent()) {
+            // Get authority with the same name
+            Authority authorityWithSameName = optAuthorityWithSameName.get();
 
-                // If the authority with the same name is the same as the one that is being validated,
-                if (authorityWithSameName.get().getId().equals(authority.getId())) {
-
-                    // The authority is valid.
-                    return true;
-                }
+            // If ids don't match
+            if (authority.getId() == null || !authorityWithSameName.getId().equals(authority.getId())) {
 
                 // The authority is not valid.
                 return false;
 
             }
 
-            // The authority is valid.
-            return true;
-        }
-
-        // Find an authority with the same name.
-        Optional<Authority> authorityWithSameName = authorityService
-                .findByName(authority.getName());
-
-        // If the authority with the same name is found
-        if (authorityWithSameName.isPresent()) {
-
-            // The authority is not valid.
-            return false;
         }
 
         // The authority is valid.
