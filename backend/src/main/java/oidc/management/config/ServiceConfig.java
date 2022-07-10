@@ -114,4 +114,15 @@ public class ServiceConfig {
         return new DefaultAuditEventEncryptionService();
     }
 
+    /**
+     * Default implementation of {@link AuditEventService}.
+     *
+     * @return An instance of {@link DefaultAuditEventService}.
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public AuditEventService auditEventService() {
+        return new DefaultAuditEventService();
+    }
+
 }
