@@ -22,9 +22,6 @@ import java.util.UUID;
 public class AuthenticationFailureCredentialsExpiredEventListenerTests {
 
     @Autowired
-    private AuthenticationFailureCredentialsExpiredEventListener listener;
-
-    @Autowired
     private ApplicationEventPublisher publisher;
 
     @MockBean
