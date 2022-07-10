@@ -27,7 +27,7 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
         auditEventService.save(auditEvent);
 
         // Log the audit event
-        log.warn(auditEvent);
+        log.info(auditEvent);
 
     }
 
