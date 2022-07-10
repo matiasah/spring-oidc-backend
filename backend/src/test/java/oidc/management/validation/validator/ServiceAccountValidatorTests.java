@@ -79,7 +79,7 @@ public class ServiceAccountValidatorTests {
     }
 
     @Test
-    public void testIsValidWithSameNameAndDifferentId() {
+    public void testIsValidWithSameClientIdAndDifferentId() {
 
         // Create serviceAccount
         TestServiceAccount serviceAccount = TestServiceAccount.builder()
