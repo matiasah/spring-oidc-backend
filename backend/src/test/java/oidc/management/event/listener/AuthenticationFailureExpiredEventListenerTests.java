@@ -20,7 +20,7 @@ import java.util.UUID;
         ApplicationEventPublisher.class
 })
 public class AuthenticationFailureExpiredEventListenerTests {
-    
+
     @Autowired
     private ApplicationEventPublisher publisher;
 
