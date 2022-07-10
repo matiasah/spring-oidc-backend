@@ -3,7 +3,7 @@ package oidc.management.service;
 import oidc.management.model.Authority;
 
 /**
- * Service for encrypting and decrypting authorities.
+ * Service for encrypting and decrypting instances of {@link Authority}.
  *
  * @author Matías Hermosilla
  * @since 10-04-2022
