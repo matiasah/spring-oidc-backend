@@ -20,7 +20,7 @@ public class AuthenticationFailureBadCredentialsEventListener implements Applica
 
         // Create AuditEvent
         AuditEvent auditEvent = this.auditEventService.entityBuilder()
-                .description(String.format("Authentication failure, bad credentials with authentication \"%s\"", event.getAuthentication().getPrincipal()))
+                .description(String.format("Authentication failure, bad credentials for \"%s\"", event.getAuthentication().getPrincipal()))
                 .build();
 
         // Save the audit event
