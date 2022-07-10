@@ -51,7 +51,11 @@ public class DefaultAuthorityService implements AuthorityService {
 
         // If there is no search term or the search term is empty
         if (search == null || search.isEmpty()) {
-            return authorityRepository.findAll(pageable);
+            return authorityRepository.findAll(pageable)
+                    .map(
+                            // Decrypt authority
+                            authority -> authorityEncryptionService.decrypt((Authority) authority)
+                    );
         }
 
         // Find all authorities
