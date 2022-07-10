@@ -21,8 +21,6 @@ import java.util.UUID;
 })
 public class AuthenticationFailureDisabledEventListenerTests {
 
-    @Autowired
-    private AuthenticationFailureDisabledEventListener listener;
 
     @Autowired
     private ApplicationEventPublisher publisher;
