@@ -3,7 +3,7 @@ package oidc.management.service;
 import oidc.management.model.ServiceAccount;
 
 /**
- * Service for encrypting and decrypting service accounts.
+ * Service for encrypting and decrypting instances of {@link ServiceAccount}.
  *
  * @author Matías Hermosilla
  * @since 27-03-2022
