@@ -3,7 +3,7 @@ package oidc.management.service;
 import oidc.management.model.UserAccount;
 
 /**
- * Service for encrypting and decrypting user accounts.
+ * Service for encrypting and decrypting instances of {@link UserAccount}.
  *
  * @author Matías Hermosilla
  * @since 27-03-2022
