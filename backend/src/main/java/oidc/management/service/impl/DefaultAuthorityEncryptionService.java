@@ -5,6 +5,9 @@ import oidc.management.service.AuthorityEncryptionService;
 
 /**
  * Default implementation of {@link oidc.management.service.AuthorityEncryptionService}.
+ *
+ * @author Matías Hermosilla
+ * @since 10-04-2022
  */
 public class DefaultAuthorityEncryptionService implements AuthorityEncryptionService {
 
