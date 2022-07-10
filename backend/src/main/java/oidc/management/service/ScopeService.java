@@ -15,6 +15,11 @@ import java.util.Optional;
  */
 public interface ScopeService {
 
+    /**
+     * Creates an object that is used to build instances of {@link Scope}
+     *
+     * @return An instance of {@link oidc.management.model.Scope.ScopeBuilder}
+     */
     public Scope.ScopeBuilder entityBuilder();
 
     /**
