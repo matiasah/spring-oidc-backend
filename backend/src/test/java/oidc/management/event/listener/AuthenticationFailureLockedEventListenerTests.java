@@ -22,9 +22,6 @@ import java.util.UUID;
 public class AuthenticationFailureLockedEventListenerTests {
 
     @Autowired
-    private AuthenticationFailureLockedEventListener listener;
-
-    @Autowired
     private ApplicationEventPublisher publisher;
 
     @MockBean
