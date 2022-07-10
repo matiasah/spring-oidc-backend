@@ -31,43 +31,27 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
 
             // Skip validation
             return true;
+            
         }
 
-        // If user account has an id
-        if (userAccount.getId() != null) {
+        // Find a user account with the same name
+        Optional<UserAccount> optUserAccountWithSameName = userAccountService
+                .findByUsername(userAccount.getUsername());
 
-            // Find a user account with the same name
-            Optional<UserAccount> userAccountWithSameName = userAccountService
-                    .findByUsername(userAccount.getUsername());
+        // If user account with the same name exists
+        if (optUserAccountWithSameName.isPresent()) {
 
-            // If user account with the same name exists
-            if (userAccountWithSameName.isPresent()) {
+            // Get user account with the same name
+            UserAccount userAccountWithSameName = optUserAccountWithSameName.get();
 
-                // If the user account with the same name is the same as the user account
-                if (userAccountWithSameName.get().getId().equals(userAccount.getId())) {
-
-                    // The user account is valid
-                    return true;
-                }
+            // If ids don't match
+            if (userAccount.getId() ==  null || !userAccountWithSameName.getId().equals(userAccount.getId())) {
 
                 // The user account is not valid
                 return false;
 
             }
 
-            // The user account is valid
-            return true;
-        }
-
-        // Find a user account with the same name
-        Optional<UserAccount> userAccountWithSameName = userAccountService
-                .findByUsername(userAccount.getUsername());
-
-        // If user account with the same name exists
-        if (userAccountWithSameName.isPresent()) {
-
-            // The user account is not valid
-            return false;
         }
 
         // The user account is valid
