@@ -72,7 +72,7 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
 
         // The user account is valid
         return true;
-        
+
     }
 
 }
