@@ -31,43 +31,27 @@ public class ServiceAccountValidator implements ConstraintValidator<ValidService
 
             // Skip validation
             return true;
+            
         }
 
-        // If the serviceAccount has an id, it means it is already persisted.
-        if (serviceAccount.getId() != null) {
+        // Find a serviceAccount with the same clientId.
+        Optional<ServiceAccount> optServiceAccountWithSameClientId = serviceAccountService
+                .findByClientId(serviceAccount.getClientId());
 
-            // Find a serviceAccount with the same clientId.
-            Optional<ServiceAccount> serviceAccountWithSameClientId = serviceAccountService
-                    .findByClientId(serviceAccount.getClientId());
+        // If the serviceAccount with the same clientId is found
+        if (optServiceAccountWithSameClientId.isPresent()) {
 
-            // If the serviceAccount with the same clientId is found
-            if (serviceAccountWithSameClientId.isPresent()) {
+            // Get service account with same client id
+            ServiceAccount serviceAccountWithSameClientId = optServiceAccountWithSameClientId.get();
 
-                // If the serviceAccount with the same clientId is the same as the one being validated
-                if (serviceAccountWithSameClientId.get().getId().equals(serviceAccount.getId())) {
-
-                    // The serviceAccount is valid
-                    return true;
-                }
+            // If ids don't match
+            if (serviceAccount.getId() == null || !serviceAccountWithSameClientId.getId().equals(serviceAccount.getId())) {
 
                 // The serviceAccount is not valid
                 return false;
 
             }
 
-            // The serviceAccount is valid
-            return true;
-        }
-
-        // Find a serviceAccount with the same clientId.
-        Optional<ServiceAccount> serviceAccountWithSameClientId = serviceAccountService
-                .findByClientId(serviceAccount.getClientId());
-
-        // If the serviceAccount with the same clientId is found
-        if (serviceAccountWithSameClientId.isPresent()) {
-
-            // The serviceAccount is not valid
-            return false;
         }
 
         // The serviceAccount is valid
