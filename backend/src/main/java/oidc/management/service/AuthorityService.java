@@ -15,6 +15,11 @@ import java.util.Optional;
  */
 public interface AuthorityService {
 
+    /**
+     * Creates an object that is used to build instances of {@link Authority}
+     *
+     * @return An instance of {@link oidc.management.model.Authority.AuthorityBuilder}
+     */
     public Authority.AuthorityBuilder entityBuilder();
 
     /**
