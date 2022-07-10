@@ -53,7 +53,11 @@ public class DefaultServiceAccountService implements ServiceAccountService {
         if (search == null || search.isEmpty()) {
 
             // Return all Service Accounts
-            return serviceAccountRepository.findAll(pageable);
+            return serviceAccountRepository.findAll(pageable)
+                    .map(
+                            // Decrypt Service Account
+                            serviceAccount -> serviceAccountEncryptionService.decrypt((ServiceAccount) serviceAccount)
+                    );
         }
 
         // Return all Service Accounts that match the search term
