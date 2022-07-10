@@ -95,7 +95,7 @@ public class ServiceAccountValidatorTests {
                 .clientSecret(UUID.randomUUID().toString())
                 .build();
 
-        // Mock findByName
+        // Mock findByClientId
         Mockito.when(serviceAccountService.findByClientId(serviceAccount.getClientId())).thenReturn(Optional.of(responseServiceAccount));
 
         // Create validator
