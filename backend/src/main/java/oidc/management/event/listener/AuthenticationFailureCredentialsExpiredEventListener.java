@@ -20,7 +20,7 @@ public class AuthenticationFailureCredentialsExpiredEventListener implements App
 
         // Create AuditEvent
         AuditEvent auditEvent = this.auditEventService.entityBuilder()
-                .description(String.format("Authentication failure, credentials expired with authentication \"%s\"", event.getAuthentication().getPrincipal()))
+                .description(String.format("Authentication failure, credentials expired for \"%s\"", event.getAuthentication().getPrincipal()))
                 .build();
 
         // Save the audit event
