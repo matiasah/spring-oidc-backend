@@ -17,6 +17,11 @@ import java.util.Optional;
  */
 public interface UserAccountService {
 
+    /**
+     * Creates an object that is used to build instances of {@link UserAccount}
+     *
+     * @return An instance of {@link oidc.management.model.UserAccount.UserAccountBuilder}
+     */
     public UserAccount.UserAccountBuilder entityBuilder();
 
     /**
