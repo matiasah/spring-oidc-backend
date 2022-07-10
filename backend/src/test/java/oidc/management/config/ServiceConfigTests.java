@@ -1,9 +1,6 @@
 package oidc.management.config;
 
-import oidc.management.repository.AuthorityRepository;
-import oidc.management.repository.ScopeRepository;
-import oidc.management.repository.ServiceAccountRepository;
-import oidc.management.repository.UserAccountRepository;
+import oidc.management.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,6 +21,9 @@ public class ServiceConfigTests {
 
     @MockBean
     private AuthorityRepository authorityRepository;
+
+    @MockBean
+    private AuditEventRepository auditEventRepository;
 
     @Test
     public void testContext() {
