@@ -33,10 +33,9 @@ public interface AuditEventService {
      * Finds a page of {@link AuditEvent}s.
      *
      * @param pageable Pageable object.
-     * @param search The search string.
      * @return Page of {@link AuditEvent}.
      */
-    public Page<AuditEvent> findAll(Pageable pageable, String search);
+    public Page<AuditEvent> findAll(Pageable pageable);
 
     /**
      * Finds an {@link AuditEvent} by its id.
