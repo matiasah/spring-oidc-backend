@@ -22,9 +22,6 @@ import java.util.UUID;
 public class AuthenticationFailureProviderNotFoundEventListenerTests {
 
     @Autowired
-    private AuthenticationFailureProviderNotFoundEventListener listener;
-
-    @Autowired
     private ApplicationEventPublisher publisher;
 
     @MockBean
