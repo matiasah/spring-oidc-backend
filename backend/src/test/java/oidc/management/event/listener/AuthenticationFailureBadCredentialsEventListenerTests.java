@@ -21,8 +21,6 @@ import java.util.UUID;
 })
 public class AuthenticationFailureBadCredentialsEventListenerTests {
 
-    @Autowired
-    private AuthenticationFailureBadCredentialsEventListener listener;
 
     @Autowired
     private ApplicationEventPublisher publisher;
