@@ -17,6 +17,11 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ServiceAccountService {
 
+    /**
+     * Creates an object that is used to build instances of {@link ServiceAccount}
+     *
+     * @return An instance of {@link oidc.management.model.ServiceAccount.ServiceAccountBuilder}
+     */
     public ServiceAccount.ServiceAccountBuilder entityBuilder();
 
     /**
