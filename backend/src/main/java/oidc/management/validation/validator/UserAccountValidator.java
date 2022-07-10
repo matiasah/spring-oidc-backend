@@ -31,7 +31,7 @@ public class UserAccountValidator implements ConstraintValidator<ValidUserAccoun
 
             // Skip validation
             return true;
-            
+
         }
 
         // Find a user account with the same name
