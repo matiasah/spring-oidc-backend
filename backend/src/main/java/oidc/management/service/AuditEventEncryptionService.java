@@ -3,7 +3,7 @@ package oidc.management.service;
 import oidc.management.model.AuditEvent;
 
 /**
- * Service for encrypting and decrypting instances of {@link oidc.management.model.AuditEvent}.
+ * Service for encrypting and decrypting instances of {@link AuditEvent}.
  *
  * @author Matías Hermosilla
  * @since 10-07-2022
