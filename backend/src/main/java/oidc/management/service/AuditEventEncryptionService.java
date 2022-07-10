@@ -25,5 +25,5 @@ public interface AuditEventEncryptionService {
      * @return The decrypted {@link AuditEvent}.
      */
     public AuditEvent decrypt(AuditEvent auditEvent);
-    
+
 }
