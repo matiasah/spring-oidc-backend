@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
+@ToString
 @Builder(toBuilder = true)
 @Document(indexName = "audit_event")
 @NoArgsConstructor

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
+@ToString
 @Builder(toBuilder = true)
 @Entity
 @NoArgsConstructor

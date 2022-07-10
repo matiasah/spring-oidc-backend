@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
+@ToString
 @Builder(toBuilder = true)
 @Document(collection = "audit_event")
 @NoArgsConstructor
