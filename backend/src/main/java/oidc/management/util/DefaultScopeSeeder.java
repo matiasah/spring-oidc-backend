@@ -59,7 +59,8 @@ public class DefaultScopeSeeder {
                 scopeService.entityBuilder().name("create_scope").description("Create scopes").tags(DEFAULT_SCOPES_TAGS).build(),
                 scopeService.entityBuilder().name("read_scope").description("Read scopes").tags(DEFAULT_SCOPES_TAGS).build(),
                 scopeService.entityBuilder().name("update_scope").description("Update scopes").tags(DEFAULT_SCOPES_TAGS).build(),
-                scopeService.entityBuilder().name("delete_scope").description("Delete scopes").tags(DEFAULT_SCOPES_TAGS).build()
+                scopeService.entityBuilder().name("delete_scope").description("Delete scopes").tags(DEFAULT_SCOPES_TAGS).build(),
+                scopeService.entityBuilder().name("read_audit_event").description("Read audit events").tags(DEFAULT_SCOPES_TAGS).build()
         );
     }
 
