@@ -17,8 +17,8 @@ export class ScopeService {
     }
 
     // Get Data Transfer Object (DTO)
-    public getDTO(serviceAccount: Scope): Scope {
-        return Object.assign({}, serviceAccount);
+    public getDTO(scope: Scope): Scope {
+        return Object.assign({}, scope);
     }
 
     public paginator(): Paginator<Scope> {
