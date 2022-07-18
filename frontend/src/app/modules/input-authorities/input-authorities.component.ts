@@ -2,7 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, Optional, Self, SimpleChanges, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormControl, NgControl } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatFormFieldControl } from '@angular/material/form-field';
@@ -30,7 +30,7 @@ export class InputAuthoritiesComponent implements OnInit, OnChanges, OnDestroy, 
     public authorities: Authority[] = [];
 
     // Authority name form control
-    public authorityNameFormControl: FormControl = new FormControl();
+    public authorityNameFormControl: UntypedFormControl = new UntypedFormControl();
 
     @ViewChild('authoritiesInput', { read: ElementRef, static: true })
     public authoritiesInputElement!: ElementRef<HTMLInputElement>;

@@ -10,7 +10,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { MatFormFieldControl } from "@angular/material/form-field";
-import { ControlValueAccessor, FormControl, NgControl } from "@angular/forms";
+import { ControlValueAccessor, UntypedFormControl, NgControl } from "@angular/forms";
 import { Subject } from "rxjs";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
@@ -36,7 +36,7 @@ export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatForm
     public tags: string[] = [];
 
     // Tag form control
-    public tagsFormControl: FormControl = new FormControl();
+    public tagsFormControl: UntypedFormControl = new UntypedFormControl();
 
     @ViewChild('tagsInput', { read: ElementRef, static: true })
     public tagsInputElement!: ElementRef<HTMLInputElement>;
