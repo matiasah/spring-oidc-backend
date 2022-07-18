@@ -22,6 +22,10 @@ const routes: Routes = [
             {
                 path: 'scopes',
                 loadChildren: () => import('../scopes/scopes.module').then(m => m.ScopesModule)
+            },
+            {
+                path: 'audit-events',
+                loadChildren: () => import('../audit-events/audit-events.module').then(m => m.AuditEventsModule)
             }
         ]
     }

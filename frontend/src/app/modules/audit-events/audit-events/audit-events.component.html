@@ -1,0 +1,55 @@
+<div class="m-8">
+
+    <mat-card class="mt-2 mb-4">
+
+        <div class="w-full flex justify-between">
+            <h1 class="title font-bold">Audit Events</h1>
+        </div>
+
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Id.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let auditEvent">
+                    {{ auditEvent.id }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name -->
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Description
+                </mat-header-cell>
+                <mat-cell *matCellDef="let auditEvent">
+                    {{ auditEvent.name }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Tags -->
+            <ng-container matColumnDef="createdAt">
+                <mat-header-cell *matHeaderCellDef>
+                    Date
+                </mat-header-cell>
+                <mat-cell *matCellDef="let auditEvent">
+                    {{ auditEvent.createdAt }}
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    </mat-card>
+
+</div>
