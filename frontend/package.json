@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^14.0.6",
     "@angular/platform-browser-dynamic": "^14.0.6",
     "@angular/router": "^14.0.6",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.7",
     "moment": "^2.29.1",
     "postcss": "^8.4.5",
     "rxjs": "~6.6.0",
