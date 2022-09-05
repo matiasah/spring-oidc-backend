@@ -2,13 +2,13 @@ version: 2
 updates:
 
   - package-ecosystem: "maven"
-    directory: "/backend/"
+    directory: "backend"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
 
   - package-ecosystem: "npm"
-    directory: "/frontend/"
+    directory: "frontend"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
