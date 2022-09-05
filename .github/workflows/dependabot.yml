@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "mvn"
+    directory: "/backend/"
+    schedule:
+      interval: "daily"
+    # Add assignees
+    assignees:
+      - "octocat"
