@@ -1,20 +1,14 @@
 version: 2
 updates:
 
-  - package-ecosystem: "mvn"
+  - package-ecosystem: "maven"
     directory: "/backend/"
     schedule:
       interval: "daily"
-    # Add assignees
-    assignees:
-      - "octocat"
     open-pull-requests-limit: 5
 
   - package-ecosystem: "npm"
     directory: "/frontend/"
     schedule:
       interval: "daily"
-    # Add assignees
-    assignees:
-      - "octocat"
     open-pull-requests-limit: 5
