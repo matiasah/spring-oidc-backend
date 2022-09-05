@@ -7,3 +7,4 @@ updates:
     # Add assignees
     assignees:
       - "octocat"
+    open-pull-requests-limit: 5
