@@ -1,4 +1,30 @@
 export const environment = {
   production: true,
-  token_item: 'oidc_token'
+  token_item: 'oidc_token',
+  host: 'http://127.0.0.1:8080',
+  clientId: 'eb5d9c2a-b5aa-4467-b4b4-79ae82eee0d8',
+  clientSecret: '05009f8d-97d7-4601-8852-b196ba7fdf41',
+  scope: [
+    'openid',
+    'profile',
+    'email',
+    'create_authority',
+    'read_authority',
+    'update_authority',
+    'delete_authority',
+    'create_service_account',
+    'read_service_account',
+    'update_service_account',
+    'delete_service_account',
+    'create_user_account',
+    'read_user_account',
+    'update_user_account',
+    'delete_user_account',
+    'create_scope',
+    'read_scope',
+    'update_scope',
+    'delete_scope',
+    'read_audit_event'
+  ].join(' '),
+  redirectUri: 'http://127.0.0.1/oauth/callback'
 };
