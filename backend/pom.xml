@@ -22,7 +22,7 @@
         <spring-cloud-dependencies.version>2021.0.4</spring-cloud-dependencies.version>
         <spring-security-oauth2-authorization-server.version>0.3.1</spring-security-oauth2-authorization-server.version>
         <bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
-        <h2.version>2.1.212</h2.version>
+        <h2.version>2.1.214</h2.version>
         <spotbugs-annotations.version>4.7.1</spotbugs-annotations.version>
 
         <!-- SonarQube configuration -->
