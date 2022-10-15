@@ -1,25 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SystemComponent } from './system.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {SystemComponent} from './system.component';
+import {TestLocalStorage} from "../../../util/test-local-storage.spec";
 
 describe('SystemComponent', () => {
-  let component: SystemComponent;
-  let fixture: ComponentFixture<SystemComponent>;
+    let component: SystemComponent;
+    let fixture: ComponentFixture<SystemComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SystemComponent ]
-    })
-    .compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [SystemComponent],
+            providers: [
+                {
+                    provide: Storage,
+                    useValue: new TestLocalStorage()
+                }
+            ]
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SystemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SystemComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
