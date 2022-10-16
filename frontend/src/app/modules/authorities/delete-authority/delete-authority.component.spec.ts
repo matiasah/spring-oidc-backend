@@ -11,8 +11,8 @@ describe('DeleteAuthorityComponent', () => {
     let fixture: ComponentFixture<DeleteAuthorityComponent>;
     let authority: Authority = {} as any as Authority;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
                 MaterialModule
@@ -29,7 +29,7 @@ describe('DeleteAuthorityComponent', () => {
                 }
             ]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DeleteAuthorityComponent);

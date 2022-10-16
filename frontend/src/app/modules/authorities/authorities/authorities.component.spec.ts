@@ -8,8 +8,8 @@ describe('AuthoritiesComponent', () => {
     let component: AuthoritiesComponent;
     let fixture: ComponentFixture<AuthoritiesComponent>;
 
-    beforeEach(waitForAsync( () => {
-        TestBed.configureTestingModule({
+    beforeEach(async  () => {
+        await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
                 NoopAnimationsModule,
@@ -17,7 +17,7 @@ describe('AuthoritiesComponent', () => {
             ],
             declarations: [AuthoritiesComponent]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AuthoritiesComponent);

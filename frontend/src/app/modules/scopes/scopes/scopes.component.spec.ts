@@ -9,8 +9,8 @@ describe('ScopesComponent', () => {
     let component: ScopesComponent;
     let fixture: ComponentFixture<ScopesComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
                 ReactiveFormsModule,
@@ -20,7 +20,7 @@ describe('ScopesComponent', () => {
             ],
             declarations: [ScopesComponent]
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ScopesComponent);
