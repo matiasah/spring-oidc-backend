@@ -3,6 +3,7 @@ import {UserAccountsComponent} from './user-accounts.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('UserAccountsComponent', () => {
     let component: UserAccountsComponent;
@@ -12,6 +13,8 @@ describe('UserAccountsComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
                 NoopAnimationsModule,
                 MaterialModule
             ],

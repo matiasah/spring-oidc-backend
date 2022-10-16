@@ -19,6 +19,10 @@ describe('SystemComponent', () => {
                 {
                     provide: Storage,
                     useValue: new TestLocalStorage()
+                },
+                {
+                    provide: Window,
+                    useValue: {}
                 }
             ]
         }).compileComponents();

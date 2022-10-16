@@ -1,13 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {EditAuthorityComponent} from './edit-authority.component';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {Authority} from "../../../interfaces/authority";
 
 describe('EditAuthorityComponent', () => {
     let component: EditAuthorityComponent;
     let fixture: ComponentFixture<EditAuthorityComponent>;
+    let authority: Authority = {} as any as Authority;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -20,6 +22,10 @@ describe('EditAuthorityComponent', () => {
                 {
                     provide: MatDialogRef,
                     useValue: new TestMatDialogRef()
+                },
+                {
+                    provide: MAT_DIALOG_DATA,
+                    useValue: authority
                 }
             ]
         }).compileComponents();

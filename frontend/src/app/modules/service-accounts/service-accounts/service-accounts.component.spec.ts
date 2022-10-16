@@ -3,6 +3,9 @@ import {ServiceAccountsComponent} from './service-accounts.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialModule} from "../../material/material.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('ServiceAccountsComponent', () => {
     let component: ServiceAccountsComponent;
@@ -11,7 +14,11 @@ describe('ServiceAccountsComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
+                NoopAnimationsModule,
+                MaterialModule
             ],
             declarations: [ServiceAccountsComponent],
             providers: [

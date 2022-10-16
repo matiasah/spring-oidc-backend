@@ -6,6 +6,7 @@ import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTagsModule} from "../../input-tags/input-tags.module";
 
 describe('CreateAuthorityComponent', () => {
     let component: CreateAuthorityComponent;
@@ -18,7 +19,8 @@ describe('CreateAuthorityComponent', () => {
                 ReactiveFormsModule,
                 FormsModule,
                 NoopAnimationsModule,
-                MaterialModule
+                MaterialModule,
+                InputTagsModule
             ],
             declarations: [CreateAuthorityComponent],
             providers: [

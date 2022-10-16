@@ -4,6 +4,9 @@ import {MaterialModule} from "../../material/material.module";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTagsModule} from "../../input-tags/input-tags.module";
 
 describe('CreateUserAccountComponent', () => {
     let component: CreateUserAccountComponent;
@@ -12,8 +15,12 @@ describe('CreateUserAccountComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
                 NoopAnimationsModule,
-                MaterialModule
+                MaterialModule,
+                InputTagsModule
             ],
             declarations: [CreateUserAccountComponent],
             providers: [
