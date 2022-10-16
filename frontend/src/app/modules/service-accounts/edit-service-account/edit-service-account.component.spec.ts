@@ -10,6 +10,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
+import {InputScopesTableModule} from "../../input-scopes-table/input-scopes-table.module";
 
 describe('EditServiceAccountComponent', () => {
     let component: EditServiceAccountComponent;
@@ -25,7 +26,8 @@ describe('EditServiceAccountComponent', () => {
                 NoopAnimationsModule,
                 MaterialModule,
                 InputAuthoritiesModule,
-                InputTagsModule
+                InputTagsModule,
+                InputScopesTableModule
             ],
             declarations: [EditServiceAccountComponent],
             providers: [
