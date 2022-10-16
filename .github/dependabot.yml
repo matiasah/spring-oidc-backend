@@ -5,16 +5,16 @@ updates:
     directory: "backend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "npm"
     directory: "frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
   
   - package-ecosystem: "npm"
     directory: "backend/auth-frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
