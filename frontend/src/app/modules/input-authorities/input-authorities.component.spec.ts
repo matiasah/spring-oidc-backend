@@ -2,6 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputAuthoritiesComponent} from './input-authorities.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {MaterialModule} from "../material/material.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('InputAuthoritiesComponent', () => {
     let component: InputAuthoritiesComponent;
@@ -11,6 +13,9 @@ describe('InputAuthoritiesComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
+                NoopAnimationsModule,
                 MaterialModule
             ],
             declarations: [InputAuthoritiesComponent]

@@ -3,6 +3,7 @@ import {AuthoritiesComponent} from './authorities.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {MaterialModule} from "../../material/material.module";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('AuthoritiesComponent', () => {
     let component: AuthoritiesComponent;
@@ -12,6 +13,8 @@ describe('AuthoritiesComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
                 NoopAnimationsModule,
                 MaterialModule
             ],
