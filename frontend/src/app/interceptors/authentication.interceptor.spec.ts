@@ -15,6 +15,10 @@ describe('AuthenticationInterceptor', () => {
             {
                 provide: Storage,
                 useValue: new TestLocalStorage()
+            },
+            {
+                provide: Window,
+                useValue: {}
             }
         ]
     }));

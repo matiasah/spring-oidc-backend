@@ -5,6 +5,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {TestLocalStorage} from "../../../util/test-local-storage.spec";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MaterialModule} from "../../material/material.module";
 
 describe('CallbackComponent', () => {
     let component: CallbackComponent;
@@ -14,7 +15,8 @@ describe('CallbackComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
-                HttpClientTestingModule
+                HttpClientTestingModule,
+                MaterialModule
             ],
             declarations: [CallbackComponent],
             providers: [
@@ -25,6 +27,10 @@ describe('CallbackComponent', () => {
                 {
                     provide: Storage,
                     useValue: new TestLocalStorage()
+                },
+                {
+                    provide: Window,
+                    useValue: {}
                 }
             ]
         }).compileComponents();

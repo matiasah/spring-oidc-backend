@@ -17,6 +17,10 @@ describe('AuthenticationGuard', () => {
                 {
                     provide: Storage,
                     useValue: new TestLocalStorage()
+                },
+                {
+                    provide: Window,
+                    useValue: {}
                 }
             ]
         });

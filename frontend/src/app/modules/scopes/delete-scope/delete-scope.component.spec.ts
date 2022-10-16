@@ -1,14 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DeleteScopeComponent} from './delete-scope.component';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {Scope} from "../../../interfaces/scope";
 
 describe('DeleteScopeComponent', () => {
     let component: DeleteScopeComponent;
     let fixture: ComponentFixture<DeleteScopeComponent>;
+    let scope: Scope = {} as any as Scope;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -22,6 +24,10 @@ describe('DeleteScopeComponent', () => {
                 {
                     provide: MatDialogRef,
                     useValue: new TestMatDialogRef()
+                },
+                {
+                    provide: MAT_DIALOG_DATA,
+                    useValue: scope
                 }
             ]
         }).compileComponents();

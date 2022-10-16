@@ -7,6 +7,7 @@ import {Scope} from "../../../interfaces/scope";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('EditScopeComponent', () => {
     let component: EditScopeComponent;
@@ -19,6 +20,7 @@ describe('EditScopeComponent', () => {
                 HttpClientTestingModule,
                 ReactiveFormsModule,
                 FormsModule,
+                NoopAnimationsModule,
                 MaterialModule,
                 InputTagsModule
             ],

@@ -26,7 +26,8 @@ export class AuthService {
     public constructor(
         private storage: Storage,
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private window: Window
     ) {
 
         // Si hay token en localStorage
@@ -64,7 +65,7 @@ export class AuthService {
         const httpRequest: HttpRequest<unknown> = new HttpRequest('GET', `${environment.host}/oauth2/authorize`, { params: httpParams });
 
         // Redirect to login
-        window.location = httpRequest.urlWithParams as any as Location;
+        this.window.location = httpRequest.urlWithParams as any as Location;
     }
 
     public exchangeCodeForToken(code: string): Observable<AccessToken> {

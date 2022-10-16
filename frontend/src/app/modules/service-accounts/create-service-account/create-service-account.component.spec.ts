@@ -2,6 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CreateServiceAccountComponent} from './create-service-account.component';
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "../../material/material.module";
 
 describe('CreateServiceAccountComponent', () => {
     let component: CreateServiceAccountComponent;
@@ -9,6 +11,10 @@ describe('CreateServiceAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [
+                NoopAnimationsModule,
+                MaterialModule
+            ],
             declarations: [CreateServiceAccountComponent],
             providers: [
                 {

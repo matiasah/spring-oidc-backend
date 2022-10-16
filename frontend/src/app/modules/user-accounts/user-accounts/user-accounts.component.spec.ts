@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UserAccountsComponent} from './user-accounts.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "../../material/material.module";
 
 describe('UserAccountsComponent', () => {
     let component: UserAccountsComponent;
@@ -9,7 +11,9 @@ describe('UserAccountsComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
+                NoopAnimationsModule,
+                MaterialModule
             ],
             declarations: [UserAccountsComponent]
         }).compileComponents();
