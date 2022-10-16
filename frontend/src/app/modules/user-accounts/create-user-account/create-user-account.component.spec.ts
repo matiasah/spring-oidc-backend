@@ -3,6 +3,7 @@ import {CreateUserAccountComponent} from './create-user-account.component';
 import {MaterialModule} from "../../material/material.module";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('CreateUserAccountComponent', () => {
     let component: CreateUserAccountComponent;
@@ -11,6 +12,7 @@ describe('CreateUserAccountComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                NoopAnimationsModule,
                 MaterialModule
             ],
             declarations: [CreateUserAccountComponent],

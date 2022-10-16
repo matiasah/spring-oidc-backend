@@ -5,6 +5,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('EditUserAccountComponent', () => {
     let component: EditUserAccountComponent;
@@ -13,6 +14,7 @@ describe('EditUserAccountComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                HttpClientTestingModule,
                 NoopAnimationsModule,
                 MaterialModule
             ],

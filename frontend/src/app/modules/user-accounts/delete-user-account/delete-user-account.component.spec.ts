@@ -2,6 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DeleteUserAccountComponent} from './delete-user-account.component';
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "../../material/material.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('DeleteUserAccountComponent', () => {
     let component: DeleteUserAccountComponent;
@@ -9,6 +12,11 @@ describe('DeleteUserAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule,
+                NoopAnimationsModule,
+                MaterialModule
+            ],
             declarations: [DeleteUserAccountComponent],
             providers: [
                 {

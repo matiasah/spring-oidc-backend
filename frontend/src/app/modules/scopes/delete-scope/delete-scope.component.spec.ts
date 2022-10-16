@@ -3,6 +3,8 @@ import {DeleteScopeComponent} from './delete-scope.component';
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('DeleteScopeComponent', () => {
     let component: DeleteScopeComponent;
@@ -11,6 +13,8 @@ describe('DeleteScopeComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                HttpClientTestingModule,
+                NoopAnimationsModule,
                 MaterialModule
             ],
             declarations: [DeleteScopeComponent],

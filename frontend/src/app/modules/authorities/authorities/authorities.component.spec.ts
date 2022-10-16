@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {AuthoritiesComponent} from './authorities.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {MaterialModule} from "../../material/material.module";
@@ -8,8 +8,8 @@ describe('AuthoritiesComponent', () => {
     let component: AuthoritiesComponent;
     let fixture: ComponentFixture<AuthoritiesComponent>;
 
-    beforeEach(async (compileComponents) => {
-        await TestBed.configureTestingModule({
+    beforeEach(waitForAsync( () => {
+        TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
                 NoopAnimationsModule,
@@ -17,7 +17,7 @@ describe('AuthoritiesComponent', () => {
             ],
             declarations: [AuthoritiesComponent]
         }).compileComponents();
-    });
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AuthoritiesComponent);
