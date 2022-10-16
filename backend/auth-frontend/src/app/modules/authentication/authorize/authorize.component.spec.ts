@@ -1,6 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AuthorizeComponent } from './authorize.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {AuthorizeComponent} from './authorize.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
+import { LoginComponent } from '../login/login.component';
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "../../material/material.module";
 
 describe('AuthorizeComponent', () => {
   let component: AuthorizeComponent;
@@ -8,9 +12,22 @@ describe('AuthorizeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthorizeComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule.withRoutes([
+          {
+            path: 'login',
+            component: LoginComponent
+          }
+        ]),
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+        MaterialModule
+      ],
+      declarations: [
+        AuthorizeComponent,
+        LoginComponent
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +39,5 @@ describe('AuthorizeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
