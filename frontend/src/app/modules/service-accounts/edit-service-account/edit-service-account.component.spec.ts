@@ -3,6 +3,13 @@ import {EditServiceAccountComponent} from './edit-service-account.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {ServiceAccount} from "../../../interfaces/service-account";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {MaterialModule} from "../../material/material.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
+import {InputTagsModule} from "../../input-tags/input-tags.module";
 
 describe('EditServiceAccountComponent', () => {
     let component: EditServiceAccountComponent;
@@ -11,6 +18,15 @@ describe('EditServiceAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
+                NoopAnimationsModule,
+                MaterialModule,
+                InputAuthoritiesModule,
+                InputTagsModule
+            ],
             declarations: [EditServiceAccountComponent],
             providers: [
                 {

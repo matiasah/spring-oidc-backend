@@ -14,8 +14,9 @@ export class CreateUserAccountComponent implements OnInit {
 
     // User account to create
     public userAccount: UserAccount = {
+        authorities: [],
         enabled: true
-    } as UserAccount;
+    } as any as UserAccount;
 
     // Indicate if the account is being created
     public creating = false;

@@ -5,6 +5,9 @@ import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {Authority} from "../../../interfaces/authority";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTagsModule} from "../../input-tags/input-tags.module";
 
 describe('EditAuthorityComponent', () => {
     let component: EditAuthorityComponent;
@@ -15,7 +18,11 @@ describe('EditAuthorityComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
-                MaterialModule
+                ReactiveFormsModule,
+                FormsModule,
+                NoopAnimationsModule,
+                MaterialModule,
+                InputTagsModule
             ],
             declarations: [EditAuthorityComponent],
             providers: [

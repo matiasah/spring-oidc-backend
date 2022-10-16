@@ -16,6 +16,8 @@ export class CreateServiceAccountComponent implements OnInit {
 
     // Service account to create
     public serviceAccount: ServiceAccount = {
+        scopes: [],
+        authorities: [],
         redirectUris: []
     } as unknown as ServiceAccount;
 

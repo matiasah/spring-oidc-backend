@@ -8,6 +8,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {UserAccount} from "../../../interfaces/user-account";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
+import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
 
 describe('EditUserAccountComponent', () => {
     let component: EditUserAccountComponent;
@@ -24,6 +25,7 @@ describe('EditUserAccountComponent', () => {
                 FormsModule,
                 NoopAnimationsModule,
                 MaterialModule,
+                InputAuthoritiesModule,
                 InputTagsModule
             ],
             declarations: [EditUserAccountComponent],
