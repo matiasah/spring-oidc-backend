@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DeleteScopeComponent} from './delete-scope.component';
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
+import {MaterialModule} from "../../material/material.module";
 
 describe('DeleteScopeComponent', () => {
     let component: DeleteScopeComponent;
@@ -9,6 +10,9 @@ describe('DeleteScopeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [
+                MaterialModule
+            ],
             declarations: [DeleteScopeComponent],
             providers: [
                 {

@@ -1,6 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CallbackComponent} from './callback.component';
 import {RouterTestingModule} from "@angular/router/testing";
+import {MatDialogRef} from "@angular/material/dialog";
+import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
+import {TestLocalStorage} from "../../../util/test-local-storage.spec";
 
 describe('CallbackComponent', () => {
     let component: CallbackComponent;
@@ -11,7 +14,17 @@ describe('CallbackComponent', () => {
             imports: [
                 RouterTestingModule
             ],
-            declarations: [CallbackComponent]
+            declarations: [CallbackComponent],
+            providers: [
+                {
+                    provide: MatDialogRef,
+                    useValue: new TestMatDialogRef()
+                },
+                {
+                    provide: Storage,
+                    useValue: new TestLocalStorage()
+                }
+            ]
         }).compileComponents();
     });
 

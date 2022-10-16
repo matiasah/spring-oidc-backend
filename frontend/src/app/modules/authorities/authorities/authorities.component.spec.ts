@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AuthoritiesComponent} from './authorities.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MaterialModule} from "../../material/material.module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('AuthoritiesComponent', () => {
     let component: AuthoritiesComponent;
@@ -9,7 +11,9 @@ describe('AuthoritiesComponent', () => {
     beforeEach(async (compileComponents) => {
         await TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
+                NoopAnimationsModule,
+                MaterialModule
             ],
             declarations: [AuthoritiesComponent]
         }).compileComponents();

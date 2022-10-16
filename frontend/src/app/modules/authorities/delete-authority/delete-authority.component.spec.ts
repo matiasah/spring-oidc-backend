@@ -3,6 +3,7 @@ import {DeleteAuthorityComponent} from './delete-authority.component';
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('DeleteAuthorityComponent', () => {
     let component: DeleteAuthorityComponent;
@@ -11,6 +12,7 @@ describe('DeleteAuthorityComponent', () => {
     beforeEach(async (compileComponents) => {
         await TestBed.configureTestingModule({
             imports: [
+                HttpClientTestingModule,
                 MaterialModule
             ],
             declarations: [DeleteAuthorityComponent],

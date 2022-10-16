@@ -1,7 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {AuditEventsComponent} from './audit-events.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MaterialModule} from "../../material/material.module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('AuditEventsComponent', () => {
     let component: AuditEventsComponent;
@@ -10,7 +11,9 @@ describe('AuditEventsComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
+                NoopAnimationsModule,
+                MaterialModule
             ],
             declarations: [AuditEventsComponent]
         }).compileComponents();

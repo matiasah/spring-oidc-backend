@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputScopesTableComponent} from './input-scopes-table.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MaterialModule} from "../material/material.module";
 
 describe('InputScopesTableComponent', () => {
     let component: InputScopesTableComponent;
@@ -9,7 +10,8 @@ describe('InputScopesTableComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
+                MaterialModule
             ],
             declarations: [InputScopesTableComponent]
         }).compileComponents();

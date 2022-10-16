@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {SystemComponent} from './system.component';
 import {TestLocalStorage} from "../../../util/test-local-storage.spec";
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('SystemComponent', () => {
     let component: SystemComponent;
@@ -8,6 +10,10 @@ describe('SystemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule,
+                HttpClientTestingModule
+            ],
             declarations: [SystemComponent],
             providers: [
                 {

@@ -5,6 +5,7 @@ import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
 import {Scope} from "../../../interfaces/scope";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('EditScopeComponent', () => {
     let component: EditScopeComponent;
@@ -15,6 +16,8 @@ describe('EditScopeComponent', () => {
         await TestBed.configureTestingModule({
             imports: [
                 HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
                 MaterialModule
             ],
             declarations: [EditScopeComponent],
