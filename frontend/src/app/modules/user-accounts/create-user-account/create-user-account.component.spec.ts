@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CreateUserAccountComponent} from './create-user-account.component';
 import {MaterialModule} from "../../material/material.module";
+import {MatDialogRef} from "@angular/material/dialog";
+import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 
 describe('CreateUserAccountComponent', () => {
     let component: CreateUserAccountComponent;
@@ -11,7 +13,13 @@ describe('CreateUserAccountComponent', () => {
             imports: [
                 MaterialModule
             ],
-            declarations: [CreateUserAccountComponent]
+            declarations: [CreateUserAccountComponent],
+            providers: [
+                {
+                    provide: MatDialogRef,
+                    useValue: new TestMatDialogRef()
+                }
+            ]
         }).compileComponents();
     });
 

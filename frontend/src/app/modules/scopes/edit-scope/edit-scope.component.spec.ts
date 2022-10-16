@@ -6,6 +6,7 @@ import {MaterialModule} from "../../material/material.module";
 import {Scope} from "../../../interfaces/scope";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTagsModule} from "../../input-tags/input-tags.module";
 
 describe('EditScopeComponent', () => {
     let component: EditScopeComponent;
@@ -18,9 +19,12 @@ describe('EditScopeComponent', () => {
                 HttpClientTestingModule,
                 ReactiveFormsModule,
                 FormsModule,
-                MaterialModule
+                MaterialModule,
+                InputTagsModule
             ],
-            declarations: [EditScopeComponent],
+            declarations: [
+                EditScopeComponent,
+            ],
             providers: [
                 {
                     provide: MatDialogRef,

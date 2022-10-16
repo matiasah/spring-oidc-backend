@@ -4,6 +4,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {TestLocalStorage} from "../../../util/test-local-storage.spec";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('CallbackComponent', () => {
     let component: CallbackComponent;
@@ -12,7 +13,8 @@ describe('CallbackComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule
+                RouterTestingModule,
+                HttpClientTestingModule
             ],
             declarations: [CallbackComponent],
             providers: [

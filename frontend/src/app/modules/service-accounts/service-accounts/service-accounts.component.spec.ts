@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ServiceAccountsComponent} from './service-accounts.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MatDialogRef} from "@angular/material/dialog";
+import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 
 describe('ServiceAccountsComponent', () => {
     let component: ServiceAccountsComponent;
@@ -11,7 +13,13 @@ describe('ServiceAccountsComponent', () => {
             imports: [
                 HttpClientTestingModule
             ],
-            declarations: [ServiceAccountsComponent]
+            declarations: [ServiceAccountsComponent],
+            providers: [
+                {
+                    provide: MatDialogRef,
+                    useValue: new TestMatDialogRef()
+                }
+            ]
         }).compileComponents();
     });
 
