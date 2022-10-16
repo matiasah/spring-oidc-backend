@@ -12,3 +12,9 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
+  
+  - package-ecosystem: "npm"
+    directory: "backend/auth-frontend"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
