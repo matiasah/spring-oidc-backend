@@ -19,7 +19,7 @@
     "@angular/forms": "^14.0.6",
     "@angular/material": "^14.0.5",
     "@angular/material-moment-adapter": "^14.2.5",
-    "@angular/platform-browser": "^14.0.6",
+    "@angular/platform-browser": "^14.2.6",
     "@angular/platform-browser-dynamic": "^14.0.6",
     "@angular/router": "^14.0.6",
     "autoprefixer": "^10.4.7",
