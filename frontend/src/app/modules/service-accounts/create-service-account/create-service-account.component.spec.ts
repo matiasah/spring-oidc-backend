@@ -8,6 +8,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
 import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
+import {InputScopesTableModule} from "../../input-scopes-table/input-scopes-table.module";
 
 describe('CreateServiceAccountComponent', () => {
     let component: CreateServiceAccountComponent;
@@ -22,7 +23,8 @@ describe('CreateServiceAccountComponent', () => {
                 NoopAnimationsModule,
                 MaterialModule,
                 InputAuthoritiesModule,
-                InputTagsModule
+                InputTagsModule,
+                InputScopesTableModule
             ],
             declarations: [CreateServiceAccountComponent],
             providers: [

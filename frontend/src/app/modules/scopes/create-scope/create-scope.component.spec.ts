@@ -5,16 +5,23 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTagsModule} from "../../input-tags/input-tags.module";
 
 describe('CreateScopeComponent', () => {
     let component: CreateScopeComponent;
     let fixture: ComponentFixture<CreateScopeComponent>;
 
-    beforeEach(async (compileComponents) => {
+    beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
                 NoopAnimationsModule,
-                MaterialModule
+                MaterialModule,
+                InputTagsModule
             ],
             declarations: [CreateScopeComponent],
             providers: [
