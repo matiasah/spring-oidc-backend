@@ -3,19 +3,19 @@ import {AuthorizationInfoService} from './authorization-info.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('AuthorizationInfoService', () => {
-  let service: AuthorizationInfoService;
+    let service: AuthorizationInfoService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule
+            ]
+        });
+        service = TestBed.inject(AuthorizationInfoService);
     });
-    service = TestBed.inject(AuthorizationInfoService);
-  });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 
 });
