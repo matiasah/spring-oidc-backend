@@ -9,10 +9,10 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
-    // Indicar si el usuario o contraseña son incorrectos
-    public incorrecto: boolean = false;
+    // Indicates if there was an error during login process
+    public loginError: boolean = false;
 
-    // Usuario
+    // User
     public username: string = '';
     public password: string = '';
 
@@ -24,13 +24,17 @@ export class LoginComponent implements OnInit {
     ) { }
 
     public ngOnInit(): void {
-        // Identificar error
+
+        // Detect error
         this.activatedRoute.queryParams.subscribe(
             queryParams => {
-                // Identificar error
-                this.incorrecto = queryParams.error;
+
+                // Toggle error flag
+                this.loginError = queryParams.error;
+
             }
         );
+
     }
 
 }

@@ -13,7 +13,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="incorrecto" class="w-full mb-3">
+                    <div *ngIf="loginError" class="w-full mb-3">
                         <div class="flex justify-center">
                             <mat-card class="mat-elevation-z1 bg-warn">
                                 Username or password may be invalid.
@@ -21,7 +21,7 @@
                         </div>
                     </div>
 
-                    <!-- Formulario de datos para inicio de sesión -->
+                    <!-- Login form -->
                     <form ngNoForm [action]="host + '/login'" method="post">
                         <div class="grid grid-cols-12 w-full">
 
@@ -48,10 +48,11 @@
 
                             <div class="flex justify-center col-span-12 mt-2">
 
-                                <!-- Botón de inicio de sesión -->
+                                <!-- Login button-->
                                 <button mat-raised-button id="loginButton" type="submit" color="primary">
                                     Log in
                                 </button>
+
                             </div>
 
                         </div>
