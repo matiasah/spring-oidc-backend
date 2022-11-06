@@ -3,7 +3,13 @@
 
 name: Node.js CI (Auth Frontend)
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - ./backend/auth-frontend/**
+  pull_request:
+    paths:
+      - ./backend/auth-frontend/**
 
 jobs:
   build:
