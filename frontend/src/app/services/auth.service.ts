@@ -30,27 +30,35 @@ export class AuthService {
         private window: Window
     ) {
 
-        // Si hay token en localStorage
+        // If there's a token in the localStorage
         const item: string | null = this.storage.getItem(environment.token_item);
 
-        // Si el item existe
+        // If the item exists
         if (item) {
-            // Leer objeto
+
+            // Read object
             this.token = JSON.parse(item);
 
-            // Si hay token
+            // If there's a token
             if (this.token) {
 
-                // Si hay expiracion
+                // If the token has expiration
                 if (this.token.expiresAt) {
-                    // Transformar fecha a Date
+
+                    // Convert to date
                     this.token.expiresAt = new Date(this.token.expiresAt);
+
                 } else {
-                    // Eliminar token
+
+                    // Delete token
                     this.logout();
+
                 }
+
             }
+
         }
+
     }
 
     public login(): void {
@@ -64,7 +72,7 @@ export class AuthService {
         // HTTP Request
         const httpRequest: HttpRequest<unknown> = new HttpRequest('GET', `${environment.host}/oauth2/authorize`, { params: httpParams });
 
-        // Redirect to login
+        // Redirect to login page
         this.window.location = httpRequest.urlWithParams as any as Location;
     }
 

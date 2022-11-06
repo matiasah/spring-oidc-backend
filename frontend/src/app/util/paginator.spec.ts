@@ -19,23 +19,23 @@ import {MaterialModule} from "../modules/material/material.module";
 })
 class PaginatorTestComponent implements OnInit, OnDestroy {
 
-    // Columnas de datatable
+    // Datatable columns
     public displayedColumns: string[] = ['nombre'];
 
-    // Paginación
+    // Paginator
     public paginator!: Paginator<any>;
 
     // Data-source
     public dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-    // Indicar si se encuentra cargando resultados
+    // Indicate if the component is still loading results
     public isLoading!: Observable<boolean>;
 
     // Sort
     @ViewChild(MatSort, {static: true})
     public matSort!: MatSort;
 
-    // Paginación
+    // Paginator
     @ViewChild(MatPaginator, {static: true})
     public matPaginator!: MatPaginator;
 
@@ -46,13 +46,13 @@ class PaginatorTestComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-        // Instanciar paginador
+        // Create paginator
         this.paginator = new Paginator(this.http, `${environment.host}/test`);
 
         // Observables
         this.isLoading = this.paginator.isLoadingSubject;
 
-        // Inicializar paginador
+        // Initialize paginator
         this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
     }
 
@@ -89,11 +89,11 @@ describe('Paginator', () => {
         fixture.detectChanges();
     });
 
-    it('crear componente', () => {
+    it('should create component', () => {
         expect(component).toBeTruthy();
     });
 
-    it('impedir avanzar a siguiente página', (done) => {
+    it('should not allow going to the next page', (done) => {
         const paginaA = {
             content: [
                 {nombre: 'A'},
@@ -149,7 +149,7 @@ describe('Paginator', () => {
         });
     });
 
-    it('avanzar a siguiente página', (done) => {
+    it('should go to the next page', (done) => {
         const paginaA = {
             content: [
                 {nombre: 'A'},
@@ -238,7 +238,7 @@ describe('Paginator', () => {
         });
     });
 
-    it('avanzar a siguiente página y retroceder a página anterior', (done) => {
+    it('should go to the next page and go back to the previous one', (done) => {
         const paginaA = {
             content: [
                 {nombre: 'A'},
@@ -341,7 +341,7 @@ describe('Paginator', () => {
         });
     });
 
-    it('impedir retroceder a página anterior', (done) => {
+    it('should prevent going back to the previous page', (done) => {
         const paginaA = {
             content: [
                 {nombre: 'A'},
