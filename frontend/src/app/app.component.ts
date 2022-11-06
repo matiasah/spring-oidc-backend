@@ -25,15 +25,15 @@ export class AppComponent {
 
                 // Event received
                 if (event instanceof NavigationStart) {
-                    if (!this.loading) {
-                        // Start loading
-                        this.loading = true;
-                    }
+
+                    // Start loading
+                    this.loading = true;
+
                 } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-                    if (this.loading) {
-                        // End loading
-                        this.loading = false;
-                    }
+
+                    // End loading
+                    this.loading = false;
+
                 }
             }
         );
