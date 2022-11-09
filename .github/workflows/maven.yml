@@ -3,14 +3,7 @@
 
 name: Java CI with Maven
 
-on:
-  push:
-    paths:
-      - ./backend/pom.xml
-      - ./backend/src/**
-  pull_request:
-    paths:
-      - ./backend/pom.xml
+on: [push, pull_request]
 
 jobs:
   build:
