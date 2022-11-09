@@ -2,13 +2,8 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI (Frontend)
-on:
-  push:
-    paths:
-      - frontend/**
-  pull_request:
-    paths:
-      - frontend/**
+
+on: [push, pull_request]
 
 jobs:
   build:
