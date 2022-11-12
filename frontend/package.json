@@ -21,7 +21,7 @@
     "@angular/material-moment-adapter": "^14.2.7",
     "@angular/platform-browser": "^14.2.8",
     "@angular/platform-browser-dynamic": "^14.2.8",
-    "@angular/router": "^14.2.8",
+    "@angular/router": "^14.2.10",
     "autoprefixer": "^10.4.13",
     "moment": "^2.29.4",
     "postcss": "^8.4.18",
