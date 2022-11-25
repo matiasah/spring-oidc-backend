@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CallbackComponent} from './callback.component';
 import {RouterTestingModule} from "@angular/router/testing";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {TestLocalStorage} from "../../../util/test-local-storage.spec";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
