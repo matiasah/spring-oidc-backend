@@ -6,7 +6,7 @@ import oidc.management.model.Scope;
 import oidc.management.validation.annotations.ValidScope;
 import org.springframework.data.domain.Pageable;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Builder(toBuilder = true)

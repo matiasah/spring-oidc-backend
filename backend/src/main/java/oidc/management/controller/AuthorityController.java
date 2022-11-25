@@ -3,7 +3,7 @@ package oidc.management.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import oidc.management.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;

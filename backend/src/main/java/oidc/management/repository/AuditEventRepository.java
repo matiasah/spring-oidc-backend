@@ -1,6 +1,8 @@
 package oidc.management.repository;
 
 import oidc.management.model.AuditEvent;
+
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -16,7 +18,7 @@ import java.util.List;
  * @see {@link AuditEvent}
  */
 @NoRepositoryBean
-public interface AuditEventRepository<T extends AuditEvent> extends PagingAndSortingRepository<T, String> {
+public interface AuditEventRepository<T extends AuditEvent> extends PagingAndSortingRepository<T, String>, CrudRepository<T, String> {
 
     public AuditEvent.AuditEventBuilder entityBuilder();
 

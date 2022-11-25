@@ -51,11 +51,10 @@ public class AuthorizationServerConfig {
 				.getEndpointsMatcher();
         
 		return http
-			.requestMatcher(endpointsMatcher)
-			.authorizeRequests()
-                .anyRequest()
-                    .authenticated()
-                    .and()
+            .authorizeHttpRequests()
+			.requestMatchers(endpointsMatcher)
+                .authenticated()
+                .and()
 			.csrf()
                 .ignoringRequestMatchers(endpointsMatcher)
                 .and()

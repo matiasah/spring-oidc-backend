@@ -6,7 +6,7 @@ import oidc.management.repository.AuthorityRepository;
 import oidc.management.validation.annotations.ValidAuthority;
 import org.springframework.data.domain.Pageable;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 @Builder(toBuilder = true)

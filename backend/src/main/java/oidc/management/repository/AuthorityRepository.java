@@ -2,8 +2,9 @@ package oidc.management.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import oidc.management.model.Authority;
+
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -19,7 +20,7 @@ import java.util.Optional;
  * @see Authority
  */
 @NoRepositoryBean
-public interface AuthorityRepository<T extends Authority> extends PagingAndSortingRepository<T, String> {
+public interface AuthorityRepository<T extends Authority> extends PagingAndSortingRepository<T, String>, CrudRepository<T, String> {
 
     public Authority.AuthorityBuilder entityBuilder();
 

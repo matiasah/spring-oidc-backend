@@ -2,8 +2,8 @@ package oidc.management.validation.annotations;
 
 import oidc.management.validation.validator.ServiceAccountValidator;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented

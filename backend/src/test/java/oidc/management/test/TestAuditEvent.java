@@ -4,7 +4,7 @@ import lombok.*;
 import oidc.management.model.AuditEvent;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Builder(toBuilder = true)

@@ -3,7 +3,7 @@ package oidc.management.model;
 import org.springframework.security.core.GrantedAuthority;
 import oidc.management.repository.AuthorityRepository;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 /**

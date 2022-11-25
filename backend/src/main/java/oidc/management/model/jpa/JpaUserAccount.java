@@ -11,8 +11,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.domain.Pageable;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;

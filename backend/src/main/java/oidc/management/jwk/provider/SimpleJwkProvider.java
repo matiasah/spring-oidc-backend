@@ -6,7 +6,7 @@ import oidc.management.jwk.JwkProvider;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 

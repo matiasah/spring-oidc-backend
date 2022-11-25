@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import oidc.management.model.UserAccount;
+
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -17,7 +19,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * @see oidc.management.service.UserAccountService#findByUsername(String)
  */
 @NoRepositoryBean
-public interface UserAccountRepository<T extends UserAccount> extends PagingAndSortingRepository<T, String> {
+public interface UserAccountRepository<T extends UserAccount> extends PagingAndSortingRepository<T, String>, CrudRepository<T, String> {
 
     public UserAccount.UserAccountBuilder entityBuilder();
 
