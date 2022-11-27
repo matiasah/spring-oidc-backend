@@ -4,6 +4,7 @@ import com.nimbusds.jose.jwk.JWK;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.bson.Document;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +35,14 @@ public class MongoJwkProviderTests {
 
     @Autowired
     private RSAKeyGenerator rsaKeyGenerator;
+
+    @BeforeEach
+    public void cleanUp() {
+
+        // Clean collection
+        mongoTemplate.getCollection(collection).drop();
+
+    }
 
     @Test
     public void testGetJwks() {
