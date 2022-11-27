@@ -73,7 +73,7 @@ public class DefaultAuthorityServiceTests {
         Authority authority = authorityService.entityBuilder()
                 .name("test")
                 .description("test")
-                .tags(Set.of("%test%"))
+                .tags(Set.of("test"))
                 .build();
 
         // Save authority

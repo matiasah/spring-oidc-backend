@@ -73,7 +73,7 @@ public class DefaultUserAccountServiceTests {
         UserAccount userAccount = userAccountService.entityBuilder()
                 .username("test")
                 .password("test")
-                .tags(Set.of("%test%"))
+                .tags(Set.of("test"))
                 .build();
 
         // Save userAccount

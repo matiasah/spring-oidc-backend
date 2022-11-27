@@ -76,7 +76,7 @@ public class DefaultServiceAccountServiceTests {
                 .clientId("test")
                 .clientSecret("test")
                 .clientDescription("test")
-                .tags(Set.of("%test%"))
+                .tags(Set.of("test"))
                 .build();
 
         // Save serviceAccount
