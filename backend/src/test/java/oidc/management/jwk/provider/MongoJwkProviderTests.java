@@ -46,7 +46,7 @@ public class MongoJwkProviderTests {
 
     @Test
     public void testGetJwks() {
-        
+
         // Generate JWK
         Map<String, Object> key = rsaKeyGenerator.generateRsa().toJSONObject();
 
