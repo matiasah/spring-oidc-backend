@@ -26,9 +26,3 @@ oidc:
         enabled: true
         username: "test"
         password: "test"
-
-logging:
-  level:
-    org:
-      springframework.boot.autoconfigure.mongo.embedded: DEBUG
-      mongodb: DEBUG
