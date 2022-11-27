@@ -11,6 +11,7 @@ import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.bson.Document;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,7 +47,7 @@ public class MongoJwkProviderTests {
     private RSAKeyGenerator rsaKeyGenerator;
 
     @BeforeEach
-    void setup() throws Exception {
+    public void setup() throws Exception {
 
         final String CONNECTION_STRING = "mongodb://%s:%d";
         final String ip = "localhost";
@@ -65,6 +66,14 @@ public class MongoJwkProviderTests {
 
         // Clean collection
         mongoTemplate.getCollection(collection).drop();
+
+    }
+
+    @AfterEach
+    public void clean() {
+
+        // Stop MongoDB instance
+        mongodExecutable.stop();
 
     }
 
