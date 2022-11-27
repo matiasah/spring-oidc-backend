@@ -41,33 +41,35 @@ public class AuthorizationServerConfig {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+
         OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer =
-				new OAuth2AuthorizationServerConfigurer<>();
+			new OAuth2AuthorizationServerConfigurer<>();
+
 		authorizationServerConfigurer
-				.authorizationEndpoint(authorizationEndpoint ->
-						authorizationEndpoint.consentPage("/consent"));
+			.authorizationEndpoint(authorizationEndpoint ->
+				authorizationEndpoint.consentPage("/consent"));
 
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer
-				.getEndpointsMatcher();
+			.getEndpointsMatcher();
         
 		return http
-            .authorizeHttpRequests()
-			.requestMatchers(endpointsMatcher)
-                .authenticated()
-                .and()
+			.authorizeHttpRequests()
+				.requestMatchers(endpointsMatcher)
+					.authenticated()
+					.and()
 			.csrf()
-                .ignoringRequestMatchers(endpointsMatcher)
-                .and()
-            .cors()
-                .configurationSource(configurationSource)
-                .and()
+				.ignoringRequestMatchers(endpointsMatcher)
+				.and()
+			.cors()
+				.configurationSource(configurationSource)
+				.and()
 			.apply(authorizationServerConfigurer)
-                .and()
-            .formLogin(Customizer.withDefaults())
-                .exceptionHandling()
-                    .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(DEFAULT_LOGIN_PAGE_URL))
-                    .and()
-                .build();
+				.and()
+			.formLogin(Customizer.withDefaults())
+				.exceptionHandling()
+					.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(DEFAULT_LOGIN_PAGE_URL))
+					.and()
+				.build();
     }
 
     @Bean
