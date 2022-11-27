@@ -1,7 +1,7 @@
 spring:
   mongodb:
     embedded:
-      version: 5.0.5
+      version: 6.0.2
 
 oidc:
   management:

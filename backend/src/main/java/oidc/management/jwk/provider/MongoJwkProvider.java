@@ -45,11 +45,13 @@ public class MongoJwkProvider implements JwkProvider {
         for (Document document : iterable) {
 
             try {
+
                 // Parse the map into a JWK
                 JWK jwk = JWK.parse(document);
 
                 // Add the JWK to the list
                 jwks.add(jwk);
+
             } catch (Exception e) {
 
                 // Log the document that could not be parsed

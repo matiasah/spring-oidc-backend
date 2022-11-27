@@ -37,9 +37,12 @@ public class MongoJwkProviderTests {
 
     @Test
     public void testGetJwks() {
+        
+        // Generate JWK
+        Map<String, Object> key = rsaKeyGenerator.generateRsa().toJSONObject();
 
         // Save test JWK
-        mongoTemplate.getCollection(collection).insertOne(new Document(rsaKeyGenerator.generateRsa().toJSONObject()));
+        mongoTemplate.getCollection(collection).insertOne(new Document(key));
 
         // Get Jwks
         List<JWK> jwks = mongoJwkProvider.getJwks();
