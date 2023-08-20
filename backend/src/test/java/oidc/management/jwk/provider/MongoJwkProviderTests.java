@@ -1,47 +1,31 @@
 package oidc.management.jwk.provider;
 
-import com.mongodb.client.MongoClients;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.nimbusds.jose.jwk.JWK;
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.ImmutableMongodConfig;
-import de.flapdoodle.embed.mongo.config.MongodConfig;
-import de.flapdoodle.embed.mongo.config.Net;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.distribution.ImmutableDistribution;
-import de.flapdoodle.embed.process.runtime.Network;
-import de.flapdoodle.os.CommonArchitecture;
-import de.flapdoodle.os.ImmutablePlatform;
-import de.flapdoodle.os.OS;
-import de.flapdoodle.os.linux.LinuxDistribution;
-import de.flapdoodle.os.linux.UbuntuVersion;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.bson.Document;
-import org.junit.jupiter.api.AfterEach;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.mongodb.core.MongoOperations;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@Import({
+@SpringBootTest(classes = {
         MongoJwkProvider.class,
         RSAKeyGenerator.class
 })
-@DataMongoTest
 public class MongoJwkProviderTests {
-
-    private MongodExecutable mongodExecutable;
-
-    private MongoTemplate mongoTemplate;
 
     @Value("${oidc.management.jwk.mongo.collection}")
     private String collection;
@@ -52,36 +36,17 @@ public class MongoJwkProviderTests {
     @Autowired
     private RSAKeyGenerator rsaKeyGenerator;
 
-    @BeforeEach
-    public void setup() throws Exception {
+    @MockBean
+    private MongoOperations mongoOperations;
 
-        final String CONNECTION_STRING = "mongodb://%s:%d";
-        final String ip = "localhost";
-        final int port = 27017;
+    @Mock
+    private MongoCollection<Document> mongoCollection;
 
-        ImmutableMongodConfig mongodConfig = MongodConfig
-            .builder()
-            .version(Version.Main.V6_0)
-            .net(new Net(ip, port, Network.localhostIsIPv6()))
-            .build();
+    @Mock
+    private FindIterable<Document> findIterable;
 
-        MongodStarter starter = MongodStarter.getDefaultInstance();
-        mongodExecutable = starter.prepare(mongodConfig, ImmutableDistribution.detectFor(Version.Main.V6_0));
-        mongodExecutable.start();
-        mongoTemplate = new MongoTemplate(MongoClients.create(String.format(CONNECTION_STRING, ip, port)), "test");
-
-        // Clean collection
-        mongoTemplate.getCollection(collection).drop();
-
-    }
-
-    @AfterEach
-    public void clean() {
-
-        // Stop MongoDB instance
-        mongodExecutable.stop();
-
-    }
+    @Mock
+    private MongoCursor<Document> mongoCursor;
 
     @Test
     public void testGetJwks() {
@@ -89,8 +54,29 @@ public class MongoJwkProviderTests {
         // Generate JWK
         Map<String, Object> key = rsaKeyGenerator.generateRsa().toJSONObject();
 
-        // Save test JWK
-        mongoTemplate.getCollection(collection).insertOne(new Document(key));
+        // Convert JWK to Document
+        Document documentKey = new Document(key);
+
+        // Create a List of document
+        List<Document> documents = List.of(documentKey);
+
+        // Mock getCollection()
+        Mockito.when(mongoOperations.getCollection(collection)).thenReturn(mongoCollection);
+
+        // Mock find()
+        Mockito.when(mongoCollection.find(Document.class)).thenReturn(findIterable);
+
+        // Real Iterator
+        Iterator<Document> documentIterator = documents.iterator();
+
+        // Mock hasNext()
+        Mockito.when(mongoCursor.hasNext()).thenAnswer((invocation) -> documentIterator.hasNext());
+
+        // Mock next()
+        Mockito.when(mongoCursor.next()).thenAnswer((invocation) -> documentIterator.next());
+
+        // Mock iterator()
+        Mockito.when(findIterable.iterator()).thenReturn(mongoCursor);
 
         // Get Jwks
         List<JWK> jwks = mongoJwkProvider.getJwks();
@@ -103,8 +89,32 @@ public class MongoJwkProviderTests {
     @Test
     public void testGetJwksWithInvalidData() {
 
-        // Save test JWK
-        mongoTemplate.getCollection(collection).insertOne(new Document(Map.of("ABC", "123")));
+        // Generate JWK
+        Map<String, Object> key = Map.of("_id", new ObjectId());
+
+        // Convert JWK to Document
+        Document documentKey = new Document(key);
+
+        // Create a List of document
+        List<Document> documents = List.of(documentKey);
+
+        // Mock getCollection()
+        Mockito.when(mongoOperations.getCollection(collection)).thenReturn(mongoCollection);
+
+        // Mock find()
+        Mockito.when(mongoCollection.find(Document.class)).thenReturn(findIterable);
+
+        // Real Iterator
+        Iterator<Document> documentIterator = documents.iterator();
+
+        // Mock hasNext()
+        Mockito.when(mongoCursor.hasNext()).thenAnswer((invocation) -> documentIterator.hasNext());
+
+        // Mock next()
+        Mockito.when(mongoCursor.next()).thenAnswer((invocation) -> documentIterator.next());
+
+        // Mock iterator()
+        Mockito.when(findIterable.iterator()).thenReturn(mongoCursor);
 
         // Get Jwks
         List<JWK> jwks = mongoJwkProvider.getJwks();

@@ -1,13 +1,13 @@
 package oidc.management.jwk.provider;
 
-import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoIterable;
 import com.nimbusds.jose.jwk.JWK;
 import lombok.extern.log4j.Log4j2;
 import oidc.management.jwk.JwkProvider;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.MongoOperations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class MongoJwkProvider implements JwkProvider {
      * MongoTemplate for accessing the list of JWKs.
      */
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private MongoOperations mongoOperations;
 
     @Override
     public List<JWK> getJwks() {
@@ -39,7 +39,7 @@ public class MongoJwkProvider implements JwkProvider {
         List<JWK> jwks = new ArrayList<>();
 
         // Find all documents in the collection
-        FindIterable<Document> iterable = mongoTemplate.getCollection(collection).find(Document.class);
+        MongoIterable<Document> iterable = mongoOperations.getCollection(collection).find(Document.class);
 
         // For every document
         for (Document document : iterable) {
@@ -56,6 +56,7 @@ public class MongoJwkProvider implements JwkProvider {
 
                 // Log the document that could not be parsed
                 log.error("Could not parse document {}", document.getObjectId("_id").toString(), e);
+                
             }
 
         }
