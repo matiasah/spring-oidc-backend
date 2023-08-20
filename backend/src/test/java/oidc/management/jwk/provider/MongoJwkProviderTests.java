@@ -8,7 +8,13 @@ import de.flapdoodle.embed.mongo.config.ImmutableMongodConfig;
 import de.flapdoodle.embed.mongo.config.MongodConfig;
 import de.flapdoodle.embed.mongo.config.Net;
 import de.flapdoodle.embed.mongo.distribution.Version;
+import de.flapdoodle.embed.process.distribution.ImmutableDistribution;
 import de.flapdoodle.embed.process.runtime.Network;
+import de.flapdoodle.os.CommonArchitecture;
+import de.flapdoodle.os.ImmutablePlatform;
+import de.flapdoodle.os.OS;
+import de.flapdoodle.os.linux.LinuxDistribution;
+import de.flapdoodle.os.linux.UbuntuVersion;
 import oidc.management.jwk.RSAKeyGenerator;
 import org.bson.Document;
 import org.junit.jupiter.api.AfterEach;
@@ -60,7 +66,7 @@ public class MongoJwkProviderTests {
             .build();
 
         MongodStarter starter = MongodStarter.getDefaultInstance();
-        mongodExecutable = starter.prepare(mongodConfig);
+        mongodExecutable = starter.prepare(mongodConfig, ImmutableDistribution.detectFor(Version.Main.V6_0));
         mongodExecutable.start();
         mongoTemplate = new MongoTemplate(MongoClients.create(String.format(CONNECTION_STRING, ip, port)), "test");
 
