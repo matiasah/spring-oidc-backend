@@ -16,6 +16,7 @@ updates:
       angular:
         patterns:
           - "@angular/*"
+          - "@angular-devkit/*"
       karma:
         patterns:
           - "karma-*"
@@ -29,6 +30,7 @@ updates:
       angular:
         patterns:
           - "@angular/*"
+          - "@angular-devkit/*"
       karma:
         patterns:
           - "karma-*"
