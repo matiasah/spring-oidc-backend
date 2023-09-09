@@ -12,9 +12,17 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+    groups:
+      dependencies:
+        patterns:
+          - "@angular/*"
   
   - package-ecosystem: "npm"
     directory: "backend/auth-frontend"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+    groups:
+      dependencies:
+        patterns:
+          - "@angular/*"
