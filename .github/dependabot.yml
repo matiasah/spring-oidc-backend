@@ -13,9 +13,12 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 10
     groups:
-      dependencies:
+      angular:
         patterns:
           - "@angular/*"
+      karma:
+        patterns:
+          - "karma-*"
   
   - package-ecosystem: "npm"
     directory: "backend/auth-frontend"
@@ -23,6 +26,9 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 10
     groups:
-      dependencies:
+      angular:
         patterns:
           - "@angular/*"
+      karma:
+        patterns:
+          - "karma-*"
