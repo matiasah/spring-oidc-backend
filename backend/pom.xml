@@ -25,6 +25,8 @@
 		<h2.version>2.2.222</h2.version>
 		<de.flapdoodle.embed.mongo.version>4.9.2</de.flapdoodle.embed.mongo.version>
 		<spotbugs-annotations.version>4.7.3</spotbugs-annotations.version>
+        <mockito-core.version>5.5.0</mockito-core.version>
+        <mockito-inline.version>5.2.0</mockito-inline.version>
 
 		<!-- SonarQube configuration -->
 		<sonar.java.libraries>target/dependency/*.jar</sonar.java.libraries>
@@ -125,11 +127,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
+            <version>${mockito-inline.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
