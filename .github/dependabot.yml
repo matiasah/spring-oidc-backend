@@ -19,6 +19,7 @@ updates:
           - "@angular-devkit/*"
       karma:
         patterns:
+          - "karma"
           - "karma-*"
   
   - package-ecosystem: "npm"
@@ -33,4 +34,5 @@ updates:
           - "@angular-devkit/*"
       karma:
         patterns:
+          - "karma"
           - "karma-*"
