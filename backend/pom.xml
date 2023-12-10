@@ -19,7 +19,7 @@
 		<java.version>17</java.version>
 
 		<!-- Dependencies versions -->
-		<spring-cloud-dependencies.version>2022.0.4</spring-cloud-dependencies.version>
+		<spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
 		<spring-security-oauth2-authorization-server.version>1.2.0</spring-security-oauth2-authorization-server.version>
 		<bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
 		<h2.version>2.2.224</h2.version>
