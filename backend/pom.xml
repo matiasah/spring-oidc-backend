@@ -24,7 +24,7 @@
 		<bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
 		<h2.version>2.2.224</h2.version>
 		<de.flapdoodle.embed.mongo.version>4.11.1</de.flapdoodle.embed.mongo.version>
-		<spotbugs-annotations.version>4.8.2</spotbugs-annotations.version>
+		<spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
         <mockito-core.version>5.8.0</mockito-core.version>
         <mockito-inline.version>5.2.0</mockito-inline.version>
 
