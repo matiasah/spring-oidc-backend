@@ -20,7 +20,7 @@
 
 		<!-- Dependencies versions -->
 		<spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
-		<spring-security-oauth2-authorization-server.version>1.2.0</spring-security-oauth2-authorization-server.version>
+		<spring-security-oauth2-authorization-server.version>1.2.1</spring-security-oauth2-authorization-server.version>
 		<bcpkix-jdk15on.version>1.70</bcpkix-jdk15on.version>
 		<h2.version>2.2.224</h2.version>
 		<de.flapdoodle.embed.mongo.version>4.11.1</de.flapdoodle.embed.mongo.version>
