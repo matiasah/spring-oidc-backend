@@ -25,7 +25,7 @@
 		<h2.version>2.3.232</h2.version>
 		<de.flapdoodle.embed.mongo.version>4.17.0</de.flapdoodle.embed.mongo.version>
 		<spotbugs-annotations.version>4.8.6</spotbugs-annotations.version>
-        <mockito-core.version>5.13.0</mockito-core.version>
+        <mockito-core.version>5.14.0</mockito-core.version>
         <mockito-inline.version>5.2.0</mockito-inline.version>
 
 		<!-- SonarQube configuration -->
