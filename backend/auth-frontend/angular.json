@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "auth-frontend:build:production"
+              "buildTarget": "auth-frontend:build:production"
             },
             "development": {
-              "browserTarget": "auth-frontend:build:development"
+              "buildTarget": "auth-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "auth-frontend:build"
+            "buildTarget": "auth-frontend:build"
           }
         },
         "test": {
