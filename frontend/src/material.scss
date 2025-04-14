@@ -12,7 +12,7 @@ $frontend-warn: mat.define-palette(mat.$red-palette);
 $frontend-typography: mat.define-typography-config();
 
 // Define the full theme
-$frontend-theme: mat.define-theme((
+$frontend-theme: mat.define-light-theme((
   color: (
     primary: $frontend-primary,
     accent: $frontend-accent,
