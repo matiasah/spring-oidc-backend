@@ -2,6 +2,7 @@ import {
     Component,
     ElementRef,
     HostBinding,
+    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -82,8 +83,9 @@ export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatForm
     // Separator key codes
     public separatorKeysCodes: number[] = [ENTER, COMMA];
 
+    private focusMonitor: FocusMonitor = inject(FocusMonitor)
+
     public constructor(
-        private focusMonitor: FocusMonitor,
         private elementRef: ElementRef<HTMLElement>,
         @Optional() @Self() public ngControl: NgControl
     ) {
