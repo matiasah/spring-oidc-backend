@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {EditServiceAccountComponent} from './edit-service-account.component';
-import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {ServiceAccount} from "../../../interfaces/service-account";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";

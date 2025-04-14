@@ -1,12 +1,12 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {CallbackComponent} from './callback.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
-import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
-import {TestLocalStorage} from "../../../util/test-local-storage.spec";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {MaterialModule} from "../../material/material.module";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CallbackComponent } from './callback.component';
+import { MatDialogRef } from "@angular/material/dialog";
+import { TestMatDialogRef } from "../../../util/test-mat-dialog-ref.spec";
+import { TestLocalStorage } from "../../../util/test-local-storage.spec";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MaterialModule } from "../../material/material.module";
 import { LoginComponent } from '../login/login.component';
+import { provideRouter } from '@angular/router';
 
 describe('CallbackComponent', () => {
     let component: CallbackComponent;
@@ -15,12 +15,6 @@ describe('CallbackComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule.withRoutes([
-                    {
-                        path: 'login',
-                        component: LoginComponent
-                    }
-                ]),
                 HttpClientTestingModule,
                 MaterialModule
             ],
@@ -29,6 +23,12 @@ describe('CallbackComponent', () => {
                 LoginComponent
             ],
             providers: [
+                provideRouter([
+                    {
+                        path: 'login',
+                        component: LoginComponent
+                    }
+                ]),
                 {
                     provide: MatDialogRef,
                     useValue: new TestMatDialogRef()

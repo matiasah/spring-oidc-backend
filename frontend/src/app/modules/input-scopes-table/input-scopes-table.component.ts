@@ -1,9 +1,9 @@
 import { Component, forwardRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NgForm, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Scope } from 'src/app/interfaces/scope';
 import { ScopeService } from 'src/app/services/scope.service';

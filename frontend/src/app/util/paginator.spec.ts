@@ -1,17 +1,17 @@
-import {HttpClient} from '@angular/common/http';
-import {HttpClientTestingModule, HttpTestingController, TestRequest} from '@angular/common/http/testing';
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
-import {BrowserModule} from '@angular/platform-browser';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterTestingModule} from '@angular/router/testing';
-import {Observable} from 'rxjs';
-import {Paginator} from './paginator';
-import {environment} from "../../environments/environment";
-import {MaterialModule} from "../modules/material/material.module";
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Observable } from 'rxjs';
+import { Paginator } from './paginator';
+import { environment } from "../../environments/environment";
+import { MaterialModule } from "../modules/material/material.module";
+import { provideRouter } from '@angular/router';
 
 @Component({
     selector: 'app-paginator-test',
@@ -32,11 +32,11 @@ class PaginatorTestComponent implements OnInit, OnDestroy {
     public isLoading!: Observable<boolean>;
 
     // Sort
-    @ViewChild(MatSort, {static: true})
+    @ViewChild(MatSort, { static: true })
     public matSort!: MatSort;
 
     // Paginator
-    @ViewChild(MatPaginator, {static: true})
+    @ViewChild(MatPaginator, { static: true })
     public matPaginator!: MatPaginator;
 
     public constructor(
@@ -69,11 +69,13 @@ describe('Paginator', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
+            providers: [
+                provideRouter([])
+            ],
             imports: [
                 BrowserModule,
                 NoopAnimationsModule,
                 HttpClientTestingModule,
-                RouterTestingModule,
                 MaterialModule
             ],
             declarations: [
@@ -96,11 +98,11 @@ describe('Paginator', () => {
     it('should not allow going to the next page', (done) => {
         const paginaA = {
             content: [
-                {nombre: 'A'},
-                {nombre: 'B'},
-                {nombre: 'C'},
-                {nombre: 'D'},
-                {nombre: 'E'}
+                { nombre: 'A' },
+                { nombre: 'B' },
+                { nombre: 'C' },
+                { nombre: 'D' },
+                { nombre: 'E' }
             ],
             pageable: {
                 sort: {
@@ -152,11 +154,11 @@ describe('Paginator', () => {
     it('should go to the next page', (done) => {
         const paginaA = {
             content: [
-                {nombre: 'A'},
-                {nombre: 'B'},
-                {nombre: 'C'},
-                {nombre: 'D'},
-                {nombre: 'E'}
+                { nombre: 'A' },
+                { nombre: 'B' },
+                { nombre: 'C' },
+                { nombre: 'D' },
+                { nombre: 'E' }
             ],
             pageable: {
                 sort: {
@@ -187,7 +189,7 @@ describe('Paginator', () => {
 
         const paginaB = {
             content: [
-                {nombre: 'F'}
+                { nombre: 'F' }
             ],
             pageable: {
                 sort: {
@@ -241,11 +243,11 @@ describe('Paginator', () => {
     it('should go to the next page and go back to the previous one', (done) => {
         const paginaA = {
             content: [
-                {nombre: 'A'},
-                {nombre: 'B'},
-                {nombre: 'C'},
-                {nombre: 'D'},
-                {nombre: 'E'}
+                { nombre: 'A' },
+                { nombre: 'B' },
+                { nombre: 'C' },
+                { nombre: 'D' },
+                { nombre: 'E' }
             ],
             pageable: {
                 sort: {
@@ -276,7 +278,7 @@ describe('Paginator', () => {
 
         const paginaB = {
             content: [
-                {nombre: 'F'}
+                { nombre: 'F' }
             ],
             pageable: {
                 sort: {
@@ -344,11 +346,11 @@ describe('Paginator', () => {
     it('should prevent going back to the previous page', (done) => {
         const paginaA = {
             content: [
-                {nombre: 'A'},
-                {nombre: 'B'},
-                {nombre: 'C'},
-                {nombre: 'D'},
-                {nombre: 'E'}
+                { nombre: 'A' },
+                { nombre: 'B' },
+                { nombre: 'C' },
+                { nombre: 'D' },
+                { nombre: 'E' }
             ],
             pageable: {
                 sort: {

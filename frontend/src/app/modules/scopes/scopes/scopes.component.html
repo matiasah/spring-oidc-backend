@@ -30,7 +30,7 @@
 
         <div class="w-full overflow-x-auto">
 
-            <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+            <mat-table class="w-full" [dataSource]="dataSource" matSort>
 
                 <!-- ID -->
                 <ng-container matColumnDef="id">
@@ -70,14 +70,14 @@
                     <mat-cell *matCellDef="let scope">
 
                         <!-- Chip list -->
-                        <mat-chip-list>
+                        <mat-chip-grid>
 
                             <!-- For every tag -->
                             <mat-chip *ngFor="let tag of scope.tags">
                                 <span>{{ tag }}</span>
                             </mat-chip>
 
-                        </mat-chip-list>
+                        </mat-chip-grid>
 
                     </mat-cell>
                 </ng-container>
@@ -97,7 +97,7 @@
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </table>
+            </mat-table>
 
         </div>
 

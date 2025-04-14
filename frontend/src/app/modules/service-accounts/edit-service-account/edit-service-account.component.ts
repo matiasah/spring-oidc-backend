@@ -3,8 +3,8 @@ import { ServiceAccount } from "../../../interfaces/service-account";
 import { NgForm } from "@angular/forms";
 import { ClientAuthenticationMethod, clientAuthenticationMethodNames } from "../../../enums/client-authentication-method";
 import { AuthorizationGrantType, authorizationGrantTypeNames } from "../../../enums/authorization-grant-type";
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
-import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ServiceAccountService } from "../../../services/service-account.service";
 
 @Component({

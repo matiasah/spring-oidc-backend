@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthorizationGrantType, authorizationGrantTypeNames } from 'src/app/enums/authorization-grant-type';
 import { ClientAuthenticationMethod, clientAuthenticationMethodNames } from 'src/app/enums/client-authentication-method';
 import { ServiceAccount } from 'src/app/interfaces/service-account';

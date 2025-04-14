@@ -19,7 +19,7 @@
 
 <div class="w-full overflow-x-auto">
 
-    <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+    <mat-table class="w-full" [dataSource]="dataSource" matSort>
 
         <!-- Select -->
         <ng-container matColumnDef="select">
@@ -53,7 +53,7 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </table>
+    </mat-table>
 
 </div>
 

@@ -15,7 +15,7 @@ import { Subject } from "rxjs";
 import { coerceBooleanProperty } from "@angular/cdk/coercion";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { FocusMonitor } from "@angular/cdk/a11y";
-import { MatLegacyChipInputEvent as MatChipInputEvent } from "@angular/material/legacy-chips";
+import { MatChipInputEvent } from "@angular/material/chips";
 
 @Component({
     selector: 'app-input-tags',

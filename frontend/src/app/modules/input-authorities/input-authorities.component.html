@@ -1,16 +1,16 @@
 <!-- Chip list -->
-<mat-chip-list #chipListAuthorities>
+<mat-chip-grid #chipListAuthorities>
 
     <!-- For every authority -->
-    <mat-chip *ngFor="let authority of authorities" [selectable]="true" [removable]="true" (removed)="removeAuthority(authority)">
+    <mat-basic-chip-option *ngFor="let authority of authorities" [selectable]="true" [removable]="true" (removed)="removeAuthority(authority)">
         <span>{{ authority.name }}</span>
         <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
+    </mat-basic-chip-option>
 
     <!-- Input for adding new authorities -->
     <input matInput #authoritiesInput name="authorities" type="text" class="w-full" [formControl]="authorityNameFormControl" (ngModelChange)="authorityNameChanges.next($event)" [matChipInputFor]="chipListAuthorities" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addChip($event)" [matAutocomplete]="authoritiesAutocomplete" [required]="required" [placeholder]="placeholder">
     
-</mat-chip-list>
+</mat-chip-grid>
 
 <!-- Autocomplete for adding new authorities -->
 <mat-autocomplete #authoritiesAutocomplete="matAutocomplete" [displayWith]="displayAuthority">

@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Paginator} from "../../../util/paginator";
-import {MatLegacyTableDataSource as MatTableDataSource} from "@angular/material/legacy-table";
+import {MatTableDataSource} from "@angular/material/table";
 import {Observable} from "rxjs";
 import {MatSort} from "@angular/material/sort";
-import {MatLegacyPaginator as MatPaginator} from "@angular/material/legacy-paginator";
+import {MatPaginator} from "@angular/material/paginator";
 import {AuditEvent} from "../../../interfaces/audit-event";
 import {AuditEventService} from "../../../services/audit-event.service";
 

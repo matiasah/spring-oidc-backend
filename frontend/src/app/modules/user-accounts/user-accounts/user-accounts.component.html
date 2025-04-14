@@ -28,7 +28,7 @@
 
         <mat-divider></mat-divider>
 
-        <table mat-table class="w-full" [dataSource]="dataSource" matSort>
+        <mat-table class="w-full" [dataSource]="dataSource" matSort>
 
             <!-- ID -->
             <ng-container matColumnDef="id">
@@ -57,15 +57,15 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let userAccount">
 
-                    <!-- Chip list -->
-                    <mat-chip-list>
+                    <!-- Chip grid -->
+                    <mat-chip-grid>
 
                         <!-- For every tag -->
                         <mat-chip *ngFor="let tag of userAccount.tags">
                             <span>{{ tag }}</span>
                         </mat-chip>
 
-                    </mat-chip-list>
+                    </mat-chip-grid>
 
                 </mat-cell>
             </ng-container>
@@ -96,7 +96,7 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </table>
+        </mat-table>
 
         <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
