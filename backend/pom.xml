@@ -190,8 +190,8 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <nodeVersion>v17.9.1</nodeVersion>
-                            <npmVersion>6.14.13</npmVersion>
+                            <nodeVersion>v18.20.8</nodeVersion>
+                            <npmVersion>10.8.2</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
