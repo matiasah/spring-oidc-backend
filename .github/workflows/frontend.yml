@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - frontend/**
+      - .github/workflows/frontend.yml
   pull_request:
   workflow_dispatch:
 
@@ -21,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [17.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
