@@ -1,6 +1,7 @@
 // Modern Theming for Angular Material (Angular 17+)
 @use '@angular/material' as mat;
-@use '@angular/material/core' as mat-core;
+
+@include mat.core();
 
 // Define your color palettes
 $frontend-primary: mat.define-palette(mat.$red-palette);
@@ -19,9 +20,6 @@ $frontend-theme: mat.define-theme((
   ),
   typography: $frontend-typography,
 ));
-
-// Include the base styles (only once)
-@include mat.core();
 
 // Apply the theme to all components (includes color, typography, density, etc.)
 @include mat.all-component-themes($frontend-theme);
