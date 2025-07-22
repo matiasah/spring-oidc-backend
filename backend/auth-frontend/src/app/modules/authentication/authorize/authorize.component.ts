@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-authorize',
     templateUrl: './authorize.component.html',
-    styleUrls: ['./authorize.component.scss']
+    styleUrls: ['./authorize.component.scss'],
+    standalone: false
 })
 export class AuthorizeComponent implements OnInit {
 
