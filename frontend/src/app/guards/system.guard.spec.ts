@@ -1,12 +1,12 @@
-import {TestBed} from '@angular/core/testing';
-import {SystemGuard} from './system.guard';
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {TestLocalStorage} from "../util/test-local-storage.spec";
-import {of} from "rxjs";
-import {AuthService} from "../services/auth.service";
-import {Router} from "@angular/router";
-import {Component} from "@angular/core";
+import { TestBed } from '@angular/core/testing';
+import { SystemGuard } from './system.guard';
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { TestLocalStorage } from "../util/test-local-storage.spec";
+import { of } from "rxjs";
+import { AuthService } from "../services/auth.service";
+import { Router, RouterModule } from "@angular/router";
+import { Component } from "@angular/core";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
     template: ``
@@ -21,20 +21,17 @@ describe('SystemGuard', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule.withRoutes([
-                    {
-                        path: 'sys',
-                        component: TestComponent,
-                        canActivate: [SystemGuard]
-                    },
-                    {
-                        path: '',
-                        component: TestComponent
-                    }
-                ]),
-                HttpClientTestingModule
-            ],
+            imports: [RouterModule.forRoot([
+                {
+                    path: 'sys',
+                    component: TestComponent,
+                    canActivate: [SystemGuard]
+                },
+                {
+                    path: '',
+                    component: TestComponent
+                }
+            ])],
             providers: [
                 {
                     provide: Storage,
@@ -43,7 +40,9 @@ describe('SystemGuard', () => {
                 {
                     provide: Window,
                     useValue: {}
-                }
+                },
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting()
             ]
         });
         guard = TestBed.inject(SystemGuard);

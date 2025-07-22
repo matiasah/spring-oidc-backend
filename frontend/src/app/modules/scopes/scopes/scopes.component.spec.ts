@@ -1,9 +1,10 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ScopesComponent} from './scopes.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ScopesComponent', () => {
     let component: ScopesComponent;
@@ -11,15 +12,13 @@ describe('ScopesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule,
-                NoopAnimationsModule,
-                MaterialModule
-            ],
-            declarations: [ScopesComponent]
-        }).compileComponents();
+    declarations: [ScopesComponent],
+    imports: [ReactiveFormsModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MaterialModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
     });
 
     beforeEach(() => {

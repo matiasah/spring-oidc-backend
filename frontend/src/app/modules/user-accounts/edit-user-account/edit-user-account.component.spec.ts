@@ -4,11 +4,12 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {UserAccount} from "../../../interfaces/user-account";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
 import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditUserAccountComponent', () => {
     let component: EditUserAccountComponent;
@@ -19,27 +20,26 @@ describe('EditUserAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule,
-                NoopAnimationsModule,
-                MaterialModule,
-                InputAuthoritiesModule,
-                InputTagsModule
-            ],
-            declarations: [EditUserAccountComponent],
-            providers: [
-                {
-                    provide: MatDialogRef,
-                    useValue: new TestMatDialogRef()
-                },
-                {
-                    provide: MAT_DIALOG_DATA,
-                    useValue: userAccount
-                }
-            ]
-        }).compileComponents();
+    declarations: [EditUserAccountComponent],
+    imports: [ReactiveFormsModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MaterialModule,
+        InputAuthoritiesModule,
+        InputTagsModule],
+    providers: [
+        {
+            provide: MatDialogRef,
+            useValue: new TestMatDialogRef()
+        },
+        {
+            provide: MAT_DIALOG_DATA,
+            useValue: userAccount
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

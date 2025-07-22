@@ -1,8 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {AuditEventsComponent} from './audit-events.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {MaterialModule} from "../../material/material.module";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuditEventsComponent } from './audit-events.component';
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { MaterialModule } from "../../material/material.module";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AuditEventsComponent', () => {
     let component: AuditEventsComponent;
@@ -10,12 +11,9 @@ describe('AuditEventsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                NoopAnimationsModule,
-                MaterialModule
-            ],
-            declarations: [AuditEventsComponent]
+            declarations: [AuditEventsComponent],
+            imports: [NoopAnimationsModule, MaterialModule],
+            providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
 
         fixture = TestBed.createComponent(AuditEventsComponent);

@@ -3,11 +3,12 @@ import {EditAuthorityComponent} from './edit-authority.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {MaterialModule} from "../../material/material.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {Authority} from "../../../interfaces/authority";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditAuthorityComponent', () => {
     let component: EditAuthorityComponent;
@@ -16,26 +17,25 @@ describe('EditAuthorityComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule,
-                NoopAnimationsModule,
-                MaterialModule,
-                InputTagsModule
-            ],
-            declarations: [EditAuthorityComponent],
-            providers: [
-                {
-                    provide: MatDialogRef,
-                    useValue: new TestMatDialogRef()
-                },
-                {
-                    provide: MAT_DIALOG_DATA,
-                    useValue: authority
-                }
-            ]
-        }).compileComponents();
+    declarations: [EditAuthorityComponent],
+    imports: [ReactiveFormsModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MaterialModule,
+        InputTagsModule],
+    providers: [
+        {
+            provide: MatDialogRef,
+            useValue: new TestMatDialogRef()
+        },
+        {
+            provide: MAT_DIALOG_DATA,
+            useValue: authority
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

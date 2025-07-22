@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AppComponent} from './app.component';
-import {MaterialModule} from "./modules/material/material.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {Router} from "@angular/router";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { MaterialModule } from "./modules/material/material.module";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { Router, RouterModule } from "@angular/router";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AppComponent', () => {
 
@@ -13,14 +13,11 @@ describe('AppComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule,
-                MaterialModule,
-                HttpClientTestingModule
-            ],
             declarations: [
                 AppComponent
             ],
+            imports: [RouterModule.forRoot([]), MaterialModule],
+            providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
         router = TestBed.inject(Router);
     });

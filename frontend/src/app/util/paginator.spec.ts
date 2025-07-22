@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpTestingController, TestRequest, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatPaginator } from '@angular/material/paginator';
@@ -69,19 +69,18 @@ describe('Paginator', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [
-                provideRouter([])
-            ],
-            imports: [
-                BrowserModule,
-                NoopAnimationsModule,
-                HttpClientTestingModule,
-                MaterialModule
-            ],
-            declarations: [
-                PaginatorTestComponent
-            ]
-        }).compileComponents();
+    declarations: [
+        PaginatorTestComponent
+    ],
+    imports: [BrowserModule,
+        NoopAnimationsModule,
+        MaterialModule],
+    providers: [
+        provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
         controller = TestBed.inject(HttpTestingController);
     });
 

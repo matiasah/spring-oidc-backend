@@ -1,12 +1,12 @@
-import {TestBed} from '@angular/core/testing';
-import {AuthenticationInterceptor} from './authentication.interceptor';
-import {TestLocalStorage} from "../util/test-local-storage.spec";
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
-import {AuthService} from "../services/auth.service";
-import {firstValueFrom, of} from "rxjs";
-import {environment} from "../../environments/environment";
+import { TestBed } from '@angular/core/testing';
+import { AuthenticationInterceptor } from './authentication.interceptor';
+import { TestLocalStorage } from "../util/test-local-storage.spec";
+import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { AuthService } from "../services/auth.service";
+import { firstValueFrom, of } from "rxjs";
+import { environment } from "../../environments/environment";
+import { RouterModule } from '@angular/router';
 
 describe('AuthenticationInterceptor', () => {
 
@@ -16,10 +16,7 @@ describe('AuthenticationInterceptor', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule,
-                HttpClientTestingModule
-            ],
+            imports: [RouterModule.forRoot([])],
             providers: [
                 AuthService,
                 {
@@ -34,7 +31,9 @@ describe('AuthenticationInterceptor', () => {
                 {
                     provide: Window,
                     useValue: {}
-                }
+                },
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting()
             ]
         });
         authService = TestBed.inject(AuthService);

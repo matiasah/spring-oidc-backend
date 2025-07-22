@@ -4,8 +4,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { UserAccount } from 'src/app/interfaces/user-account';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('DeleteUserAccountComponent', () => {
     let component: DeleteUserAccountComponent;
@@ -14,23 +15,22 @@ describe('DeleteUserAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                NoopAnimationsModule,
-                MaterialModule
-            ],
-            declarations: [DeleteUserAccountComponent],
-            providers: [
-                {
-                    provide: MatDialogRef,
-                    useValue: new TestMatDialogRef()
-                },
-                {
-                    provide: MAT_DIALOG_DATA,
-                    useValue: userAccount
-                }
-            ]
-        }).compileComponents();
+    declarations: [DeleteUserAccountComponent],
+    imports: [NoopAnimationsModule,
+        MaterialModule],
+    providers: [
+        {
+            provide: MatDialogRef,
+            useValue: new TestMatDialogRef()
+        },
+        {
+            provide: MAT_DIALOG_DATA,
+            useValue: userAccount
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

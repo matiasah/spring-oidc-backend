@@ -4,11 +4,12 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
 import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
 import {InputScopesTableModule} from "../../input-scopes-table/input-scopes-table.module";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CreateServiceAccountComponent', () => {
     let component: CreateServiceAccountComponent;
@@ -16,24 +17,23 @@ describe('CreateServiceAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule,
-                NoopAnimationsModule,
-                MaterialModule,
-                InputAuthoritiesModule,
-                InputTagsModule,
-                InputScopesTableModule
-            ],
-            declarations: [CreateServiceAccountComponent],
-            providers: [
-                {
-                    provide: MatDialogRef,
-                    useValue: new TestMatDialogRef()
-                }
-            ]
-        }).compileComponents();
+    declarations: [CreateServiceAccountComponent],
+    imports: [ReactiveFormsModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MaterialModule,
+        InputAuthoritiesModule,
+        InputTagsModule,
+        InputScopesTableModule],
+    providers: [
+        {
+            provide: MatDialogRef,
+            useValue: new TestMatDialogRef()
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

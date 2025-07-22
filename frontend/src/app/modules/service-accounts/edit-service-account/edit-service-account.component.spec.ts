@@ -5,11 +5,12 @@ import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {ServiceAccount} from "../../../interfaces/service-account";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../../material/material.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
 import {InputScopesTableModule} from "../../input-scopes-table/input-scopes-table.module";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditServiceAccountComponent', () => {
     let component: EditServiceAccountComponent;
@@ -18,28 +19,27 @@ describe('EditServiceAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule,
-                NoopAnimationsModule,
-                MaterialModule,
-                InputAuthoritiesModule,
-                InputTagsModule,
-                InputScopesTableModule
-            ],
-            declarations: [EditServiceAccountComponent],
-            providers: [
-                {
-                    provide: MatDialogRef,
-                    useValue: new TestMatDialogRef()
-                },
-                {
-                    provide: MAT_DIALOG_DATA,
-                    useValue: serviceAccount
-                }
-            ]
-        }).compileComponents();
+    declarations: [EditServiceAccountComponent],
+    imports: [ReactiveFormsModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MaterialModule,
+        InputAuthoritiesModule,
+        InputTagsModule,
+        InputScopesTableModule],
+    providers: [
+        {
+            provide: MatDialogRef,
+            useValue: new TestMatDialogRef()
+        },
+        {
+            provide: MAT_DIALOG_DATA,
+            useValue: serviceAccount
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

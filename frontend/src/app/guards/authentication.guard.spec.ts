@@ -1,12 +1,12 @@
-import {TestBed} from '@angular/core/testing';
-import {AuthenticationGuard} from './authentication.guard';
-import {TestLocalStorage} from "../util/test-local-storage.spec";
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {AuthService} from "../services/auth.service";
-import {Component} from "@angular/core";
-import {Router} from "@angular/router";
-import {of} from "rxjs";
+import { TestBed } from '@angular/core/testing';
+import { AuthenticationGuard } from './authentication.guard';
+import { TestLocalStorage } from "../util/test-local-storage.spec";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { AuthService } from "../services/auth.service";
+import { Component } from "@angular/core";
+import { Router, RouterModule } from "@angular/router";
+import { of } from "rxjs";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
     template: ``
@@ -24,20 +24,17 @@ describe('AuthenticationGuard', () => {
             declarations: [
                 TestComponent
             ],
-            imports: [
-                RouterTestingModule.withRoutes([
-                    {
-                        path: '',
-                        component: TestComponent,
-                        canActivate: [AuthenticationGuard]
-                    },
-                    {
-                        path: 'sys',
-                        component: TestComponent
-                    }
-                ]),
-                HttpClientTestingModule
-            ],
+            imports: [RouterModule.forRoot([
+                {
+                    path: '',
+                    component: TestComponent,
+                    canActivate: [AuthenticationGuard]
+                },
+                {
+                    path: 'sys',
+                    component: TestComponent
+                }
+            ])],
             providers: [
                 {
                     provide: Storage,
@@ -46,7 +43,9 @@ describe('AuthenticationGuard', () => {
                 {
                     provide: Window,
                     useValue: {}
-                }
+                },
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting()
             ]
         });
         guard = TestBed.inject(AuthenticationGuard);

@@ -4,10 +4,11 @@ import {MaterialModule} from "../../material/material.module";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestMatDialogRef} from "../../../util/test-mat-dialog-ref.spec";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTagsModule} from "../../input-tags/input-tags.module";
 import {InputAuthoritiesModule} from "../../input-authorities/input-authorities.module";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CreateUserAccountComponent', () => {
     let component: CreateUserAccountComponent;
@@ -15,23 +16,22 @@ describe('CreateUserAccountComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule,
-                NoopAnimationsModule,
-                MaterialModule,
-                InputAuthoritiesModule,
-                InputTagsModule
-            ],
-            declarations: [CreateUserAccountComponent],
-            providers: [
-                {
-                    provide: MatDialogRef,
-                    useValue: new TestMatDialogRef()
-                }
-            ]
-        }).compileComponents();
+    declarations: [CreateUserAccountComponent],
+    imports: [ReactiveFormsModule,
+        FormsModule,
+        NoopAnimationsModule,
+        MaterialModule,
+        InputAuthoritiesModule,
+        InputTagsModule],
+    providers: [
+        {
+            provide: MatDialogRef,
+            useValue: new TestMatDialogRef()
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+}).compileComponents();
     });
 
     beforeEach(() => {

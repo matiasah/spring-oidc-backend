@@ -3,22 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MaterialModule } from './modules/material/material.module';
 import {AuthenticationInterceptor} from "./interceptors/authentication.interceptor";
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent
     ],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        HttpClientModule,
-        MaterialModule
-    ],
-    providers: [
+        MaterialModule], providers: [
         {
             provide: Storage,
             useValue: localStorage
@@ -31,8 +26,7 @@ import {AuthenticationInterceptor} from "./interceptors/authentication.intercept
         {
             provide: Window,
             useValue: window
-        }
-    ],
-    bootstrap: [AppComponent]
-})
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
