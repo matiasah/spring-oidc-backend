@@ -1,12 +1,13 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {AuthorizeComponent} from './authorize.component';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {LoginComponent} from '../login/login.component';
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {MaterialModule} from "../../material/material.module";
-import {environment} from "../../../../environments/environment";
-import {AuthorizationInfo} from "../../../interfaces/authorization-info";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthorizeComponent } from './authorize.component';
+import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
+import { LoginComponent } from '../login/login.component';
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { MaterialModule } from "../../material/material.module";
+import { environment } from "../../../../environments/environment";
+import { AuthorizationInfo } from "../../../interfaces/authorization-info";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 describe('AuthorizeComponent', () => {
     let component: AuthorizeComponent;
@@ -15,21 +16,19 @@ describe('AuthorizeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule.withRoutes([
-                    {
-                        path: 'login',
-                        component: LoginComponent
-                    }
-                ]),
-                HttpClientTestingModule,
-                NoopAnimationsModule,
-                MaterialModule
-            ],
             declarations: [
                 AuthorizeComponent,
                 LoginComponent
-            ]
+            ],
+            imports: [RouterModule.forRoot([
+                {
+                    path: 'login',
+                    component: LoginComponent
+                }
+            ]),
+                NoopAnimationsModule,
+                MaterialModule],
+            providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         }).compileComponents();
         controller = TestBed.inject(HttpTestingController);
     });

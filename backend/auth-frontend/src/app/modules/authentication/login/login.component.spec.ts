@@ -1,10 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {LoginComponent} from './login.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {MaterialModule} from "../../material/material.module";
-import {Router} from "@angular/router";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LoginComponent } from './login.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { MaterialModule } from "../../material/material.module";
+import { Router, RouterModule } from "@angular/router";
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -14,7 +13,7 @@ describe('LoginComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule,
+                RouterModule.forRoot([]),
                 ReactiveFormsModule,
                 FormsModule,
                 NoopAnimationsModule,
@@ -39,7 +38,7 @@ describe('LoginComponent', () => {
         expect(component).toBeTruthy();
 
         // Test queryParams
-        await router.navigate(["/"], {queryParams: {error: true}});
+        await router.navigate(["/"], { queryParams: { error: true } });
     });
 
 });

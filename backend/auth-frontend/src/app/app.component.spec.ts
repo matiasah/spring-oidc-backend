@@ -1,7 +1,6 @@
 import {TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {Router} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
 import {MaterialModule} from "./modules/material/material.module";
 
 describe('AppComponent', () => {
@@ -11,7 +10,7 @@ describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule,
+                RouterModule.forRoot([]),
                 MaterialModule
             ],
             declarations: [
