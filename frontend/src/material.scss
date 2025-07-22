@@ -4,15 +4,15 @@
 @include mat.core();
 
 // Define your color palettes
-$frontend-primary: mat.define-palette(mat.$red-palette);
-$frontend-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
-$frontend-warn: mat.define-palette(mat.$red-palette);
+$frontend-primary: mat.m2-define-palette(mat.$m2-red-palette);
+$frontend-accent: mat.m2-define-palette(mat.$m2-orange-palette, A200, A100, A400);
+$frontend-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Define typography config (optional, or customize if needed)
-$frontend-typography: mat.define-typography-config();
+$frontend-typography: mat.m2-define-typography-config();
 
 // Define the full theme
-$frontend-theme: mat.define-light-theme((
+$frontend-theme: mat.m2-define-light-theme((
   color: (
     primary: $frontend-primary,
     accent: $frontend-accent,
@@ -30,5 +30,5 @@ html, body {
 }
 body {
   margin: 0;
-  font-family: mat.font-family($frontend-typography); // consistent with your theme
+  font-family: mat.m2-font-family($frontend-typography); // consistent with your theme
 }
