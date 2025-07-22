@@ -73,7 +73,7 @@ export class AuthService {
         const httpRequest: HttpRequest<unknown> = new HttpRequest('GET', `${environment.host}/oauth2/authorize`, { params: httpParams });
 
         // Redirect to login page
-        this.window.location = httpRequest.urlWithParams as any as Location;
+        this.window.location = httpRequest.urlWithParams as any as string;
     }
 
     public exchangeCodeForToken(code: string): Observable<AccessToken> {

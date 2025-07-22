@@ -7,7 +7,7 @@ export class TestLocalStorage {
     }
 
     public getItem(key: string): string {
-        return key in this.store ? this.store[key] : null;
+        return key in this.store ? this.store[key] : '';
     }
 
     public setItem(key: string, value: string): void {
