@@ -15,7 +15,8 @@ import { EditUserAccountComponent } from '../edit-user-account/edit-user-account
 @Component({
     selector: 'app-user-accounts',
     templateUrl: './user-accounts.component.html',
-    styleUrls: ['./user-accounts.component.scss']
+    styleUrls: ['./user-accounts.component.scss'],
+    standalone: false
 })
 export class UserAccountsComponent implements OnInit {
 

@@ -7,7 +7,8 @@ import { UserAccountService } from 'src/app/services/user-account.service';
 @Component({
     selector: 'app-delete-user-account',
     templateUrl: './delete-user-account.component.html',
-    styleUrls: ['./delete-user-account.component.scss']
+    styleUrls: ['./delete-user-account.component.scss'],
+    standalone: false
 })
 export class DeleteUserAccountComponent implements OnInit {
 

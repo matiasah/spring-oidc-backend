@@ -19,7 +19,8 @@ import { Paginator } from 'src/app/util/paginator';
             useExisting: forwardRef(() => InputScopesTableComponent),
             multi: true
         }
-    ]
+    ],
+    standalone: false
 })
 export class InputScopesTableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 

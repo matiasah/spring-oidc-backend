@@ -15,7 +15,8 @@ import { EditServiceAccountComponent } from '../edit-service-account/edit-servic
 @Component({
     selector: 'app-service-accounts',
     templateUrl: './service-accounts.component.html',
-    styleUrls: ['./service-accounts.component.scss']
+    styleUrls: ['./service-accounts.component.scss'],
+    standalone: false
 })
 export class ServiceAccountsComponent implements OnInit {
 

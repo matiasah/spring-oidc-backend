@@ -10,7 +10,8 @@ import { ServiceAccountService } from 'src/app/services/service-account.service'
 @Component({
     selector: 'app-create-service-account',
     templateUrl: './create-service-account.component.html',
-    styleUrls: ['./create-service-account.component.scss']
+    styleUrls: ['./create-service-account.component.scss'],
+    standalone: false
 })
 export class CreateServiceAccountComponent implements OnInit {
 

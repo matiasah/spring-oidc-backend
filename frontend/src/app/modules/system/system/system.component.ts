@@ -7,7 +7,8 @@ import { RouterService } from 'src/app/services/router.service';
 @Component({
     selector: 'app-system',
     templateUrl: './system.component.html',
-    styleUrls: ['./system.component.scss']
+    styleUrls: ['./system.component.scss'],
+    standalone: false
 })
 export class SystemComponent implements OnInit {
 

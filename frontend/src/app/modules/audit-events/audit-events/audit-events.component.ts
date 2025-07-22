@@ -8,9 +8,10 @@ import {AuditEvent} from "../../../interfaces/audit-event";
 import {AuditEventService} from "../../../services/audit-event.service";
 
 @Component({
-  selector: 'app-audit-events',
-  templateUrl: './audit-events.component.html',
-  styleUrls: ['./audit-events.component.scss']
+    selector: 'app-audit-events',
+    templateUrl: './audit-events.component.html',
+    styleUrls: ['./audit-events.component.scss'],
+    standalone: false
 })
 export class AuditEventsComponent implements OnInit {
 

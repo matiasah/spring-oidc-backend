@@ -20,7 +20,8 @@ import { AuthorityService } from 'src/app/services/authority.service';
             provide: MatFormFieldControl,
             useExisting: InputAuthoritiesComponent
         }
-    ]
+    ],
+    standalone: false
 })
 export class InputAuthoritiesComponent implements OnInit, OnChanges, OnDestroy, MatFormFieldControl<Authority[]>, ControlValueAccessor {
 

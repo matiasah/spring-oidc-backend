@@ -8,7 +8,8 @@ import { ScopeService } from 'src/app/services/scope.service';
 @Component({
     selector: 'app-create-scope',
     templateUrl: './create-scope.component.html',
-    styleUrls: ['./create-scope.component.scss']
+    styleUrls: ['./create-scope.component.scss'],
+    standalone: false
 })
 export class CreateScopeComponent implements OnInit {
 

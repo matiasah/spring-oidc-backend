@@ -15,7 +15,8 @@ import { provideRouter } from '@angular/router';
 
 @Component({
     selector: 'app-paginator-test',
-    templateUrl: './paginator.spec.html'
+    templateUrl: './paginator.spec.html',
+    standalone: false
 })
 class PaginatorTestComponent implements OnInit, OnDestroy {
 

@@ -8,7 +8,8 @@ import { ScopeService } from 'src/app/services/scope.service';
 @Component({
     selector: 'app-edit-scope',
     templateUrl: './edit-scope.component.html',
-    styleUrls: ['./edit-scope.component.scss']
+    styleUrls: ['./edit-scope.component.scss'],
+    standalone: false
 })
 export class EditScopeComponent implements OnInit {
 

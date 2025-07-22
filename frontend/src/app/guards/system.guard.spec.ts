@@ -9,7 +9,8 @@ import { Component } from "@angular/core";
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
-    template: ``
+    template: ``,
+    standalone: false
 })
 class TestComponent {
 }

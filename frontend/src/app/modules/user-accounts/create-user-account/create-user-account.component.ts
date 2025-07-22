@@ -8,7 +8,8 @@ import { UserAccountService } from 'src/app/services/user-account.service';
 @Component({
     selector: 'app-create-user-account',
     templateUrl: './create-user-account.component.html',
-    styleUrls: ['./create-user-account.component.scss']
+    styleUrls: ['./create-user-account.component.scss'],
+    standalone: false
 })
 export class CreateUserAccountComponent implements OnInit {
 

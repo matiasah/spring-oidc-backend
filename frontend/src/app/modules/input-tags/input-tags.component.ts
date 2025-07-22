@@ -27,7 +27,8 @@ import { MatChipInputEvent } from "@angular/material/chips";
             provide: MatFormFieldControl,
             useExisting: InputTagsComponent
         }
-    ]
+    ],
+    standalone: false
 })
 export class InputTagsComponent implements OnInit, OnChanges, OnDestroy, MatFormFieldControl<string[]>, ControlValueAccessor {
 

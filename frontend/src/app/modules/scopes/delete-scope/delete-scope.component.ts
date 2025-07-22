@@ -7,7 +7,8 @@ import { ScopeService } from 'src/app/services/scope.service';
 @Component({
     selector: 'app-delete-scope',
     templateUrl: './delete-scope.component.html',
-    styleUrls: ['./delete-scope.component.scss']
+    styleUrls: ['./delete-scope.component.scss'],
+    standalone: false
 })
 export class DeleteScopeComponent implements OnInit {
 

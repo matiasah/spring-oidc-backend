@@ -9,7 +9,8 @@ import { of } from "rxjs";
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
-    template: ``
+    template: ``,
+    standalone: false
 })
 class TestComponent {
 }

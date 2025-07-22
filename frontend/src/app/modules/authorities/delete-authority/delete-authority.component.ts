@@ -7,7 +7,8 @@ import { AuthorityService } from 'src/app/services/authority.service';
 @Component({
     selector: 'app-delete-authority',
     templateUrl: './delete-authority.component.html',
-    styleUrls: ['./delete-authority.component.scss']
+    styleUrls: ['./delete-authority.component.scss'],
+    standalone: false
 })
 export class DeleteAuthorityComponent implements OnInit {
 

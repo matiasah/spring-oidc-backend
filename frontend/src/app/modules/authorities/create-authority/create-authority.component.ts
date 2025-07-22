@@ -8,7 +8,8 @@ import { AuthorityService } from 'src/app/services/authority.service';
 @Component({
     selector: 'app-create-authority',
     templateUrl: './create-authority.component.html',
-    styleUrls: ['./create-authority.component.scss']
+    styleUrls: ['./create-authority.component.scss'],
+    standalone: false
 })
 export class CreateAuthorityComponent implements OnInit {
 

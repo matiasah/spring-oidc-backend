@@ -8,7 +8,8 @@ import { UserAccountService } from 'src/app/services/user-account.service';
 @Component({
     selector: 'app-edit-user-account',
     templateUrl: './edit-user-account.component.html',
-    styleUrls: ['./edit-user-account.component.scss']
+    styleUrls: ['./edit-user-account.component.scss'],
+    standalone: false
 })
 export class EditUserAccountComponent implements OnInit {
 

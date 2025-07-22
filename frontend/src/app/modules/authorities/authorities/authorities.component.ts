@@ -15,7 +15,8 @@ import { EditAuthorityComponent } from '../edit-authority/edit-authority.compone
 @Component({
     selector: 'app-authorities',
     templateUrl: './authorities.component.html',
-    styleUrls: ['./authorities.component.scss']
+    styleUrls: ['./authorities.component.scss'],
+    standalone: false
 })
 export class AuthoritiesComponent implements OnInit {
 

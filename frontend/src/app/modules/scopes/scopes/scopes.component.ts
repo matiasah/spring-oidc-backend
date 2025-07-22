@@ -15,7 +15,8 @@ import { EditScopeComponent } from '../edit-scope/edit-scope.component';
 @Component({
     selector: 'app-scopes',
     templateUrl: './scopes.component.html',
-    styleUrls: ['./scopes.component.scss']
+    styleUrls: ['./scopes.component.scss'],
+    standalone: false
 })
 export class ScopesComponent implements OnInit {
 
