@@ -1,5 +1,5 @@
-@import "material";
-@import "tailwindcss";
+@use "material";
+@use "tailwindcss";
 
 .loading-shade {
     position: absolute;
