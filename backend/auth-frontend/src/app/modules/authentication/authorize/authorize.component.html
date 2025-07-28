@@ -1,93 +1,79 @@
 <div class="w-full h-full">
 
-    <div class="flex items-center justify-center w-full h-full">
+  <div class="flex items-center justify-center w-full h-full">
 
-        <div class="flex flex-col max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-2">
+    <div class="flex flex-col max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-2">
 
-            <mat-card class="mat-elevation-z6 p-4">
+      <mat-card class="mat-elevation-z6 p-4">
 
-                <div class="container">
+        <div class="container">
 
-                    <div class="container">
-                        <div class="flex justify-center">
-                            <img src="assets/img/logo.png" alt="Logo" />
-                        </div>
-                        <div class="flex flex-col justify-center items-center">
-                            <h2 class="mat-h2 mb-0">Authorize application</h2>
-                        </div>
+          <div class="container">
+            <div class="flex justify-center">
+              <img src="assets/img/logo.png" alt="Logo" />
+            </div>
+            <div class="flex flex-col justify-center items-center">
+              <h2 class="mat-h2 mb-0">Authorize application</h2>
+            </div>
+          </div>
+
+          @if (!authorizationInfo) {
+            <div class="container">
+              <mat-progress-spinner class="m-auto" diameter="48" color="primary" mode="indeterminate">
+              </mat-progress-spinner>
+            </div>
+          }
+
+          @if (authorizationInfo) {
+            <div class="container">
+              <div class="container h-12">
+                <span>Would you like to authorize <strong>{{ authorizationInfo.client.clientName }}</strong> to use your user account?</span>
+              </div>
+              <div class="container h-full pt-12 -mt-12">
+                <form ngNoForm [action]="authorizeUrl" method="post" class="w-full">
+                  <input name="client_id" [value]="authorizationInfo.client.clientId" type="hidden" />
+                  <input name="state" [value]="authorizationInfo.state" type="hidden" />
+                  <div class="flex flex-col max-h-full h-full pb-20 -mb-20">
+                    <div class="flex flex-col max-h-scopes">
+                      <div class="overflow-y-auto">
+                        <mat-list>
+                          @for (scope of authorizationInfo.scopes; track scope) {
+                            <mat-list-item>
+                              <!-- Align to the left -->
+                              <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name" [checked]="true">
+                                {{ scope.description }}
+                              </mat-checkbox>
+                            </mat-list-item>
+                          }
+                        </mat-list>
+                      </div>
                     </div>
-
-                    <div class="container" *ngIf="!authorizationInfo">
-                        <mat-progress-spinner class="m-auto" diameter="48" color="primary" mode="indeterminate">
-                        </mat-progress-spinner>
+                  </div>
+                  <div class="flex justify-center mt-4 h-16">
+                    <!-- Button on the left -->
+                    <div class="flex flex-col items-center mx-4">
+                      <button mat-raised-button type="submit" color="primary">
+                        Authorize
+                      </button>
                     </div>
-
-                    <div class="container" *ngIf="authorizationInfo">
-
-                        <div class="container h-12">
-                            <span>Would you like to authorize <strong>{{ authorizationInfo.client.clientName }}</strong> to use your user account?</span>
-                        </div>
-
-                        <div class="container h-full pt-12 -mt-12">
-
-                            <form ngNoForm [action]="authorizeUrl" method="post" class="w-full">
-                                <input name="client_id" [value]="authorizationInfo.client.clientId" type="hidden" />
-                                <input name="state" [value]="authorizationInfo.state" type="hidden" />
-
-                                <div class="flex flex-col max-h-full h-full pb-20 -mb-20">
-
-                                    <div class="flex flex-col max-h-scopes">
-
-                                        <div class="overflow-y-auto">
-
-                                            <mat-list>
-
-                                                <mat-list-item *ngFor="let scope of authorizationInfo.scopes">
-
-                                                    <!-- Align to the left -->
-                                                    <mat-checkbox class="flex align-self-start" name="scope" [value]="scope.name" [checked]="true">
-                                                        {{ scope.description }}
-                                                    </mat-checkbox>
-                                                </mat-list-item>
-
-                                            </mat-list>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="flex justify-center mt-4 h-16">
-
-                                    <!-- Button on the left -->
-                                    <div class="flex flex-col items-center mx-4">
-                                        <button mat-raised-button type="submit" color="primary">
-                                            Authorize
-                                        </button>
-                                    </div>
-
-                                    <!-- Button on the right -->
-                                    <div class="flex flex-col items-center mx-4">
-                                        <button mat-raised-button type="reset" color="warn">
-                                            Decline
-                                        </button>
-                                    </div>
-
-                                </div>
-
-                            </form>
-
-                        </div>
-
+                    <!-- Button on the right -->
+                    <div class="flex flex-col items-center mx-4">
+                      <button mat-raised-button type="reset" color="warn">
+                        Decline
+                      </button>
                     </div>
-
-                </div>
-
-            </mat-card>
+                  </div>
+                </form>
+              </div>
+            </div>
+          }
 
         </div>
 
+      </mat-card>
+
     </div>
+
+  </div>
 
 </div>
