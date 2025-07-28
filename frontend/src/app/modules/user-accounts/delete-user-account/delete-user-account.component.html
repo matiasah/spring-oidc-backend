@@ -1,55 +1,61 @@
 <div class="w-full flex justify-between">
-    <h2 mat-dialog-title>
-        Delete user account
-    </h2>
+  <h2 mat-dialog-title>
+    Delete user account
+  </h2>
 
-    <button mat-icon-button mat-dialog-close>
-        <mat-icon>close</mat-icon>
-    </button>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
 
 <mat-dialog-content>
-    
-    <div class="w-full flex">
 
-        <mat-list role="list">
-            <mat-list-item role="listitem">
-                <strong>User name:</strong>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-                <strong>Name:</strong>
-            </mat-list-item>
-        </mat-list>
+  <div class="w-full flex">
 
-        <mat-list role="list">
-            <mat-list-item role="listitem">
-                {{ userAccount.username }}
-            </mat-list-item>
-            <mat-list-item role="listitem">
-                {{ userAccount.firstName }} {{ userAccount.lastName }}
-            </mat-list-item>
-        </mat-list>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <strong>User name:</strong>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <strong>Name:</strong>
+      </mat-list-item>
+    </mat-list>
 
-    </div>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        {{ userAccount.username }}
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        {{ userAccount.firstName }} {{ userAccount.lastName }}
+      </mat-list-item>
+    </mat-list>
+
+  </div>
 
 </mat-dialog-content>
 
 <mat-dialog-actions class="grid grid-cols-12 flex justify-end gap-2">
-    <div *ngIf="!deleting" class="col-span-6 md:col-span-3 md:col-start-7">
-        <button id="botonEnviar" class="w-full" (click)="onSubmit()" mat-raised-button color="accent">
-            <span class="hidden md:inline">Delete</span>
-            <mat-icon class="inline md:hidden">delete</mat-icon>
-        </button>
+  @if (!deleting) {
+    <div class="col-span-6 md:col-span-3 md:col-start-7">
+      <button id="botonEnviar" class="w-full" (click)="onSubmit()" mat-raised-button color="accent">
+        <span class="hidden md:inline">Delete</span>
+        <mat-icon class="inline md:hidden">delete</mat-icon>
+      </button>
     </div>
+  }
 
-    <div *ngIf="!deleting" class="col-span-6 md:col-span-3 md:col-start-10">
-        <button class="w-full" mat-raised-button mat-dialog-close color="warn">
-            <span class="hidden md:inline">Cancel</span>
-            <mat-icon class="inline md:hidden">close</mat-icon>
-        </button>
+  @if (!deleting) {
+    <div class="col-span-6 md:col-span-3 md:col-start-10">
+      <button class="w-full" mat-raised-button mat-dialog-close color="warn">
+        <span class="hidden md:inline">Cancel</span>
+        <mat-icon class="inline md:hidden">close</mat-icon>
+      </button>
     </div>
+  }
 
-    <div class="col-span-12 flex justify-center" *ngIf="deleting">
-        <mat-progress-spinner class="m-auto" diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+  @if (deleting) {
+    <div class="col-span-12 flex justify-center">
+      <mat-progress-spinner class="m-auto" diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
     </div>
+  }
 </mat-dialog-actions>

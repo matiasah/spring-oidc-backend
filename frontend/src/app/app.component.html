@@ -1,5 +1,7 @@
-<div *ngIf="loading" class="loading-shade">
+@if (loading) {
+  <div class="loading-shade">
     <mat-spinner></mat-spinner>
-</div>
+  </div>
+}
 
 <router-outlet></router-outlet>

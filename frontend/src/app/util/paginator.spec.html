@@ -1,21 +1,23 @@
-<div *ngIf="isLoading | async" class="loading-shade">
+@if (isLoading | async) {
+  <div class="loading-shade">
     <mat-spinner></mat-spinner>
-</div>
+  </div>
+}
 
 <mat-table class="w-full" [dataSource]="dataSource" matSort>
 
-    <!-- Nombre -->
-    <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-            Nombre
-        </mat-header-cell>
-        <mat-cell *matCellDef="let data">
-            {{ data.nombre }}
-        </mat-cell>
-    </ng-container>
+  <!-- Nombre -->
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      Nombre
+    </mat-header-cell>
+    <mat-cell *matCellDef="let data">
+      {{ data.nombre }}
+    </mat-cell>
+  </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
 
 <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

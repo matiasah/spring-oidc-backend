@@ -1,13 +1,15 @@
 <!-- Chip list -->
 <mat-chip-grid #chipListAuthorities>
 
-    <!-- For every tag -->
-    <mat-basic-chip-option *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="removeTag(tag)">
-        <span>{{ tag }}</span>
-        <mat-icon matChipRemove>cancel</mat-icon>
+  <!-- For every tag -->
+  @for (tag of tags; track tag) {
+    <mat-basic-chip-option [selectable]="true" [removable]="true" (removed)="removeTag(tag)">
+      <span>{{ tag }}</span>
+      <mat-icon matChipRemove>cancel</mat-icon>
     </mat-basic-chip-option>
+  }
 
-    <!-- Input for adding new tags -->
-    <input matInput #tagsInput name="tags" type="text" class="w-full" [formControl]="tagsFormControl" (ngModelChange)="tagChanges.next($event)" [matChipInputFor]="chipListAuthorities" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addChip($event)" [required]="required" [placeholder]="placeholder">
+  <!-- Input for adding new tags -->
+  <input matInput #tagsInput name="tags" type="text" class="w-full" [formControl]="tagsFormControl" (ngModelChange)="tagChanges.next($event)" [matChipInputFor]="chipListAuthorities" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addChip($event)" [required]="required" [placeholder]="placeholder">
 
 </mat-chip-grid>

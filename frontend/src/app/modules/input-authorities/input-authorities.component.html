@@ -1,20 +1,24 @@
 <!-- Chip list -->
 <mat-chip-grid #chipListAuthorities>
 
-    <!-- For every authority -->
-    <mat-basic-chip-option *ngFor="let authority of authorities" [selectable]="true" [removable]="true" (removed)="removeAuthority(authority)">
-        <span>{{ authority.name }}</span>
-        <mat-icon matChipRemove>cancel</mat-icon>
+  <!-- For every authority -->
+  @for (authority of authorities; track authority) {
+    <mat-basic-chip-option [selectable]="true" [removable]="true" (removed)="removeAuthority(authority)">
+      <span>{{ authority.name }}</span>
+      <mat-icon matChipRemove>cancel</mat-icon>
     </mat-basic-chip-option>
+  }
 
-    <!-- Input for adding new authorities -->
-    <input matInput #authoritiesInput name="authorities" type="text" class="w-full" [formControl]="authorityNameFormControl" (ngModelChange)="authorityNameChanges.next($event)" [matChipInputFor]="chipListAuthorities" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addChip($event)" [matAutocomplete]="authoritiesAutocomplete" [required]="required" [placeholder]="placeholder">
-    
+  <!-- Input for adding new authorities -->
+  <input matInput #authoritiesInput name="authorities" type="text" class="w-full" [formControl]="authorityNameFormControl" (ngModelChange)="authorityNameChanges.next($event)" [matChipInputFor]="chipListAuthorities" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addChip($event)" [matAutocomplete]="authoritiesAutocomplete" [required]="required" [placeholder]="placeholder">
+
 </mat-chip-grid>
 
 <!-- Autocomplete for adding new authorities -->
 <mat-autocomplete #authoritiesAutocomplete="matAutocomplete" [displayWith]="displayAuthority">
-    <mat-option *ngFor="let authority of selectableAuthorities" [value]="authority">
-        <span>{{ authority.name }}</span>
+  @for (authority of selectableAuthorities; track authority) {
+    <mat-option [value]="authority">
+      <span>{{ authority.name }}</span>
     </mat-option>
+  }
 </mat-autocomplete>
