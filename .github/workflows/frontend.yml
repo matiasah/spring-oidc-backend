@@ -28,6 +28,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: browser-actions/setup-chrome@latest
+    - run: npm install
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
