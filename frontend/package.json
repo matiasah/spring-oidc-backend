@@ -22,7 +22,7 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/platform-browser-dynamic": "^20.3.0",
     "@angular/router": "^20.3.0",
-    "@tailwindcss/postcss": "^4.1.13",
+    "@tailwindcss/postcss": "^4.1.15",
     "autoprefixer": "^10.4.20",
     "moment": "^2.30.1",
     "postcss": "^8.5.6",
